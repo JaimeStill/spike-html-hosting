@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** handoff
+- **Task:** layers
+- **Branch:** layers
 
 ## Tasks
 
@@ -12,6 +12,79 @@
 4. [ ] org
 5. [ ] review
 6. [ ] answer
+
+## Task brief
+
+```
+Problem       The spike's evidence needs four repositories and three live project sites, each
+              built by Vite on the foundation and deployed by its own Pages workflow. Only the
+              root exists, with a shellcheck-only check and no site. Every later task builds on
+              these layers.
+Behaviors     1. spike-html-hosting-components, -architecture, and -sqlate exist on GitHub
+                 (JaimeStill, public, Apache-2.0, a "main" ruleset as spike-html-apps' layer
+                 repos), each with marathon.toml, STANDARDS.md (restating the root's conventions
+                 for it), mise.toml with install, check, and currency tasks, and ci.yml on pull
+                 requests.
+              2. The components repository's check runs shellcheck, actionlint, and Prettier; its
+                 release.yml tags an untagged package.json version and skips 0.0.0; its
+                 CHANGELOG holds only [Unreleased]; package.json is at 0.0.0. No tag is cut.
+              3. Each site (the root, -architecture, -sqlate) builds with Vite 8.3.5 and
+                 vite-plugin-standard-css-modules 0.3.0 on spike-html-apps-foundation v0.3.0 by
+                 git tag, under base "/<repo>/", to a placeholder page that loads the
+                 foundation's page.css, register.js, and preferences.js render-blocking and
+                 opens the theme menu from a button.
+              4. Each site's check builds, lints (ESLint, Prettier, typescript-go, actionlint,
+                 shellcheck), and fails on any CSS module script left in the build output; a
+                 test proves the leftover check fails on a fixture that keeps one.
+              5. Each site's browser test serves the build under its base with vite preview,
+                 loads the page with headless Chrome, opens the theme menu, and finds its sheet
+                 adopted, with every request resolving under the base.
+              6. Each site's Pages workflow, on push to main, runs the check, then uploads the
+                 build output and deploys it; the deployed page loads at
+                 https://jaimestill.github.io/<repo>/ with the theme menu working.
+              7. Each repository's [remote] ci waits on the push run (the Pages deploy for the
+                 sites, release.yml for components); each currency command reports mise tools,
+                 package pins, github: tags, and action pins behind their latest.
+Test seams    the built site under its base, through vite preview and headless Chrome; the
+              leftover check against the build output and a fixture
+Slices        1. components scaffold: the repository, its lint-only check, ci.yml, release.yml
+                 skipping 0.0.0, CHANGELOG, STANDARDS.md, currency
+              2. root site: Vite build, the placeholder page, the leftover check and its fixture
+                 test, the browser test, the Pages workflow, ci.yml, the extended currency, and
+                 [remote] ci on the deploy
+              3. spike-html-hosting-architecture site, the root's site layer copied with
+                 provenance under its own base
+              4. spike-html-hosting-sqlate site, the same
+Out of scope  content (Markdown rendering), components code and v0.1.0, cross-site navigation,
+              the review, VHS, cost measurement
+Door          two-way: new repositories, rulesets, and Pages enablement can all be removed; no
+              tag is pushed
+```
+
+## Progress
+
+slices 4/4 committed · standards ✓ · spec 1 gap · editor —
+
+## Handoff
+
+Next move: gap fixes, then the editor, then BRIEF.
+1. One implementer pass in spike-html-hosting-components on `layers`:
+   - spec gap (behavior 1): STANDARDS.md restates the root's conventions that apply to a layer
+     repository (the provenance-line rule now; Design for its components).
+   - session decision: scripts/currency.sh compares action pins against `git ls-remote` tags,
+     as the root and sites do, instead of `gh api` releases (no token needed; one method).
+   - sqlate's index.html wording: "the sqlate stand-in's docs site of spike-html-hosting" reads
+     awkwardly; reword (spike-html-hosting-sqlate).
+2. Editor pass: goal record, context/README.md, each repository's README/context.
+3. BRIEF, then SHIP.
+
+Waiting on the architect (setup, not an escalation): `gh repo create --public` for
+spike-html-hosting-components, -architecture, -sqlate was denied by the permission check. Their
+init commits are local with origin set; on `main` push them (`gh repo create JaimeStill/<r>
+--public --source=. --push`), then apply the "main" ruleset (as spike-html-apps-foundation's
+25960234) and enable Pages (`gh api -X POST repos/JaimeStill/<r>/pages -f build_type=workflow`)
+for the root, -architecture, and -sqlate. Needed before SHIP and before behavior 6 can show.
+No WIP: every commit's check passes.
 
 ## Decisions
 
@@ -53,6 +126,29 @@
 - setup: the references are architecture at 8706d04, sqlate at v0.6.1 with sqlint/v0.1.1,
   spike-html-apps-foundation v0.3.0, spike-html-apps-tooling v0.3.0, spike-html-design,
   spike-html-apps, and spike-html-conventions.
+- layers: each site's placeholder page loads the foundation's page.css, register.js, and
+  preferences.js with a button opening the theme menu, so the build holds a real CSS module
+  script for the plugin to rewrite. Rejected: page.css only, which builds with none.
+- layers: each site's Vite base is "/<repo>/", served by vite preview in tests as Pages serves
+  it. Rejected: "./", which hides links that assume the origin root.
+- layers: the leftover check is ESLint over the build output with the foundation's
+  import-attribute type "css" selectors, proven by a fixture test. Rejected: a rolldown/utils
+  scan script, a grep.
+- layers: each site's Pages workflow runs the full check on push, then uploads and deploys;
+  ci.yml runs on pull requests only. Rejected: ci.yml on push beside a deploy-only workflow.
+- layers: spike-html-hosting-components gets release.yml now, at version 0.0.0, which it skips;
+  v0.1.0 releases in the components task.
+- layers: spike-html-hosting-components' check is shellcheck, actionlint, and Prettier until its
+  first component. Rejected: the full toolchain over a stub module.
+- layers: the theme menu in foundation v0.3.0 adopts its sheet on the document, not a shadow
+  root, so the browser test asserts document.adoptedStyleSheets holds its foundation.theme-menu
+  sheet after the click.
+- layers: each site's base is read from package.json's name, so a copied site changes only its
+  package name and page text; the browser test reads the expected title from index.html.
+- layers: the leftover check matches import() at its options' `type` property; esquery's :has
+  doesn't walk an ImportExpression's options.
+- layers: currency compares action pins and github: tags against `git ls-remote` tags, needing no
+  GitHub token.
 
 ## Pending edits
 

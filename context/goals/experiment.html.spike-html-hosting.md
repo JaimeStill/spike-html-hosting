@@ -1,6 +1,6 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
+- **State:** building
 - **Task:** content
 - **Branch:** content
 
@@ -8,11 +8,13 @@
 
 1. [x] layers
 2. [ ] content
-3. [ ] template
-4. [ ] components
-5. [ ] org
-6. [ ] review
-7. [ ] answer
+3. [ ] screenshots
+4. [ ] template
+5. [ ] highlighting
+6. [ ] components
+7. [ ] org
+8. [ ] review
+9. [ ] answer
 
 ## Task brief · content
 
@@ -35,9 +37,10 @@ Behaviors     1. Each site's browser tier runs on chrome-headless-shell
                  STANDARDS.md records this exception to the per-file
                  provenance line.
               3. The build renders every copied file through marked into a
-                 page in the site's shell (the foundation's page.css,
-                 register.js and preferences.js render-blocking, the theme
-                 button). "x.md" becomes "x.html" and "dir/README.md" becomes
+                 page in the site's shell: the foundation's full entry
+                 (page-full.css, register-full.js), preferences.js and
+                 keys.js render-blocking, the Theme button bound to T, and
+                 the site stylesheet. "x.md" becomes "x.html" and "dir/README.md" becomes
                  "dir/", so the root README is the site's index. No generated
                  file lands in the working tree.
               4. A relative ".md" link to a copied page points to that page's
@@ -61,6 +64,18 @@ Behaviors     1. Each site's browser tier runs on chrome-headless-shell
                  copied to sqlate with provenance. The spike's context names
                  the architecture site as its owner until the template task
                  moves it into the site SDK.
+              9. Every site's shell, the root's included, offers every
+                 foundation profile in the theme menu (4 color, 2 space,
+                 2 type, the schemes), and pressing T opens the menu. Each
+                 site's browser test presses T, finds the menu open, and
+                 finds that choosing a non-default color, space and type
+                 sets its attribute on the root.
+             10. Every site's shell links one site stylesheet in a layer
+                 after the foundation's, on the foundation's --space-*
+                 tokens: inline padding, main held to a reading width and
+                 centered, and spacing around the header, the front matter
+                 table and code blocks. The crawl asserts main's width is
+                 capped below a wide viewport's.
 Test seams    the built site under its base, crawled through vite preview and
               headless Chrome; the provenance record against the copied trees
 Slices        1. architecture upgrade: chrome-headless-shell 157, currency
@@ -75,17 +90,25 @@ Slices        1. architecture upgrade: chrome-headless-shell 157, currency
               5. sqlate pages: the renderer copied from architecture with
                  provenance, README and docs/ at v0.6.1 with their record,
                  titles from the first h1, the crawl test
+              6. shell fixes in the architecture site: full entry, T bound,
+                 the site stylesheet, behaviors 9-10 in its browser test
+              7. the same copied to sqlate with provenance
+              8. the same in the root's placeholder page and its browser
+                 test (the root owns the shell's origin)
 Out of scope  the shared site template and SDK (its own task), documentation
               components (section tree, page header, nav), syntax
-              highlighting, the root site's code and its chrome pin,
-              cross-site navigation, the review, VHS
-Door          two-way: copies, build code and pins in two sites; no tag is
-              pushed
+              highlighting (its own task), the screenshots task (its own
+              task), the root's chrome pin, cross-site navigation, the
+              review, VHS
+Door          two-way: copies, build code and pins in three sites, each
+              redeploying on merge; no tag is pushed
+(amended at the session brief's redirect: behavior 3, behaviors 9-10,
+slices 6-8)
 ```
 
 ## Progress
 
-slices 5/5 committed · standards ✓ · spec ✓ (one gap closed by this edit) · editor ✓
+slices 5/8 committed · standards — · spec — · editor — (redirected after the session brief)
 
 ## Decisions
 
@@ -201,9 +224,25 @@ slices 5/5 committed · standards ✓ · spec ✓ (one gap closed by this edit) 
   devDependencies.
 - content: each site's Vite appType is "mpa", so vite preview answers 404 for a path the build
   didn't write rather than serving the index.
+- content: the shell uses the foundation's full entry, page-full.css + register-full.js, so the
+  theme menu offers every profile. Rejected: the lean entry, which registers only the defaults.
+- content: T opens the theme menu through keys.js and the Theme button's data-keys="t", as the
+  foundation's preferences.js documents.
+- content: the shell fixes land in all three sites, the root included, since the root owns the
+  shell's origin.
+- content: a minimal site stylesheet on the --space-* tokens, in a layer after the foundation's.
+  Rejected: leaving page layout to the components task.
+- content: syntax highlighting is its own task after template, in the renderer the site SDK
+  takes. Shiki 4.6.0 is the candidate; it ships no flexoki theme.
+- content: screenshots are their own task right after content, a `mise run screenshots` on the
+  tooling's spike-html-apps-screenshots bin, as the spike-html-apps* repositories have; the review
+  task keeps the cross-site review, VHS, and cost.
 
 ## Pending edits
 
-- coordinator · roadmap: add task `template` to experiment.html.spike-html-hosting between
-  content and components (a site SDK released by tag plus a template subtree copied once), through
-  a `plan` session after content ships.
+- coordinator · roadmap: through a `plan` session after content ships, add to
+  experiment.html.spike-html-hosting the tasks `screenshots` (after content: `mise run
+  screenshots` on every site with the tooling's bin), `template` (a site SDK released by tag plus
+  a template subtree copied once), and `highlighting` (after template: code fences highlighted in
+  the SDK's renderer, matched to the foundation's profiles), before components; the review task
+  drops its capture setup.

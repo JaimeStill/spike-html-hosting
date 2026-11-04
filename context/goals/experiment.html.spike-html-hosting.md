@@ -1,15 +1,15 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** template
-- **Branch:** template
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
 1. [x] layers
 2. [x] content
 3. [x] screenshots
-4. [ ] template
+4. [x] template
 5. [ ] highlighting
 6. [ ] components
 7. [ ] org
@@ -171,9 +171,6 @@ Door          one-way: the public spike-html-hosting-sdk repository and its
 Release       spike-html-hosting-sdk v0.1.0
 ```
 
-## Progress
-
-slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf; root 0fe3163) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) b71b1ba, 596d3f4 · spec (sites) no gaps · editor done (4bb53ef, 68005b4, c765e3a)
 
 ## Decisions
 
@@ -411,6 +408,11 @@ slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf
   <path>`, the tag form for a file from an SDK release.
 - template: v0.1.1 candidate: template/README.md's `{{name}}` line runs past 100 columns for a
   long repository name, as in the architecture and sqlate READMEs.
+- template: v0.1.0 released at the BUILD checkpoint by this session's release run 41886733833
+  (tag commit 3806e18), so SHIP merged the three sites without tagging again.
+- template: v0.1.1 candidate: the scaffold's closing line names `mise run install, then mise run
+  check` but not `git init`, which the check's actionlint needs; the bin's message and the
+  README's scaffold section should name it.
 
 ## Pending edits
 

@@ -101,9 +101,9 @@ depends = ["lint", "types", "build", "test:unit", "test:browser"]
 # Never a dependency of check: a reviewer's look at the site's page, not a test. The capture is
 # spike-html-apps-tooling's spike-html-apps-screenshots, on scripts/screenshots.config.ts; the
 # browser tier runs it once (test/browser/screenshots.test.ts).
+# Adapted from spike-html-apps-components (19d4f59): mise.toml, its screenshots task.
 # Adapted from spike-html-hosting-architecture (a20a1e0): mise.toml, its screenshots task, over
 # the root's one page.
-# Adapted from spike-html-apps-components (19d4f59): mise.toml, its screenshots task.
 [tasks.screenshots]
 description = "Capture the index whole, wide and narrow, and with its theme menu open, light and dark, in tiles, at the defaults, or --palette/--space/--type <name>, or --all; --page <name> (repeatable), --scheme light|dark, --output terminal|directory|browser, --dir <path>, --keep; reads no network, writes dist/ and the captures, under TMPDIR unless --dir"
 depends = ["preflight browser", "build"]

@@ -1,9 +1,9 @@
 // How the site is served to a browser: the build, dist/, by Vite's preview, under the Pages base,
 // on a free loopback port. The browser tier and the screenshots description both start it here, so
 // a capture makes the requests the tier checks, as the deployed site does.
-// From spike-html-hosting-architecture (a20a1e0): test/browser/support/served.ts.
 // Adapted from spike-html-apps-components (19d4f59): test/browser/support/served.ts, its serve
 // options a start function over Vite's preview.
+// From spike-html-hosting-architecture (a20a1e0): test/browser/support/served.ts.
 
 import { join } from "node:path";
 

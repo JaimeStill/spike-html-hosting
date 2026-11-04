@@ -6,12 +6,12 @@
 // foundation's registry, every built-in one, as the page loads the full entry. The site is served
 // as the browser tier serves it, by Vite's preview under the base (test/browser/support/served.ts),
 // so a capture makes the requests the deployed site makes.
-// Adapted from spike-html-hosting-architecture (a20a1e0): scripts/screenshots.config.ts, its pages
-// the one index the root builds, with no content.json to map.
 // Adapted from spike-html-apps-foundation (d5037b4): scripts/screenshots.config.ts, its theme
 // menu's open step, viewports, facets, --all, and registry read.
 // Adapted from spike-html-apps-components (19d4f59): scripts/screenshots.config.ts, its server
 // the browser tier's.
+// Adapted from spike-html-hosting-architecture (a20a1e0): scripts/screenshots.config.ts, its pages
+// the one index the root builds, with no content.json to map.
 
 import { until } from "@jaimestill/spike-html-apps-tooling/browser.js";
 import type {

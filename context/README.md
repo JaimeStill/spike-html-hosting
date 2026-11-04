@@ -46,6 +46,8 @@ its own docs/ guide.
 
 - **Sites:** three Pages project sites, each built by Vite and deployed by its own workflow.
 - **Content:** Markdown sources rendered at build, with front matter and resolved links.
+- **Site SDK:** spike-html-hosting-sdk, released by tag: the template each site is scaffolded
+  from, the build and check pieces, and the reusable workflows.
 - **Documentation components:** the section tree, page header, site index, and cross-site
   navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
@@ -59,8 +61,8 @@ The tasks, in the order they run; each cites the evidence it proves.
    base path, with the no-CSS-module-script check (evidence 1, 7).
 2. `content`: the pinned architecture and sqlate copies rendered at build (evidence 3, 4).
 3. `screenshots`: `mise run screenshots` on every site, with spike-html-apps-tooling's bin.
-4. `template`: the shared site template, a site SDK released by tag and a template subtree each
-   site copies once, in place of the hand-copied site files.
+4. `template`: the shared site files in place of the hand copies: a site SDK released by tag,
+   whose release carries the template that one scaffold command copies into a new site.
 5. `highlighting`: code fences highlighted in the SDK's renderer, matched to the foundation's
    profiles.
 6. `components`: the documentation components, released and pinned on every site
@@ -73,27 +75,29 @@ The tasks, in the order they run; each cites the evidence it proves.
 
 ## Building the sites
 
-- Each site's Vite base, `/<repo>/`, is `vite.config.ts`'s reading of package.json's `name`.
-  The root's browser test reads the expected title from its `index.html`.
-- The sites share their build, check, and deploy files by hand copy. Each copy carries a
-  provenance line naming the repository and commit it came from, and a change in the owning
-  repository is copied by hand to the sites that copy it:
-  - This repository owns the files the Markdown pages leave unchanged: the two workflows,
-    `eslint.config.js`, `.prettierignore`, `scripts/currency.sh`, `scripts/preflight.sh`, and
-    `test/unit/leftover.test.ts`. The architecture and sqlate sites copy them unchanged.
-  - The architecture site owns the content renderer, `markdown-pages.ts`, with its tests; the
-    files it adapted from this repository to build Markdown pages: `index.html`,
-    `vite.config.ts`, `mise.toml`, `tsconfig.json`, and `test/browser/site.test.ts`; and the
-    site layout, `site.css`. The sqlate site copies them, with its own title and text in
-    `index.html`. This repository copies `site.css` unchanged.
-  - The architecture site owns the screenshot files: `scripts/screenshots.config.ts`,
-    `test/browser/support/served.ts`, `test/browser/screenshots.test.ts`, and
-    `tsconfig.test.json`, which type-checks `scripts/` with the suite. The sqlate site copies
-    them unchanged. This repository copies all but the capture file, which it adapts to its one
-    page.
-  - This repository's own `index.html` and browser test carry the architecture site's shell
-    changes, kept in step by hand.
-  - The planned `template` task moves the shared files into a site SDK released by tag.
+- spike-html-hosting-sdk owns every file the sites share: the Vite plugins, the Markdown
+  renderer, the ESLint configuration with the leftover check, the tsconfig and Prettier bases,
+  `site.css`, `served()`, the shell checks and the crawl, the capture description, the currency
+  bin, and the reusable workflows. Its README documents each export.
+- Each site was scaffolded from the SDK's template at v0.1.0, by
+  `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
+  were scaffolded into a scratch directory and the copy moved over them, keeping each site's
+  notes, marathon configuration, history, and copied tree, if it has one.
+- A site keeps pace with the SDK by bumping its tag in `package.json` and in both workflows'
+  `uses:` lines.
+- Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (v0.1.0)"
+  provenance line:
+  - The architecture and sqlate sites adapt `index.html`, with their own title and text;
+    `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
+    links; and `.gitignore`, which keeps marathon's working files.
+  - This repository adapts the template to its one page. `index.html` is its own page rather
+    than a shell to fill. `vite.config.ts` runs no `markdownPages` and keeps appType `mpa`. The
+    browser test runs the shell checks alone, with no crawl. `mise.toml` has no unit tier, since
+    the root copies no Markdown tree to check. The capture file lists the index alone. Its
+    `.gitignore` keeps marathon's working files.
+- Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
+  `name`. Every shell links `site.css` by its package export,
+  `@jaimestill/spike-html-hosting-sdk/site.css`, and Vite bundles it into the entry's sheet.
 - Each Markdown site's `content/` holds byte-for-byte copies of its source at the pin: the
   architecture repository's 29 front-matter pages at 8706d04, and sqlate's README and docs/ at
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
@@ -101,11 +105,9 @@ The tasks, in the order they run; each cites the evidence it proves.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
   theme menu offers every profile. It also loads `keys.js`, which clicks the Theme button, marked
   `data-keys="t"`, when the reader presses T.
-- Every shell links `site.css` by the root-relative `/site.css`, and Vite bundles it into the
-  entry's sheet.
 - Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
-  the browser test looks for that sheet in `document.adoptedStyleSheets`.
+  the shell checks look for that sheet in `document.adoptedStyleSheets`.
 
 ## Taking captures
 
@@ -113,8 +115,9 @@ The tasks, in the order they run; each cites the evidence it proves.
 `spike-html-apps-screenshots` bin, on the site's `scripts/screenshots.config.ts`. It isn't part
 of the check.
 
-- The capture file describes every page the site builds. A page's name is its built path under
-  the base without `.html`: the index is `index`, and a `dir/` page is `dir`.
+- The capture file exports the SDK's `description()` over the site's page list, every page the
+  site builds. A page's name is its built path under the base without `.html`: the index is
+  `index`, and a `dir/` page is `dir`.
 - Each page is captured whole, in tiles, at 1280x800 and 390x844, in light and dark. The index
   is also captured with its theme menu open at both widths.
 - `--page <name>` captures that page alone and can be given more than once, so a site's pages
@@ -127,14 +130,16 @@ of the check.
   `--keep` is given; `--output directory` and `--output browser` keep them. The tooling's README
   documents each flag.
 - The capture file serves the build through Vite's preview under the `/<repo>/` base, started by
-  `served()` in `test/browser/support/served.ts`, which the browser tier also uses. A browser
-  test in each site's check runs the command once and asserts it leaves no capture file behind.
+  the SDK's `served()`, which the browser tier also uses. A browser test in each site's check
+  runs the command once and asserts it leaves no capture file behind.
 
 ## Releases
 
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
-starting at v0.1.0, peering spike-html-apps-foundation at its current minor. The sites release
-nothing; each deploys on its push to main.
+starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
+spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
+release workflow tags a version bump that lands on main. v0.1.0 is its first release. The sites
+release nothing; each deploys on its push to main.
 
 ## References
 

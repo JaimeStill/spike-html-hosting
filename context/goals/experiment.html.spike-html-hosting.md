@@ -1,6 +1,6 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** building
+- **State:** brief ready
 - **Task:** template
 - **Branch:** template
 
@@ -173,7 +173,7 @@ Release       spike-html-hosting-sdk v0.1.0
 
 ## Progress
 
-slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf; root 0fe3163) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) — · spec (sites) — · editor —
+slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf; root 0fe3163) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) b71b1ba, 596d3f4 · spec (sites) no gaps · editor done (4bb53ef, 68005b4, c765e3a)
 
 ## Decisions
 
@@ -388,7 +388,43 @@ slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf
   configuration move with an SDK bump. Rejected: an SDK peer each site declares and configures.
 - template: the scaffold test reads the nested check's output with its color stripped; mise and
   node color their lines on GitHub Actions, which failed the step assertions there only.
+- template: the scaffold bin is named spike-html-hosting-sdk, the package's own name, so
+  `pnpm dlx` and `npm exec` run it without a bin argument.
+- template: the template keeps each file's inherited upstream provenance lines, and so does
+  every site scaffolded from it. Two lines that cited spike-html-hosting cb0511c for what that
+  commit doesn't hold now cite the commits that do: mise.toml cites c161b7d for
+  chrome-headless-shell 157.0.8103.38, and index.html cites fba414c for its full page entry, keys
+  module, and Theme button.
+- template: the template's sample copied tree is the SDK's README at 93d68b5, the commit whose
+  README names cssModuleScripts.
+- template: the currency bin reads typescript-eslint's peer range from the installed SDK when the
+  site doesn't declare typescript-eslint itself.
+- template: no site declares rolldown; vite-plugin-standard-css-modules finds it through pnpm's
+  default hoist, `node_modules/.pnpm/node_modules`, and the SDK README tells a site that turns
+  the hoist off to declare it.
+- template: the architecture and sqlate sites adapt index.html (title and text), vite.config.ts
+  (`external` the source's LICENSE), and .gitignore (marathon's .claude/plans/ and
+  .claude/briefs/ kept).
+- template: the root keeps appType "mpa", drops the unit tier, since it copies no Markdown tree,
+  and takes the template's header with the Theme button in it, its page content unchanged.
+- template: a STANDARDS.md provenance line reads `From|Adapted from <repo> (<commit>|<tag>):
+  <path>`, the tag form for a file from an SDK release.
+- template: v0.1.1 candidate: template/README.md's `{{name}}` line runs past 100 columns for a
+  long repository name, as in the architecture and sqlate READMEs.
 
 ## Pending edits
 
-None.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.template`'s summary: it names
+  a template/ subtree tagged template/v* that each site copies once; the task shipped the
+  template inside the SDK's v* release, which a site scaffolds from with `pnpm dlx
+  github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo>`.
+- coordinator · references.toml and references.local.toml: add spike-html-hosting-sdk
+  (`https://github.com/JaimeStill/spike-html-hosting-sdk.git`,
+  `~/experiments/spike-html-hosting-sdk`) beside the spike's other four repositories.
+- claude-plugins · marathon retro: pipeline.md's Releasing assumes the session tags the merge
+  commit, but this spike's release workflows commit the pack's tree and cut their own tag on the
+  push to main; and a task whose own repositories consume its release needs a BUILD checkpoint,
+  which the pipeline doesn't describe.
+- claude-plugins · marathon retro: the session merged a pull request with red CI because it piped
+  `gh pr checks --watch` through `tail`, which hid the command's exit status; the session should
+  run the configured merge command exactly as written.

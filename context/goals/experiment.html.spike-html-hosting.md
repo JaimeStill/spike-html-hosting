@@ -8,10 +8,11 @@
 
 1. [x] layers
 2. [ ] content
-3. [ ] components
-4. [ ] org
-5. [ ] review
-6. [ ] answer
+3. [ ] template
+4. [ ] components
+5. [ ] org
+6. [ ] review
+7. [ ] answer
 
 ## Task brief · content
 
@@ -84,7 +85,7 @@ Door          two-way: copies, build code and pins in two sites; no tag is
 
 ## Progress
 
-slices 5/5 committed · standards ✓ · spec — · editor —
+slices 5/5 committed · standards ✓ · spec ✓ (one gap closed by this edit) · editor ✓
 
 ## Decisions
 
@@ -188,6 +189,18 @@ slices 5/5 committed · standards ✓ · spec — · editor —
   released by tag plus a template subtree copied once, after go-web-sdk-template and
   go-cli-sdk-template. Rejected: a GitHub template repository, a scaffold script alone, and
   keeping the hand copy.
+- content: the crawl starts at the index, then restarts from each page content.json records that no
+  link reaches, and asserts it checked every recorded page; at 8706d04 no page links
+  standards/go-elemental/principles/README.md.
+- content: sqlate's content.json pins f2b2117, the commit annotated tag v0.6.1 points to, not the
+  tag object f09068a.
+- content: the front matter table has one row per key, in source order.
+- content: each site's STANDARDS.md records the content/ exception to the per-file provenance
+  line.
+- content: the sites' build dependencies (marked, marked-gfm-heading-id, yaml) are
+  devDependencies.
+- content: each site's Vite appType is "mpa", so vite preview answers 404 for a path the build
+  didn't write rather than serving the index.
 
 ## Pending edits
 

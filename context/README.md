@@ -58,22 +58,35 @@ The tasks, in the order they run; each cites the evidence it proves.
 1. `layers`: the three repositories created; every site built and deployed by Pages under its
    base path, with the no-CSS-module-script check (evidence 1, 7).
 2. `content`: the pinned architecture and sqlate copies rendered at build (evidence 3, 4).
-3. `components`: the documentation components, released and pinned on every site
+3. `template`: the shared site template, a site SDK released by tag and a template subtree each
+   site copies once, in place of the hand-copied site files.
+4. `components`: the documentation components, released and pinned on every site
    (evidence 4, 6).
-4. `org`: the charter, the index, the hosted report, shared navigation measured, and the
+5. `org`: the charter, the index, the hosted report, shared navigation measured, and the
    HTML/Markdown line (evidence 2, 5, 8).
-5. `review`: the review across every site, the sqlint VHS demo, and the cost per site
+6. `review`: the review across every site, the sqlint VHS demo, and the cost per site
    (evidence 9, 10, 11).
-6. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
+7. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
 
 ## Building the sites
 
 - Each site's Vite base, `/<repo>/`, is `vite.config.ts`'s reading of package.json's `name`.
-  The browser test reads the expected title from the site's own `index.html`.
-- The files that build, check, and deploy a site are the same in all three sites. The
-  architecture and sqlate sites copy them from this repository, and each copy carries a
-  provenance line naming the commit it came from. A change to one of these files here is copied
-  by hand to the other two sites.
+  The root's browser test reads the expected title from its `index.html`.
+- The sites share their build, check, and deploy files by hand copy. Each copy carries a
+  provenance line naming the repository and commit it came from, and a change in the owning
+  repository is copied by hand to the sites that copy it:
+  - This repository owns the files the Markdown pages leave unchanged: the two workflows,
+    `eslint.config.js`, `tsconfig.test.json`, `.prettierignore`, `scripts/`, and
+    `test/unit/leftover.test.ts`. The architecture and sqlate sites copy them unchanged.
+  - The architecture site owns the content renderer, `markdown-pages.ts`, with its tests and the
+    files it adapted from this repository to build Markdown pages: `index.html`,
+    `vite.config.ts`, `mise.toml`, `tsconfig.json`, and `test/browser/site.test.ts`. The sqlate
+    site copies them, with its own title and text in `index.html`.
+  - The planned `template` task moves the shared files into a site SDK released by tag.
+- Each Markdown site's `content/` holds byte-for-byte copies of its source at the pin: the
+  architecture repository's 29 front-matter pages at 8706d04, and sqlate's README and docs/ at
+  the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
+  each file's git blob hash, and a unit test fails when a copy differs.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the browser test looks for that sheet in `document.adoptedStyleSheets`.
 

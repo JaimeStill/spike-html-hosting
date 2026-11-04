@@ -249,12 +249,4 @@ Door          two-way: a mise task, a capture file, a test and a pin in three
 
 ## Pending edits
 
-- coordinator · roadmap: tasks.template's summary drops "The root's chrome-headless-shell moves
-  to 157.0.8103.38." (the screenshots task moved it) and adds that the template takes each site's
-  screenshots capture file and `mise run screenshots` task.
-- coordinator · roadmap: tasks.components' summary adds that at 390px the architecture index
-  scrolls horizontally, since an element, probably a table, is wider than the viewport; the
-  components task or site.css fixes it.
-- coordinator · roadmap: tasks.template's summary adds that spike-html-apps-tooling's
-  unknown-profile message prints the page's path, which is empty for an index at "", so the
-  message names no page; the template task fixes it in the capture file or the tooling.
+None.

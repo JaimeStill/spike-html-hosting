@@ -1,12 +1,12 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** handoff
-- **Task:** layers
-- **Branch:** layers
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
-1. [ ] layers
+1. [x] layers
 2. [ ] content
 3. [ ] components
 4. [ ] org
@@ -60,31 +60,6 @@ Out of scope  content (Markdown rendering), components code and v0.1.0, cross-si
 Door          two-way: new repositories, rulesets, and Pages enablement can all be removed; no
               tag is pushed
 ```
-
-## Progress
-
-slices 4/4 committed · standards ✓ · spec 1 gap · editor —
-
-## Handoff
-
-Next move: gap fixes, then the editor, then BRIEF.
-1. One implementer pass in spike-html-hosting-components on `layers`:
-   - spec gap (behavior 1): STANDARDS.md restates the root's conventions that apply to a layer
-     repository (the provenance-line rule now; Design for its components).
-   - session decision: scripts/currency.sh compares action pins against `git ls-remote` tags,
-     as the root and sites do, instead of `gh api` releases (no token needed; one method).
-   - sqlate's index.html wording: "the sqlate stand-in's docs site of spike-html-hosting" reads
-     awkwardly; reword (spike-html-hosting-sqlate).
-2. Editor pass: goal record, context/README.md, each repository's README/context.
-3. BRIEF, then SHIP.
-
-Waiting on the architect (setup, not an escalation): `gh repo create --public` for
-spike-html-hosting-components, -architecture, -sqlate was denied by the permission check. Their
-init commits are local with origin set; on `main` push them (`gh repo create JaimeStill/<r>
---public --source=. --push`), then apply the "main" ruleset (as spike-html-apps-foundation's
-25960234) and enable Pages (`gh api -X POST repos/JaimeStill/<r>/pages -f build_type=workflow`)
-for the root, -architecture, and -sqlate. Needed before SHIP and before behavior 6 can show.
-No WIP: every commit's check passes.
 
 ## Decisions
 
@@ -149,6 +124,20 @@ No WIP: every commit's check passes.
   doesn't walk an ImportExpression's options.
 - layers: currency compares action pins and github: tags against `git ls-remote` tags, needing no
   GitHub token.
+- layers: each site copied from the root keeps every file's upstream provenance line and adds
+  one naming spike-html-hosting and the commit that last changed the file there; JSON files
+  carry none, and pnpm-lock.yaml is copied unchanged because it names no root package.
+- layers: index.html names the foundation's modules by package specifier, which Vite resolves
+  through the package's exports. Rejected: node_modules paths.
+- layers: spike-html-hosting-components' STANDARDS.md takes the root's provenance rule and its
+  Design section, but not the Sites lines, which govern a deployed site.
+- layers: spike-html-hosting-components' release.yml skips version 0.0.0 by treating it as
+  already released, so a push at 0.0.0 cuts no tag.
+- layers: no package.json carries a packageManager field; mise pins pnpm, as in the precedent.
+- layers: no repository has a pnpm-workspace.yaml, since no dependency needs an allowBuilds entry.
+- layers: held npm typescript at 6.0.3: typescript-eslint 8.72.1's peer range is <6.1.0, which
+  excludes 7.0.2. Currency compares it with the newest version that range accepts, and
+  typescript-go 7.0.2 does the type check.
 
 ## Pending edits
 

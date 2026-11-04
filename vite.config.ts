@@ -1,13 +1,14 @@
-// The site's build (mise run build): index.html and the foundation modules it loads into dist/,
-// static files GitHub Pages serves as the repository's project site, under /<repository>/. The
-// base is that path, and the repository's name is package.json's name, the one place it is
-// written: a site that copies this layer renames its package and changes its page, and nothing
-// here.
+// The site's build (mise run build): index.html, its site.css, and the foundation modules it loads
+// into dist/, static files GitHub Pages serves as the repository's project site, under
+// /<repository>/. The base is that path, and the repository's name is package.json's name, the one
+// place it is written: a site that copies this layer renames its package and changes its page, and
+// nothing here.
 //
 // Vite drops the entry script's blocking attribute as it rewrites the tag, so renderBlocking puts
-// it back on the built entry: the page's module scripts, the foundation's registrations and its
+// it back on the built entry: the page's module scripts, the foundation's registrations, its
 // preferences module, which applies the reader's stored theme choice to the root element before
-// first paint, are one entry in the build, and it runs before first paint as they did.
+// first paint, and keys.js, which binds T to the Theme button, are one entry in the build, and it
+// runs before first paint as they did.
 // Adapted from spike-html-apps (529ec52): vite.external.config.ts, its plugins, with the base the
 // Pages path and no preview host.
 

@@ -6,7 +6,8 @@
 // type rows each to a profile past its default, which the full entry registers, sets that facet's
 // attribute on the root. In a 1600px viewport, the site's layout holds main to a reading width,
 // centered. Nothing here names a site: a site that copies this layer changes only package.json's
-// name and index.html's page text, and this file not at all.
+// name and index.html's page text, and this file not at all. The preview is support/served.ts's,
+// which the screenshots description starts too.
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -15,31 +16,23 @@ import { after, before, describe, test } from "node:test";
 
 import { launch, until } from "@jaimestill/spike-html-apps-tooling/browser.js";
 import type { Browser, Page } from "@jaimestill/spike-html-apps-tooling/browser.js";
-import { freePort, start } from "@jaimestill/spike-html-apps-tooling/process.js";
-import type { Started } from "@jaimestill/spike-html-apps-tooling/process.js";
+import type { Server } from "@jaimestill/spike-html-apps-tooling/server.js";
 
-import { base } from "../../vite.config.ts";
+import { served } from "./support/served.ts";
 
 const root = join(import.meta.dirname, "../..");
 
 /** The page's title as the site's index.html writes it, which the built page must carry. */
 const title = /<title>([^<]*)<\/title>/.exec(readFileSync(join(root, "index.html"), "utf8"))?.[1];
 
-let preview: Started;
-let origin: string;
+let preview: Server;
+/** The site's URL under the base, as the preview serves it. */
+let site: string;
 let browser: Browser;
 
 before(async () => {
-  const port = await freePort();
-  origin = `http://127.0.0.1:${port}`;
-  preview = await start(
-    join(root, "node_modules", ".bin", "vite"),
-    ["preview", "--port", `${port}`],
-    {
-      cwd: root,
-      ready: `${origin}${base}`,
-    },
-  );
+  preview = await served();
+  site = preview.origin;
   browser = await launch();
 });
 after(async () => {
@@ -96,7 +89,7 @@ describe("the site under its base", () => {
           failures.push({ url: urls.get(requestId) ?? requestId, errorText }),
       );
       await page.cdp("Network.enable");
-      await page.goto(`${origin}${base}`);
+      await page.goto(site);
       assert.ok(title, "index.html has a title");
       assert.equal(await page.evaluate("document.title"), title);
 
@@ -125,14 +118,14 @@ describe("the site under its base", () => {
         [],
       );
       assert.deepEqual(
-        requests.filter((url) => !url.startsWith(`${origin}${base}`)),
+        requests.filter((url) => !url.startsWith(site)),
         [],
         "every request resolves under the base",
       );
       // The page, its entry and stylesheet, and the menu's chunk, loaded on the first open; no
       // stylesheet is fetched for the menu, whose sheet is in its chunk.
-      assert.ok(requests.includes(`${origin}${base}`), "the page loaded");
-      const assets = requests.filter((url) => url.startsWith(`${origin}${base}assets/`));
+      assert.ok(requests.includes(site), "the page loaded");
+      const assets = requests.filter((url) => url.startsWith(`${site}assets/`));
       for (const pattern of [
         /\/index-[\w-]+\.js$/,
         /\/index-[\w-]+\.css$/,
@@ -155,7 +148,7 @@ describe("the site under its base", () => {
   test("opens the theme menu on T, and each row's choice sets its attribute on the root", async () => {
     const page = await browser.open("about:blank");
     try {
-      await page.goto(`${origin}${base}`);
+      await page.goto(site);
       await press(page, "t");
       await until(page, `document.querySelector("sl-theme-menu dialog")?.matches(":modal")`);
 
@@ -205,7 +198,7 @@ describe("the site under its base", () => {
         deviceScaleFactor: 1,
         mobile: false,
       });
-      await page.goto(`${origin}${base}`);
+      await page.goto(site);
       const { width, left, right, viewport }: Record<string, number> = await page.evaluate(`(() => {
         const rect = document.querySelector("main").getBoundingClientRect();
         const viewport = document.documentElement.clientWidth;

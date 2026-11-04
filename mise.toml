@@ -72,7 +72,7 @@ run = "tsc -p ."
 dir = "{{config_root}}"
 
 [tasks."types:test"]
-description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, with tsc against tsconfig.test.json; reads no network, writes nothing"
+description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, and the screenshots description, scripts/screenshots.config.ts, with tsc against tsconfig.test.json; reads no network, writes nothing"
 run = "tsc -p tsconfig.test.json"
 dir = "{{config_root}}"
 
@@ -89,7 +89,7 @@ run = "node --test 'test/unit/*.test.ts'"
 dir = "{{config_root}}"
 
 [tasks."test:browser"]
-description = "Run the browser tier after the build: dist/ under the base by Vite's preview, in the pinned chrome-headless-shell, the theme menu opened with its sheet adopted and every request under the base, and on T, each facet's choice set on the root, and main held to a centered reading width; reads no network, writes dist/"
+description = "Run the browser tier after the build: dist/ under the base by Vite's preview, in the pinned chrome-headless-shell, the theme menu opened with its sheet adopted and every request under the base, and on T, each facet's choice set on the root, and main held to a centered reading width; and the screenshots command on the index, its captures under a scratch TMPDIR removed after unless --keep; reads no network, writes dist/"
 depends = ["preflight browser", "build"]
 run = "BROWSER_EXECUTABLE=$(mise which chrome-headless-shell) node --test 'test/browser/*.test.ts'"
 dir = "{{config_root}}"
@@ -97,6 +97,21 @@ dir = "{{config_root}}"
 [tasks.check]
 description = "Run every check: lint, types, build, test:unit, and test:browser; reads no network, writes dist/ (gitignored) and nothing else outside TMPDIR"
 depends = ["lint", "types", "build", "test:unit", "test:browser"]
+
+# Never a dependency of check: a reviewer's look at the site's page, not a test. The capture is
+# spike-html-apps-tooling's spike-html-apps-screenshots, on scripts/screenshots.config.ts; the
+# browser tier runs it once (test/browser/screenshots.test.ts).
+# Adapted from spike-html-hosting-architecture (a20a1e0): mise.toml, its screenshots task, over
+# the root's one page.
+# Adapted from spike-html-apps-components (19d4f59): mise.toml, its screenshots task.
+[tasks.screenshots]
+description = "Capture the index whole, wide and narrow, and with its theme menu open, light and dark, in tiles, at the defaults, or --palette/--space/--type <name>, or --all; --page <name> (repeatable), --scheme light|dark, --output terminal|directory|browser, --dir <path>, --keep; reads no network, writes dist/ and the captures, under TMPDIR unless --dir"
+depends = ["preflight browser", "build"]
+# Its arguments follow the description, with or without a leading --.
+# raw: with dependencies, mise prefixes a task's output through a pipe; icat needs the terminal.
+raw = true
+run = "BROWSER_EXECUTABLE=$(mise which chrome-headless-shell) pnpm exec spike-html-apps-screenshots scripts/screenshots.config.ts"
+dir = "{{config_root}}"
 
 [tasks.install]
 description = "Install every mise.toml pin and node_modules from pnpm-lock.yaml; reads the network, writes node_modules/"

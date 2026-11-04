@@ -379,6 +379,13 @@ slices 4/7 committed (sdk c93bc87, 4f29607, 4185d54, b64d707, 03f11f8) · sdk pr
   into a following task.
 - template: the template's sample copied tree is the SDK's own README pinned at an SDK commit.
   Rejected: a fixture tree in template/; an empty content record.
+- template: the SDK reviews (standards, spec) run before the checkpoint, so a fix lands before
+  v0.1.0 rather than as v0.1.1; the sites' reviews follow their adoption.
+- template: the checkpoint is accepted: the SDK's pull request merges and its release workflow
+  cuts v0.1.0, which this session pushes.
+- template: vite-plugin-standard-css-modules stays the SDK's own dependency behind an SDK
+  export, cssModuleScripts(), holding the sites' include and outputMode, so the pin and its
+  configuration move with an SDK bump. Rejected: an SDK peer each site declares and configures.
 
 ## Pending edits
 

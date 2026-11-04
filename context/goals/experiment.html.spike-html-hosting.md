@@ -8,7 +8,7 @@
 
 1. [x] layers
 2. [x] content
-3. [ ] screenshots
+3. [x] screenshots
 4. [ ] template
 5. [ ] highlighting
 6. [ ] components
@@ -16,94 +16,75 @@
 8. [ ] review
 9. [ ] answer
 
-## Task brief · content
+## Task brief · screenshots
 
 ```
-Problem       The architecture and sqlate sites show a placeholder page.
-              Evidence 3 and 4 need their Markdown sources, pinned with
-              provenance, rendered at build as pages under each site's base:
-              front matter shown, relative links resolved, the README as the
-              index. The components and org tasks build on these pages.
-Behaviors     1. Each site's browser tier runs on chrome-headless-shell
+Problem       No site can show what it looks like. Every later session brief
+              needs captures of the built pages, light and dark, wide and
+              narrow, and with the theme menu open, taken one page at a time
+              so no one run is heavy.
+Behaviors     1. The root's browser tier runs on chrome-headless-shell
                  157.0.8103.38, and its currency command reports only the
                  held typescript.
-              2. The architecture site carries byte-identical copies of
-                 architecture's 29 front-matter pages at 8706d04 (README.md,
-                 architecture.md, principles/, standards/). The sqlate site
-                 carries sqlate's README.md and docs/ at v0.6.1 (f09068a).
-                 Each tree has one provenance record naming the repository,
-                 the commit, and each path with its git blob hash. A unit test
-                 fails when a copy differs from its recorded hash, and
-                 STANDARDS.md records this exception to the per-file
-                 provenance line.
-              3. The build renders every copied file through marked into a
-                 page in the site's shell: the foundation's full entry
-                 (page-full.css, register-full.js), preferences.js and
-                 keys.js render-blocking, the Theme button bound to T, and
-                 the site stylesheet. "x.md" becomes "x.html" and "dir/README.md" becomes
-                 "dir/", so the root README is the site's index. No generated
-                 file lands in the working tree.
-              4. A relative ".md" link to a copied page points to that page's
-                 built URL, keeping its fragment. Every heading carries its
-                 GitHub-style id (marked-gfm-heading-id), so every fragment
-                 link reaches its heading.
-              5. A relative link to anything not copied (README -> LICENSE)
-                 points to the source's github.com blob URL at the pin. The
-                 build fails on a relative link it can't place.
-              6. Front matter, parsed by yaml, shows as a key/value table
-                 above the page's content, never as body text. The page title
-                 is the front matter's name, else the first h1.
-              7. Each site's browser tier crawls every page from the index
-                 under the base. Each page answers 2xx, makes every request
-                 under the base, and has one render-blocking module script.
-                 Each in-site link reaches a built page and an existing
-                 fragment id. Titles and the front matter table match the
-                 source. The theme menu opens with its sheet adopted, as
-                 before.
-              8. The content renderer is written in the architecture site and
-                 copied to sqlate with provenance. The spike's context names
-                 the architecture site as its owner until the template task
-                 moves it into the site SDK.
-              9. Every site's shell, the root's included, offers every
-                 foundation profile in the theme menu (4 color, 2 space,
-                 2 type, the schemes), and pressing T opens the menu. Each
-                 site's browser test presses T, finds the menu open, and
-                 finds that choosing a non-default color, space and type
-                 sets its attribute on the root.
-             10. Every site's shell links one site stylesheet in a layer
-                 after the foundation's, on the foundation's --space-*
-                 tokens: inline padding, main held to a reading width and
-                 centered, and spacing around the header, the front matter
-                 table and code blocks. The crawl asserts main's width is
-                 capped below a wide viewport's.
-Test seams    the built site under its base, crawled through vite preview and
-              headless Chrome; the provenance record against the copied trees
-Slices        1. architecture upgrade: chrome-headless-shell 157, currency
-                 reporting only held items, check passing
-              2. sqlate upgrade: the same
-              3. architecture pages: the 29 copies with their provenance
-                 record and test, rendered in the shell with the README as
-                 the index, links and fragments resolved, links outside the
-                 copy sent to the blob at 8706d04, the crawl test
-              4. architecture front matter: the table above each page and
-                 titles from name, asserted by the crawl
-              5. sqlate pages: the renderer copied from architecture with
-                 provenance, README and docs/ at v0.6.1 with their record,
-                 titles from the first h1, the crawl test
-              6. shell fixes in the architecture site: full entry, T bound,
-                 the site stylesheet, behaviors 9-10 in its browser test
-              7. the same copied to sqlate with provenance
-              8. the same in the root's placeholder page and its browser
-                 test (the root owns the shell's origin)
-Out of scope  the shared site template and SDK (its own task), documentation
-              components (section tree, page header, nav), syntax
-              highlighting (its own task), the screenshots task (its own
-              task), the root's chrome pin, cross-site navigation, the
-              review, VHS
-Door          two-way: copies, build code and pins in three sites, each
-              redeploying on merge; no tag is pushed
-(amended at the session brief's redirect: behavior 3, behaviors 9-10,
-slices 6-8)
+              2. Each site has `mise run screenshots`, after the
+                 spike-html-apps* precedent: it depends on the browser
+                 preflight and the build, runs raw, points
+                 BROWSER_EXECUTABLE at the pinned chrome-headless-shell, and
+                 runs spike-html-apps-tooling v0.3.0's
+                 spike-html-apps-screenshots bin on the site's capture
+                 file, passing --page, --scheme, --output, --dir, --keep and
+                 the profile flags through. It stays out of check.
+              3. The capture file describes every page the site builds, one
+                 named page each, in build order. A page's name is its
+                 built path under the base without ".html", the index
+                 "index" and a "dir/" page "dir" (e.g.
+                 "principles/composition-root", "principles"). The
+                 architecture and sqlate sites read the list from their
+                 provenance record, so a page added to the copy is
+                 described without an edit; the root describes its index.
+                 --page <name> captures that page alone and repeats; an
+                 unknown name exits 2 listing the names.
+              4. Every page is captured whole, in tiles, at a wide
+                 (1280x800) and a narrow (390x844) viewport, in both
+                 schemes unless --scheme picks one. Each site's index adds
+                 the theme menu open, wide and narrow, opened by clicking
+                 the Theme button and waiting for the menu's dialog to be
+                 open.
+              5. The palette, space and type flags and --all work as in the
+                 foundation's precedent, reading each page's registered
+                 profiles from the foundation's registry.
+              6. The bin serves the build through vite preview under the
+                 site's /<repo>/ base, started by the same function the
+                 browser tier uses, so a capture's requests match the
+                 deployed site's.
+              7. A browser test in each site's check runs the screenshots
+                 command on one page in one scheme, terminal output, no
+                 --keep, with a scratch TMPDIR, and asserts it exits 0 and
+                 leaves no capture file. The capture file is type-checked,
+                 linted and formatted with the test code.
+              8. The capture file and its server function are written in
+                 the architecture site and copied to sqlate with
+                 provenance; the root adapts them to its one page.
+Test seams    the screenshots command run against the built site; the
+              browser tier's vite preview of the build
+Slices        1. root upgrade: chrome-headless-shell 157.0.8103.38 pin and
+                 checksum, currency reporting only held items, check
+                 passing
+              2. architecture screenshots: the shared preview start, the
+                 capture file over every page from the provenance record
+                 with the index's theme-menu states, the mise task, the
+                 no-capture-left test; a run with --page index and one
+                 deeper page shown
+              3. sqlate screenshots: the same copied with provenance, its
+                 test, a --page run shown
+              4. root screenshots: the same adapted to the root's index, its
+                 test, a run shown
+Out of scope  the site SDK and template (the template task takes the capture
+              file and mise task), syntax highlighting, documentation
+              components, the cross-site review, VHS, CI capture
+Door          two-way: a mise task, a capture file, a test and a pin in three
+              sites, each redeploying on merge unchanged in output; no tag
+              is pushed
 ```
 
 ## Decisions
@@ -244,7 +225,36 @@ slices 6-8)
   versioned on its own; two repositories, as go-web-sdk and go-web-sdk-template.
 - plan: whether pages.yml becomes a reusable workflow called by tag is left to template's plan.
 - plan: no next brief was written; screenshots' start plans it.
+- screenshots: the root's chrome-headless-shell moves to 157.0.8103.38 now, so every site's
+  captures come from one Chrome. Rejected: holding it until the template task.
+- screenshots: every built page is described and named; runs are split with --page, as in
+  spike-html-apps-components. Rejected: a fixed sample of pages; one run over a whole site.
+- screenshots: a browser test in each site's check asserts a run without --keep leaves no
+  capture file. Rejected: showing it by hand in the session brief.
+- screenshots: the capture file serves the build through vite preview by a server function
+  shared with the browser tier. Rejected: the bin's built-in static server, which has no base
+  path and serves one page for every extensionless path (tooling src/server.ts:59-64, 144).
+- screenshots: a state's name turns its page name's "/" into "-", since the bin writes every
+  state's files into one directory; --page names keep their slashes.
+- screenshots: each capture's caption is its page's URL path under the base.
+- screenshots: the index's page path is "", the base itself.
+- screenshots: the no-capture-left test turns off node's compile cache
+  (NODE_DISABLE_COMPILE_CACHE=1), which also writes under TMPDIR, and asserts TMPDIR is empty; a
+  second run with --keep shows the captures were written there.
+- screenshots: tsconfig.test.json's scripts/ include comes from the architecture site, which added
+  it first, and the root and sqlate copy it; no site cites a commit made after its own.
+- screenshots: currency prints nothing in every site. It compares the held typescript 6.0.3 with
+  the newest version typescript-eslint's peer range accepts, so typescript isn't reported as
+  behind. Brief behavior 1 said currency "reports only the held typescript".
 
 ## Pending edits
 
-None.
+- coordinator · roadmap: tasks.template's summary drops "The root's chrome-headless-shell moves
+  to 157.0.8103.38." (the screenshots task moved it) and adds that the template takes each site's
+  screenshots capture file and `mise run screenshots` task.
+- coordinator · roadmap: tasks.components' summary adds that at 390px the architecture index
+  scrolls horizontally, since an element, probably a table, is wider than the viewport; the
+  components task or site.css fixes it.
+- coordinator · roadmap: tasks.template's summary adds that spike-html-apps-tooling's
+  unknown-profile message prints the page's path, which is empty for an index at "", so the
+  message names no page; the template task fixes it in the capture file or the tooling.

@@ -108,7 +108,7 @@ slices 6-8)
 
 ## Progress
 
-slices 5/8 committed · standards — · spec — · editor — (redirected after the session brief)
+slices 6/8 committed · standards — · spec — · editor — (redirected after the session brief)
 
 ## Decisions
 

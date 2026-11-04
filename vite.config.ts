@@ -9,6 +9,10 @@
 // The root copies no Markdown tree, so it runs no markdownPages: its index is its own page.
 // Adapted from spike-html-apps (529ec52): vite.external.config.ts, its plugins, with the base the
 // Pages path and no preview host.
+// Adapted from spike-html-hosting (cb0511c): vite.config.ts, its one page a page for each copied
+// Markdown file.
+// Adapted from spike-html-hosting-architecture (27d70e1): vite.config.ts, its plugins and its base
+// the SDK's.
 // Adapted from spike-html-hosting-sdk (v0.1.0): template/vite.config.ts, without markdownPages
 // and content.json, its one page the root's index.
 

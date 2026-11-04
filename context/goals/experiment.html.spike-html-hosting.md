@@ -173,7 +173,7 @@ Release       spike-html-hosting-sdk v0.1.0
 
 ## Progress
 
-slices 6/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) — · spec (sites) — · editor —
+slices 7/7 committed (sdk c93bc87..cfec324; architecture 3fdf345; sqlate e364cbf; root 0fe3163) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) — · spec (sites) — · editor —
 
 ## Decisions
 

@@ -238,12 +238,13 @@ slices 6-8)
 - content: the T test leaves the theme menu unsaved, so no stored choice persists into the crawl.
 - content: each shell links site.css root-relative, as /site.css, and Vite bundles it into the
   entry's sheet.
+- plan: the site SDK lives in a new repository, spike-html-hosting-sdk, holding the SDK package
+  released by tag and a template/ subtree tagged template/v*; the template task creates it, as
+  layers created the other three. Rejected: inside spike-html-hosting-components, a runtime layer
+  versioned on its own; two repositories, as go-web-sdk and go-web-sdk-template.
+- plan: whether pages.yml becomes a reusable workflow called by tag is left to template's plan.
+- plan: no next brief was written; screenshots' start plans it.
 
 ## Pending edits
 
-- coordinator · roadmap: through a `plan` session after content ships, add to
-  experiment.html.spike-html-hosting the tasks `screenshots` (after content: `mise run
-  screenshots` on every site with the tooling's bin), `template` (a site SDK released by tag plus
-  a template subtree copied once), and `highlighting` (after template: code fences highlighted in
-  the SDK's renderer, matched to the foundation's profiles), before components; the review task
-  drops its capture setup.
+None.

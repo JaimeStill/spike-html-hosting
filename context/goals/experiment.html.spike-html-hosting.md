@@ -89,7 +89,7 @@ Door          two-way: a mise task, a capture file, a test and a pin in three
 
 ## Progress
 
-slices 4/4 committed (1: c161b7d; 2: architecture a20a1e0; 3: sqlate a6688a5; 4: 16c97c6) · standards — · spec — · editor —
+slices 4/4 committed (1: c161b7d; 2: architecture a20a1e0; 3: sqlate a6688a5; 4: 16c97c6) · standards done (arch a09e7db af083a1; sqlate 65b1918 320789b; root be1422c 359dc04) · spec — · editor —
 
 ## Decisions
 

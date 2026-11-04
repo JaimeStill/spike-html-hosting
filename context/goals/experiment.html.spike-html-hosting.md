@@ -108,7 +108,7 @@ slices 6-8)
 
 ## Progress
 
-slices 8/8 committed · standards ✓ · spec — · editor — (redirected after the session brief)
+slices 8/8 committed · standards ✓ · spec ✓ (context gap closed by this edit) · editor ✓
 
 ## Decisions
 
@@ -237,6 +237,11 @@ slices 8/8 committed · standards ✓ · spec — · editor — (redirected afte
 - content: screenshots are their own task right after content, a `mise run screenshots` on the
   tooling's spike-html-apps-screenshots bin, as the spike-html-apps* repositories have; the review
   task keeps the cross-site review, VHS, and cost.
+- content: the architecture site owns site.css, and sqlate and the root copy it unchanged.
+- content: site.css caps main at 80ch, since the foundation has no width token.
+- content: the T test leaves the theme menu unsaved, so no stored choice persists into the crawl.
+- content: each shell links site.css root-relative, as /site.css, and Vite bundles it into the
+  entry's sheet.
 
 ## Pending edits
 

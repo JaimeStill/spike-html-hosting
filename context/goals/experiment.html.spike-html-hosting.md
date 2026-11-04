@@ -89,7 +89,7 @@ Door          two-way: a mise task, a capture file, a test and a pin in three
 
 ## Progress
 
-slices 4/4 committed (1: c161b7d; 2: architecture a20a1e0; 3: sqlate a6688a5; 4: 16c97c6) · standards done (arch a09e7db af083a1; sqlate 65b1918 320789b; root be1422c 359dc04) · spec — · editor —
+slices 4/4 committed · standards done · spec done, no gaps · editor done
 
 ## Decisions
 
@@ -238,9 +238,27 @@ slices 4/4 committed (1: c161b7d; 2: architecture a20a1e0; 3: sqlate a6688a5; 4:
 - screenshots: the capture file serves the build through vite preview by a server function
   shared with the browser tier. Rejected: the bin's built-in static server, which has no base
   path and serves one page for every extensionless path (tooling src/server.ts:59-64, 144).
+- screenshots: a state's name turns its page name's "/" into "-", since the bin writes every
+  state's files into one directory; --page names keep their slashes.
+- screenshots: each capture's caption is its page's URL path under the base.
+- screenshots: the index's page path is "", the base itself.
+- screenshots: the no-capture-left test turns off node's compile cache
+  (NODE_DISABLE_COMPILE_CACHE=1), which also writes under TMPDIR, and asserts TMPDIR is empty; a
+  second run with --keep shows the captures were written there.
+- screenshots: tsconfig.test.json's scripts/ include comes from the architecture site, which added
+  it first, and the root and sqlate copy it; no site cites a commit made after its own.
+- screenshots: currency prints nothing in every site. It compares the held typescript 6.0.3 with
+  the newest version typescript-eslint's peer range accepts, so typescript isn't reported as
+  behind. Brief behavior 1 said currency "reports only the held typescript".
 
 ## Pending edits
 
 - coordinator · roadmap: tasks.template's summary drops "The root's chrome-headless-shell moves
   to 157.0.8103.38." (the screenshots task moved it) and adds that the template takes each site's
   screenshots capture file and `mise run screenshots` task.
+- coordinator · roadmap: tasks.components' summary adds that at 390px the architecture index
+  scrolls horizontally, since an element, probably a table, is wider than the viewport; the
+  components task or site.css fixes it.
+- coordinator · roadmap: tasks.template's summary adds that spike-html-apps-tooling's
+  unknown-profile message prints the page's path, which is empty for an index at "", so the
+  message names no page; the template task fixes it in the capture file or the tooling.

@@ -79,13 +79,18 @@ The tasks, in the order they run; each cites the evidence it proves.
   provenance line naming the repository and commit it came from, and a change in the owning
   repository is copied by hand to the sites that copy it:
   - This repository owns the files the Markdown pages leave unchanged: the two workflows,
-    `eslint.config.js`, `tsconfig.test.json`, `.prettierignore`, `scripts/`, and
+    `eslint.config.js`, `.prettierignore`, `scripts/currency.sh`, `scripts/preflight.sh`, and
     `test/unit/leftover.test.ts`. The architecture and sqlate sites copy them unchanged.
   - The architecture site owns the content renderer, `markdown-pages.ts`, with its tests; the
     files it adapted from this repository to build Markdown pages: `index.html`,
     `vite.config.ts`, `mise.toml`, `tsconfig.json`, and `test/browser/site.test.ts`; and the
     site layout, `site.css`. The sqlate site copies them, with its own title and text in
     `index.html`. This repository copies `site.css` unchanged.
+  - The architecture site owns the screenshot files: `scripts/screenshots.config.ts`,
+    `test/browser/support/served.ts`, `test/browser/screenshots.test.ts`, and
+    `tsconfig.test.json`, which type-checks `scripts/` with the suite. The sqlate site copies
+    them unchanged. This repository copies all but the capture file, which it adapts to its one
+    page.
   - This repository's own `index.html` and browser test carry the architecture site's shell
     changes, kept in step by hand.
   - The planned `template` task moves the shared files into a site SDK released by tag.
@@ -98,8 +103,32 @@ The tasks, in the order they run; each cites the evidence it proves.
   `data-keys="t"`, when the reader presses T.
 - Every shell links `site.css` by the root-relative `/site.css`, and Vite bundles it into the
   entry's sheet.
+- Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the browser test looks for that sheet in `document.adoptedStyleSheets`.
+
+## Taking captures
+
+`mise run screenshots` builds the site and captures its pages with spike-html-apps-tooling's
+`spike-html-apps-screenshots` bin, on the site's `scripts/screenshots.config.ts`. It isn't part
+of the check.
+
+- The capture file describes every page the site builds. A page's name is its built path under
+  the base without `.html`: the index is `index`, and a `dir/` page is `dir`.
+- Each page is captured whole, in tiles, at 1280x800 and 390x844, in light and dark. The index
+  is also captured with its theme menu open at both widths.
+- `--page <name>` captures that page alone and can be given more than once, so a site's pages
+  can be split across runs; an unknown name exits 2 and lists the names. `--scheme light|dark`
+  picks one scheme.
+- `--palette`, `--space`, and `--type <name>` pick a profile, and `--all` runs every profile the
+  capture file lists.
+- The files go to a new directory under TMPDIR unless `--dir <path>` names one. The default
+  output, `--output terminal`, shows each capture and removes its files at the end unless
+  `--keep` is given; `--output directory` and `--output browser` keep them. The tooling's README
+  documents each flag.
+- The capture file serves the build through Vite's preview under the `/<repo>/` base, started by
+  `served()` in `test/browser/support/served.ts`, which the browser tier also uses. A browser
+  test in each site's check runs the command once and asserts it leaves no capture file behind.
 
 ## Releases
 

@@ -4,9 +4,7 @@
  * table, and code blocks. Its own layer, site, declared after the foundation's layers, which the
  * page entry declares first, so it wins over them. Every length is a --space-* token, so the
  * reader's Space profile changes it. Minimal: the site's layout until the components restyle it.
- *
- * Adapted from spike-html-hosting-architecture (18eaa89): site.css, which the architecture site
- * wrote first for the shell it adapted from this page; carried back unchanged.
+ * From spike-html-hosting-architecture (18eaa89): site.css.
  */
 
 @layer site {

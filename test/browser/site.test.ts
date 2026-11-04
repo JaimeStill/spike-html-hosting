@@ -151,6 +151,7 @@ describe("the site under its base", () => {
       await page.close();
     }
   });
+
   test("opens the theme menu on T, and each row's choice sets its attribute on the root", async () => {
     const page = await browser.open("about:blank");
     try {

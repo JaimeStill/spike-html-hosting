@@ -66,6 +66,17 @@ The tasks, in the order they run; each cites the evidence it proves.
    (evidence 9, 10, 11).
 6. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
 
+## Building the sites
+
+- Each site's Vite base, `/<repo>/`, is `vite.config.ts`'s reading of package.json's `name`.
+  The browser test reads the expected title from the site's own `index.html`.
+- The files that build, check, and deploy a site are the same in all three sites. The
+  architecture and sqlate sites copy them from this repository, and each copy carries a
+  provenance line naming the commit it came from. A change to one of these files here is copied
+  by hand to the other two sites.
+- The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
+  the browser test looks for that sheet in `document.adoptedStyleSheets`.
+
 ## Releases
 
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,

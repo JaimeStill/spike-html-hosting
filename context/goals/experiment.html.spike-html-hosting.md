@@ -173,7 +173,7 @@ Release       spike-html-hosting-sdk v0.1.0
 
 ## Progress
 
-slices 4/7 committed (sdk c93bc87, 4f29607, 4185d54, b64d707, 03f11f8) · sdk pre-release review: standards a7362b3 741c8b1 0aa9e63, fixes 827ef95, spec gap fixed d947b01 · checkpoint awaiting the architect · standards (sites) — · spec (sites) — · editor —
+slices 4/7 committed (sdk c93bc87..cfec324) · sdk reviewed (standards, spec) · checkpoint done: sdk PR #1 merged f8e5eb9 with its CI red (the merge command piped through tail); release run cancelled, no tag; fixed forward on template-fix, PR #2 237a769 green; this session's release run 41886733833 pushed v0.1.0 (tag commit 3806e18) and its GitHub release; a scaffold from the tag installs, checks, and prints no currency · standards (sites) — · spec (sites) — · editor —
 
 ## Decisions
 
@@ -386,6 +386,8 @@ slices 4/7 committed (sdk c93bc87, 4f29607, 4185d54, b64d707, 03f11f8) · sdk pr
 - template: vite-plugin-standard-css-modules stays the SDK's own dependency behind an SDK
   export, cssModuleScripts(), holding the sites' include and outputMode, so the pin and its
   configuration move with an SDK bump. Rejected: an SDK peer each site declares and configures.
+- template: the scaffold test reads the nested check's output with its color stripped; mise and
+  node color their lines on GitHub Actions, which failed the step assertions there only.
 
 ## Pending edits
 

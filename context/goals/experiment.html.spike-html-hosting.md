@@ -1,13 +1,13 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** content
-- **Branch:** content
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
 1. [x] layers
-2. [ ] content
+2. [x] content
 3. [ ] screenshots
 4. [ ] template
 5. [ ] highlighting
@@ -105,10 +105,6 @@ Door          two-way: copies, build code and pins in three sites, each
 (amended at the session brief's redirect: behavior 3, behaviors 9-10,
 slices 6-8)
 ```
-
-## Progress
-
-slices 8/8 committed · standards ✓ · spec ✓ (context gap closed by this edit) · editor ✓
 
 ## Decisions
 

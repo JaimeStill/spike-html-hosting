@@ -1,15 +1,20 @@
 <!doctype html>
-<!-- The org stand-in's GitHub Pages site: the foundation's page entry, its registrations, and its
-     preferences module, render-blocking as the foundation's README "Use" section loads them, and a
-     button that opens the theme menu. -->
+<!-- The org stand-in's GitHub Pages site: the foundation's full page entry and its registrations,
+     every built-in profile, so the theme menu offers each, and its preferences module,
+     render-blocking as the foundation's README "Use" section loads them, and its keys module,
+     keys.js, render-blocking too, as the build makes every module script one entry; the site's
+     layout, site.css, after the entry; and a button that opens the theme menu, which keys.js
+     clicks on T. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The org stand-in</title>
-    <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page.css" />
-    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register.js"></script>
+    <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
   </head>
   <body>
     <main>
@@ -18,7 +23,7 @@
         This site is the org stand-in of spike-html-hosting, a spike on hosting GitHub Pages sites
         and persistent artifacts as native web. Its content arrives in later tasks.
       </p>
-      <p><button type="button" commandfor="theme" command="--open">Theme</button></p>
+      <p><button type="button" commandfor="theme" command="--open" data-keys="t">Theme</button></p>
     </main>
     <sl-theme-menu id="theme"></sl-theme-menu>
   </body>

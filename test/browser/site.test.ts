@@ -2,8 +2,11 @@
 // pinned chrome-headless-shell. The page is the site's index.html, its entry render-blocking. The
 // page's button opens the theme menu, whose CSS module script the build rewrote, so its sheet is
 // adopted with no stylesheet fetched for it; and every request the page makes resolves under the
-// base, with none failed. Nothing here names a site: a site that copies this layer changes only
-// package.json's name and index.html's page text, and this file not at all.
+// base, with none failed. T opens the menu too, through keys.js, and stepping the color, space, and
+// type rows each to a profile past its default, which the full entry registers, sets that facet's
+// attribute on the root. In a 1600px viewport, the site's layout holds main to a reading width,
+// centered. Nothing here names a site: a site that copies this layer changes only package.json's
+// name and index.html's page text, and this file not at all.
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -53,6 +56,17 @@ async function click(page: Page, selector: string): Promise<void> {
   for (const type of ["mousePressed", "mouseReleased"]) {
     await page.cdp("Input.dispatchMouseEvent", { type, x, y, button: "left", clickCount: 1 });
   }
+}
+
+/** Presses a lowercase letter key as a US keyboard types it: keyDown with its text, then keyUp. */
+async function press(page: Page, letter: string): Promise<void> {
+  const event = {
+    key: letter,
+    code: `Key${letter.toUpperCase()}`,
+    windowsVirtualKeyCode: letter.toUpperCase().charCodeAt(0),
+  };
+  await page.cdp("Input.dispatchKeyEvent", { type: "keyDown", ...event, text: letter });
+  await page.cdp("Input.dispatchKeyEvent", { type: "keyUp", ...event });
 }
 
 describe("the site under its base", () => {
@@ -133,6 +147,72 @@ describe("the site under its base", () => {
         requests.filter((url) => /theme-menu[\w-]*\.css$/.test(url)),
         [],
       );
+    } finally {
+      await page.close();
+    }
+  });
+
+  test("opens the theme menu on T, and each row's choice sets its attribute on the root", async () => {
+    const page = await browser.open("about:blank");
+    try {
+      await page.goto(`${origin}${base}`);
+      await press(page, "t");
+      await until(page, `document.querySelector("sl-theme-menu dialog")?.matches(":modal")`);
+
+      // Each facet's row, by its section, and the root attribute preferences.js sets for it.
+      const facets = [
+        ["color", "data-palette"],
+        ["space", "data-space"],
+        ["type", "data-type"],
+      ];
+      // Every row lists more than its default: the full entry registered every built-in profile.
+      const rows: Record<string, { values: string[]; checked: string }> = await page.evaluate(`
+        Object.fromEntries([...document.querySelectorAll("sl-theme-menu [data-section]")].map(
+          (row) => [row.dataset.section, {
+            values: [...row.querySelectorAll("input")].map((radio) => radio.value),
+            checked: row.querySelector(":checked").value,
+          }]))`);
+      for (const [facet] of facets) {
+        assert.ok(rows[facet].values.length > 1, `the ${facet} row offers ${rows[facet].values}`);
+      }
+
+      // Focus opens on the first row, color; l steps a row to its next radio, j moves down a row.
+      // Each facet's row steps once, past the scheme row, to the radio after its default.
+      for (const [index, [facet, attribute]] of facets.entries()) {
+        if (index > 0) await press(page, "j");
+        if (facet === "space") await press(page, "j");
+        await press(page, "l");
+        const { values, checked } = rows[facet];
+        const chosen = values[(values.indexOf(checked) + 1) % values.length];
+        assert.equal(
+          await page.evaluate(`document.documentElement.getAttribute("${attribute}")`),
+          chosen,
+          `choosing ${chosen} in the ${facet} row sets ${attribute}`,
+        );
+      }
+    } finally {
+      await page.close();
+    }
+  });
+
+  test("holds main to a reading width, centered, in a 1600px viewport", async () => {
+    const page = await browser.open("about:blank");
+    try {
+      // A viewport wider than any reading width, so main's cap shows.
+      await page.cdp("Emulation.setDeviceMetricsOverride", {
+        width: 1600,
+        height: 900,
+        deviceScaleFactor: 1,
+        mobile: false,
+      });
+      await page.goto(`${origin}${base}`);
+      const { width, left, right, viewport }: Record<string, number> = await page.evaluate(`(() => {
+        const rect = document.querySelector("main").getBoundingClientRect();
+        const viewport = document.documentElement.clientWidth;
+        return { width: rect.width, left: rect.left, right: viewport - rect.right, viewport };
+      })()`);
+      assert.ok(width < viewport * 0.75, `main's ${width}px is capped in ${viewport}px`);
+      assert.ok(Math.abs(left - right) <= 1, `main is centered, ${left}px and ${right}px`);
     } finally {
       await page.close();
     }

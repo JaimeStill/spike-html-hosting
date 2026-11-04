@@ -8,42 +8,30 @@ importers:
 
   .:
     devDependencies:
-      '@eslint/js':
-        specifier: 10.0.1
-        version: 10.0.1(eslint@10.14.0)
       '@jaimestill/spike-html-apps-foundation':
         specifier: github:JaimeStill/spike-html-apps-foundation#v0.3.0
         version: https://codeload.github.com/JaimeStill/spike-html-apps-foundation/tar.gz/ff723d1597cab408fe81d7e35ab52bfa33cd9c55
       '@jaimestill/spike-html-apps-tooling':
         specifier: github:JaimeStill/spike-html-apps-tooling#v0.3.0
         version: https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072
+      '@jaimestill/spike-html-hosting-sdk':
+        specifier: github:JaimeStill/spike-html-hosting-sdk#v0.1.0
+        version: https://codeload.github.com/JaimeStill/spike-html-hosting-sdk/tar.gz/3806e189e0e94fdeff99cdc8b86f23abcb7ebc58(@jaimestill/spike-html-apps-foundation@https://codeload.github.com/JaimeStill/spike-html-apps-foundation/tar.gz/ff723d1597cab408fe81d7e35ab52bfa33cd9c55)(@jaimestill/spike-html-apps-tooling@https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072)(eslint@10.14.0)(typescript@6.0.3)(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1))
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
       eslint:
         specifier: 10.14.0
         version: 10.14.0
-      globals:
-        specifier: 17.14.0
-        version: 17.14.0
       prettier:
         specifier: 3.9.10
         version: 3.9.10
-      rolldown:
-        specifier: 1.2.16
-        version: 1.2.16
       typescript:
         specifier: 6.0.3
         version: 6.0.3
-      typescript-eslint:
-        specifier: 8.72.1
-        version: 8.72.1(eslint@10.14.0)(typescript@6.0.3)
       vite:
         specifier: 8.3.5
-        version: 8.3.5(@types/node@26.6.6)
-      vite-plugin-standard-css-modules:
-        specifier: 0.3.0
-        version: 0.3.0(vite@8.3.5(@types/node@26.6.6))
+        version: 8.3.5(@types/node@26.6.6)(yaml@2.9.1)
 
 packages:
 
@@ -120,6 +108,16 @@ packages:
     resolution: {gitHosted: true, integrity: sha512-uQYlMLWnhEQ14v3q7XACnDfYKYH4TcXkY3yoXL8jSPG/a6xGpE8Ib9hwcVzyOumXMgCBGFdQh4F/HlzoZZ9zFQ==, tarball: https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072}
     version: 0.3.0
     hasBin: true
+
+  '@jaimestill/spike-html-hosting-sdk@https://codeload.github.com/JaimeStill/spike-html-hosting-sdk/tar.gz/3806e189e0e94fdeff99cdc8b86f23abcb7ebc58':
+    resolution: {gitHosted: true, integrity: sha512-V+ZAH3cTCts3a8MTZ9XFMiqiZDpCNJdWx60ZAAlGzmoYfUbTx8qjdK+eIUtSAprJe5eNnWs1hr7ujE/qzQJETQ==, tarball: https://codeload.github.com/JaimeStill/spike-html-hosting-sdk/tar.gz/3806e189e0e94fdeff99cdc8b86f23abcb7ebc58}
+    version: 0.1.0
+    hasBin: true
+    peerDependencies:
+      '@jaimestill/spike-html-apps-foundation': github:JaimeStill/spike-html-apps-foundation#v0.3.0
+      '@jaimestill/spike-html-apps-tooling': github:JaimeStill/spike-html-apps-tooling#v0.3.0
+      eslint: ^10.14.0
+      vite: ^8.3.5
 
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
@@ -432,6 +430,9 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  github-slugger@2.0.0:
+    resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
+
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
@@ -566,6 +567,16 @@ packages:
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
+
+  marked-gfm-heading-id@4.1.4:
+    resolution: {integrity: sha512-CspnvVfHSkb/znqdPS4jUR8HtCjq3M/DnrsJCrfLBLvdrgbemmoINKpeWKQYkBiXAoBGejw0cV7xzqrPdup3WA==}
+    peerDependencies:
+      marked: '>=13 <19'
+
+  marked@18.1.3:
+    resolution: {integrity: sha512-9ChMH8EVVgjgID49nsL6IWxWk5c6GtAsq/xw7U1ggkjkU5AGuv68oLTVlFRtvcUYZtpbNyjyvGo3YDu0fGapiw==}
+    engines: {node: '>= 20'}
+    hasBin: true
 
   minimatch@10.2.6:
     resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
@@ -749,6 +760,11 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
+  yaml@2.9.1:
+    resolution: {integrity: sha512-3NxN8+78OdzbT7C/WjGsyfPAtJaN3FNDsWxv7Y7mcDsT/oOmgW8BpyQQFFBnvZE3j9Y2Sdz1ULFLezL7Eb2yFw==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
@@ -820,6 +836,26 @@ snapshots:
   '@jaimestill/spike-html-apps-foundation@https://codeload.github.com/JaimeStill/spike-html-apps-foundation/tar.gz/ff723d1597cab408fe81d7e35ab52bfa33cd9c55': {}
 
   '@jaimestill/spike-html-apps-tooling@https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072': {}
+
+  '@jaimestill/spike-html-hosting-sdk@https://codeload.github.com/JaimeStill/spike-html-hosting-sdk/tar.gz/3806e189e0e94fdeff99cdc8b86f23abcb7ebc58(@jaimestill/spike-html-apps-foundation@https://codeload.github.com/JaimeStill/spike-html-apps-foundation/tar.gz/ff723d1597cab408fe81d7e35ab52bfa33cd9c55)(@jaimestill/spike-html-apps-tooling@https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072)(eslint@10.14.0)(typescript@6.0.3)(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1))':
+    dependencies:
+      '@eslint/js': 10.0.1(eslint@10.14.0)
+      '@jaimestill/spike-html-apps-foundation': https://codeload.github.com/JaimeStill/spike-html-apps-foundation/tar.gz/ff723d1597cab408fe81d7e35ab52bfa33cd9c55
+      '@jaimestill/spike-html-apps-tooling': https://codeload.github.com/JaimeStill/spike-html-apps-tooling/tar.gz/d1687ef64e24bb5853987f5c5a314bbbfc814072
+      eslint: 10.14.0
+      globals: 17.14.0
+      marked: 18.1.3
+      marked-gfm-heading-id: 4.1.4(marked@18.1.3)
+      rolldown: 1.2.16
+      typescript-eslint: 8.72.1(eslint@10.14.0)(typescript@6.0.3)
+      vite: 8.3.5(@types/node@26.6.6)(yaml@2.9.1)
+      vite-plugin-standard-css-modules: 0.3.0(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1))
+      yaml: 2.9.1
+    transitivePeerDependencies:
+      - lit
+      - oxc-parser
+      - supports-color
+      - typescript
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
@@ -1118,6 +1154,8 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
+  github-slugger@2.0.0: {}
+
   glob-parent@6.0.2:
     dependencies:
       is-glob: 4.0.3
@@ -1215,6 +1253,13 @@ snapshots:
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
+
+  marked-gfm-heading-id@4.1.4(marked@18.1.3):
+    dependencies:
+      github-slugger: 2.0.0
+      marked: 18.1.3
+
+  marked@18.1.3: {}
 
   minimatch@10.2.6:
     dependencies:
@@ -1330,12 +1375,12 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite-plugin-standard-css-modules@0.3.0(vite@8.3.5(@types/node@26.6.6)):
+  vite-plugin-standard-css-modules@0.3.0(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1)):
     dependencies:
       magic-string: 0.30.21
-      vite: 8.3.5(@types/node@26.6.6)
+      vite: 8.3.5(@types/node@26.6.6)(yaml@2.9.1)
 
-  vite@8.3.5(@types/node@26.6.6):
+  vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -1345,11 +1390,14 @@ snapshots:
     optionalDependencies:
       '@types/node': 26.6.6
       fsevents: 2.3.3
+      yaml: 2.9.1
 
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
+
+  yaml@2.9.1: {}
 
   yocto-queue@0.1.0: {}

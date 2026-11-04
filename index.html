@@ -1,29 +1,38 @@
 <!doctype html>
-<!-- The org stand-in's GitHub Pages site: the foundation's full page entry and its registrations,
-     every built-in profile, so the theme menu offers each, and its preferences module,
-     render-blocking as the foundation's README "Use" section loads them, and its keys module,
-     keys.js, render-blocking too, as the build makes every module script one entry; the site's
-     layout, site.css, after the entry; and a button that opens the theme menu, which keys.js
-     clicks on T. -->
+<!-- The org stand-in's GitHub Pages site, the one page the root builds: the foundation's full page
+     entry and its registrations, every built-in profile, so the theme menu offers each, its
+     preferences module, and its keys module, render-blocking, as the build makes every module
+     script one entry; the SDK's site.css by the package's name, after the entry; a button that
+     opens the theme menu, which keys.js clicks on T; and its own main content.
+     Adapted from spike-html-hosting (cb0511c): index.html, its title and text this site's, and its
+     page a shell.
+     Adapted from spike-html-hosting (fba414c): index.html, its full page entry, its keys module,
+     and the Theme button that keys.js clicks on T.
+     Adapted from spike-html-hosting-architecture (27d70e1): index.html, its title the site's
+     repository and its stylesheet the SDK's.
+     Adapted from spike-html-hosting-sdk (v0.1.0): template/index.html, its title the org
+     stand-in's and its main element the root's own content, not a shell to fill. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The org stand-in</title>
     <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
-    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
   </head>
   <body>
+    <header>
+      <button type="button" commandfor="theme" command="--open" data-keys="t">Theme</button>
+    </header>
     <main>
       <h1>The org stand-in</h1>
       <p>
         This site is the org stand-in of spike-html-hosting, a spike on hosting GitHub Pages sites
         and persistent artifacts as native web. Its content arrives in later tasks.
       </p>
-      <p><button type="button" commandfor="theme" command="--open" data-keys="t">Theme</button></p>
     </main>
     <sl-theme-menu id="theme"></sl-theme-menu>
   </body>

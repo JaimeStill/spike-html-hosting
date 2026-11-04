@@ -84,7 +84,7 @@ Door          two-way: copies, build code and pins in two sites; no tag is
 
 ## Progress
 
-slices 5/5 committed · standards — · spec — · editor —
+slices 5/5 committed · standards ✓ · spec — · editor —
 
 ## Decisions
 

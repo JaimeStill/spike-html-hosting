@@ -1,14 +1,14 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** screenshots
-- **Branch:** screenshots
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
 1. [x] layers
 2. [x] content
-3. [ ] screenshots
+3. [x] screenshots
 4. [ ] template
 5. [ ] highlighting
 6. [ ] components
@@ -86,10 +86,6 @@ Door          two-way: a mise task, a capture file, a test and a pin in three
               sites, each redeploying on merge unchanged in output; no tag
               is pushed
 ```
-
-## Progress
-
-slices 4/4 committed · standards done · spec done, no gaps · editor done
 
 ## Decisions
 

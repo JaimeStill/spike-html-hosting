@@ -173,7 +173,7 @@ Release       spike-html-hosting-sdk v0.1.0
 
 ## Progress
 
-slices 0/7 committed · checkpoint — · standards — · spec — · editor —
+slices 1/7 committed (sdk c93bc87) · checkpoint — · standards — · spec — · editor —
 
 ## Decisions
 

@@ -9,83 +9,168 @@
 1. [x] layers
 2. [x] content
 3. [x] screenshots
-4. [ ] template
+4. [x] template
 5. [ ] highlighting
 6. [ ] components
 7. [ ] org
 8. [ ] review
 9. [ ] answer
 
-## Task brief · screenshots
+## Task brief · template
 
 ```
-Problem       No site can show what it looks like. Every later session brief
-              needs captures of the built pages, light and dark, wide and
-              narrow, and with the theme menu open, taken one page at a time
-              so no one run is heavy.
-Behaviors     1. The root's browser tier runs on chrome-headless-shell
-                 157.0.8103.38, and its currency command reports only the
-                 held typescript.
-              2. Each site has `mise run screenshots`, after the
-                 spike-html-apps* precedent: it depends on the browser
-                 preflight and the build, runs raw, points
-                 BROWSER_EXECUTABLE at the pinned chrome-headless-shell, and
-                 runs spike-html-apps-tooling v0.3.0's
-                 spike-html-apps-screenshots bin on the site's capture
-                 file, passing --page, --scheme, --output, --dir, --keep and
-                 the profile flags through. It stays out of check.
-              3. The capture file describes every page the site builds, one
-                 named page each, in build order. A page's name is its
-                 built path under the base without ".html", the index
-                 "index" and a "dir/" page "dir" (e.g.
-                 "principles/composition-root", "principles"). The
-                 architecture and sqlate sites read the list from their
-                 provenance record, so a page added to the copy is
-                 described without an edit; the root describes its index.
-                 --page <name> captures that page alone and repeats; an
-                 unknown name exits 2 listing the names.
-              4. Every page is captured whole, in tiles, at a wide
-                 (1280x800) and a narrow (390x844) viewport, in both
-                 schemes unless --scheme picks one. Each site's index adds
-                 the theme menu open, wide and narrow, opened by clicking
-                 the Theme button and waiting for the menu's dialog to be
-                 open.
-              5. The palette, space and type flags and --all work as in the
-                 foundation's precedent, reading each page's registered
-                 profiles from the foundation's registry.
-              6. The bin serves the build through vite preview under the
-                 site's /<repo>/ base, started by the same function the
-                 browser tier uses, so a capture's requests match the
-                 deployed site's.
-              7. A browser test in each site's check runs the screenshots
-                 command on one page in one scheme, terminal output, no
-                 --keep, with a scratch TMPDIR, and asserts it exits 0 and
-                 leaves no capture file. The capture file is type-checked,
-                 linted and formatted with the test code.
-              8. The capture file and its server function are written in
-                 the architecture site and copied to sqlate with
-                 provenance; the root adapts them to its one page.
-Test seams    the screenshots command run against the built site; the
-              browser tier's vite preview of the build
-Slices        1. root upgrade: chrome-headless-shell 157.0.8103.38 pin and
-                 checksum, currency reporting only held items, check
-                 passing
-              2. architecture screenshots: the shared preview start, the
-                 capture file over every page from the provenance record
-                 with the index's theme-menu states, the mise task, the
-                 no-capture-left test; a run with --page index and one
-                 deeper page shown
-              3. sqlate screenshots: the same copied with provenance, its
-                 test, a --page run shown
-              4. root screenshots: the same adapted to the root's index, its
-                 test, a run shown
-Out of scope  the site SDK and template (the template task takes the capture
-              file and mise task), syntax highlighting, documentation
-              components, the cross-site review, VHS, CI capture
-Door          two-way: a mise task, a capture file, a test and a pin in three
-              sites, each redeploying on merge unchanged in output; no tag
-              is pushed
+Problem       The three sites share their build, check, deploy, test and
+              capture files by hand copy, each change copied by hand from
+              its owning site to the others, so a fix reaches a site only
+              when someone copies it. Every later task (highlighting,
+              components, org) would add to those copies. The shared files
+              become one SDK released by tag, a site is created by one
+              command at that tag, as gonew creates a Go service, and a
+              site keeps pace by bumping the tag.
+Behaviors     1. spike-html-hosting-sdk exists on GitHub (public,
+                 Apache-2.0), managed with marathon as kind code, with
+                 `mise run check`, `mise run currency`, CI on pull
+                 requests, a CHANGELOG, a README, and a STANDARDS.md that
+                 restates the spike's provenance and design rules. Its
+                 currency prints nothing, comparing the held typescript
+                 6.0.3 as the sites do.
+              2. Its release workflow, on a push to main whose manifest
+                 version has no tag, runs the check, commits the pack's
+                 tree and tags it v<version>, and creates a GitHub release
+                 from the CHANGELOG with the tarball attached. It does
+                 nothing at version 0.0.0 or at a version already tagged.
+              3. The package @jaimestill/spike-html-hosting-sdk ships built
+                 ES modules and their declarations through its exports,
+                 never TypeScript source: the render-blocking and Markdown
+                 pages Vite plugins, the ESLint configuration with the
+                 leftover check, a tsconfig base, a Prettier configuration,
+                 the site stylesheet, the content check, the preview
+                 server, the shell checks, the Markdown crawl, and the
+                 capture description. It peers vite, eslint,
+                 spike-html-apps-foundation and spike-html-apps-tooling,
+                 and pins marked, marked-gfm-heading-id, yaml,
+                 vite-plugin-standard-css-modules, @eslint/js,
+                 typescript-eslint and globals exactly as its own
+                 dependencies.
+              4. The SDK's unit tier holds what the sites' unit tiers held:
+                 the leftover check refuses every CSS module script form in
+                 fixture output and passes clean output; the renderer
+                 places links, front matter and heading ids as before; the
+                 content check fails when a copied file's blob hash
+                 differs from its record.
+              5. The shell checks, called on a page: the Theme button and T
+                 open the theme menu with its sheet adopted on the
+                 document; stepping each facet sets its attribute on the
+                 root; the page's one module script is render-blocking;
+                 every request resolves under the base with none failed;
+                 main holds its centered reading width at 1600px. The
+                 crawl adds the Markdown checks: every recorded page
+                 reached, titles, the front matter table, links and
+                 fragments.
+              6. The capture description takes the site's page list and
+                 gives each page every state, the theme-menu states,
+                 facets, --all and the registry read as before. A page's
+                 path is its absolute URL path under the base, the index
+                 /<repo>/, so captures and captions are unchanged, and an
+                 unknown profile's message names the page's path; an SDK
+                 test asserts that message.
+              7. The pages and CI workflows are reusable workflows in the
+                 v* tree: pages runs the full check on a push to main, then
+                 uploads and deploys the build; ci runs the check on pull
+                 requests. A site calls them at the SDK's tag.
+              8. The SDK's currency bin reports, one line each, every mise
+                 tool, package pin, github: tag, action pin and reusable
+                 workflow call that trails its latest, compares typescript
+                 with the newest version typescript-eslint's peer range
+                 accepts, prints nothing and exits 0 when all are current,
+                 and exits nonzero when it reports.
+              9. The scaffold bin, run as `pnpm dlx
+                 github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo>
+                 [dir]` (or npm exec with --allow-git=all), writes the
+                 template into dir, ./<repo> by default, and refuses a
+                 non-empty dir, exiting nonzero and naming it; a usage
+                 error exits 2. The copy's package name is <repo>, so its
+                 base is /<repo>/; its index title names <repo>; it pins
+                 the SDK and calls its workflows at the bin's own tag; its
+                 .gitignore is present; each file that takes comments
+                 carries "From spike-html-hosting-sdk (vX.Y.Z):
+                 template/<path>" beside its upstream lines, JSON none; and
+                 its lockfile is written.
+              10. The template is a Markdown-copy site: a shell page every
+                 Markdown page fills; a sample copied tree, the SDK's own
+                 README pinned at an SDK commit, with its content record;
+                 its crawl, shell, content and leftover checks; a
+                 screenshots task over every page (outside check); the
+                 no-capture-left test; the browser preflight; and a
+                 currency task on the SDK's bin.
+              11. The SDK's check scaffolds the working tree into a scratch
+                 directory under TMPDIR, points the copy's SDK dependency
+                 at the working tree, runs the copy's full check with no
+                 network, and removes the directory.
+              12. spike-html-hosting-sdk v0.1.0 is released as Behavior 2
+                 describes, at a BUILD checkpoint before the sites adopt
+                 it, and installs by its tag.
+              13. The architecture and sqlate sites each consist of a
+                 v0.1.0 scaffold of their own name plus what they keep:
+                 their copied tree and its record, their notes and
+                 marathon configuration, their history, and their index
+                 title and text. Each pins the SDK and calls its workflows
+                 at v0.1.0, builds the same pages at the same paths as
+                 before, passes its check, prints nothing from currency,
+                 and deploys.
+              14. The root is a v0.1.0 scaffold adapted to its one page,
+                 each adaptation marked "Adapted from": its own index page,
+                 its plugin list without the Markdown plugin, the shell
+                 checks alone on its index, and a capture of its index at
+                 /spike-html-hosting/ with the theme-menu states. Its check
+                 passes, its currency prints nothing, it deploys, and the
+                 spike's notes name the SDK as the owner of every shared
+                 file and describe the scaffold command.
+              15. No site declares the SDK's own dependencies directly, and
+                 no site holds a hand copy of a file another site owns.
+Test seams    each repository's `mise run check`; the scaffold bin run into
+              a scratch directory and the copy's check; the built site
+              under Vite's preview
+Slices        1. SDK repository created: init, marathon configuration,
+                 STANDARDS.md, CHANGELOG, README stub, lint-only check, CI,
+                 release workflow at 0.0.0, currency; green CI, no tag
+              2. SDK build-time exports: the two Vite plugins and the
+                 renderer with its tests, the ESLint configuration and its
+                 leftover fixture test, the tsconfig and Prettier bases,
+                 the stylesheet, the content check; built, packed, and the
+                 pack's exports shown resolving
+              3. SDK browser exports and bins: the preview server, the
+                 shell checks, the crawl, the capture description with
+                 absolute page paths and the unknown-profile test, the
+                 currency bin, the reusable workflows; the browser tier
+                 green on a fixture page
+              4. template and scaffold bin: the Markdown-copy template with
+                 the SDK README as its sample tree, the scaffold bin, the
+                 scaffold test running the copy's full check offline;
+                 version 0.1.0, CHANGELOG [0.1.0], README install and
+                 scaffold forms
+                 → checkpoint (escalation): architect accepts the SDK, its
+                   pull request merges, the release workflow cuts v0.1.0;
+                   the record logs that this session pushed it
+              5. architecture adopts v0.1.0: scaffold into scratch, copied
+                 over, kept files restored; built page list unchanged; a
+                 --page index capture shown
+              6. sqlate adopts v0.1.0, the same; a --page capture shown
+              7. root adopts v0.1.0 with its single-page adaptations; the
+                 spike's notes rewritten to name the SDK as owner; a
+                 capture of its index shown
+Out of scope  syntax highlighting, the documentation components, the org
+              content and the root's Markdown, the cross-site review, VHS,
+              cost; a fix inside spike-html-apps-tooling (a reference);
+              publishing to the npm registry; template/v* tags; a scaffold
+              mode that writes into a non-empty directory
+Door          one-way: the public spike-html-hosting-sdk repository and its
+              v0.1.0 tag, which three sites consume; two-way: each site's
+              change, which redeploys its pages unchanged in content and
+              reverts by reverting its merge
+Release       spike-html-hosting-sdk v0.1.0
 ```
+
 
 ## Decisions
 
@@ -246,7 +331,102 @@ Door          two-way: a mise task, a capture file, a test and a pin in three
 - screenshots: currency prints nothing in every site. It compares the held typescript 6.0.3 with
   the newest version typescript-eslint's peer range accepts, so typescript isn't reported as
   behind. Brief behavior 1 said currency "reports only the held typescript".
+- template: the SDK ships built ES modules and declarations, its tag tree the pack, pinned
+  `github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z`; node refuses to strip types under
+  node_modules. Rejected: shipping TypeScript source.
+- template: pages.yml and ci.yml are reusable workflows in the SDK's v* tree, called at @vX.Y.Z,
+  which currency compares like an action pin. Rejected: pages.yml alone; copies in template/.
+- template: the SDK peers vite, eslint, spike-html-apps-foundation, and spike-html-apps-tooling,
+  and pins marked, marked-gfm-heading-id, yaml, vite-plugin-standard-css-modules, @eslint/js,
+  typescript-eslint, and globals as its own dependencies. Rejected: every one a site peer.
+- template: template/ is the Markdown-copy site; the root keeps its single-page index and Vite
+  plugin list as adaptations until org. Rejected: the root's shape; a config factory.
+- template: the capture description is an SDK export taking the site's page list. Rejected: the
+  whole capture file copied in template/.
+- template: a capture page's path is its absolute URL path under the base, the index /<repo>/,
+  so the tooling's unknown-profile message names the page; an SDK test asserts it. Supersedes
+  "screenshots: the index's page path is '', the base itself." Rejected: "./"; a tooling fix.
+- template: the content/ blob-hash check is an SDK export called by a short site test.
+  Rejected: a per-site copy.
+- template: the SDK's fixture site is the scaffold test, which runs the scaffolded copy's full
+  check offline with its SDK dependency pointed at the working tree. Rejected: a separate
+  fixture site; the build and browser tier only.
+- template: a site is created by an SDK bin, `pnpm dlx
+  github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo> [dir]` (npm: `npm exec
+  --allow-git=all`), after gonew: it refuses a non-empty directory, writes the name and title,
+  pins itself, writes provenance, restores .gitignore, which pnpm pack drops, and writes the
+  lockfile. Rejected: giget; a documented git clone; a bin fetching a separate template tag;
+  `pnpm create`, which resolves only registry create-* names.
+- template: template/ ships inside the v* release; there are no template/v* tags. Supersedes
+  "plan: … a template/ subtree tagged template/v*".
+- template: a scaffolded file's provenance reads "From|Adapted from spike-html-hosting-sdk
+  (vX.Y.Z): template/<path>" beside its upstream lines; JSON carries none. Rejected: one record
+  file per site.
+- template: this task releases spike-html-hosting-sdk v0.1.0 and the sites pin #v0.1.0; one-way
+  for the tag and the new public repository. Rejected: pinning a commit, releasing later.
+- template: the SDK exports the shell checks apart from the Markdown crawl; the root calls only
+  the shell checks. Rejected: the root keeping a hand-adapted browser test.
+- template: currency is an SDK bin; preflight.sh stays a template copy, since it runs before
+  node_modules exists. Rejected: currency.sh as a template copy.
+- template: existing sites adopt by scaffolding into scratch and copying over on the site's
+  branch, keeping content/, content.json, CLAUDE.md, context/, .claude/, and history; the bin
+  has no --into mode. Rejected: an in-place overwrite mode.
+- template: v0.1.0 releases at a BUILD checkpoint by escalation, the SDK merged and released
+  before the adoption slices, as spike-html-apps' layers did. Rejected: splitting the adoptions
+  into a following task.
+- template: the template's sample copied tree is the SDK's own README pinned at an SDK commit.
+  Rejected: a fixture tree in template/; an empty content record.
+- template: the SDK reviews (standards, spec) run before the checkpoint, so a fix lands before
+  v0.1.0 rather than as v0.1.1; the sites' reviews follow their adoption.
+- template: the checkpoint is accepted: the SDK's pull request merges and its release workflow
+  cuts v0.1.0, which this session pushes.
+- template: vite-plugin-standard-css-modules stays the SDK's own dependency behind an SDK
+  export, cssModuleScripts(), holding the sites' include and outputMode, so the pin and its
+  configuration move with an SDK bump. Rejected: an SDK peer each site declares and configures.
+- template: the scaffold test reads the nested check's output with its color stripped; mise and
+  node color their lines on GitHub Actions, which failed the step assertions there only.
+- template: the scaffold bin is named spike-html-hosting-sdk, the package's own name, so
+  `pnpm dlx` and `npm exec` run it without a bin argument.
+- template: the template keeps each file's inherited upstream provenance lines, and so does
+  every site scaffolded from it. Two lines that cited spike-html-hosting cb0511c for what that
+  commit doesn't hold now cite the commits that do: mise.toml cites c161b7d for
+  chrome-headless-shell 157.0.8103.38, and index.html cites fba414c for its full page entry, keys
+  module, and Theme button.
+- template: the template's sample copied tree is the SDK's README at 93d68b5, the commit whose
+  README names cssModuleScripts.
+- template: the currency bin reads typescript-eslint's peer range from the installed SDK when the
+  site doesn't declare typescript-eslint itself.
+- template: no site declares rolldown; vite-plugin-standard-css-modules finds it through pnpm's
+  default hoist, `node_modules/.pnpm/node_modules`, and the SDK README tells a site that turns
+  the hoist off to declare it.
+- template: the architecture and sqlate sites adapt index.html (title and text), vite.config.ts
+  (`external` the source's LICENSE), and .gitignore (marathon's .claude/plans/ and
+  .claude/briefs/ kept).
+- template: the root keeps appType "mpa", drops the unit tier, since it copies no Markdown tree,
+  and takes the template's header with the Theme button in it, its page content unchanged.
+- template: a STANDARDS.md provenance line reads `From|Adapted from <repo> (<commit>|<tag>):
+  <path>`, the tag form for a file from an SDK release.
+- template: v0.1.1 candidate: template/README.md's `{{name}}` line runs past 100 columns for a
+  long repository name, as in the architecture and sqlate READMEs.
+- template: v0.1.0 released at the BUILD checkpoint by this session's release run 41886733833
+  (tag commit 3806e18), so SHIP merged the three sites without tagging again.
+- template: v0.1.1 candidate: the scaffold's closing line names `mise run install, then mise run
+  check` but not `git init`, which the check's actionlint needs; the bin's message and the
+  README's scaffold section should name it.
 
 ## Pending edits
 
-None.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.template`'s summary: it names
+  a template/ subtree tagged template/v* that each site copies once; the task shipped the
+  template inside the SDK's v* release, which a site scaffolds from with `pnpm dlx
+  github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo>`.
+- coordinator · references.toml and references.local.toml: add spike-html-hosting-sdk
+  (`https://github.com/JaimeStill/spike-html-hosting-sdk.git`,
+  `~/experiments/spike-html-hosting-sdk`) beside the spike's other four repositories.
+- claude-plugins · marathon retro: pipeline.md's Releasing assumes the session tags the merge
+  commit, but this spike's release workflows commit the pack's tree and cut their own tag on the
+  push to main; and a task whose own repositories consume its release needs a BUILD checkpoint,
+  which the pipeline doesn't describe.
+- claude-plugins · marathon retro: the session merged a pull request with red CI because it piped
+  `gh pr checks --watch` through `tail`, which hid the command's exit status; the session should
+  run the configured merge command exactly as written.

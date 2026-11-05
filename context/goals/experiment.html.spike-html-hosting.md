@@ -46,19 +46,24 @@ Behaviors     1. The components layer builds as a library on the
               2. Each component is a Lit element with a shadow
                  root, named with the sl- prefix. It adopts the
                  foundation's reset and elements sheets before a
-                 layout-only sheet of its own, written as a CSS
-                 module script. A page's content is light-DOM HTML
-                 the element slots: with no script, every list,
-                 link and field still renders and works.
+                 sheet of its own for layout and the component's
+                 own state marks, from foundation color tokens,
+                 written as a CSS module script. A page's content
+                 is light-DOM HTML the element slots: with no
+                 script, every list, link and field still renders
+                 and works. sl-site-nav, whose list the release
+                 holds rather than the page, renders nothing with
+                 no script.
               3. sl-section-tree slots a nested list of links to
                  the page's h2 and h3 headings, by their GitHub ids.
                  An IntersectionObserver marks the section in view
-                 with aria-current. Left and Right arrows move to
-                 the previous and next section, shown as bracketed
-                 [←] and [→] key hints and bound through the
-                 foundation's keys module, so its help dialog lists
-                 them and its off switch turns them off. Up and
-                 Down stay the browser's own scrolling.
+                 with aria-current. H and L move to the previous
+                 and next section, shown as bracketed [H] and [L]
+                 key hints and bound through the foundation's keys
+                 module, so its help dialog lists them and its off
+                 switch turns them off. Every arrow key stays the
+                 browser's own scrolling, in the page and in any
+                 region that scrolls sideways.
               4. The section tree's reading progress follows the
                  page's scroll through a CSS scroll timeline, with
                  no script drawing it. In an engine without scroll
@@ -223,7 +228,7 @@ Release       spike-html-hosting-components v0.1.0;
 
 ## Progress
 
-slices 4/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7) · checkpoint 1: standards done (components 73735bd, 6b45161) · spec: 4 gaps, escalation open · editor —
+slices 4/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7) · checkpoint 1: standards done (components 73735bd, 6b45161) · spec: 4 gaps, escalation answered, fixing · editor —
 
 ## Decisions
 
@@ -574,7 +579,7 @@ slices 4/9 committed (slice 1: no change, currency reports only the held rolldow
   shows as a key/value table above the page; the title comes from name, else the first h1." as to
   the table; the title rule stands. Rejected: the header above the table, which shows each key
   twice.
-- components: Left and Right arrows move to the previous and next section, shown as bracketed [←]
+- components: (superseded at checkpoint 1) Left and Right arrows move to the previous and next section, shown as bracketed [←]
   and [→] key hints and bound through the foundation's keys.js; Up and Down stay the browser's
   scrolling. Rejected: digits 1-9 per entry, which reach only nine of sqlate quick-start's 13
   sections.
@@ -612,6 +617,29 @@ slices 4/9 committed (slice 1: no change, currency reports only the held rolldow
   heading until org. Rejected: the page header and section tree on its placeholder page.
 - components: the components take the stack's sl- prefix, as the foundation's sl-theme-menu and
   spike-html-apps-components' elements do.
+- components: checkpoint 1: H and L move between sections, with [H] [L] hints, character keys the
+  foundation's off switch and help dialog already handle; every arrow stays the browser's
+  scrolling. The spec review found the foundation's keys module cancels every key a binding
+  matches and its off switch covers character keys only, so bound arrows hijacked sideways
+  scrolling in code blocks and table regions and went dead with keys off. Supersedes the arrows.
+  Rejected: P and N, which leave H free for a later Home key; arrows kept with the element
+  unbinding them by focus and setting. H is now taken; a later Home key takes a sequence such as
+  G H.
+- components: checkpoint 1: sl-site-nav, whose list the components release holds, renders nothing
+  with no script; behavior 2 exempts it. Rejected: no-script fallback links in every site's shell,
+  the hand-edited copies round 1 rejected.
+- components: checkpoint 1: sl-site-nav naming the three sites, its dependents, is this spike's
+  accepted exception to the architecture's downward-dependencies principle (standards review);
+  the org task's measure of build-time-by-tag against fetched-at-runtime settles it. Rejected:
+  moving the list to the consumers now, which removes the measure's build-time-by-tag side.
+- components: checkpoint 1: a component's own sheet holds its layout and its own state marks, from
+  foundation color tokens (the progress track and bar, sl-site-nav's current link), since a shadow
+  root's parts can't be styled from the page. Rejected: every color in the page's sheet through
+  ::part().
+- components: checkpoint 1 closes on these answers: once the fixes land and both reviews pass
+  again, the components merge and the release workflow cuts v0.1.0 without another stop.
+- components: sl-site-index is the one writer of the current page's mark, at runtime, so one
+  rendered list serves every page of a site; the renderer writes no mark.
 
 ## Pending edits
 

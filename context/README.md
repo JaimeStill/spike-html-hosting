@@ -85,8 +85,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   notes, marathon configuration, history, and copied tree, if it has one.
 - A site keeps pace with the SDK by bumping its tag in `package.json` and in both workflows'
   `uses:` lines.
-- Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (v0.1.0)"
-  provenance line:
+- Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
+  provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
     `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
     links; and `.gitignore`, which keeps marathon's working files.

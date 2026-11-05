@@ -1,10 +1,10 @@
-<!-- Adapted from spike-html-hosting-sdk (v0.1.0): template/README.md, its site the root's one
+<!-- Adapted from spike-html-hosting-sdk (v0.2.0): template/README.md, its site the root's one
      index page, with no copied tree and no unit tier. -->
 
 # spike-html-hosting
 
 The GitHub Pages site of spike-html-hosting, the org stand-in, made from the template of
-[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.1.0. Its one
+[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.2.0. Its one
 page, `index.html`, is served under `/spike-html-hosting/`.
 
 ## Tasks

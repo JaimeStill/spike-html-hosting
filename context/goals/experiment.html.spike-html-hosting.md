@@ -259,7 +259,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b next · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, reviews running · editor —
 
 ## Decisions
 
@@ -733,6 +733,17 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
   1px, --line-s, --radius-md), and the lengths test holds that one sheet to exactly them.
 - components: v0.2.0 released at the reopened checkpoint 1 by this session: spike-html-hosting-components
   PR #4 merged as 70a1122, and its release run 42122025990 cut v0.2.0.
+- components: the SDK's layout docks each side column only where it fits, measured in the pinned
+  shell: three columns (16rem minimum each beside main's 80ch) at 86rem and wider; the section tree
+  docked beside main with the site index in the Pages drawer from 70rem; one column below 70rem,
+  with the tree's sticky bar. The renderer writes both lengths as each element's dock, exported as
+  docks, and a unit test holds site.css to them.
+- components: the renderer now writes div.section-tree before main, so reading and keyboard order
+  match the page and the bar sticks to the viewport; this reverses slice 5's main-first order. The
+  site index is written inside sl-drawer (label Pages, id pages) after main.
+- components: keepsNavigationWords, in the shell checks and the crawl at 390, 1119, 1120, 1375,
+  1376 and 1400px, fails on a navigation word rendered across lines, or a docked side column under
+  16rem; a hyphenated compound may wrap after its hyphen, a line break between its halves.
 
 ## Pending edits
 

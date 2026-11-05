@@ -1,11 +1,12 @@
 // The site's build, as Pages serves it: dist/ under the base, by the SDK's served(), Vite's
 // preview, loaded in the pinned chrome-headless-shell. Each of the SDK's shell checks is a test on
 // a fresh page of the index, the one page the root builds; with no copied tree, there is no crawl.
-// Nothing here names the site: its base is package.json's name.
+// The index holds no highlighted code, so the palette check has nothing to recolor and is left
+// out. Nothing here names the site: its base is package.json's name.
 // Adapted from spike-html-hosting-architecture (27d70e1): test/browser/site.test.ts, its checks
 // the SDK's.
-// Adapted from spike-html-hosting-sdk (v0.1.0): template/test/browser/site.test.ts, its shell
-// checks alone, without the crawl.
+// Adapted from spike-html-hosting-sdk (v0.2.0): template/test/browser/site.test.ts, its shell
+// checks alone, without the crawl or the palette check, the root's page holding no code.
 
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";

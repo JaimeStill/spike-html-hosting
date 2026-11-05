@@ -63,8 +63,8 @@ The tasks, in the order they run; each cites the evidence it proves.
 3. `screenshots`: `mise run screenshots` on every site, with spike-html-apps-tooling's bin.
 4. `template`: the shared site files in place of the hand copies: a site SDK released by tag,
    whose release carries the template that one scaffold command copies into a new site.
-5. `highlighting`: code fences highlighted in the SDK's renderer, matched to the foundation's
-   profiles.
+5. `highlighting`: code fences highlighted at build by the SDK's renderer, each palette's code
+   in the colors of the editor theme the palette comes from.
 6. `components`: the documentation components, released and pinned on every site
    (evidence 4, 6).
 7. `org`: the charter, the index, the hosted report, shared navigation measured, and the
@@ -76,15 +76,16 @@ The tasks, in the order they run; each cites the evidence it proves.
 ## Building the sites
 
 - spike-html-hosting-sdk owns every file the sites share: the Vite plugins, the Markdown
-  renderer, the ESLint configuration with the leftover check, the tsconfig and Prettier bases,
-  `site.css`, `served()`, the shell checks and the crawl, the capture description, the currency
-  bin, and the reusable workflows. Its README documents each export.
+  renderer with its highlighting and syntax themes, the ESLint configuration with the leftover
+  check, the tsconfig and Prettier bases, `site.css`, `served()`, the shell checks, the palette
+  check, the crawl, the capture description, the currency bin, and the reusable workflows. Its
+  README documents each export.
 - Each site was scaffolded from the SDK's template at v0.1.0, by
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- A site keeps pace with the SDK by bumping its tag in `package.json` and in both workflows'
-  `uses:` lines.
+- Every site pins the SDK at v0.2.0. A site keeps pace with the SDK by bumping its tag in
+  `package.json` and in both workflows' `uses:` lines.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -105,6 +106,18 @@ The tasks, in the order they run; each cites the evidence it proves.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
   theme menu offers every profile. It also loads `keys.js`, which clicks the Theme button, marked
   `data-keys="t"`, when the reader presses T.
+- The renderer highlights each fenced block at build with Shiki, so no script reaches the page.
+  A syntax theme is `{ palette, light, dark }`. The SDK's built-ins map primer, catppuccin, and
+  everforest to Shiki's bundled themes, and flexoki to a byte-for-byte copy of Flexoki's VS Code
+  themes whose green the SDK moves to the foundation's hue 142°. A site appends an entry for an
+  outside palette, as the SDK's Noctis fixture site does.
+- The architecture and sqlate sites' browser tests call the SDK's `highlightsEachPalette` check
+  on their indexes, which hold highlighted code. The root's page holds no code, so its test
+  leaves the check out.
+- Every site and the SDK's template set `minimumReleaseAge: 0` in `pnpm-workspace.yaml`.
+  Currency moves each pin to its latest release, and pnpm's default one-day wait fails a frozen
+  install of a lockfile that pins a release under a day old. Reading each release's notes before
+  its bump lands stands in for the wait.
 - Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the shell checks look for that sheet in `document.adoptedStyleSheets`.
@@ -138,8 +151,8 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. v0.1.0 is its first release. The sites
-release nothing; each deploys on its push to main.
+release workflow tags a version bump that lands on main. Its current release is v0.2.0. The
+sites release nothing; each deploys on its push to main.
 
 ## References
 

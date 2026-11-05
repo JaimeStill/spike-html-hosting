@@ -256,7 +256,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), reviews running · editor —
 
 ## Decisions
 
@@ -720,6 +720,14 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
   inline-end edge; the tree inside the Pages drawer.
 - components: each side column docks only where it fits, at a minimum of about 16rem, and
   navigation text never breaks mid-word (decided as a fact with the redirect).
+- components: v0.2.0's sl-section-tree takes `dock` (70rem by default, exported as DOCK), read in a
+  media query as sl-drawer reads its own, and switches to the sticky bar below it through a custom
+  state, so with no script the list renders inline at every width; at the top of the page no
+  section is current, so L from the top lands on the first section. sl-drawer keeps the
+  reference's 48rem default; the SDK sets both to the width where its centered three columns fit
+  (about 88rem).
+- components: drawer.css keeps the reference's non-token values (100%, 100dvh, the 200ms slide,
+  1px, --line-s, --radius-md), and the lengths test holds that one sheet to exactly them.
 
 ## Pending edits
 

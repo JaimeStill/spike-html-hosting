@@ -260,7 +260,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps (SDK fixing; components v0.2.1) · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 building · editor —
 
 ## Decisions
 
@@ -756,6 +756,12 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
 - components: checkpoint 2: the spec review found main off-center between 70rem and 84rem on pages
   with no section tree, and no keys help dialog in the site shells, so readers couldn't see H, L,
   P and T or reach the off switch; both fixed in the SDK.
+- components: the SDK's shell checks and crawl assert main centered at 1200px on a page with no
+  section tree (holdsBetweenDocks) and the keys help: "?" opens it, it lists exactly the page's
+  bindings, and the off switch stops L and P (opensKeysHelp). The shells carry a "Help [?]" button
+  and the foundation's help dialog, after its demo/keys.html (18e0c55); Pages, Help and Close take
+  aria-labels, since the help module would name a row from the text with its kbd hint removed. The
+  root's shell, which runs the shell checks, adds the Help button and dialog when it adopts.
 
 ## Pending edits
 

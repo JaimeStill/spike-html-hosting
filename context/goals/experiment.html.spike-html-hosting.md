@@ -253,13 +253,14 @@ Door          one-way: spike-html-hosting-components v0.1.0, its
               consume; two-way: each site's change, which redeploys
               its pages and reverts by reverting its merge
 Release       spike-html-hosting-components v0.1.0 (released);
-              spike-html-hosting-components v0.2.0;
+              spike-html-hosting-components v0.2.0 (released);
+              spike-html-hosting-components v0.2.1;
               spike-html-hosting-sdk v0.3.0
 ```
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, reviews running · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps (SDK fixing; components v0.2.1) · editor —
 
 ## Decisions
 
@@ -744,6 +745,17 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
 - components: keepsNavigationWords, in the shell checks and the crawl at 390, 1119, 1120, 1375,
   1376 and 1400px, fails on a navigation word rendered across lines, or a docked side column under
   16rem; a hyphenated compound may wrap after its hyphen, a line break between its halves.
+- components: checkpoint 2: the spec review found H and L skipping or stalling on real pages: after a
+  move to a section shorter than the distance to the reading line, v0.2.0 moved the mark to the
+  next section and counted the next move from there. Fixed as components v0.2.1, a patch: each
+  move counts from the last stop H or L reached until the reader scrolls, tested on sections
+  shorter than a screen; SDK v0.3.0 pins v0.2.1. Rejected: releasing on v0.2.0 and fixing later.
+- components: checkpoint 2: a hyphenated compound in navigation may wrap after its hyphen; the
+  words on each side stay whole. Rejected: treating it as a mid-word break, which would widen the
+  side columns or move the 86rem dock point.
+- components: checkpoint 2: the spec review found main off-center between 70rem and 84rem on pages
+  with no section tree, and no keys help dialog in the site shells, so readers couldn't see H, L,
+  P and T or reach the off switch; both fixed in the SDK.
 
 ## Pending edits
 

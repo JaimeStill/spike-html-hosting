@@ -223,7 +223,7 @@ Release       spike-html-hosting-components v0.1.0;
 
 ## Progress
 
-slices 1/9 committed (slice 1: no change; currency reports only the held rolldown 1.3.0, SDK check passes) · standards — · spec — · editor —
+slices 2/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7) · standards — · spec — · editor —
 
 ## Decisions
 

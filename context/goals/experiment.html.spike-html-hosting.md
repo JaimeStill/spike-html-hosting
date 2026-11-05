@@ -10,165 +10,150 @@
 2. [x] content
 3. [x] screenshots
 4. [x] template
-5. [ ] highlighting
+5. [x] highlighting
 6. [ ] components
 7. [ ] org
 8. [ ] review
 9. [ ] answer
 
-## Task brief · template
+## Task brief · highlighting
 
 ```
-Problem       The three sites share their build, check, deploy, test and
-              capture files by hand copy, each change copied by hand from
-              its owning site to the others, so a fix reaches a site only
-              when someone copies it. Every later task (highlighting,
-              components, org) would add to those copies. The shared files
-              become one SDK released by tag, a site is created by one
-              command at that tag, as gonew creates a Go service, and a
-              site keeps pace by bumping the tag.
-Behaviors     1. spike-html-hosting-sdk exists on GitHub (public,
-                 Apache-2.0), managed with marathon as kind code, with
-                 `mise run check`, `mise run currency`, CI on pull
-                 requests, a CHANGELOG, a README, and a STANDARDS.md that
-                 restates the spike's provenance and design rules. Its
-                 currency prints nothing, comparing the held typescript
-                 6.0.3 as the sites do.
-              2. Its release workflow, on a push to main whose manifest
-                 version has no tag, runs the check, commits the pack's
-                 tree and tags it v<version>, and creates a GitHub release
-                 from the CHANGELOG with the tarball attached. It does
-                 nothing at version 0.0.0 or at a version already tagged.
-              3. The package @jaimestill/spike-html-hosting-sdk ships built
-                 ES modules and their declarations through its exports,
-                 never TypeScript source: the render-blocking and Markdown
-                 pages Vite plugins, the ESLint configuration with the
-                 leftover check, a tsconfig base, a Prettier configuration,
-                 the site stylesheet, the content check, the preview
-                 server, the shell checks, the Markdown crawl, and the
-                 capture description. It peers vite, eslint,
-                 spike-html-apps-foundation and spike-html-apps-tooling,
-                 and pins marked, marked-gfm-heading-id, yaml,
-                 vite-plugin-standard-css-modules, @eslint/js,
-                 typescript-eslint and globals exactly as its own
-                 dependencies.
-              4. The SDK's unit tier holds what the sites' unit tiers held:
-                 the leftover check refuses every CSS module script form in
-                 fixture output and passes clean output; the renderer
-                 places links, front matter and heading ids as before; the
-                 content check fails when a copied file's blob hash
-                 differs from its record.
-              5. The shell checks, called on a page: the Theme button and T
-                 open the theme menu with its sheet adopted on the
-                 document; stepping each facet sets its attribute on the
-                 root; the page's one module script is render-blocking;
-                 every request resolves under the base with none failed;
-                 main holds its centered reading width at 1600px. The
-                 crawl adds the Markdown checks: every recorded page
-                 reached, titles, the front matter table, links and
-                 fragments.
-              6. The capture description takes the site's page list and
-                 gives each page every state, the theme-menu states,
-                 facets, --all and the registry read as before. A page's
-                 path is its absolute URL path under the base, the index
-                 /<repo>/, so captures and captions are unchanged, and an
-                 unknown profile's message names the page's path; an SDK
-                 test asserts that message.
-              7. The pages and CI workflows are reusable workflows in the
-                 v* tree: pages runs the full check on a push to main, then
-                 uploads and deploys the build; ci runs the check on pull
-                 requests. A site calls them at the SDK's tag.
-              8. The SDK's currency bin reports, one line each, every mise
-                 tool, package pin, github: tag, action pin and reusable
-                 workflow call that trails its latest, compares typescript
-                 with the newest version typescript-eslint's peer range
-                 accepts, prints nothing and exits 0 when all are current,
-                 and exits nonzero when it reports.
-              9. The scaffold bin, run as `pnpm dlx
-                 github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo>
-                 [dir]` (or npm exec with --allow-git=all), writes the
-                 template into dir, ./<repo> by default, and refuses a
-                 non-empty dir, exiting nonzero and naming it; a usage
-                 error exits 2. The copy's package name is <repo>, so its
-                 base is /<repo>/; its index title names <repo>; it pins
-                 the SDK and calls its workflows at the bin's own tag; its
-                 .gitignore is present; each file that takes comments
-                 carries "From spike-html-hosting-sdk (vX.Y.Z):
-                 template/<path>" beside its upstream lines, JSON none; and
-                 its lockfile is written.
-              10. The template is a Markdown-copy site: a shell page every
-                 Markdown page fills; a sample copied tree, the SDK's own
-                 README pinned at an SDK commit, with its content record;
-                 its crawl, shell, content and leftover checks; a
-                 screenshots task over every page (outside check); the
-                 no-capture-left test; the browser preflight; and a
-                 currency task on the SDK's bin.
-              11. The SDK's check scaffolds the working tree into a scratch
-                 directory under TMPDIR, points the copy's SDK dependency
-                 at the working tree, runs the copy's full check with no
-                 network, and removes the directory.
-              12. spike-html-hosting-sdk v0.1.0 is released as Behavior 2
-                 describes, at a BUILD checkpoint before the sites adopt
-                 it, and installs by its tag.
-              13. The architecture and sqlate sites each consist of a
-                 v0.1.0 scaffold of their own name plus what they keep:
-                 their copied tree and its record, their notes and
-                 marathon configuration, their history, and their index
-                 title and text. Each pins the SDK and calls its workflows
-                 at v0.1.0, builds the same pages at the same paths as
-                 before, passes its check, prints nothing from currency,
-                 and deploys.
-              14. The root is a v0.1.0 scaffold adapted to its one page,
-                 each adaptation marked "Adapted from": its own index page,
-                 its plugin list without the Markdown plugin, the shell
-                 checks alone on its index, and a capture of its index at
-                 /spike-html-hosting/ with the theme-menu states. Its check
-                 passes, its currency prints nothing, it deploys, and the
-                 spike's notes name the SDK as the owner of every shared
-                 file and describe the scaffold command.
-              15. No site declares the SDK's own dependencies directly, and
-                 no site holds a hand copy of a file another site owns.
-Test seams    each repository's `mise run check`; the scaffold bin run into
-              a scratch directory and the copy's check; the built site
-              under Vite's preview
-Slices        1. SDK repository created: init, marathon configuration,
-                 STANDARDS.md, CHANGELOG, README stub, lint-only check, CI,
-                 release workflow at 0.0.0, currency; green CI, no tag
-              2. SDK build-time exports: the two Vite plugins and the
-                 renderer with its tests, the ESLint configuration and its
-                 leftover fixture test, the tsconfig and Prettier bases,
-                 the stylesheet, the content check; built, packed, and the
-                 pack's exports shown resolving
-              3. SDK browser exports and bins: the preview server, the
-                 shell checks, the crawl, the capture description with
-                 absolute page paths and the unknown-profile test, the
-                 currency bin, the reusable workflows; the browser tier
-                 green on a fixture page
-              4. template and scaffold bin: the Markdown-copy template with
-                 the SDK README as its sample tree, the scaffold bin, the
-                 scaffold test running the copy's full check offline;
-                 version 0.1.0, CHANGELOG [0.1.0], README install and
-                 scaffold forms
+
+Problem       Code fences on the architecture and sqlate sites render as
+              plain text: sqlate's guide carries 67 fenced blocks (SQL, Go,
+              shell, TOML and others) and the template's sample tree 15,
+              none highlighted. Highlighting belongs at build, in the SDK's
+              Markdown renderer, so no script reaches the page; and it must
+              follow the reader's color profile and scheme, every palette's
+              code true to the editor theme its palette comes from. Shiki
+              bundles three of the four palettes' source themes but not
+              Flexoki's, the default, so the SDK needs an extension point
+              for themes Shiki lacks, which Flexoki uses first and an
+              outside palette, Noctis, proves.
+Behaviors     1. spike-html-hosting-sdk depends on shiki 4.6.0, pinned
+                 exactly. The Markdown renderer highlights each fenced
+                 block through marked's own code-renderer extension on its
+                 existing instance; the highlighter is created once per
+                 build, and rendering a page stays synchronous.
+              2. A fence labeled with a language Shiki doesn't bundle, or
+                 with no label, renders as plain code, and the build
+                 doesn't fail.
+              3. A syntax theme is { palette, light, dark }, light and dark
+                 each a Shiki bundled theme's name or a theme object. The
+                 SDK's built-ins map primer to github-light-default /
+                 github-dark-dimmed, catppuccin to catppuccin-latte /
+                 catppuccin-mocha, and everforest to everforest-light /
+                 everforest-dark, loaded from Shiki as it bundles them; and
+                 flexoki to a byte-for-byte copy of Flexoki's own VS Code
+                 themes (kepano/flexoki vscode/ at 24ab91d, MIT), carried
+                 with its LICENSE and a provenance record, entered through
+                 the same shape. markdownPages() takes a list of syntax
+                 themes, the built-ins by default; a site appends an
+                 outside entry.
+              4. The SDK exports a check of a syntax theme, as the
+                 foundation exports check(): its light and dark themes hold
+                 the same rule list, in order, with the same font styles,
+                 and every rule colored in one is colored in the other; it
+                 reports each failure. The check passes every built-in, and
+                 the build refuses an entry that fails it, naming the
+                 palette.
+              5. The SDK merges each entry's pair into one theme whose
+                 colors are light-dark() pairs. Each highlighted token
+                 carries one class; the build emits one generated
+                 stylesheet, linked by every Markdown page, holding each
+                 class's per-palette color and font style and one rule per
+                 syntax theme selecting it by data-palette, flexoki also on
+                 the root with no attribute. On a palette with no syntax
+                 theme, code is plain, in the page's text color.
+              6. A highlighted block keeps the foundation's pre: Shiki's
+                 inline background and color are dropped, so the block has
+                 the foundation's border and no fill of its own.
+              7. The SDK's unit tier holds the highlighting: an unknown and
+                 an unlabeled fence render plain; the check passes each
+                 built-in and fails a pair with a rule dropped from one
+                 side, and one with a color dropped; and, over the
+                 template's sample tree, every token's light and dark color
+                 and font style in each palette equals the one its source
+                 theme gives it alone.
+              8. A new shell check, exported beside the others: for each
+                 palette profiles("color") lists, stepping to it in light
+                 and in dark recolors a highlighted token to that palette's
+                 syntax theme's color; it fails, naming the palette, for a
+                 registered palette whose code renders plain. The
+                 architecture and sqlate sites' browser tests call it.
+              9. An SDK fixture site registers spike-html-apps-noctis
+                 v0.1.1, a dev dependency, as its README describes, and
+                 appends a Noctis syntax theme: Noctis Hibernus and Obscuro
+                 copied byte for byte from liviuschera/noctis at 4a82370,
+                 with its LICENSE and provenance. Its browser test passes
+                 the shell check of Behavior 8 with noctis in the menu, and
+                 the check fails on the same site built without the Noctis
+                 entry.
+              10. The scaffold's closing line and the SDK README's scaffold
+                 section name git init before mise run install and mise run
+                 check; the template README keeps every line within 100
+                 columns for any repository name. The scaffold test still
+                 runs the copy's full check offline, highlighting
+                 included.
+              11. The SDK README documents the syntax themes: the built-in
+                 mapping, the { palette, light, dark } shape, how a site
+                 appends one, the check, and the plain fallback. The
+                 CHANGELOG's [0.2.0] lists the additions and the two
+                 template fixes, and spike-html-hosting-sdk v0.2.0 is
+                 released as its release workflow describes, at a BUILD
+                 checkpoint before the sites adopt it.
+              12. The architecture and sqlate sites pin the SDK and call its
+                 workflows at v0.2.0, take the v0.2.0 template README
+                 (provenance From spike-html-hosting-sdk (v0.2.0)), call
+                 the shell check of Behavior 8, build the same pages at the
+                 same paths, pass their checks, print nothing from
+                 currency, and deploy.
+              13. The root pins the SDK and calls its workflows at v0.2.0;
+                 its page is unchanged, its check passes, its currency
+                 prints nothing, and it deploys.
+              14. The session brief shows, per palette and scheme, a sqlate
+                 code page beside the same code rendered by its source
+                 theme alone, for the architect to judge fidelity.
+Test seams    each repository's `mise run check`: the SDK's unit tier over
+              the renderer and the syntax check, its browser tier over the
+              fixture sites, and the scaffold test; each Markdown site's
+              shell checks on its build under Vite's preview
+Slices        1. SDK highlighting: shiki pinned; the code renderer; the
+                 syntax theme shape, merge and check; the three bundled
+                 built-ins and the Flexoki copy with its record; classes
+                 and the generated stylesheet with its data-palette rules
+                 and plain fallback; the foundation's pre kept; the unit
+                 tier of Behavior 7; a template build with highlighted
+                 pages shown by a capture
+              2. SDK browser proof: the palette shell check, exported; the
+                 noctis fixture site and its passing and failing builds;
+                 the scaffold test green with highlighting
+              3. SDK release: the git init line and the template README's
+                 width; the README's syntax section; version 0.2.0 and
+                 CHANGELOG [0.2.0]
                  → checkpoint (escalation): architect accepts the SDK, its
-                   pull request merges, the release workflow cuts v0.1.0;
+                   pull request merges, the release workflow cuts v0.2.0;
                    the record logs that this session pushed it
-              5. architecture adopts v0.1.0: scaffold into scratch, copied
-                 over, kept files restored; built page list unchanged; a
-                 --page index capture shown
-              6. sqlate adopts v0.1.0, the same; a --page capture shown
-              7. root adopts v0.1.0 with its single-page adaptations; the
-                 spike's notes rewritten to name the SDK as owner; a
-                 capture of its index shown
-Out of scope  syntax highlighting, the documentation components, the org
-              content and the root's Markdown, the cross-site review, VHS,
-              cost; a fix inside spike-html-apps-tooling (a reference);
-              publishing to the npm registry; template/v* tags; a scaffold
-              mode that writes into a non-empty directory
-Door          one-way: the public spike-html-hosting-sdk repository and its
-              v0.1.0 tag, which three sites consume; two-way: each site's
-              change, which redeploys its pages unchanged in content and
-              reverts by reverting its merge
-Release       spike-html-hosting-sdk v0.1.0
+              4. architecture adopts v0.2.0: pin and workflow calls bumped,
+                 the v0.2.0 README taken, the palette check called; its one
+                 yaml block shown in a capture
+              5. sqlate adopts v0.2.0, the same; the side-by-side captures
+                 of a code page per palette and scheme
+              6. root adopts v0.2.0: pin and workflow calls bumped; currency
+                 empty; a capture of its index
+Out of scope  highlighting inline code; line numbers, copy buttons, diff
+              or focus notation, and any script on the page; a nested
+              data-palette scope's code choosing its nearest palette (the
+              rules apply in source order); syntax tokens in the
+              foundation, and any change to spike-html-apps-foundation or
+              spike-html-apps-noctis (references); the root's Markdown;
+              the documentation components; languages Shiki doesn't
+              bundle; publishing to the npm registry
+Door          one-way: spike-html-hosting-sdk v0.2.0, which three sites
+              consume; two-way: each site's change, which redeploys its
+              pages and reverts by reverting its merge
+Release       spike-html-hosting-sdk v0.2.0
 ```
 
 
@@ -413,9 +398,99 @@ Release       spike-html-hosting-sdk v0.1.0
 - template: v0.1.1 candidate: the scaffold's closing line names `mise run install, then mise run
   check` but not `git init`, which the check's actionlint needs; the bin's message and the
   README's scaffold section should name it.
+- highlighting: code fences are highlighted at build by Shiki 4.6.0, an exact SDK dependency.
+  Supersedes "content: syntax highlighting is its own task after template … Shiki 4.6.0 is the
+  candidate". Rejected: highlight.js 11.12.0 (regex grammars); starry-night 3.11.0 (a separate
+  HTML serializer, 15 MB); Prism 1.30.0 (last published 2025-03).
+- highlighting: the renderer highlights through marked's own code-renderer extension on its
+  existing instance; the highlighter is created once per build and render() stays synchronous.
+  Rejected: marked-highlight 2.2.4, which wraps its own <pre><code> around Shiki's; marked-shiki
+  1.2.1, third-party, last published 2025-08.
+- highlighting: Shiki runs the oniguruma engine, the TextMate grammars' own regex engine, so tokens
+  match the source editors'; it starts once per build in ~40 ms. Rejected: the JavaScript regex
+  engine, faster to start and slower to highlight.
+- highlighting: pages render in buildStart, so the generated stylesheet holds every class the
+  pages use.
+- highlighting: a fence whose label Shiki doesn't bundle, or with no label, renders as plain code.
+  Rejected: failing the build, which a byte-for-byte copy couldn't fix.
+- highlighting: each palette's code is true to its source theme pair, merged into one Shiki theme
+  with light-dark() colors and chosen by data-palette. Rejected: the first plan round's one theme
+  bound to the foundation's 16 color tokens, which got 24-69% of characters right; one shared
+  theme with per-palette roles, which needs 53 roles to be exact on the three trees' 78 blocks.
+- highlighting: syntax colors stay out of the foundation, in the SDK's palette-to-syntax-theme
+  mapping, which a site extends as spike-html-apps-noctis extends the foundation's palettes.
+  Rejected: per-profile syntax tokens in spike-html-apps-foundation v0.4.0, a reference whose
+  conformance contract spike-html-apps-noctis and eight pinning repositories share.
+- highlighting: a syntax theme is { palette, light, dark }, each side a Shiki bundled theme's name
+  or a theme object; markdownPages() takes the list, the built-ins by default, and a site appends
+  outside entries. The SDK merges each pair and exports its check, checkSyntax, named after its
+  checkContent, as the foundation exports check(): the same rule list in order, the same font
+  styles, and every rule colored in both. Rejected: a new spike-html-hosting-syntax repository;
+  spike-html-hosting-components, a runtime layer.
+- highlighting: the built-ins use Shiki's bundled themes natively (primer: github-light-default /
+  github-dark-dimmed; catppuccin: catppuccin-latte / catppuccin-mocha; everforest:
+  everforest-light / everforest-dark). Rejected: a module per palette; copies of the bundled data.
+- highlighting: Flexoki, which Shiki doesn't bundle, is a byte-for-byte copy of kepano/flexoki
+  vscode/ at 24ab91d (MIT) with its LICENSE and provenance record, entered through the extension
+  shape as its first user.
+- highlighting: the flexoki syntax theme takes the foundation's green departure: the SDK turns
+  Flexoki's green-600 #66800b and green-400 #879a39 into #408739 and #61a25a, rotated to hue 142°
+  as spike-html-apps-foundation v0.3.0's flexoki.css does, and the copy stays byte for byte. The
+  architect's direction at the release checkpoint.
+- highlighting: tokens carry classes from transformerStyleToClass, with one generated stylesheet
+  emitted into the build. Rejected: inline styles, +28% brotli on sqlate's bodies against +11%.
+- highlighting: the generated stylesheet selects each theme by data-palette, flexoki also on the
+  root; code on a palette with no syntax theme is plain, in the page's text color. Rejected:
+  falling back to flexoki's syntax colors, made for flexoki's background.
+- highlighting: a highlighted block keeps the foundation's pre, its border and no fill, and keeps
+  tabindex="0" on <pre> for keyboard scrolling; Shiki's background is dropped. Rejected: the
+  source theme's editor background.
+- highlighting: fidelity is held by an SDK unit test that every token's light and dark color in
+  each palette equals its source theme's over the template's sample tree, and shown by
+  session-brief captures of a sqlate code page per palette and scheme beside its source theme's
+  own rendering. Rejected: the captures alone.
+- highlighting: the browser check highlightsEachPalette, exported apart from `shell`, asserts
+  that each palette profiles("color") lists recolors a highlighted token to its syntax theme's
+  color, failing a registered palette with none; the architecture and sqlate sites call it.
+  Rejected: the renderer's unit tests alone.
+- highlighting: an SDK fixture site registers spike-html-apps-noctis v0.1.1, a dev dependency,
+  with Noctis Hibernus / Obscuro copied from liviuschera/noctis at 4a82370 with provenance and
+  LICENSE, as the extension point's second user. Rejected: a made-up palette in the unit tier;
+  no extension test.
+- highlighting: the release is spike-html-hosting-sdk v0.2.0, a minor for a new feature at 0.y.z,
+  at a BUILD checkpoint before the sites adopt. Rejected: v0.1.1.
+- highlighting: v0.2.0 ships both v0.1.1 candidates, closing the two "template: v0.1.1
+  candidate" lines: the scaffold's closing line and the SDK README name git init, and the
+  template README's {{name}} line stays within 100 columns for a repository name up to 95
+  characters. Behavior 10's "any repository name" can't hold, since GitHub allows 100. Rejected:
+  a later release.
+- highlighting: the architecture and sqlate sites take the v0.2.0 template README, its provenance
+  From spike-html-hosting-sdk (v0.2.0). Rejected: a hand re-wrap as an adaptation; leaving the
+  119- and 113-column lines.
+- highlighting: the root bumps its SDK pin and workflow calls to v0.2.0 with its page unchanged,
+  so its currency stays empty.
+- highlighting: pnpm's minimumReleaseAge is 0 in the SDK, its template, and every site, set in
+  pnpm-workspace.yaml. In PR #3's CI, pnpm 12's default one-day wait refused vite 8.3.6, the
+  release currency reported. The architect's direction: no superficial waits; currency stays
+  rolling, and each release's notes are read before its bump. Supersedes "layers: no repository
+  has a pnpm-workspace.yaml". Rejected: waiting a day; going back to vite 8.3.5; a per-package
+  minimumReleaseAgeExclude.
+- highlighting: the architect's direction: minimumReleaseAge: 0 becomes the standard for every
+  web module that installs with pnpm, now that PR #3's CI and the v0.2.0 release run proved it
+  here. The standard is a pending edit to the architecture repository's rolling-currency
+  principle.
+- highlighting: the components task adds pnpm-workspace.yaml with `minimumReleaseAge: 0` to
+  spike-html-hosting-components, as the SDK's template has it.
 
 ## Pending edits
 
+- architecture · principles/rolling-currency.md: a web module that installs with pnpm sets
+  `minimumReleaseAge: 0` in its pnpm-workspace.yaml, so the package manager installs the latest
+  release currency reports. Otherwise pnpm 12's default one-day wait refuses a same-day release
+  in CI (spike-html-hosting-sdk PR #3, vite 8.3.6). Reading each release's notes before its bump
+  lands replaces the wait as the review. The trade: the wait keeps out a compromised publish that
+  the registry pulls within hours, and reading the notes doesn't. This is the architect's
+  direction, proven by spike-html-hosting-sdk v0.2.0 and the three sites that pin it.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.template`'s summary: it names
   a template/ subtree tagged template/v* that each site copies once; the task shipped the
   template inside the SDK's v* release, which a site scaffolds from with `pnpm dlx

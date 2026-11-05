@@ -228,7 +228,7 @@ Release       spike-html-hosting-components v0.1.0;
 
 ## Progress
 
-slices 4/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · editor —
+slices 5/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · editor —
 
 ## Decisions
 
@@ -642,6 +642,26 @@ slices 4/9 committed (slice 1: no change, currency reports only the held rolldow
   rendered list serves every page of a site; the renderer writes no mark.
 - components: v0.1.0 released at checkpoint 1 by this session: spike-html-hosting-components PR #3
   merged as d4bbbd5, and its release run 42096936848 cut v0.1.0.
+- components: the template shell's components wiring moved from slice 6 into slice 5: the
+  screenshots tool waits for every hyphenated tag to be defined, so the renderer's sl-* markup needs
+  the shells to load components v0.1.0 in the same slice. Slice 6 is the v0.3.0 release
+  preparation alone. No behavior changed.
+- components: the SDK and its template pin components v0.1.0 as a dev dependency, since no SDK module
+  imports it; the shells load the four modules render-blocking after the foundation's, with
+  sl-site-nav in the header beside the Theme button.
+- components: renderBlocking groups every module a page loads statically into one chunk (rolldown
+  codeSplitting group "index", tags $initial), keeping one module script per page once the keys
+  module's dynamic help-dialog import split Vite's preload helper into its own chunk; the theme
+  menu and the keys help stay lazy chunks.
+- components: the renderer still fills only title and main: sl-page-header opens main, always
+  written, empty with no front matter; div.section-tree (left out with no h2 or h3) and
+  div.site-index follow main, so a reader reaches the text first. At 70rem and wider site.css lays
+  the body out as three columns with main centered at 80ch and the panels sticky; narrower, they
+  stack after main. Divs, not asides: the components carry their own named nav landmarks.
+- components: a table region is named "Table: <header cells>", or "Table" with every header cell
+  empty; tree labels come from the heading tokens' text, since getHeadingList()'s raw text drops
+  &; a front-matter sequence or mapping shows as text joined by ", "; site-index links are relative
+  to each page.
 
 ## Pending edits
 

@@ -61,9 +61,15 @@ Behaviors     1. The components layer builds as a library on the
                  and next section, shown as bracketed [H] and [L]
                  key hints and bound through the foundation's keys
                  module, so its help dialog lists them and its off
-                 switch turns them off. Every arrow key stays the
-                 browser's own scrolling, in the page and in any
-                 region that scrolls sideways.
+                 switch turns them off. The top of the page is a
+                 stop, and the moves wrap: L past the last section
+                 goes to the top, H from the top to the last
+                 section. Every arrow key stays the browser's own
+                 scrolling, in the page and in any region that
+                 scrolls sideways. Where the tree's column doesn't
+                 fit, the tree shows as a sticky bar at the top of
+                 the viewport holding only the progress and the
+                 [H] and [L] buttons, its section links hidden.
               4. The section tree's reading progress follows the
                  page's scroll through a CSS scroll timeline, with
                  no script drawing it. In an engine without scroll
@@ -78,7 +84,14 @@ Behaviors     1. The components layer builds as a library on the
                  site, nested by directory, each by its title. A
                  directory with an index page is labeled by that
                  page's title and links to it. The current page is
-                 marked aria-current.
+                 marked aria-current. Where its column fits, it is
+                 docked beside the page; narrower, it sits in
+                 sl-drawer, copied with provenance from
+                 spike-html-apps-components, a modal dialog opened
+                 by a "Pages" header button with the P key, bound
+                 through the foundation's keys module. Each side
+                 column docks only at a width where it fits (about
+                 16rem), and no navigation text breaks mid-word.
               7. sl-site-nav shows the sites listed in the
                  components release: the org stand-in,
                  architecture and sqlate, each by root-relative
@@ -203,6 +216,20 @@ Slices        1. SDK upgrade: rolldown held at 1.2.16, the hold
               8. sqlate adopts, the same way; captures of the
                  quick-start tree and its progress
                  (spike-html-hosting-sqlate)
+              6a. checkpoint 2 redirect, components: the H and L
+                 cycle with the top as a stop; sl-drawer copied with
+                 provenance; the narrow sticky bar; version 0.2.0,
+                 README, CHANGELOG [0.2.0]
+                 → checkpoint 1 reopened: both reviews, then the
+                   pull request merges and the release workflow
+                   cuts v0.2.0, which the record logs this session
+                   pushed (spike-html-hosting-components)
+              6b. checkpoint 2 redirect, SDK: components v0.2.0
+                 pinned; the Pages drawer and button in the shell
+                 and renderer markup; side columns at their minimum
+                 widths and no mid-word breaks; README and CHANGELOG
+                 [0.3.0] follow
+                 → checkpoint 2 again (spike-html-hosting-sdk)
               9. root adopts: pins and workflow calls bumped,
                  sl-site-nav on its page; the live stored-theme
                  capture across the three deployed sites
@@ -222,13 +249,14 @@ Door          one-way: spike-html-hosting-components v0.1.0, its
               v0.3.0, which three sites and every new scaffold
               consume; two-way: each site's change, which redeploys
               its pages and reverts by reverting its merge
-Release       spike-html-hosting-components v0.1.0;
+Release       spike-html-hosting-components v0.1.0 (released);
+              spike-html-hosting-components v0.2.0;
               spike-html-hosting-sdk v0.3.0
 ```
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), awaiting the architect · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · editor —
 
 ## Decisions
 
@@ -671,6 +699,27 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
 - components: the shell checks and the crawl fail on any page holding an undefined custom element,
   naming the tags, so a shell missing a component module fails the check instead of hanging the
   screenshots tool's whenDefined() wait (spec review's weak spot; sdk 1c5c56e).
+- components: checkpoint 2 redirect: the architect's look at the local builds found the three
+  columns cramped at about 1400px, the site index breaking words mid-word, and H unable to return
+  to the top. The fixes ship as components v0.2.0 at a reopened checkpoint 1, and SDK v0.3.0, not
+  yet released, pins it. Rejected: holding the fixes for a later task.
+- components: H and L cycle through every stop, the top of the page one of them: L past the last
+  section goes to the top, H from the top to the last section. Rejected: the top as a stop with
+  H and L stopping at each end. This retires the checkpoint 1 note that a later Home key takes a
+  sequence: there is no Home key to plan for.
+- components: sl-drawer is copied with provenance from spike-html-apps-components into
+  spike-html-hosting-components, as the toolchain was, so the sites stay on the foundation and
+  their own components layer. Rejected: spike-html-apps-components v0.3.0 as a dependency, with
+  its marked dependency and another spike's pin.
+- components: the site index's drawer opens from a "Pages" header button with the P key.
+  Rejected: "Documents" with D, as spike-html-apps has it; these sites list pages.
+- components: at narrow widths the section tree is a sticky bar at the top of the viewport holding
+  only the progress and the [H] and [L] buttons, its section links hidden: while reading on a
+  narrow screen the links aren't critical (the architect's direction). Rejected: the tree stacked
+  after the page; a second "Sections" drawer, which the copied drawer can't open from the
+  inline-end edge; the tree inside the Pages drawer.
+- components: each side column docks only where it fits, at a minimum of about 16rem, and
+  navigation text never breaks mid-word (decided as a fact with the redirect).
 
 ## Pending edits
 

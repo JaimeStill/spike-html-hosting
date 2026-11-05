@@ -228,7 +228,7 @@ Release       spike-html-hosting-components v0.1.0;
 
 ## Progress
 
-slices 4/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7) · checkpoint 1: standards done (components 73735bd, 6b45161) · spec: 4 gaps, escalation answered, fixing · editor —
+slices 4/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · editor —
 
 ## Decisions
 
@@ -640,6 +640,8 @@ slices 4/9 committed (slice 1: no change, currency reports only the held rolldow
   again, the components merge and the release workflow cuts v0.1.0 without another stop.
 - components: sl-site-index is the one writer of the current page's mark, at runtime, so one
   rendered list serves every page of a site; the renderer writes no mark.
+- components: v0.1.0 released at checkpoint 1 by this session: spike-html-hosting-components PR #3
+  merged as d4bbbd5, and its release run 42096936848 cut v0.1.0.
 
 ## Pending edits
 

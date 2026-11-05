@@ -228,7 +228,7 @@ Release       spike-html-hosting-components v0.1.0;
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), awaiting the architect · editor —
 
 ## Decisions
 
@@ -662,6 +662,15 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
   empty; tree labels come from the heading tokens' text, since getHeadingList()'s raw text drops
   &; a front-matter sequence or mapping shows as text joined by ", "; site-index links are relative
   to each page.
+- components: the crawl keeps its restart from content.json and its unreachable result as a guard,
+  though every page's site index now reaches every page; removing it would change the crawl
+  beyond this task (standards review).
+- components: the crawl computes the header's expected dd text with the renderer's exported
+  frontMatterText; the unit tier pins pageHeader's exact output, so a formatting bug there still
+  fails (standards review).
+- components: the shell checks and the crawl fail on any page holding an undefined custom element,
+  naming the tags, so a shell missing a component module fails the check instead of hanging the
+  screenshots tool's whenDefined() wait (spec review's weak spot; sdk 1c5c56e).
 
 ## Pending edits
 

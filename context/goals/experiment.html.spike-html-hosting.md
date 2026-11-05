@@ -98,7 +98,10 @@ Behaviors     1. The components layer builds as a library on the
                  /<repo>/. The current site is marked aria-current.
                  A list change is a components release.
               8. Focus is always visible on every component, and
-                 every length is a --space-* token. Each component
+                 every space is a --space-* token; the copied
+                 sl-drawer keeps its reference's other lengths
+                 (sizes, offsets, timing), which aren't spacing.
+                 Each component
                  renders under every profile the full entry
                  registers, in light and in dark, at 1280px and
                  390px.
@@ -256,7 +259,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), reviews running · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, open-drawer profile case adding · editor —
 
 ## Decisions
 

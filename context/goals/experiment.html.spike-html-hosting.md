@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** building
+- **Task:** components
+- **Branch:** components
 
 ## Tasks
 
@@ -16,146 +16,214 @@
 8. [ ] review
 9. [ ] answer
 
-## Task brief · highlighting
+## Task brief · components
 
 ```
-
-Problem       Code fences on the architecture and sqlate sites render as
-              plain text: sqlate's guide carries 67 fenced blocks (SQL, Go,
-              shell, TOML and others) and the template's sample tree 15,
-              none highlighted. Highlighting belongs at build, in the SDK's
-              Markdown renderer, so no script reaches the page; and it must
-              follow the reader's color profile and scheme, every palette's
-              code true to the editor theme its palette comes from. Shiki
-              bundles three of the four palettes' source themes but not
-              Flexoki's, the default, so the SDK needs an extension point
-              for themes Shiki lacks, which Flexoki uses first and an
-              outside palette, Noctis, proves.
-Behaviors     1. spike-html-hosting-sdk depends on shiki 4.6.0, pinned
-                 exactly. The Markdown renderer highlights each fenced
-                 block through marked's own code-renderer extension on its
-                 existing instance; the highlighter is created once per
-                 build, and rendering a page stays synchronous.
-              2. A fence labeled with a language Shiki doesn't bundle, or
-                 with no label, renders as plain code, and the build
-                 doesn't fail.
-              3. A syntax theme is { palette, light, dark }, light and dark
-                 each a Shiki bundled theme's name or a theme object. The
-                 SDK's built-ins map primer to github-light-default /
-                 github-dark-dimmed, catppuccin to catppuccin-latte /
-                 catppuccin-mocha, and everforest to everforest-light /
-                 everforest-dark, loaded from Shiki as it bundles them; and
-                 flexoki to a byte-for-byte copy of Flexoki's own VS Code
-                 themes (kepano/flexoki vscode/ at 24ab91d, MIT), carried
-                 with its LICENSE and a provenance record, entered through
-                 the same shape. markdownPages() takes a list of syntax
-                 themes, the built-ins by default; a site appends an
-                 outside entry.
-              4. The SDK exports a check of a syntax theme, as the
-                 foundation exports check(): its light and dark themes hold
-                 the same rule list, in order, with the same font styles,
-                 and every rule colored in one is colored in the other; it
-                 reports each failure. The check passes every built-in, and
-                 the build refuses an entry that fails it, naming the
-                 palette.
-              5. The SDK merges each entry's pair into one theme whose
-                 colors are light-dark() pairs. Each highlighted token
-                 carries one class; the build emits one generated
-                 stylesheet, linked by every Markdown page, holding each
-                 class's per-palette color and font style and one rule per
-                 syntax theme selecting it by data-palette, flexoki also on
-                 the root with no attribute. On a palette with no syntax
-                 theme, code is plain, in the page's text color.
-              6. A highlighted block keeps the foundation's pre: Shiki's
-                 inline background and color are dropped, so the block has
-                 the foundation's border and no fill of its own.
-              7. The SDK's unit tier holds the highlighting: an unknown and
-                 an unlabeled fence render plain; the check passes each
-                 built-in and fails a pair with a rule dropped from one
-                 side, and one with a color dropped; and, over the
-                 template's sample tree, every token's light and dark color
-                 and font style in each palette equals the one its source
-                 theme gives it alone.
-              8. A new shell check, exported beside the others: for each
-                 palette profiles("color") lists, stepping to it in light
-                 and in dark recolors a highlighted token to that palette's
-                 syntax theme's color; it fails, naming the palette, for a
-                 registered palette whose code renders plain. The
-                 architecture and sqlate sites' browser tests call it.
-              9. An SDK fixture site registers spike-html-apps-noctis
-                 v0.1.1, a dev dependency, as its README describes, and
-                 appends a Noctis syntax theme: Noctis Hibernus and Obscuro
-                 copied byte for byte from liviuschera/noctis at 4a82370,
-                 with its LICENSE and provenance. Its browser test passes
-                 the shell check of Behavior 8 with noctis in the menu, and
-                 the check fails on the same site built without the Noctis
-                 entry.
-              10. The scaffold's closing line and the SDK README's scaffold
-                 section name git init before mise run install and mise run
-                 check; the template README keeps every line within 100
-                 columns for any repository name. The scaffold test still
-                 runs the copy's full check offline, highlighting
-                 included.
-              11. The SDK README documents the syntax themes: the built-in
-                 mapping, the { palette, light, dark } shape, how a site
-                 appends one, the check, and the plain fallback. The
-                 CHANGELOG's [0.2.0] lists the additions and the two
-                 template fixes, and spike-html-hosting-sdk v0.2.0 is
-                 released as its release workflow describes, at a BUILD
-                 checkpoint before the sites adopt it.
-              12. The architecture and sqlate sites pin the SDK and call its
-                 workflows at v0.2.0, take the v0.2.0 template README
-                 (provenance From spike-html-hosting-sdk (v0.2.0)), call
-                 the shell check of Behavior 8, build the same pages at the
-                 same paths, pass their checks, print nothing from
+Problem       The three sites render pages with no way to move
+              through them. sqlate's longest guide page has 13
+              sections and no section tree. Architecture's 29
+              pages link to each other only from their bodies. No
+              site links the others. Front matter shows as a raw
+              key/value table. And at 390px three pages scroll
+              sideways, because body tables are wider than the
+              column. Evidence 4 needs the section tree, with
+              bracketed key hints, reading progress and arrow-key
+              movement. Evidence 6 needs one baseline pin, with
+              the reader's stored theme carrying across the shared
+              origin. spike-html-hosting-components, still at
+              0.0.0, is the layer for these components, and the
+              SDK's renderer is where each page's data is made.
+Behaviors     1. The components layer builds as a library on the
+                 foundation peer, its toolchain copied with
+                 provenance from spike-html-apps-components: a tsc
+                 emit build to ES modules and declarations, ESLint
+                 and Prettier, a unit tier, and a browser tier on
+                 spike-html-apps-tooling v0.3.0 in
+                 chrome-headless-shell 157.0.8103.38. It depends on
+                 lit 3.3.3, pinned exactly, and peers
+                 spike-html-apps-foundation ^0.3.0. Its check reads
+                 no network.
+              2. Each component is a Lit element with a shadow
+                 root, named with the sl- prefix. It adopts the
+                 foundation's reset and elements sheets before a
+                 layout-only sheet of its own, written as a CSS
+                 module script. A page's content is light-DOM HTML
+                 the element slots: with no script, every list,
+                 link and field still renders and works.
+              3. sl-section-tree slots a nested list of links to
+                 the page's h2 and h3 headings, by their GitHub ids.
+                 An IntersectionObserver marks the section in view
+                 with aria-current. Left and Right arrows move to
+                 the previous and next section, shown as bracketed
+                 [←] and [→] key hints and bound through the
+                 foundation's keys module, so its help dialog lists
+                 them and its off switch turns them off. Up and
+                 Down stay the browser's own scrolling.
+              4. The section tree's reading progress follows the
+                 page's scroll through a CSS scroll timeline, with
+                 no script drawing it. In an engine without scroll
+                 timelines the indicator is absent and nothing else
+                 changes. Under reduced motion the progress still
+                 shows, and no scrolling is smooth.
+              5. sl-page-header slots the page's front matter as a
+                 description list, every key and value in source
+                 order and escaped. A page with no front matter
+                 shows no fields.
+              6. sl-site-index slots every page of the current
+                 site, nested by directory, each by its title. A
+                 directory with an index page is labeled by that
+                 page's title and links to it. The current page is
+                 marked aria-current.
+              7. sl-site-nav shows the sites listed in the
+                 components release: the org stand-in,
+                 architecture and sqlate, each by root-relative
+                 /<repo>/. The current site is marked aria-current.
+                 A list change is a components release.
+              8. Focus is always visible on every component, and
+                 every length is a --space-* token. Each component
+                 renders under every profile the full entry
+                 registers, in light and in dark, at 1280px and
+                 390px.
+              9. The components' browser tier proves the stored
+                 theme carries across sites. Two fixture sites are
+                 served under two bases from one local origin. A
+                 theme saved through the menu on one site applies
+                 before first paint on the other, and a palette the
+                 second site doesn't register falls back to its
+                 default and stays stored.
+              10. spike-html-hosting-components v0.1.0 is released
+                 as its release workflow describes: a README of
+                 each element and its slotted markup, and
+                 CHANGELOG [0.1.0]. It releases at a BUILD
+                 checkpoint before the SDK pins it.
+              11. The SDK's renderer writes each Markdown page's
+                 data as HTML inside the components' elements:
+                 - the section tree of the page's h2 and h3, from
+                   the same heading ids its headings carry;
+                 - the page header in place of the front-matter
+                   table;
+                 - the site index of every page the site builds,
+                   nested by directory.
+                 The page title still comes from the front matter's
+                 name, else the first h1.
+              12. The renderer wraps each body table in a region a
+                 keyboard can focus. The region is named, and
+                 scrolls the table sideways. site.css styles it.
+                 No page of either Markdown site scrolls sideways
+                 at 390px.
+              13. The SDK's crawl asserts each page's header: its
+                 fields equal the source's front matter in order,
+                 and no front-matter table remains. It asserts the
+                 site index lists every page the build writes, and
+                 that the page has no sideways scroll at 390px.
+                 The shell checks add the 390px check. The 1600px
+                 check still holds main to a centered reading
+                 width.
+              14. The SDK's template shell loads components v0.1.0
+                 by tag, so a scaffolded site shows all four
+                 components. The scaffold test still runs the
+                 copy's full check offline.
+              15. The SDK holds rolldown at 1.2.16, the version Vite
+                 8.3.6 depends on. Its currency reports only
+                 rolldown 1.3.0, and its check passes.
+              16. The SDK README documents the markup the renderer
+                 writes for each element and the table regions.
+                 CHANGELOG [0.3.0] lists them. SDK v0.3.0 is
+                 released as its release workflow describes, at a
+                 BUILD checkpoint before the sites adopt it.
+              17. The architecture and sqlate sites pin SDK v0.3.0
+                 and components v0.1.0, and call the SDK workflows
+                 at v0.3.0. They take the v0.3.0 template shell
+                 with its provenance and keep their adaptations.
+                 They build the same pages at the same paths, pass
+                 their checks, print only the held rolldown from
                  currency, and deploy.
-              13. The root pins the SDK and calls its workflows at v0.2.0;
-                 its page is unchanged, its check passes, its currency
-                 prints nothing, and it deploys.
-              14. The session brief shows, per palette and scheme, a sqlate
-                 code page beside the same code rendered by its source
-                 theme alone, for the architect to judge fidelity.
-Test seams    each repository's `mise run check`: the SDK's unit tier over
-              the renderer and the syntax check, its browser tier over the
-              fixture sites, and the scaffold test; each Markdown site's
-              shell checks on its build under Vite's preview
-Slices        1. SDK highlighting: shiki pinned; the code renderer; the
-                 syntax theme shape, merge and check; the three bundled
-                 built-ins and the Flexoki copy with its record; classes
-                 and the generated stylesheet with its data-palette rules
-                 and plain fallback; the foundation's pre kept; the unit
-                 tier of Behavior 7; a template build with highlighted
-                 pages shown by a capture
-              2. SDK browser proof: the palette shell check, exported; the
-                 noctis fixture site and its passing and failing builds;
-                 the scaffold test green with highlighting
-              3. SDK release: the git init line and the template README's
-                 width; the README's syntax section; version 0.2.0 and
-                 CHANGELOG [0.2.0]
-                 → checkpoint (escalation): architect accepts the SDK, its
-                   pull request merges, the release workflow cuts v0.2.0;
-                   the record logs that this session pushed it
-              4. architecture adopts v0.2.0: pin and workflow calls bumped,
-                 the v0.2.0 README taken, the palette check called; its one
-                 yaml block shown in a capture
-              5. sqlate adopts v0.2.0, the same; the side-by-side captures
-                 of a code page per palette and scheme
-              6. root adopts v0.2.0: pin and workflow calls bumped; currency
-                 empty; a capture of its index
-Out of scope  highlighting inline code; line numbers, copy buttons, diff
-              or focus notation, and any script on the page; a nested
-              data-palette scope's code choosing its nearest palette (the
-              rules apply in source order); syntax tokens in the
-              foundation, and any change to spike-html-apps-foundation or
-              spike-html-apps-noctis (references); the root's Markdown;
-              the documentation components; languages Shiki doesn't
-              bundle; publishing to the npm registry
-Door          one-way: spike-html-hosting-sdk v0.2.0, which three sites
-              consume; two-way: each site's change, which redeploys its
-              pages and reverts by reverting its merge
-Release       spike-html-hosting-sdk v0.2.0
+              18. The root pins SDK v0.3.0 and components v0.1.0,
+                 and its page gains sl-site-nav only; the page is
+                 otherwise unchanged. It passes its check, including
+                 the 390px shell check, and deploys.
+              19. The session brief shows captures per site, light
+                 and dark, at 1280px and 390px: sqlate's
+                 quick-start with its tree and progress, an
+                 architecture page with its header and site index,
+                 and the architecture index's table scrolling in
+                 its region. It also shows a theme saved on one
+                 deployed site applying on the other two, live on
+                 jaimestill.github.io.
+Test seams    each repository's `mise run check`:
+              - the components' browser tier over fixture pages in
+                the renderer's markup, including the two-base origin
+              - the SDK's unit tier over the renderer's output, and
+                its crawl and shell checks
+              - the scaffold test
+              - each site's crawl and shell checks on its build
+                under Vite's preview
+Slices        1. SDK upgrade: rolldown held at 1.2.16, the hold
+                 logged; currency reports only rolldown, and the
+                 check passes (spike-html-hosting-sdk)
+              2. Components toolchain and section tree: the copied
+                 toolchain; sl-section-tree with keys, the
+                 section-in-view mark and CSS progress, on a
+                 fixture page shown by captures
+                 (spike-html-hosting-components)
+              3. Components header, index and nav: sl-page-header,
+                 sl-site-index and sl-site-nav, and the two-base
+                 stored-theme test; captures per profile
+                 (spike-html-hosting-components)
+              4. Components release: README, version 0.1.0,
+                 CHANGELOG [0.1.0]
+                 → checkpoint 1 (escalation): the components'
+                   standards and spec reviews run first; the
+                   architect accepts the components; their pull
+                   request merges, and the release workflow cuts
+                   v0.1.0, which the record logs this session pushed
+                 (spike-html-hosting-components)
+              5. SDK renderer: the tree, header and site-index
+                 markup; the table regions and site.css; the crawl's
+                 header, site-index and 390px assertions; the 390px
+                 shell check; the unit tier; a template build shown
+                 by captures (spike-html-hosting-sdk)
+              6. SDK release: the template shell loads components
+                 v0.1.0; the scaffold test green offline; README,
+                 version 0.3.0, CHANGELOG [0.3.0]
+                 → checkpoint 2 (escalation): the SDK's standards
+                   and spec reviews run first; the architect accepts
+                   the SDK; its pull request merges, and the release
+                   workflow cuts v0.3.0, which the record logs this
+                   session pushed
+                 (spike-html-hosting-sdk)
+              7. architecture adopts: pins and workflow calls
+                 bumped, the v0.3.0 shell taken; its index at 390px
+                 shown by a capture (spike-html-hosting-architecture)
+              8. sqlate adopts, the same way; captures of the
+                 quick-start tree and its progress
+                 (spike-html-hosting-sqlate)
+              9. root adopts: pins and workflow calls bumped,
+                 sl-site-nav on its page; the live stored-theme
+                 capture across the three deployed sites
+                 (spike-html-hosting)
+Out of scope  the org task's charter, index of every site, hosted
+              report, and its measure of fetched-at-runtime
+              against build-time-by-tag navigation; h4 and deeper
+              in the tree; progress drawn by script, or any
+              fallback for engines without scroll timelines; any
+              change to spike-html-apps-foundation,
+              spike-html-apps-components or
+              spike-html-apps-tooling (references); rolldown
+              1.3.0; publishing to the npm registry; the header,
+              tree or index on the root's page
+Door          one-way: spike-html-hosting-components v0.1.0, its
+              first public release, and spike-html-hosting-sdk
+              v0.3.0, which three sites and every new scaffold
+              consume; two-way: each site's change, which redeploys
+              its pages and reverts by reverting its merge
+Release       spike-html-hosting-components v0.1.0;
+              spike-html-hosting-sdk v0.3.0
 ```
 
+## Progress
+
+slices 0/9 committed · standards — · spec — · editor —
 
 ## Decisions
 
@@ -481,6 +549,69 @@ Release       spike-html-hosting-sdk v0.2.0
   principle.
 - highlighting: the components task adds pnpm-workspace.yaml with `minimumReleaseAge: 0` to
   spike-html-hosting-components, as the SDK's template has it.
+- components: the SDK joins the task: its Markdown renderer makes the section tree, page header,
+  and site index's data at build, from the heading ids getHeadingList() gives, the parsed front
+  matter, and every page's path and title, and SDK v0.3.0 releases at a BUILD checkpoint before
+  the sites adopt. Rejected: components building it in the browser from each page's DOM; tocbot
+  4.36.8, which rebuilds the heading list and adds no keys or progress.
+- components: the components are Lit 3.3.3 elements with a shadow root, adopting the
+  foundation's reset and elements sheets before a layout-only sheet, the stack's convention
+  (spike-html-conventions' answer 4), as spike-html-apps-components has them. Rejected: plain
+  light-DOM custom elements on the foundation's dom.js.
+- components: spike-html-hosting-components' toolchain is copied with provenance from
+  spike-html-apps-components: tsc emit build, ESLint, Prettier, a unit tier, and a browser tier on
+  spike-html-apps-tooling v0.3.0 in chrome-headless-shell 157.0.8103.38, ending the lint-only
+  check of "layers: spike-html-hosting-components' check is shellcheck, actionlint, and Prettier
+  until its first component". Rejected: the site SDK's ESLint, tsconfig, and Prettier exports,
+  which check a Vite site's build and peer vite.
+- components: the site index is every page of the current site, shown on each of its pages.
+  Rejected: the org stand-in's index of every site, which the org task writes as content.
+- components: cross-site navigation's list of sites ships in the components release, the
+  build-time-by-tag form org measures against fetched-at-runtime; a new site is a components
+  release. Rejected: the list written into each site's shell.
+- components: the page header shows every front-matter key and value in source order, in place
+  of the front-matter table; a page with none shows no fields. Supersedes "content: front matter
+  shows as a key/value table above the page; the title comes from name, else the first h1." as to
+  the table; the title rule stands. Rejected: the header above the table, which shows each key
+  twice.
+- components: Left and Right arrows move to the previous and next section, shown as bracketed [←]
+  and [→] key hints and bound through the foundation's keys.js; Up and Down stay the browser's
+  scrolling. Rejected: digits 1-9 per entry, which reach only nine of sqlate quick-start's 13
+  sections.
+- components: reading progress is drawn by a CSS scroll timeline with no script, and an
+  IntersectionObserver marks the section in view; Firefox 147-158, within the stack's floor,
+  shows no progress. Rejected: a script tracking the scroll position.
+- components: a table wider than the column scrolls inside its own keyboard-focusable region, as
+  code blocks do, held by a 390px check on every page; measured on 2026-11-05 at main, the
+  architecture index (426px), architecture standards/go-elemental/ (392px), and sqlate
+  docs/features.html (623px) scrolled sideways. Rejected: wrapping cells, which breaks code names
+  such as errors.Is.
+- components: the stored theme across sites is proven by a components browser test serving two
+  fixture sites under two bases on one local origin, and shown live on the deployed sites in the
+  session brief. Rejected: the live capture alone; each site's own preview is its own origin.
+- components: the section tree nests h2 and h3. Rejected: h2 only; sqlate's features page uses
+  its 11 h3 as package sections.
+- components: held rolldown at 1.2.16: Vite 8.3.6, the latest, depends on rolldown ~1.2.16, and
+  rolldown 1.3.0's notes say Vite 8.3.6 and earlier can't run it.
+- components: the SDK's template shell loads components v0.1.0 by tag, so the release order is
+  components v0.1.0, then SDK v0.3.0, then the architecture, sqlate, and root sites, at two BUILD
+  checkpoints. Rejected: an unchanged template shell, with the components a per-site adaptation.
+- components: the renderer hands off real HTML inside each element (nested lists of links for the
+  section tree and site index, a description list for the header), which the element slots and
+  enhances, so every page reads and links with no script and the crawl follows its links.
+  Rejected: a JSON block each element renders from.
+- components: the renderer wraps each body table in a named, focusable scrolling region, since
+  focus needs markup, and site.css styles it. Rejected: site.css alone, which can't make a table
+  focusable.
+- components: the site index nests the current site's pages by directory, each by its title, a
+  directory with an index page labeled by that page's title, the current page aria-current.
+  Rejected: one flat list by title.
+- components: cross-site links are root-relative, /<repo>/, which resolve on the shared Pages
+  origin and in the two-base local test. Rejected: absolute https://jaimestill.github.io/<repo>/.
+- components: the root takes cross-site navigation only; its page has no front matter and one
+  heading until org. Rejected: the page header and section tree on its placeholder page.
+- components: the components take the stack's sl- prefix, as the foundation's sl-theme-menu and
+  spike-html-apps-components' elements do.
 
 ## Pending edits
 
@@ -505,3 +636,7 @@ Release       spike-html-hosting-sdk v0.2.0
 - claude-plugins · marathon retro: the session merged a pull request with red CI because it piped
   `gh pr checks --watch` through `tail`, which hid the command's exit status; the session should
   run the configured merge command exactly as written.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.components`: add
+  spike-html-hosting-sdk to its repos, since the task changes the SDK's renderer and template and
+  releases SDK v0.3.0; and in its summary, the 390px fix is the renderer's table regions and
+  site.css, both in the SDK, at three pages rather than the architecture index alone.

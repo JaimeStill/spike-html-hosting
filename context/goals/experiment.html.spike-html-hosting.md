@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** components
-- **Branch:** components
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
@@ -11,7 +11,7 @@
 3. [x] screenshots
 4. [x] template
 5. [x] highlighting
-6. [ ] components
+6. [x] components
 7. [ ] org
 8. [ ] review
 9. [ ] answer
@@ -261,10 +261,6 @@ Release       spike-html-hosting-components v0.1.0 (released);
               spike-html-hosting-sdk v0.3.0 (released);
               spike-html-hosting-sdk v0.3.1
 ```
-
-## Progress
-
-slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change: components c446ff5, standards 2330eb1, spec no gaps, PR #6 merged 190dbac, v0.2.2 released by this session (release run 42149691751, tag v0.2.2) · SDK d5116e3 (v0.2.2, no brackets), standards d2b18d8 1351912, spec: pnpm drift closed 8e1e11b; sdk PR #4 merged dfbb2d7, v0.3.0 released by this session (release run 42151094511, tag v0.3.0) · slice 7: architecture 0afdad7 355edd8; slice 8: sqlate abc7a56; slice 9: root 0794801 · standards: root 4f2d603, sqlate cf1ee7f · spec: short-page drop fixed (sdk be4fc9d a54dead, standards 1082cdf, spec no gaps), Theme hint e5be0e2 (standards 21ece9a, spec no gaps), as v0.3.1; sdk PR #5 merged 1c1d552, v0.3.1 released by this session (release run 42214089393, tag v0.3.1); sites pin v0.3.1 (architecture 20bf0f1, sqlate 3a7a1ea, root d4d8eb5); brief captures in scratchpad/brief-shots · editor done; components and SDK docs on main flagged
 
 ## Decisions
 
@@ -780,6 +776,8 @@ slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the he
   (the build-time-by-tag side of its measure against fetched-at-runtime); the accepted exception to
   the downward-dependencies principle, which that measure settles; and the live stored-theme
   capture across the three deployed sites, owed once this task's merge deploys them.
+- components: the architect accepted the session brief; the five pull requests merge lowest layer
+  first, and the live cross-site theme capture follows the three deploys.
 
 ## Pending edits
 

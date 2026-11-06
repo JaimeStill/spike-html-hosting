@@ -261,7 +261,7 @@ Release       spike-html-hosting-icons v0.1.0;
 
 ## Progress
 
-slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · checkpoint 2 accepted: spike-html-hosting-components 7293fd0, c0d2770, standards 1457f62, 85c2959, 3ee29cb, 89a9e7a, spec no gaps; PR #9 merged (5b6e815), v0.4.0 cut by its release workflow, which this session pushed · sdk 7c20880, architecture 5e812ac, sqlate 4bf1ee7 · standards — · spec — · editor —
+slices 11/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · checkpoint 2 accepted: spike-html-hosting-components 7293fd0, c0d2770, standards 1457f62, 85c2959, 3ee29cb, 89a9e7a, spec no gaps; PR #9 merged (5b6e815), v0.4.0 cut by its release workflow, which this session pushed · checkpoint 3 accepted: spike-html-hosting-sdk 7c20880, 9550931, 67bb8fd, 345a357 (gear), standards 03a3031, fa3d4c3, bdd3695, spec no gaps; PR #8's CI failed once on showsGlyphs' Help click, fixed by f5ddcd9; merged (fa70f45), v0.5.0 cut by its release workflow, which this session pushed · architecture 5e812ac, sqlate 4bf1ee7 · standards — · spec — · editor —
 
 ## Decisions
 
@@ -953,6 +953,13 @@ slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 m
   only the name, key and dialog change there. The architect's direction at checkpoint 3.
 - icons: the narrow header wrapping Help and Theme onto a second line at 390px is left for the
   design task. Checkpoint 3's direction.
+- icons: the SDK's shell checks click only once the element's center is in the viewport and is
+  the element, and showsGlyphs waits for no open dialog and a page held at its top, after PR #8's
+  CI failed once on the Help click; the likely cause, a late smooth scroll from the keys-help
+  check's L, wasn't reproduced locally, so the click's failure now names what it would hit.
+- icons: a malformed glyph marker (self-closed, unquoted, not empty) fails the build, naming the
+  page and its tag, and comments are skipped, so every marker is filled. The standards review's
+  fix, kept by the session.
 
 ## Pending edits
 

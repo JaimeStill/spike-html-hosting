@@ -58,8 +58,8 @@ Behaviors     1. The components layer builds as a library on the
                  the page's h2 and h3 headings, by their GitHub ids.
                  An IntersectionObserver marks the section in view
                  with aria-current. H and L move to the previous
-                 and next section, shown as bracketed [H] and [L]
-                 key hints and bound through the foundation's keys
+                 and next section, shown as H and L key hints
+                 in kbd, with no brackets, and bound through the foundation's keys
                  module, so its help dialog lists them and its off
                  switch turns them off. The top of the page is a
                  stop, and the moves wrap: L past the last section
@@ -254,13 +254,14 @@ Door          one-way: spike-html-hosting-components v0.1.0, its
               its pages and reverts by reverting its merge
 Release       spike-html-hosting-components v0.1.0 (released);
               spike-html-hosting-components v0.2.0 (released);
-              spike-html-hosting-components v0.2.1;
+              spike-html-hosting-components v0.2.1 (released);
+              spike-html-hosting-components v0.2.2;
               spike-html-hosting-sdk v0.3.0
 ```
 
 ## Progress
 
-slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), awaiting the architect at checkpoint 2 · editor —
+slices 6/9 committed (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change (components v0.2.2) · editor —
 
 ## Decisions
 
@@ -770,6 +771,11 @@ slices 6/9 committed (slice 1: no change, currency reports only the held rolldow
   fractional scaling.
 - components: v0.2.1 released at checkpoint 2 by this session: spike-html-hosting-components PR #5
   merged as 646b864, and its release run 42133877521 cut v0.2.1.
+- components: checkpoint 2 accepted, with one change: key hints render in kbd alone, without the
+  brackets around them, on the section tree's buttons and on the shells' Pages, Help and Close
+  buttons; the kbd already reads as a shortcut (the architect). Ships as components v0.2.2, a
+  patch, which SDK v0.3.0 pins; then v0.3.0 releases and the three sites adopt with no further
+  stop until the session brief.
 
 ## Pending edits
 

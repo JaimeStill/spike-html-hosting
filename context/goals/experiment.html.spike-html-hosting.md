@@ -1,6 +1,6 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** building
+- **State:** brief ready
 - **Task:** org
 - **Branch:** org
 
@@ -266,7 +266,7 @@ Release       spike-html-hosting-components v0.3.0 (released);
 
 ## Progress
 
-slices 7/8 committed (8 runs after the deploy) (1 components ac754f1; 2 components d90781d; 3 components 20e25d9; 4 sdk d8c4e36; 5 sdk 6777269; 6 root 39cf65c; 7 root f0225a8 3879d0a) · checkpoint 2 accepted: standards 2ea1d1d, spec gap closed 4f8058a; PR #7 merged 3a2a381; v0.4.0 released by the release workflow on this session's push (tag 798841a, 2026-11-06T16:37Z); note for slice 6: the root's test asserts crawled.hand exactly · checkpoint 1 accepted: standards b952db9, spec gap closed 77af71a; PR #8 merged a8edfd8; v0.3.0 released by the release workflow on this session's push (tag 9c4e75c, 2026-11-06T15:44Z) · editor —
+slices 7/8 committed (8 runs after the deploy) (1 components ac754f1; 2 components d90781d; 3 components 20e25d9; 4 sdk d8c4e36; 5 sdk 6777269; 6 root 39cf65c; 7 root f0225a8 3879d0a) · checkpoint 2 accepted: standards 2ea1d1d, spec gap closed 4f8058a; PR #7 merged 3a2a381; v0.4.0 released by the release workflow on this session's push (tag 798841a, 2026-11-06T16:37Z); note for slice 6: the root's test asserts crawled.hand exactly · checkpoint 1 accepted: standards b952db9, spec gap closed 77af71a; PR #8 merged a8edfd8; v0.3.0 released by the release workflow on this session's push (tag 9c4e75c, 2026-11-06T15:44Z) · editor d459ff7 · validated: root check unit 1 browser 74, currency clean
 
 ## Decisions
 

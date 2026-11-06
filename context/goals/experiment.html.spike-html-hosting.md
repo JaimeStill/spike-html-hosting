@@ -153,14 +153,15 @@ Behaviors     1. The components layer builds as a library on the
                  released as its release workflow describes, at a
                  BUILD checkpoint before the sites adopt it.
               17. The architecture and sqlate sites pin SDK v0.3.0
-                 and components v0.1.0, and call the SDK workflows
+                 and components v0.2.2, and call the SDK workflows
                  at v0.3.0. They take the v0.3.0 template shell
                  with its provenance and keep their adaptations.
                  They build the same pages at the same paths, pass
                  their checks, print only the held rolldown from
                  currency, and deploy.
-              18. The root pins SDK v0.3.0 and components v0.1.0,
-                 and its page gains sl-site-nav only; the page is
+              18. The root pins SDK v0.3.0 and components v0.2.2,
+                 and its page gains sl-site-nav, the Help button
+                 and the keys help dialog only; the page is
                  otherwise unchanged. It passes its check, including
                  the 390px shell check, and deploys.
               19. The session brief shows captures per site, light
@@ -261,7 +262,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change: components c446ff5, standards 2330eb1, spec no gaps, PR #6 merged 190dbac, v0.2.2 released by this session (release run 42149691751, tag v0.2.2) · SDK d5116e3 (v0.2.2, no brackets), standards d2b18d8 1351912, spec: pnpm drift closed 8e1e11b; sdk PR #4 merged dfbb2d7, v0.3.0 released by this session (release run 42151094511, tag v0.3.0) · slice 7: architecture 0afdad7 355edd8; slice 8: sqlate abc7a56; slice 9: root 0794801 · site reviews running · editor —
+slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change: components c446ff5, standards 2330eb1, spec no gaps, PR #6 merged 190dbac, v0.2.2 released by this session (release run 42149691751, tag v0.2.2) · SDK d5116e3 (v0.2.2, no brackets), standards d2b18d8 1351912, spec: pnpm drift closed 8e1e11b; sdk PR #4 merged dfbb2d7, v0.3.0 released by this session (release run 42151094511, tag v0.3.0) · slice 7: architecture 0afdad7 355edd8; slice 8: sqlate abc7a56; slice 9: root 0794801 · standards: root 4f2d603, sqlate cf1ee7f · spec: short-page drop (SDK fix be4fc9d a54dead as v0.3.1, escalation open), 2 captures owed to the brief · editor —
 
 ## Decisions
 

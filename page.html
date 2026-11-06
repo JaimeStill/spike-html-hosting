@@ -1,24 +1,29 @@
 <!doctype html>
 <!-- The shell the org stand-in's rendered pages fill, page.html, which every copied page of the
      build fills (the SDK's markdownPages, its shell option), its title the page's name and its main
-     element the page's body, while index.html is the root's own hand page. The foundation's full
-     page entry and its registrations, every built-in profile, so the theme menu offers each, its
-     preferences module, and its keys module, render-blocking, as the build makes every module
-     script one entry; the SDK's site.css by the package's name, after the entry; and a button
-     that opens the theme menu, which keys.js clicks on T. The components' five elements, each
-     module defining its element, render-blocking too: the site nav, at the header's start, and the
-     site index, the page header, the section tree, and the drawer that holds the site index, which
-     the SDK's markdownPages writes into each page with their light-DOM content. The Pages button,
-     beside the Theme button, opens that drawer, labeled Pages, keys.js clicking it on P; site.css
-     shows it only below the drawer's dock, once the drawer is defined, and the page's script wires
-     its click to the drawer's show() and keeps its aria-expanded in step with the drawer's open
-     and close events, as spike-html-hosting-components' README gives the opener. The Help button,
-     between them, opens the keys help dialog by the invoker command show-modal, keys.js clicking it
-     on ?; keys.js fills the dialog's [data-keys-list] as it opens with every binding the page has,
-     the section tree's H and L among them, and the reader's switch that turns the character keys
-     off (WCAG 2.1.4). The Pages and Help buttons, and the dialog's Close, are named by their
-     aria-label, the text their key hint, a kbd alone and aria-hidden, follows, which the dialog
-     lists.
+     element the page's body, while index.html and the pages under briefs/ and sitreps/ are the
+     root's hand pages. The foundation's full page entry and its registrations, every built-in
+     profile, so the theme menu offers each, its preferences module, and its keys module,
+     render-blocking, as the build makes every module script one entry; the SDK's site.css by the
+     package's name, after the entry, then the root's own root.css; and a button that opens the
+     theme menu, which keys.js clicks on T. The components' five elements, each module defining its
+     element, render-blocking too: the site nav, at the header's start, its src the root's
+     sites.json under the base, %BASE_URL%, which Vite writes as the base at build, so the nav
+     lists the sites the root deploys, fetched live; and the site index, the page header, the
+     section tree, and the drawer that holds the site index, which the SDK's markdownPages writes
+     into each page with their light-DOM content. The Pages button, beside the Theme button, opens
+     that drawer, labeled Pages, keys.js clicking it on P; site.css shows it only below the
+     drawer's dock, once the drawer is defined, and the page's script wires its click to the
+     drawer's show() and keeps its aria-expanded in step with the drawer's open and close events,
+     as spike-html-hosting-components' README gives the opener. The same script names, under the
+     h1 of a copied page that also has a form written by hand, that form, by a link to its page
+     under the base: the orientation brief's rendered page links briefs/orientation.html, as that
+     page links it back, while the copy stays byte for byte. The Help button, between them, opens
+     the keys help dialog by the invoker command show-modal, keys.js clicking it on ?; keys.js
+     fills the dialog's [data-keys-list] as it opens with every binding the page has, the section
+     tree's H and L among them, and the reader's switch that turns the character keys off (WCAG
+     2.1.4). The Pages and Help buttons, and the dialog's Close, are named by their aria-label, the
+     text their key hint, a kbd alone and aria-hidden, follows, which the dialog lists.
      Adapted from spike-html-hosting-sdk (v0.4.0): template/index.html, a shell of the rendered
      pages' own beside the root's hand index, its title the org stand-in's. -->
 <html lang="en">
@@ -28,6 +33,7 @@
     <title>The org stand-in</title>
     <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
     <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
+    <link rel="stylesheet" href="/root.css" />
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
@@ -45,11 +51,26 @@
       const expanded = () => opener.setAttribute("aria-expanded", String(drawer.open));
       drawer.addEventListener("open", expanded);
       drawer.addEventListener("close", expanded);
+
+      // A copied page with a form written by hand names it under its h1, as the hand page links
+      // the copy: each by its path under the base. The copy is byte for byte, so the line is the
+      // shell's to add, and only on the page it applies to.
+      const byHand = { "org/briefs/orientation.html": "briefs/orientation.html" };
+      const hand = byHand[location.pathname.slice(import.meta.env.BASE_URL.length)];
+      if (hand !== undefined) {
+        const link = document.createElement("a");
+        link.href = `${import.meta.env.BASE_URL}${hand}`;
+        link.textContent = document.title;
+        const note = document.createElement("p");
+        note.className = "form-note";
+        note.append("Rendered from its Markdown. The same brief, written by hand as HTML with two diagrams: ", link, ".");
+        document.querySelector("main > h1").after(note);
+      }
     </script>
   </head>
   <body>
     <header>
-      <sl-site-nav></sl-site-nav>
+      <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
       <button
         type="button"
         class="pages-opener"

@@ -2,8 +2,8 @@
 // scripts/screenshots.config.ts, run once as the task runs it, with the SDK's capture run: the
 // index, light, to the terminal, under a scratch TMPDIR. It leaves nothing there, and with --keep
 // leaves what it printed, so the first run's empty TMPDIR is the output's cleanup, not a capture
-// that never wrote. The capture file describes every page the root builds, the hand index and
-// both trees' copied pages, at their paths under the base.
+// that never wrote. The capture file describes every page the root builds, the three hand pages
+// and both trees' copied pages, at their paths under the base.
 // Adapted from spike-html-hosting-architecture (27d70e1): test/browser/screenshots.test.ts, its
 // run and assertions the SDK's.
 // Adapted from spike-html-hosting-sdk (v0.1.0): template/test/browser/screenshots.test.ts.
@@ -38,6 +38,11 @@ describe("mise run screenshots' command", () => {
       described.pages.map(({ name, path }) => [name, path]),
       [
         ["index", "/spike-html-hosting/"],
+        ["briefs/orientation", "/spike-html-hosting/briefs/orientation.html"],
+        [
+          "sitreps/2026-11-06-spike-html-hosting",
+          "/spike-html-hosting/sitreps/2026-11-06-spike-html-hosting.html",
+        ],
         ["github/profile", "/spike-html-hosting/github/profile/"],
         ["org/briefs/orientation", "/spike-html-hosting/org/briefs/orientation.html"],
       ],

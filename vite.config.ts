@@ -1,7 +1,9 @@
-// The site's build (mise run build): index.html, the root's own hand page; a page for each
+// The site's build (mise run build): the root's hand pages, index.html, the orientation brief by
+// hand at briefs/orientation.html, and the sitrep entry under sitreps/; a page for each
 // Markdown file of its two copied trees, content/github/ from standards-lab/.github and
 // content/org/ from standards-lab/org, as content.json records them, each filling page.html, the
-// shell its rendered pages share; and the foundation modules the pages load, into dist/: static
+// shell its rendered pages share; the foundation modules the pages load; and public/sites.json,
+// the list of sites every page's sl-site-nav fetches, copied as it is, into dist/: static
 // files GitHub Pages serves as the repository's project site, under /<repository>/. The base is
 // that path, and the repository's name is package.json's name, the one place it is written; the
 // SDK's served(), which the browser tier and the captures serve the build with, reads the same
@@ -46,14 +48,21 @@ export default defineConfig({
     }),
     renderBlocking(),
   ],
-  // No public directory: the pages and what they import are the whole site.
-  publicDir: false,
+  // The public directory holds sites.json alone, which Vite copies to the build's root unchanged,
+  // so it is served at the base, where every page's nav fetches it; no page imports it.
+  publicDir: "public",
   build: {
     outDir: "dist",
     target: "es2024",
-    // The hand page, which no shell fills: Vite builds index.html by default only with no input
+    // The hand pages, which no shell fills: Vite builds index.html by default only with no input
     // given, and the plugin gives its pages.
-    rolldownOptions: { input: [`${root}index.html`] },
+    rolldownOptions: {
+      input: [
+        `${root}index.html`,
+        `${root}briefs/orientation.html`,
+        `${root}sitreps/2026-11-06-spike-html-hosting.html`,
+      ],
+    },
   },
   // A path no page builds to is a 404 in the preview, as it is on Pages, never a fallback to the
   // index, so the shell checks' every request under the base, none failed, can't pass on one.

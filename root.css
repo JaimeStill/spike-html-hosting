@@ -1,0 +1,100 @@
+/*
+ * The root's own sheet, after site.css, which page.html and the hand orientation and sitrep pages
+ * link: the line under a page's h1 that names its other form, as the orientation brief has two,
+ * and the hand pages' diagrams, inline SVG figures. Its own layer, root, after site's, so it wins
+ * over the foundation and the site. Every color is a foundation token, a diagram's text the
+ * page's own through currentColor, so a diagram follows the reader's palette and scheme; in
+ * forced colors each takes the system colors instead, its boxes Canvas, its lines and text
+ * CanvasText, its accent box's rule Highlight. A diagram is as wide as main up to 32rem, its
+ * viewBox scaling with it, so it never scrolls sideways.
+ */
+
+@layer root {
+  .form-note {
+    color: var(--fg-2);
+  }
+
+  .diagram {
+    margin-block: var(--space-l);
+    margin-inline: 0;
+  }
+
+  .diagram > svg {
+    display: block;
+    inline-size: 100%;
+    max-inline-size: 32rem;
+    block-size: auto;
+    margin-inline: auto;
+    font-family: var(--font-ui);
+    font-size: 13px;
+  }
+
+  .diagram > figcaption {
+    margin-block-start: var(--space-s);
+    color: var(--fg-2);
+    font-size: var(--text-s);
+  }
+
+  .diagram .node > rect {
+    fill: var(--bg-1);
+    stroke: var(--border-2);
+    stroke-width: 1.5;
+  }
+
+  .diagram .node.accent > rect {
+    stroke: var(--blue);
+    stroke-width: 2;
+  }
+
+  .diagram text {
+    fill: currentColor;
+    text-anchor: middle;
+  }
+
+  .diagram text.label {
+    font-weight: 600;
+  }
+
+  .diagram text.note {
+    fill: var(--fg-2);
+  }
+
+  .diagram text.start {
+    text-anchor: start;
+  }
+
+  .diagram text.end {
+    text-anchor: end;
+  }
+
+  .diagram .edge {
+    fill: none;
+    stroke: var(--fg-2);
+    stroke-width: 1.5;
+  }
+
+  .diagram .arrowhead {
+    fill: var(--fg-2);
+  }
+
+  @media (forced-colors: active) {
+    .diagram .node > rect {
+      fill: Canvas;
+      stroke: CanvasText;
+    }
+
+    .diagram .node.accent > rect {
+      stroke: Highlight;
+    }
+
+    .diagram text,
+    .diagram text.note,
+    .diagram .arrowhead {
+      fill: CanvasText;
+    }
+
+    .diagram .edge {
+      stroke: CanvasText;
+    }
+  }
+}

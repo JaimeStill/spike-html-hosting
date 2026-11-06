@@ -1,0 +1,315 @@
+<!doctype html>
+<!-- The orientation brief by hand, a hand page of the root's at briefs/orientation.html, beside its
+     Markdown rendered at org/briefs/orientation.html: the same text as standards-lab/org's
+     briefs/orientation.md at c812496, written as HTML, with what Markdown can't hold, two
+     diagrams as inline SVG, each a figure whose svg is an img named by its title and described by
+     its desc, its caption the text alternative a reader sees, and the section tree over the page's
+     own headings. It links the rendered page, which page.html links back. The head and header are
+     the index's, the section tree's module beside the site nav's; no Markdown fills it, so it has
+     no site index and no Pages button or drawer. The IMPORTANT alert is written as the renderer
+     writes one, so site.css draws it the same, and the interview line is a plain pre, focusable so
+     a keyboard scrolls it where it overflows.
+     The diagrams draw from the foundation's tokens, the text in currentColor, so they follow the
+     reader's palette and scheme; in forced colors they take the system colors.
+     Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/briefs/orientation.html,
+     its text the brief's, with diagrams. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Standards Lab: an orientation</title>
+    <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
+    <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
+    <link rel="stylesheet" href="/root.css" />
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/site-nav.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/section-tree.js"></script>
+  </head>
+  <body>
+    <header>
+      <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
+      <button
+        type="button"
+        commandfor="help"
+        command="show-modal"
+        aria-label="Help"
+        data-keys="?"
+      >
+        Help <span aria-hidden="true"><kbd>?</kbd></span>
+      </button>
+      <button
+        type="button"
+        commandfor="theme"
+        command="--open"
+        aria-label="Theme"
+        data-keys="t"
+      >
+        Theme <span aria-hidden="true"><kbd>T</kbd></span>
+      </button>
+    </header>
+    <div class="section-tree">
+      <sl-section-tree dock="70rem">
+        <ul>
+          <li><a href="#the-vision">The vision</a></li>
+          <li><a href="#how-it-is-being-built">How it is being built</a></li>
+          <li><a href="#the-roadmap-at-a-glance">The roadmap at a glance</a></li>
+          <li><a href="#explore-it-yourself">Explore it yourself</a></li>
+        </ul>
+      </sl-section-tree>
+    </div>
+    <main>
+      <h1 id="standards-lab-an-orientation">Standards Lab: an orientation</h1>
+      <p class="form-note">
+        Written by hand as HTML, with two diagrams. The same brief, rendered from its Markdown:
+        <a href="../org/briefs/orientation.html">Standards Lab: an orientation</a>.
+      </p>
+      <p>
+        This brief is an orientation to an initiative I have been working on: Standards Lab, a
+        blueprint for a modern, agentic software architecture strategy. It covers what I am
+        building, why I believe it matters, how it is being built, and how to explore it in depth
+        with your own agent. There are no asks in this briefing beyond any feedback or questions
+        you may have.
+      </p>
+      <p>
+        If you have further questions or would like to dig deeper into what has been fleshed out so
+        far, paste the line below into your agent of choice. It initializes an interview session
+        over the organization's context and source, answering your questions with cited sources.
+      </p>
+      <div class="markdown-alert markdown-alert-important">
+        <p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+        <p>Validated with Claude and ChatGPT. Does not work with Gemini.</p>
+      </div>
+      <pre tabindex="0"><code>launch interview: https://github.com/standards-lab/org/blob/main/interview.md</code></pre>
+
+      <h2 id="the-vision">The vision</h2>
+      <p>
+        The thesis is simple to state: clear architectural principles and standards, broken down
+        into appropriately layered boundaries, optimize the utility of agentic workflows in
+        creating well-structured software. The same structure that keeps a system legible to
+        people is what lets agents build it well.
+      </p>
+      <p>
+        The boundaries in that thesis are concrete: the modern primitives of what software emits —
+        the library, the binary, the container image. Each primitive is a modular boundary: the
+        artifact where maintenance is contained, vulnerabilities and technical debt are mitigated,
+        and a capability becomes reusable. Layered appropriately, the boundaries compose into an
+        ecosystem of reusable components: foundations get solved once and adopted rather than
+        re-derived project by project, and our capacity shifts toward creating, innovating, and
+        leading the standard forward. They also keep ownership and change legible: lines of effort
+        and responsibility attach to tangible artifacts, and a small, deliberate dependency surface
+        stays pinned and current, so we drive change rather than react to it. A few examples of the
+        patterns in play:
+      </p>
+      <figure class="diagram">
+        <svg role="img" aria-labelledby="boundaries-title boundaries-desc" viewBox="0 0 400 236">
+          <title id="boundaries-title">The three primitives, layered</title>
+          <desc id="boundaries-desc">
+            Three boundaries, stacked: a library, a foundation solved once, at the bottom; a binary,
+            which adopts the libraries, above it; and a container image, which ships the binary, on
+            top. Each is a boundary where maintenance is contained and a capability is reusable.
+          </desc>
+          <defs>
+            <marker id="boundaries-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="arrowhead" d="M0 0 10 5 0 10Z" />
+            </marker>
+          </defs>
+          <g class="node accent">
+            <rect x="50" y="8" width="300" height="56" rx="6" />
+            <text x="200" y="32" class="label">Container image</text>
+            <text x="200" y="52">ships the binary it packages</text>
+          </g>
+          <g class="node">
+            <rect x="50" y="90" width="300" height="56" rx="6" />
+            <text x="200" y="114" class="label">Binary</text>
+            <text x="200" y="134">adopts the libraries</text>
+          </g>
+          <g class="node">
+            <rect x="50" y="172" width="300" height="56" rx="6" />
+            <text x="200" y="196" class="label">Library</text>
+            <text x="200" y="216">a foundation, solved once</text>
+          </g>
+          <path class="edge" d="M200 172V148" marker-end="url(#boundaries-arrow)" />
+          <path class="edge" d="M200 90V66" marker-end="url(#boundaries-arrow)" />
+        </svg>
+        <figcaption>
+          Each primitive is a boundary, layered on the one below it: foundations solved once and
+          adopted, not re-derived project by project.
+        </figcaption>
+      </figure>
+      <ul>
+        <li>
+          <p>
+            <strong>Interoperable, domain-driven services.</strong> Services scoped to a domain,
+            composing across clear interfaces rather than accumulating into monoliths.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Data composition over rigid schema.</strong> Data modeled for composition
+            rather than locked into tightly coupled schema.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Software architecture above the transport layer.</strong> Our enterprise has
+            operationalized the OSI model's lower layers well: building and configuring networks,
+            VNETs, VLANs, and firewalls is settled practice. The higher, data-driven layers are not
+            held to a comparable discipline, even though the commercial sector's standards for them
+            are mature; this strategy establishes that discipline for us.
+          </p>
+        </li>
+      </ul>
+      <p>
+        The agentic questions sit alongside the architectural ones. How do we integrate AI agents
+        well, and capture the principles of successful harness programming? How does the
+        technology raise the velocity of the enterprise rather than one person? How does the same
+        blueprint pattern serve other disciplines? And, if this proves successful, a longer-term
+        question worth holding: how does an enterprise designate its experts to cultivate a
+        discipline's evolution and adoption strategy?
+      </p>
+
+      <h2 id="how-it-is-being-built">How it is being built</h2>
+      <p>
+        The development workflow is part of the work, not tooling on the side. Harness programming
+        treats how agents develop software — the workflows, conventions, and skills they run — as
+        something to engineer with the same discipline as the software itself, and its principles
+        are part of the architecture this effort captures.
+      </p>
+      <p>
+        The concrete workflow is the agent skill marathon (from the notion that it's a marathon, not
+        a sprint). It is an extensible long-haul development skill built in this effort. Each
+        session plans one concrete step, and a maintained reset context carries continuity from one
+        session to the next. The written context lives alongside the code and holds only what the
+        code does not yet express: a note is deleted once the work expresses it, and knowledge that
+        holds beyond one repository is promoted to a principle. Its workspace feature coordinates
+        development across repositories, letting one step move the libraries, the service, and the
+        docs together. Extensions attach at its hook points; the first is a roadmap extension that
+        keeps the remaining path current as a side effect of the sessions themselves.
+      </p>
+      <figure class="diagram">
+        <svg role="img" aria-labelledby="sessions-title sessions-desc" viewBox="0 0 400 320">
+          <title id="sessions-title">How a marathon session carries forward</title>
+          <desc id="sessions-desc">
+            A session plans one concrete step and builds it, keeping the reset context current. The
+            next session starts from that context. Each note in the context leaves it one of two
+            ways: deleted once the code expresses it, or promoted to a principle in the
+            architecture when it holds beyond one repository.
+          </desc>
+          <defs>
+            <marker id="sessions-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="arrowhead" d="M0 0 10 5 0 10Z" />
+            </marker>
+          </defs>
+          <g class="node accent">
+            <rect x="95" y="8" width="210" height="56" rx="6" />
+            <text x="200" y="32" class="label">Session</text>
+            <text x="200" y="52">plans and builds one step</text>
+          </g>
+          <g class="node">
+            <rect x="95" y="118" width="210" height="56" rx="6" />
+            <text x="200" y="142" class="label">Reset context</text>
+            <text x="200" y="162">notes and the roadmap</text>
+          </g>
+          <path class="edge" d="M220 64V116" marker-end="url(#sessions-arrow)" />
+          <text x="228" y="94" class="note start">keeps it current</text>
+          <path class="edge" d="M95 146H75V36H93" marker-end="url(#sessions-arrow)" />
+          <text x="67" y="76" class="note end">the next</text>
+          <text x="67" y="93" class="note end">session</text>
+          <text x="67" y="110" class="note end">reads it</text>
+          <g class="node">
+            <rect x="4" y="228" width="192" height="84" rx="6" />
+            <text x="100" y="250" class="label">Code</text>
+            <text x="100" y="270">a note is deleted</text>
+            <text x="100" y="286">once the work</text>
+            <text x="100" y="302">expresses it</text>
+          </g>
+          <g class="node">
+            <rect x="204" y="228" width="192" height="84" rx="6" />
+            <text x="300" y="250" class="label">Architecture</text>
+            <text x="300" y="270">knowledge that holds</text>
+            <text x="300" y="286">beyond one repository</text>
+            <text x="300" y="302">becomes a principle</text>
+          </g>
+          <path class="edge" d="M170 174 112 226" marker-end="url(#sessions-arrow)" />
+          <path class="edge" d="M230 174 288 226" marker-end="url(#sessions-arrow)" />
+        </svg>
+        <figcaption>
+          Each session plans and builds one step; the reset context carries it to the next, holding
+          only what the code doesn't yet say.
+        </figcaption>
+      </figure>
+      <p>
+        The entire effort runs on this workflow, dogfooding it on the very system it exists to
+        build: every session tunes it, and the principles it proves are captured as development
+        evolves. In an agentic system, context maintenance matters as much as the source code: the
+        written context is the specification that the agent and the developers working with it
+        align on, the source of truth for the design. The reset context, the notes, and the live
+        roadmap are all public in the working context.
+      </p>
+
+      <h2 id="the-roadmap-at-a-glance">The roadmap at a glance</h2>
+      <p>
+        The target is a holistic reference: a web service at v1.0, with every capability layer a
+        production service reasonably encounters complete in one running composition. Each layer is
+        proven end to end, and what it teaches feeds the SDKs, the infrastructure libraries, the
+        template that future services start from, and the underlying principles that shape the
+        architecture and standard. Solve a layer holistically once and it becomes a repeatable
+        blueprint that does not need to be solved again.
+      </p>
+      <p>
+        The
+        <a href="https://github.com/standards-lab/org/blob/main/context/roadmap.toml">live roadmap</a>
+        holds the remaining layers and their order.
+      </p>
+      <p>
+        This is a comprehensive review of how we can optimize the way we build production software,
+        worked out in running code toward the vision laid out above. It does not have all the
+        answers yet. The point is taking the time to find enough of the right conventions to build
+        effectively; it is coming together well, and dialing it in takes time.
+      </p>
+
+      <h2 id="explore-it-yourself">Explore it yourself</h2>
+      <ul>
+        <li>
+          <a href="https://github.com/standards-lab">Organization profile</a> — the vision and the
+          organization's repositories.
+        </li>
+        <li>
+          <a href="https://github.com/standards-lab/architecture">Architecture</a> — the
+          architecture repository: the Elemental Architecture, its principles, and its standards.
+        </li>
+        <li>
+          <a href="https://github.com/standards-lab/architecture/blob/main/standards/README.md">Standards</a>
+          — each standard and its member repositories, starting with Go Elemental.
+        </li>
+        <li>
+          <a href="https://github.com/standards-lab/claude-plugins">Harness</a> —
+          <code>claude-plugins</code>, the plugin marketplace codifying the organization's
+          development processes: the <code>marathon</code> workflow and its extensions.
+        </li>
+        <li>
+          <a href="https://github.com/standards-lab/org/blob/main/context/roadmap.toml">Roadmap</a>
+          — what remains, with <code>next</code> as the order.
+        </li>
+      </ul>
+    </main>
+    <sl-theme-menu id="theme"></sl-theme-menu>
+    <dialog id="help" aria-labelledby="help-title">
+      <h2 id="help-title">Keyboard shortcuts</h2>
+      <div data-keys-list></div>
+      <footer>
+        <button
+          type="button"
+          commandfor="help"
+          command="close"
+          aria-label="Close"
+          data-keys="?"
+        >
+          Close <span aria-hidden="true"><kbd>?</kbd></span>
+        </button>
+      </footer>
+    </dialog>
+  </body>
+</html>

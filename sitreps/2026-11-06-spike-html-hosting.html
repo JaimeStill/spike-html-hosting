@@ -1,0 +1,339 @@
+<!doctype html>
+<!-- A sitrep entry, the root's hosted report, a hand page of the root's at
+     sitreps/2026-11-06-spike-html-hosting.html: spike-html-hosting's six shipped tasks, written
+     directly as HTML, from the goal record's history on main and the merged pull requests'
+     bodies, each source linked where it is used and listed under Sources. The head and header are
+     the index's, the section tree's module beside the site nav's, the tree over the entry's own
+     h2s and h3s; no Markdown fills it, so it has no site index and no Pages button or drawer. Its
+     one table sits in a named, focusable region that scrolls it sideways where the viewport is
+     narrower, as the renderer wraps a body table, so site.css holds it the same.
+     Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/briefs/orientation.html, a
+     hand page at a path under the base other than its own, its text this entry's. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sitrep: spike-html-hosting, 2026-11-06</title>
+    <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
+    <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
+    <link rel="stylesheet" href="/root.css" />
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/site-nav.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/section-tree.js"></script>
+  </head>
+  <body>
+    <header>
+      <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
+      <button
+        type="button"
+        commandfor="help"
+        command="show-modal"
+        aria-label="Help"
+        data-keys="?"
+      >
+        Help <span aria-hidden="true"><kbd>?</kbd></span>
+      </button>
+      <button
+        type="button"
+        commandfor="theme"
+        command="--open"
+        aria-label="Theme"
+        data-keys="t"
+      >
+        Theme <span aria-hidden="true"><kbd>T</kbd></span>
+      </button>
+    </header>
+    <div class="section-tree">
+      <sl-section-tree dock="70rem">
+        <ul>
+          <li><a href="#in-short">In short</a></li>
+          <li>
+            <a href="#what-shipped">What shipped</a>
+            <ul>
+              <li><a href="#layers">layers</a></li>
+              <li><a href="#content">content</a></li>
+              <li><a href="#screenshots">screenshots</a></li>
+              <li><a href="#template">template</a></li>
+              <li><a href="#highlighting">highlighting</a></li>
+              <li><a href="#components">components</a></li>
+            </ul>
+          </li>
+          <li><a href="#what-was-decided">What was decided</a></li>
+          <li><a href="#whats-next">What's next</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </sl-section-tree>
+    </div>
+    <main>
+      <h1 id="sitrep-spike-html-hosting">Sitrep: spike-html-hosting</h1>
+      <p class="form-note">
+        <time datetime="2026-11-06">2026-11-06</time> · covering
+        <time datetime="2026-11-03">2026-11-03</time> to
+        <time datetime="2026-11-06">2026-11-06</time> · goal
+        <code>experiment.html.spike-html-hosting</code> · six of eleven tasks shipped
+      </p>
+      <p>
+        spike-html-hosting asks what Standards Lab's GitHub Pages sites and its hosted, persistent
+        artifacts look like when published as native web on experiment.html's stack. Three
+        JaimeStill project sites stand in for the organization: this one for org, one for the
+        architecture repository, and one for sqlate's docs/ guide. This entry is for a reader
+        catching up on the spike: what its first six tasks shipped, what they decided, and what
+        comes next.
+      </p>
+
+      <h2 id="in-short">In short</h2>
+      <ul>
+        <li>
+          Three Pages project sites build with Vite and deploy from their own workflows, each under
+          its <code>/&lt;repository&gt;/</code> base, and every one passes a check that no CSS
+          module script is left in its build, so Safari loads every page.
+        </li>
+        <li>
+          The architecture repository's 29 pages and sqlate's README and docs/ guide render from
+          pinned, byte-for-byte Markdown copies at build, with their front matter, resolved links,
+          and code highlighted in each palette's own editor theme.
+        </li>
+        <li>
+          Every file the sites share lives in one SDK released by tag,
+          spike-html-hosting-sdk, whose template a new site is scaffolded from with one command.
+        </li>
+        <li>
+          Every page carries its navigation from one components layer released by tag: the site
+          nav, the page header, the section tree with H and L, and the site index in a Pages
+          drawer; the reader's theme carries across the three sites on their shared origin.
+        </li>
+      </ul>
+      <div class="table-region" role="region" aria-label="Table: Task, Pull request, Merged, Proved" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Pull request</th>
+              <th>Merged</th>
+              <th>Proved</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>layers</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/1">#1</a></td>
+              <td><time datetime="2026-11-03">2026-11-03</time></td>
+              <td>evidence 1, 7</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/2">#2</a></td>
+              <td><time datetime="2026-11-04">2026-11-04</time></td>
+              <td>evidence 3, 4</td>
+            </tr>
+            <tr>
+              <td>screenshots</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/3">#3</a></td>
+              <td><time datetime="2026-11-04">2026-11-04</time></td>
+              <td>the review's captures</td>
+            </tr>
+            <tr>
+              <td>template</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/4">#4</a></td>
+              <td><time datetime="2026-11-04">2026-11-04</time></td>
+              <td>one SDK by tag</td>
+            </tr>
+            <tr>
+              <td>highlighting</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/5">#5</a></td>
+              <td><time datetime="2026-11-05">2026-11-05</time></td>
+              <td>code per palette</td>
+            </tr>
+            <tr>
+              <td>components</td>
+              <td><a href="https://github.com/JaimeStill/spike-html-hosting/pull/6">#6</a></td>
+              <td><time datetime="2026-11-06">2026-11-06</time></td>
+              <td>evidence 4, 6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="what-shipped">What shipped</h2>
+
+      <h3 id="layers">layers</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/1">PR #1</a>, merged
+        2026-11-03. Four repositories: this root as the org stand-in, the architecture and sqlate
+        stand-ins, and spike-html-hosting-components, the layer the components task filled. Each
+        site's base is read from its package name, so a copied site changes only its name and its
+        text. Each site's Pages workflow runs the full check on a push to main before it deploys,
+        and its CI runs the same check on pull requests. The check that no CSS module script is
+        left in a build is ESLint over the build output, proven on six leftover forms and on clean
+        look-alikes.
+      </p>
+
+      <h3 id="content">content</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/2">PR #2</a>, merged
+        2026-11-04. The architecture site renders its 29 front-matter pages, copied at 8706d04, and
+        sqlate its README and docs/ at v0.6.1, each Markdown file a page Vite builds like a file,
+        with no generated files in the tree. Each copy stays byte for byte, held to a record of its
+        source's git blob hashes by a unit test. A <code>.md</code> link becomes its page's link,
+        a link to a file not copied goes to github.com at the pin, and the build fails on any other
+        relative link. A crawl of every page checks each link and fragment. The architect's review
+        redirected the shell: the theme menu now offers every profile, T opens it, and main is a
+        centered reading column.
+      </p>
+
+      <h3 id="screenshots">screenshots</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/3">PR #3</a>, merged
+        2026-11-04. <code>mise run screenshots</code> on every site, through
+        spike-html-apps-tooling's capture bin: every built page, named by its path, whole, at
+        1280 and 390 wide, light and dark, and split across runs with <code>--page</code>. A test
+        in each site's check runs it and fails if it leaves a capture file behind.
+      </p>
+
+      <h3 id="template">template</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/4">PR #4</a>, merged
+        2026-11-04. spike-html-hosting-sdk v0.1.0 replaced the hand copies across the sites: the
+        Vite plugins, the lint configuration, <code>site.css</code>, the content check, the shell
+        checks, the crawl, the capture description, the currency bin, and reusable Pages and CI
+        workflows. Its release carries a template, and
+        <code>pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 &lt;repo&gt;</code>
+        scaffolds a new site from it. The three sites adopted it by scaffolding into a scratch
+        directory and copying over, keeping their notes, history, and copied trees. One mistake is
+        on the record: the SDK's first pull request merged with its CI red, its failing exit hidden
+        by a pipe; no tag was cut, and a fix-forward release went out green.
+      </p>
+
+      <h3 id="highlighting">highlighting</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/5">PR #5</a>, merged
+        2026-11-05. SDK v0.2.0 highlights code at build with Shiki 4.6.0, with no script on the
+        page. Each palette's code takes the colors of the editor theme the palette comes from,
+        light and dark: Flexoki's own VS Code themes, its green moved to the foundation's hue 142°,
+        and Shiki's bundled primer, catppuccin, and everforest. A site appends a theme for an
+        outside palette. A browser check fails a palette whose code isn't recolored to its theme.
+      </p>
+
+      <h3 id="components">components</h3>
+      <p>
+        <a href="https://github.com/JaimeStill/spike-html-hosting/pull/6">PR #6</a>, merged
+        2026-11-06, with spike-html-hosting-components
+        <a href="https://github.com/JaimeStill/spike-html-hosting-components/pull/3">#3</a> to
+        <a href="https://github.com/JaimeStill/spike-html-hosting-components/pull/6">#6</a> and
+        spike-html-hosting-sdk
+        <a href="https://github.com/JaimeStill/spike-html-hosting-sdk/pull/4">#4</a> and
+        <a href="https://github.com/JaimeStill/spike-html-hosting-sdk/pull/5">#5</a>. Components
+        v0.1.0 through v0.2.2 and SDK v0.3.0 and v0.3.1 were released, and the three sites pin
+        SDK v0.3.1 and components v0.2.2. Every page now has the site nav across the three sites,
+        a page header from its front matter, a section tree with reading progress and H and L
+        moving between sections, and a site index that docks as a column where it fits and is a
+        Pages drawer, opened by P, where it doesn't. The SDK's checks now hold every page to no
+        sideways scroll at 390px, no navigation word broken mid-word, main centered and directly
+        under the header, and a keys help dialog that lists every binding. Two of those
+        regressions had passed the earlier reviews; the architect found them viewing the local
+        builds at checkpoint 2.
+      </p>
+
+      <h2 id="what-was-decided">What was decided</h2>
+      <ul>
+        <li>
+          <strong>Project sites under <code>/&lt;repo&gt;/</code>.</strong> The spike publishes
+          only on its own JaimeStill repositories, with pinned copies and their provenance; a
+          standards-lab.github.io root site stays a sourced option.
+        </li>
+        <li>
+          <strong>Markdown stays Markdown.</strong> Architecture pages and repository docs are
+          authored in Markdown and rendered at build; HTML is for persistent artifacts.
+        </li>
+        <li>
+          <strong>One SDK by tag, not a template repository.</strong> A fix reaches a site with a
+          tag bump; the template ships inside each release, and its workflows are called at the
+          same tag.
+        </li>
+        <li>
+          <strong>Each palette's code is true to its source theme.</strong> One theme bound to the
+          foundation's sixteen color tokens got only 24 to 69% of characters right, so syntax colors
+          stay out of the foundation, in the SDK's palette-to-theme mapping.
+        </li>
+        <li>
+          <strong>H and L move between sections.</strong> Bound arrow keys took over sideways
+          scrolling in code and tables and ignored the keys module's off switch, so the arrows stay
+          the browser's.
+        </li>
+        <li>
+          <strong>A side column docks only where it fits.</strong> Below 16rem beside main's 80ch,
+          the site index is a drawer and the section tree a sticky bar.
+        </li>
+        <li>
+          <strong>Rolling currency.</strong> Every repository sets pnpm's minimum release age to 0
+          and reads each release's notes before its bump lands, in place of a one-day wait.
+        </li>
+      </ul>
+
+      <h2 id="whats-next">What's next</h2>
+      <ol>
+        <li>
+          <strong>org</strong>, under way: this site's charter, its index of every site, this
+          hosted report, the orientation brief as Markdown and by hand, and the nav fetched live
+          from this site's <code>sites.json</code>, measured against the list built into each
+          components release. Components v0.3.0 and SDK v0.4.0 are released for it.
+        </li>
+        <li>
+          <strong>icons</strong>: one icon toolkit, spike-html-hosting-icons, every set available
+          while designing, each build shipping only the icons it uses.
+        </li>
+        <li><strong>design</strong>: the design review of the three sites.</li>
+        <li>
+          <strong>review</strong>: the review across every site, a VHS-recorded CLI demo in
+          sqlate's docs, and the cost per site.
+        </li>
+        <li>
+          <strong>answer</strong>: the Pages topology, the root URL option, and the components
+          layer's verdict.
+        </li>
+      </ol>
+
+      <h2 id="sources">Sources</h2>
+      <ul>
+        <li>
+          The goal record, as the components task shipped it:
+          <a href="https://github.com/JaimeStill/spike-html-hosting/blob/6c3760c5ea77f0710da6591ec78359cc169b5312/context/goals/experiment.html.spike-html-hosting.md">experiment.html.spike-html-hosting.md at 6c3760c</a>,
+          and <a href="https://github.com/JaimeStill/spike-html-hosting/commits/main/context/goals/experiment.html.spike-html-hosting.md">its history</a>.
+        </li>
+        <li>
+          The merged pull requests' bodies:
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/1">#1 layers</a>,
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/2">#2 content</a>,
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/3">#3 screenshots</a>,
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/4">#4 template</a>,
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/5">#5 highlighting</a>, and
+          <a href="https://github.com/JaimeStill/spike-html-hosting/pull/6">#6 components</a>.
+        </li>
+        <li>
+          The components task's releases:
+          <a href="https://github.com/JaimeStill/spike-html-hosting-components/pulls?q=is%3Apr+is%3Amerged">spike-html-hosting-components' pull requests</a>
+          and
+          <a href="https://github.com/JaimeStill/spike-html-hosting-sdk/pulls?q=is%3Apr+is%3Amerged">spike-html-hosting-sdk's</a>.
+        </li>
+      </ul>
+    </main>
+    <sl-theme-menu id="theme"></sl-theme-menu>
+    <dialog id="help" aria-labelledby="help-title">
+      <h2 id="help-title">Keyboard shortcuts</h2>
+      <div data-keys-list></div>
+      <footer>
+        <button
+          type="button"
+          commandfor="help"
+          command="close"
+          aria-label="Close"
+          data-keys="?"
+        >
+          Close <span aria-hidden="true"><kbd>?</kbd></span>
+        </button>
+      </footer>
+    </dialog>
+  </body>
+</html>

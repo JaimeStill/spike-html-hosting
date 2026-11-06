@@ -1,15 +1,20 @@
 <!doctype html>
-<!-- The org stand-in's GitHub Pages site, its index, the root's hand page: the foundation's full
-     page entry and its registrations, every built-in profile, so the theme menu offers each, its
-     preferences module, and its keys module, render-blocking, as the build makes every module
-     script one entry; the SDK's site.css by the package's name, after the entry; a button that
-     opens the theme menu, which keys.js clicks on T; the components' site nav, its module
-     render-blocking too, at the header's start; the Help button, before the Theme button, which
-     opens the keys help dialog by the invoker command show-modal, keys.js clicking it on ? and
-     filling the dialog's [data-keys-list] as it opens with the page's bindings and the reader's
-     switch that turns the character keys off (WCAG 2.1.4); and its own main content. The Help
-     and Theme buttons and the dialog's Close are named by their aria-label, the visible text before
-     the key hint, which is a kbd alone and aria-hidden; the dialog lists that name.
+<!-- The org stand-in's GitHub Pages site, its index, a hand page of the root's: the index of every
+     site, each linked at its base with a line on what it holds, in sites.json's order and by its
+     labels, which the browser test holds equal; the charter, the orientation brief in both its
+     forms; and the sitrep entries, newest first. The foundation's full page entry and its
+     registrations, every built-in profile, so the theme menu offers each, its preferences module,
+     and its keys module, render-blocking, as the build makes every module script one entry; the
+     SDK's site.css by the package's name, after the entry; a button that opens the theme menu,
+     which keys.js clicks on T; the components' site nav, its module render-blocking too, at the
+     header's start, its src the root's sites.json under the base, %BASE_URL%, which Vite writes
+     as the base at build, so the nav lists the sites the root deploys, fetched live; the Help
+     button, before the Theme button, which opens the keys help dialog by the invoker command
+     show-modal, keys.js clicking it on ? and filling the dialog's [data-keys-list] as it opens
+     with the page's bindings and the reader's switch that turns the character keys off (WCAG
+     2.1.4); and its own main content. The Help and Theme buttons and the dialog's Close are named
+     by their aria-label, the visible text before the key hint, which is a kbd alone and
+     aria-hidden; the dialog lists that name.
      No Markdown fills it: the copied trees' rendered pages fill page.html, so the index loads none
      of the components' other modules and has no Pages button or drawer.
      Adapted from spike-html-hosting (cb0511c): index.html, its title and text this site's, and its
@@ -35,7 +40,7 @@
   </head>
   <body>
     <header>
-      <sl-site-nav></sl-site-nav>
+      <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
       <button
         type="button"
         commandfor="help"
@@ -58,9 +63,49 @@
     <main>
       <h1>The org stand-in</h1>
       <p>
-        This site is the org stand-in of spike-html-hosting, a spike on hosting GitHub Pages sites
-        and persistent artifacts as native web. Its content arrives in later tasks.
+        This site stands in for the Standards Lab organization in spike-html-hosting, a spike on
+        hosting GitHub Pages sites and persistent artifacts as native web. It holds the charter,
+        the orientation brief, the hosted reports, and this index of every site.
       </p>
+      <h2 id="sites">Sites</h2>
+      <ul class="sites">
+        <li>
+          <a href="/spike-html-hosting/">Org</a>: this site, the org stand-in, with the charter,
+          the orientation brief as Markdown and by hand, and the sitrep entries.
+        </li>
+        <li>
+          <a href="/spike-html-hosting-architecture/">Architecture</a>: the architecture
+          repository's pages, its principles and standards, rendered from Markdown with their front
+          matter.
+        </li>
+        <li>
+          <a href="/spike-html-hosting-sqlate/">sqlate</a>: a code repository's docs, sqlate's README
+          and its docs/ guide, with the section tree.
+        </li>
+      </ul>
+      <h2 id="the-org">The org</h2>
+      <ul>
+        <li>
+          <a href="github/profile/">The charter</a>: Standards Lab's organization profile, rendered
+          from standards-lab/.github.
+        </li>
+        <li>
+          <a href="org/briefs/orientation.html">The orientation brief</a>: rendered from its
+          Markdown in standards-lab/org.
+        </li>
+        <li>
+          <a href="briefs/orientation.html">The orientation brief, by hand</a>: the same text
+          written as HTML, with diagrams Markdown can't hold.
+        </li>
+      </ul>
+      <h2 id="sitreps">Sitreps</h2>
+      <ol class="sitreps" reversed>
+        <li>
+          <time datetime="2026-11-06">2026-11-06</time>:
+          <a href="sitreps/2026-11-06-spike-html-hosting.html">spike-html-hosting</a>, six tasks
+          shipped from layers to components.
+        </li>
+      </ol>
     </main>
     <sl-theme-menu id="theme"></sl-theme-menu>
     <dialog id="help" aria-labelledby="help-title">

@@ -1,6 +1,6 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** building
+- **State:** brief ready
 - **Task:** icons
 - **Branch:** icons
 
@@ -261,7 +261,7 @@ Release       spike-html-hosting-icons v0.1.0;
 
 ## Progress
 
-slices 14/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · checkpoint 2 accepted: spike-html-hosting-components 7293fd0, c0d2770, standards 1457f62, 85c2959, 3ee29cb, 89a9e7a, spec no gaps; PR #9 merged (5b6e815), v0.4.0 cut by its release workflow, which this session pushed · checkpoint 3 accepted: spike-html-hosting-sdk 7c20880, 9550931, 67bb8fd, 345a357 (gear), standards 03a3031, fa3d4c3, bdd3695, spec no gaps; PR #8's CI failed once on showsGlyphs' Help click, fixed by f5ddcd9; merged (fa70f45), v0.5.0 cut by its release workflow, which this session pushed · architecture 5e812ac, c32f150; sqlate 4bf1ee7, 9e3c9c0; root bffc305 · evidence 12: 6/6/7 of 986 icons shipped (architecture/sqlate/root), each exactly the icons its sources name · standards — · spec — · editor —
+slices 14/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · checkpoint 2 accepted: spike-html-hosting-components 7293fd0, c0d2770, standards 1457f62, 85c2959, 3ee29cb, 89a9e7a, spec no gaps; PR #9 merged (5b6e815), v0.4.0 cut by its release workflow, which this session pushed · checkpoint 3 accepted: spike-html-hosting-sdk 7c20880, 9550931, 67bb8fd, 345a357 (gear), standards 03a3031, fa3d4c3, bdd3695, spec no gaps; PR #8's CI failed once on showsGlyphs' Help click, fixed by f5ddcd9; merged (fa70f45), v0.5.0 cut by its release workflow, which this session pushed · architecture 5e812ac, c32f150; sqlate 4bf1ee7, 9e3c9c0; root bffc305 · evidence 12: 6/6/7 of 986 icons shipped (architecture/sqlate/root), each exactly the icons its sources name · standards: sites 24f91e2 (root), d0da42d (architecture) · spec: no gaps · editor 870e2b5
 
 ## Decisions
 

@@ -41,6 +41,8 @@ its own docs/ guide.
 9. A review that shows each site's pages inline and leaves no capture file behind.
 10. A VHS-recorded CLI demo embedded in a docs page.
 11. Cost per site: brotli page weight, build time, and push-to-live time.
+12. One icon toolkit, every set available while designing, each build shipping only the icons it
+    uses.
 
 ## Capabilities
 
@@ -51,6 +53,8 @@ its own docs/ guide.
 - **Documentation components:** the section tree, page header, site index, and cross-site
   navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
+- **Icons:** one icon toolkit, spike-html-hosting-icons, its glyphs typed per-icon modules, so a
+  build ships only the icons it imports.
 - **Review and demos:** the screenshot review and VHS-recorded CLI demos.
 
 ## Path
@@ -69,9 +73,11 @@ The tasks, in the order they run; each cites the evidence it proves.
    (evidence 4, 6).
 7. `org`: the charter, the index, the hosted report, shared navigation measured, and the
    HTML/Markdown line (evidence 2, 5, 8).
-8. `review`: the review across every site, the sqlint VHS demo, and the cost per site
-   (evidence 9, 10, 11).
-9. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
+8. `icons`: one icon toolkit, spike-html-hosting-icons (evidence 12).
+9. `design`: the design review of the three sites.
+10. `review`: the review across every site, the sqlint VHS demo, and the cost per site
+    (evidence 9, 10, 11).
+11. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
 
 ## Building the sites
 
@@ -84,20 +90,27 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.3.1, and spike-html-hosting-components at v0.2.2, the tag the
-  SDK's template names. A site keeps pace with the SDK by bumping its tag in `package.json` and
-  in both workflows' `uses:` lines.
+- This repository pins the SDK at v0.4.0 and spike-html-hosting-components at v0.3.0, the tag
+  that SDK's template names. The architecture and sqlate sites stay at SDK v0.3.1 and components
+  v0.2.2 until the `icons` task. A site keeps pace with the SDK by bumping its tag in
+  `package.json` and in both workflows' `uses:` lines.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
     `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
     links; and `.gitignore`, which keeps marathon's working files.
-  - This repository adapts the template to its one page. `index.html` is its own page rather
-    than a shell to fill: it loads the components' site nav and the keys help dialog, and leaves
-    out the Pages button, its drawer, and the components' other modules. `vite.config.ts` runs no
-    `markdownPages` and keeps appType `mpa`. The browser test runs the shell checks alone, with no
-    crawl. `mise.toml` has no unit tier, since the root copies no Markdown tree to check. The
-    capture file lists the index alone. Its `.gitignore` keeps marathon's working files.
+  - This repository is a root-style site. It renders two copied trees through its own
+    `page.html` shell: standards-lab/.github's profile at dd10b25, the charter, at
+    `github/profile/`, and standards-lab/org's `briefs/orientation.md` at c812496 at
+    `org/briefs/orientation.html`. Beside them it builds three hand pages, each a build input:
+    `index.html`, the index of every site; `briefs/orientation.html`, the orientation brief by
+    hand, with diagrams; and the sitrep entry under `sitreps/`. Hand pages carry no Pages button
+    or drawer. Every page's `sl-site-nav` fetches its list from the root's own `sites.json`,
+    `public/sites.json` copied to the base, by `src="%BASE_URL%sites.json"`. `root.css` holds the
+    hand pages' diagrams and the line under each orientation page's h1 that links the other,
+    which `page.html`'s script adds to the copy's page. The unit tier holds the copies to
+    `content.json`; the browser test runs the shell checks on every page and crawls the copies;
+    the capture file lists every page the root builds.
 - Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
   `name`. Every shell links `site.css` by its package export,
   `@jaimestill/spike-html-hosting-sdk/site.css`, and Vite bundles it into the entry's sheet.
@@ -114,8 +127,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   themes whose green the SDK moves to the foundation's hue 142°. A site appends an entry for an
   outside palette, as the SDK's Noctis fixture site does.
 - The architecture and sqlate sites' browser tests call the SDK's `highlightsEachPalette` check
-  on their indexes, which hold highlighted code. The root's page holds no code, so its test
-  leaves the check out.
+  on their indexes, which hold highlighted code. The root's only code is the orientation brief's
+  one-line block, a single token, and its test leaves the check out.
 - Every site and the SDK's template set `minimumReleaseAge: 0` in `pnpm-workspace.yaml`.
   Currency moves each pin to its latest release, and pnpm's default one-day wait fails a frozen
   install of a lockfile that pins a release under a day old. Reading each release's notes before
@@ -158,8 +171,8 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.3.1, and the
-components' is v0.2.2. The sites release nothing; each deploys on its push to main.
+release workflow tags a version bump that lands on main. Its current release is v0.4.0, and the
+components' is v0.3.0. The sites release nothing; each deploys on its push to main.
 
 ## References
 
@@ -169,6 +182,8 @@ The spike reads these repositories and never writes to them. Each is a key in th
 - `architecture`, at 8706d04: the architecture stand-in's pages.
 - `sqlate`, at v0.6.1, with `sqlint/v0.1.1`: the sqlate stand-in's README and docs/, and the
   recorded CLI.
+- `standards-lab/.github`, at dd10b25: the charter, its `profile/README.md`.
+- `standards-lab/org`, at c812496: the orientation brief, its `briefs/orientation.md`.
 - `spike-html-apps-foundation`, at v0.3.0: the baseline every site pins.
 - `spike-html-apps-tooling`, at v0.3.0: the screenshot review.
 - `spike-html-design`: the first Pages workflow.

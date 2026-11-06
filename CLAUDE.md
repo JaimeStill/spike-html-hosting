@@ -11,11 +11,14 @@ repository is managed with the marathon workflow; start from `context/README.md`
   and the check on pull requests.
 - **Check:** `mise run check`, after `mise run install`: ESLint on the SDK's configuration,
   which includes the check that no CSS module script is left in the build output; Prettier,
-  shellcheck, actionlint, and typescript-go's tsc; the Vite build; and the browser tier, which
-  runs the SDK's shell checks on the build in the pinned chrome-headless-shell and runs the
-  screenshots command once to show it leaves no capture file. It reads no network.
-- **Screenshots:** `mise run screenshots` captures the index, light and dark, wide and narrow,
-  and with its theme menu open; `context/README.md`, "Taking captures", lists its flags.
+  shellcheck, actionlint, and typescript-go's tsc; the Vite build; the unit tier, the SDK's
+  content check of the copied trees against `content.json`; and the browser tier, which runs the
+  SDK's shell checks on every page the root builds and its crawl of the copied pages in the pinned
+  chrome-headless-shell, and runs the screenshots command once to show it leaves no capture file.
+  It reads no network.
+- **Screenshots:** `mise run screenshots` captures every page the root builds, light and dark,
+  wide and narrow, and the index with its theme menu open; `context/README.md`, "Taking
+  captures", lists its flags.
 - **Currency:** `mise run currency`, the SDK's currency bin: every mise tool, package.json pin,
   `github:` tag, workflow action pin, and reusable workflow call behind its latest.
 - **Goals:** this spike's tasks live in the coordinator's roadmap,

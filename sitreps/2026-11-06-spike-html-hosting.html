@@ -8,7 +8,9 @@
      one table sits in a named, focusable region that scrolls it sideways where the viewport is
      narrower, as the renderer wraps a body table, so site.css holds it the same.
      Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/briefs/orientation.html, a
-     hand page at a path under the base other than its own, its text this entry's. -->
+     hand page at a path under the base other than its own, its text this entry's.
+     Adapted from spike-html-hosting-sdk (v0.5.0): template/index.html, each header button's and
+     the dialog Close's glyph marker in place of its word. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -33,7 +35,8 @@
         aria-label="Help"
         data-keys="?"
       >
-        Help <span aria-hidden="true"><kbd>?</kbd></span>
+        <svg data-icon="octicon/question-16"></svg>
+        <span aria-hidden="true"><kbd>?</kbd></span>
       </button>
       <button
         type="button"
@@ -42,7 +45,8 @@
         aria-label="Theme"
         data-keys="t"
       >
-        Theme <span aria-hidden="true"><kbd>T</kbd></span>
+        <svg data-icon="octicon/gear-16"></svg>
+        <span aria-hidden="true"><kbd>T</kbd></span>
       </button>
     </header>
     <div class="section-tree">
@@ -332,7 +336,8 @@
           aria-label="Close"
           data-keys="?"
         >
-          Close <span aria-hidden="true"><kbd>?</kbd></span>
+          <svg data-icon="octicon/x-16"></svg>
+          <span aria-hidden="true"><kbd>?</kbd></span>
         </button>
       </footer>
     </dialog>

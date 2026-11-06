@@ -12,9 +12,11 @@
      button, before the Theme button, which opens the keys help dialog by the invoker command
      show-modal, keys.js clicking it on ? and filling the dialog's [data-keys-list] as it opens
      with the page's bindings and the reader's switch that turns the character keys off (WCAG
-     2.1.4); and its own main content. The Help and Theme buttons and the dialog's Close are named
-     by their aria-label, the visible text before the key hint, which is a kbd alone and
-     aria-hidden; the dialog lists that name.
+     2.1.4); and its own main content. The Help and Theme buttons, and the dialog's Close, each show
+     a glyph and its key hint, a kbd alone and aria-hidden, and no word: each is named by its
+     aria-label, which the dialog lists. Each glyph is a marker, <svg data-icon="octicon/<name>">,
+     which the SDK's markdownPages fills at build with the icons layer's svg: question-16 for Help,
+     gear-16 for Theme, and x-16 for Close.
      No Markdown fills it: the copied trees' rendered pages fill page.html, so the index loads none
      of the components' other modules and has no Pages button or drawer.
      Adapted from spike-html-hosting (cb0511c): index.html, its title and text this site's, and its
@@ -25,7 +27,9 @@
      repository and its stylesheet the SDK's.
      Adapted from spike-html-hosting-sdk (v0.3.1): template/index.html, its title the org
      stand-in's and its main element the root's own content, not a shell to fill, without the Pages
-     button, its drawer, and the components' other modules. -->
+     button, its drawer, and the components' other modules.
+     Adapted from spike-html-hosting-sdk (v0.5.0): template/index.html, each header button's and
+     the dialog Close's glyph marker in place of its word. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -48,7 +52,8 @@
         aria-label="Help"
         data-keys="?"
       >
-        Help <span aria-hidden="true"><kbd>?</kbd></span>
+        <svg data-icon="octicon/question-16"></svg>
+        <span aria-hidden="true"><kbd>?</kbd></span>
       </button>
       <button
         type="button"
@@ -57,7 +62,8 @@
         aria-label="Theme"
         data-keys="t"
       >
-        Theme <span aria-hidden="true"><kbd>T</kbd></span>
+        <svg data-icon="octicon/gear-16"></svg>
+        <span aria-hidden="true"><kbd>T</kbd></span>
       </button>
     </header>
     <main>
@@ -119,7 +125,8 @@
           aria-label="Close"
           data-keys="?"
         >
-          Close <span aria-hidden="true"><kbd>?</kbd></span>
+          <svg data-icon="octicon/x-16"></svg>
+          <span aria-hidden="true"><kbd>?</kbd></span>
         </button>
       </footer>
     </dialog>

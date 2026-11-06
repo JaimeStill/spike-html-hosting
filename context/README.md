@@ -84,17 +84,19 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.2.0. A site keeps pace with the SDK by bumping its tag in
-  `package.json` and in both workflows' `uses:` lines.
+- Every site pins the SDK at v0.3.1, and spike-html-hosting-components at v0.2.2, the tag the
+  SDK's template names. A site keeps pace with the SDK by bumping its tag in `package.json` and
+  in both workflows' `uses:` lines.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
     `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
     links; and `.gitignore`, which keeps marathon's working files.
   - This repository adapts the template to its one page. `index.html` is its own page rather
-    than a shell to fill. `vite.config.ts` runs no `markdownPages` and keeps appType `mpa`. The
-    browser test runs the shell checks alone, with no crawl. `mise.toml` has no unit tier, since
-    the root copies no Markdown tree to check. The capture file lists the index alone. Its
+    than a shell to fill: it loads the components' site nav and the keys help dialog, and leaves
+    out the Pages button, its drawer, and the components' other modules. `vite.config.ts` runs no
+    `markdownPages` and keeps appType `mpa`. The browser test runs the shell checks alone, with no
+    crawl. `mise.toml` has no unit tier, since the root copies no Markdown tree to check. The capture file lists the index alone. Its
     `.gitignore` keeps marathon's working files.
 - Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
   `name`. Every shell links `site.css` by its package export,
@@ -151,8 +153,8 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.2.0. The
-sites release nothing; each deploys on its push to main.
+release workflow tags a version bump that lands on main. Its current release is v0.3.1, and the
+components' is v0.2.2. The sites release nothing; each deploys on its push to main.
 
 ## References
 

@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** org
-- **Branch:** org
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
@@ -12,7 +12,7 @@
 4. [x] template
 5. [x] highlighting
 6. [x] components
-7. [ ] org
+7. [x] org
 8. [ ] icons
 9. [ ] design
 10. [ ] review
@@ -261,12 +261,9 @@ Door          one-way: spike-html-hosting-components v0.3.0 and
               two-way: the root's change, which redeploys its pages
               and reverts by reverting its merge
 Release       spike-html-hosting-components v0.3.0 (released);
-              spike-html-hosting-sdk v0.4.0 (released)
+              spike-html-hosting-sdk v0.4.0 (released); the root's live measures (slice 8)
+              run after its merge and are posted on its pull request
 ```
-
-## Progress
-
-slices 7/8 committed (8 runs after the deploy) (1 components ac754f1; 2 components d90781d; 3 components 20e25d9; 4 sdk d8c4e36; 5 sdk 6777269; 6 root 39cf65c; 7 root f0225a8 3879d0a) · checkpoint 2 accepted: standards 2ea1d1d, spec gap closed 4f8058a; PR #7 merged 3a2a381; v0.4.0 released by the release workflow on this session's push (tag 798841a, 2026-11-06T16:37Z); note for slice 6: the root's test asserts crawled.hand exactly · checkpoint 1 accepted: standards b952db9, spec gap closed 77af71a; PR #8 merged a8edfd8; v0.3.0 released by the release workflow on this session's push (tag 9c4e75c, 2026-11-06T15:44Z) · editor d459ff7 · validated: root check unit 1 browser 74, currency clean
 
 ## Decisions
 

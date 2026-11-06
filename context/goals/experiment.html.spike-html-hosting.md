@@ -1,6 +1,6 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** building
+- **State:** brief ready
 - **Task:** components
 - **Branch:** components
 

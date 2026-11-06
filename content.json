@@ -1,0 +1,20 @@
+{
+  "trees": [
+    {
+      "repository": ".github",
+      "url": "https://github.com/standards-lab/.github",
+      "commit": "dd10b25189d9aee45bd4d44786f819e2076e802b",
+      "files": {
+        "profile/README.md": "1eed646ce67f431f609872bce945a081458bb681"
+      }
+    },
+    {
+      "repository": "org",
+      "url": "https://github.com/standards-lab/org",
+      "commit": "c81249681e4494523337f4ec28f652d8022e9886",
+      "files": {
+        "briefs/orientation.md": "f468d7ac3e3ceb0c280ecdabd70063de1b2d3f1a"
+      }
+    }
+  ]
+}

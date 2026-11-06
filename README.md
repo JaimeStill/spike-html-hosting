@@ -1,19 +1,29 @@
-<!-- Adapted from spike-html-hosting-sdk (v0.3.0): template/README.md, its site the root's one
-     index page, with no copied tree and no unit tier. -->
+<!-- Adapted from spike-html-hosting-sdk (v0.4.0): template/README.md, its site the root's hand
+     pages beside the rendered pages of its two copied trees. -->
 
 # spike-html-hosting
 
 The GitHub Pages site of spike-html-hosting, the org stand-in, made from the template of
-[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.3.1. Its one
-page, `index.html`, is served under `/spike-html-hosting/`.
+[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.4.0 and served
+under `/spike-html-hosting/`.
+
+- Its hand pages are written as HTML: `index.html`, the index of every site;
+  `briefs/orientation.html`, the orientation brief with diagrams; and the sitrep entries under
+  `sitreps/`.
+- Each Markdown file copied into `content/` is a page in `page.html`'s shell:
+  standards-lab/.github's profile, the charter, under `content/github/`, and standards-lab/org's
+  orientation brief under `content/org/`. `content.json` records each copied tree's source: its
+  repository, the commit it was copied at, and each file's git blob hash.
+- `public/sites.json` is the list of sites every page's site nav fetches.
 
 ## Tasks
 
 - `mise run install`: install the pinned tools and node_modules; reads the network.
 - `mise run check`: ESLint, with the check that no CSS module script is left in the build;
-  Prettier, shellcheck, and actionlint; tsc's type check; the build; and the browser tier, the
-  SDK's checks on the build in the pinned chrome-headless-shell. It reads no network.
-- `mise run screenshots`: capture the index, light and dark, wide and narrow.
+  Prettier, shellcheck, and actionlint; tsc's type check; the build; the unit tier, the copied
+  trees against `content.json`; and the browser tier, the SDK's checks on every page the build
+  writes in the pinned chrome-headless-shell. It reads no network.
+- `mise run screenshots`: capture every page, light and dark, wide and narrow.
 - `mise run currency`: every pin behind its latest, the SDK's tag among them.
 
 ## Keeping pace with the SDK

@@ -1,16 +1,26 @@
 // mise run screenshots' capture file, which the tooling's spike-html-apps-screenshots bin runs:
-// the SDK's description of the one page the root builds, its index, --page index, captured whole,
-// wide and narrow, and with its theme menu open. The site is served as the browser tier serves it,
-// by the SDK's served(), under the base.
+// the SDK's description of every page the root builds, the hand pages, the index, --page index,
+// the orientation brief by hand, and the sitrep entry, the build's inputs in vite.config.ts's
+// order, before every tree's copied pages, listed from content.json in the build's order, each
+// captured whole, wide and narrow, and the index also with its theme menu open. A page's name is
+// its built path without .html, a directory's index its directory: the charter is --page
+// github/profile, and the hand orientation page --page briefs/orientation. The site is served as
+// the browser tier serves it, by the SDK's served(), under the base.
 // Adapted from spike-html-hosting-architecture (27d70e1): scripts/screenshots.config.ts, its
 // description the SDK's.
-// Adapted from spike-html-hosting-sdk (v0.1.0): template/scripts/screenshots.config.ts, its pages
-// the root's index alone, with no content.json to list them from.
+// Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/screenshots.config.ts, a
+// root-style site's pages, its hand pages the root's three.
 
 import { join } from "node:path";
 
-import { description } from "@jaimestill/spike-html-hosting-sdk/screenshots.js";
+import { contentPages, description } from "@jaimestill/spike-html-hosting-sdk/screenshots.js";
 
 const root = join(import.meta.dirname, "..");
 
-export default description({ root, pages: ["index.html"] });
+const hand = [
+  "index.html",
+  "briefs/orientation.html",
+  "sitreps/2026-11-06-spike-html-hosting.html",
+];
+
+export default description({ root, pages: [...hand, ...contentPages(root)] });

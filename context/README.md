@@ -41,6 +41,8 @@ its own docs/ guide.
 9. A review that shows each site's pages inline and leaves no capture file behind.
 10. A VHS-recorded CLI demo embedded in a docs page.
 11. Cost per site: brotli page weight, build time, and push-to-live time.
+12. One icon toolkit, every set available while designing, each build shipping only the icons it
+    uses.
 
 ## Capabilities
 
@@ -51,6 +53,8 @@ its own docs/ guide.
 - **Documentation components:** the section tree, page header, site index, and cross-site
   navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
+- **Icons:** one icon toolkit, spike-html-hosting-icons, its glyphs typed per-icon modules, so a
+  build ships only the icons it imports.
 - **Review and demos:** the screenshot review and VHS-recorded CLI demos.
 
 ## Path
@@ -69,9 +73,11 @@ The tasks, in the order they run; each cites the evidence it proves.
    (evidence 4, 6).
 7. `org`: the charter, the index, the hosted report, shared navigation measured, and the
    HTML/Markdown line (evidence 2, 5, 8).
-8. `review`: the review across every site, the sqlint VHS demo, and the cost per site
-   (evidence 9, 10, 11).
-9. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
+8. `icons`: one icon toolkit, spike-html-hosting-icons (evidence 12).
+9. `design`: the design review of the three sites.
+10. `review`: the review across every site, the sqlint VHS demo, and the cost per site
+    (evidence 9, 10, 11).
+11. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
 
 ## Building the sites
 
@@ -84,23 +90,39 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.3.1, and spike-html-hosting-components at v0.2.2, the tag the
-  SDK's template names. A site keeps pace with the SDK by bumping its tag in `package.json` and
-  in both workflows' `uses:` lines.
+- This repository pins the SDK at v0.4.0 and spike-html-hosting-components at v0.3.0, the tag
+  that SDK's template names. The architecture and sqlate sites stay at SDK v0.3.1 and components
+  v0.2.2 until the `icons` task. A site keeps pace with the SDK by bumping its tag in
+  `package.json` and in both workflows' `uses:` lines.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
     `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
     links; and `.gitignore`, which keeps marathon's working files.
-  - This repository adapts the template to its one page. `index.html` is its own page rather
-    than a shell to fill: it loads the components' site nav and the keys help dialog, and leaves
-    out the Pages button, its drawer, and the components' other modules. `vite.config.ts` runs no
-    `markdownPages` and keeps appType `mpa`. The browser test runs the shell checks alone, with no
-    crawl. `mise.toml` has no unit tier, since the root copies no Markdown tree to check. The
-    capture file lists the index alone. Its `.gitignore` keeps marathon's working files.
+  - This repository is a root-style site: hand pages beside the rendered pages of two copied
+    trees. The rendered pages fill its own shell, `page.html`:
+    - standards-lab/.github's `profile/README.md` at dd10b25, the charter, at `github/profile/`;
+    - standards-lab/org's `briefs/orientation.md` at c812496 at `org/briefs/orientation.html`.
+
+    Its three hand pages are build inputs in `vite.config.ts`: `index.html`, the index of every
+    site; `briefs/orientation.html`, the orientation brief written by hand, with two diagrams; and
+    the sitrep entry under `sitreps/`. Hand pages have no Pages button or drawer, because the
+    SDK's site index lists only copied pages.
+
+    Every page's `sl-site-nav` fetches the list of sites from `src="%BASE_URL%sites.json"`, which
+    Vite copies from `public/sites.json` to the base. Each orientation page links the other under
+    its h1; on the rendered page, `page.html`'s script adds that link, so the copy stays byte for
+    byte. `root.css` styles the link's line and the hand pages' diagrams.
+
+    The unit tier holds the copies to `content.json`. The browser test runs the shell checks on
+    every page and crawls the copies. The capture file lists every page the root builds.
 - Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
   `name`. Every shell links `site.css` by its package export,
   `@jaimestill/spike-html-hosting-sdk/site.css`, and Vite bundles it into the entry's sheet.
+- From SDK v0.4.0, which this repository pins, `renderBlocking` sets rolldown's
+  `output.strictExecutionOrder`, so each page runs only its own scripts. Each page loads three JS
+  files: its entry, the shared `index` chunk, and rolldown's runtime. The SDK's README describes
+  the plugin. The architecture and sqlate sites, on v0.3.1, load one JS file a page.
 - Each Markdown site's `content/` holds byte-for-byte copies of its source at the pin: the
   architecture repository's 29 front-matter pages at 8706d04, and sqlate's README and docs/ at
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
@@ -114,17 +136,20 @@ The tasks, in the order they run; each cites the evidence it proves.
   themes whose green the SDK moves to the foundation's hue 142°. A site appends an entry for an
   outside palette, as the SDK's Noctis fixture site does.
 - The architecture and sqlate sites' browser tests call the SDK's `highlightsEachPalette` check
-  on their indexes, which hold highlighted code. The root's page holds no code, so its test
-  leaves the check out.
+  on their indexes, which hold highlighted code. The root's test leaves the check out: its only
+  code is the orientation brief's one-line block, which has nothing to highlight.
 - Every site and the SDK's template set `minimumReleaseAge: 0` in `pnpm-workspace.yaml`.
   Currency moves each pin to its latest release, and pnpm's default one-day wait fails a frozen
   install of a lockfile that pins a release under a day old. Reading each release's notes before
   its bump lands stands in for the wait.
-- spike-html-hosting-components' `sl-site-nav` holds the list of sites, built into each release,
-  so adding a site is a components release that every site takes by moving its pin. This list is
-  the build-time-by-tag side of evidence 5, which the `org` task measures against a list fetched
-  at runtime. A layer that names its consumers breaks the architecture's downward-dependencies
-  principle; the spike accepts that exception until the `org` task's measure settles it.
+- spike-html-hosting-components' `sl-site-nav` holds a list of sites, `SITES`, built into each
+  release, so adding a site to it is a components release that every site takes by moving its
+  pin. From v0.3.0 its optional `src` names a list it fetches at runtime instead; the
+  components' README documents it. The root sets `src`; the architecture and sqlate sites list
+  `SITES`. These are evidence 5's two sides, build-time-by-tag and fetched-at-runtime, which the
+  components' browser tier measures on fixture sites with one deployed ahead. A layer that names
+  its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
+  exception until evidence 5's measure settles it.
 - Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the shell checks look for that sheet in `document.adoptedStyleSheets`.
@@ -158,8 +183,8 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.3.1, and the
-components' is v0.2.2. The sites release nothing; each deploys on its push to main.
+release workflow tags a version bump that lands on main. Its current release is v0.4.0, and the
+components' is v0.3.0. The sites release nothing; each deploys on its push to main.
 
 ## References
 
@@ -169,6 +194,8 @@ The spike reads these repositories and never writes to them. Each is a key in th
 - `architecture`, at 8706d04: the architecture stand-in's pages.
 - `sqlate`, at v0.6.1, with `sqlint/v0.1.1`: the sqlate stand-in's README and docs/, and the
   recorded CLI.
+- `standards-lab/.github`, at dd10b25: the charter, its `profile/README.md`.
+- `standards-lab/org`, at c812496: the orientation brief, its `briefs/orientation.md`.
 - `spike-html-apps-foundation`, at v0.3.0: the baseline every site pins.
 - `spike-html-apps-tooling`, at v0.3.0: the screenshot review.
 - `spike-html-design`: the first Pages workflow.

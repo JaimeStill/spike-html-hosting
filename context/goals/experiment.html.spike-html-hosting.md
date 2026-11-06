@@ -261,7 +261,7 @@ Release       spike-html-hosting-icons v0.1.0;
 
 ## Progress
 
-slices 7/14 committed (components aa9d491, sdk 7c20880, architecture 5e812ac, sqlate 4bf1ee7; icons 79aa6f1, f21fba8, 73e7374, 6296d9a, standards 2cc2b54, 58ab0ba, spec no gaps) · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · standards — · spec — · editor —
+slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · checkpoint 2 accepted: spike-html-hosting-components 7293fd0, c0d2770, standards 1457f62, 85c2959, 3ee29cb, 89a9e7a, spec no gaps; PR #9 merged (5b6e815), v0.4.0 cut by its release workflow, which this session pushed · sdk 7c20880, architecture 5e812ac, sqlate 4bf1ee7 · standards — · spec — · editor —
 
 ## Decisions
 
@@ -944,6 +944,9 @@ slices 7/14 committed (components aa9d491, sdk 7c20880, architecture 5e812ac, sq
   each hyphen), so its grid shows two cells a row at 390px. Checkpoint 1's direction.
 - icons: the icons layer pins rolldown 1.3.0 for its fixture build; the SDK's hold at 1.2.16 is
   Vite's constraint, and the icons layer has no Vite. Checkpoint 1's direction.
+- icons: glyphs on the theme dialog's Save and Cancel, which the foundation renders, go to the
+  design task with the dialog's heading and the opener's name and key, for the intake as one
+  foundation change. Checkpoint 2's direction.
 
 ## Pending edits
 
@@ -1043,7 +1046,8 @@ slices 7/14 committed (components aa9d491, sdk 7c20880, architecture 5e812ac, sq
   v0.5.0, adopted by all three sites. Evidence 12.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.design`: the summary adds the
   theme button's name (Theme, Settings or Appearance) and key, weighed with the foundation's
-  dialog heading; and names on hover for icon-only controls. Each goes to the intake as a
+  dialog heading and glyphs on the dialog's Save and Cancel; and names on hover for icon-only
+  controls. Each goes to the intake as a
   foundation change if the foundation must change.
 - coordinator · references.toml and references.local.toml: add primer/octicons
   (`https://github.com/primer/octicons.git`), read at the commit whose LICENSE

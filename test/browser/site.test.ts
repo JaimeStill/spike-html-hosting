@@ -91,7 +91,7 @@ describe("the site under its base", () => {
   // The hand page writes its alert's glyph as a marker, which the build fills from the icons layer,
   // as the renderer's variants take the same icon: the two titles hold the same markup.
   test("the hand orientation page's IMPORTANT alert title is the rendered page's", async () => {
-    const titles = [];
+    const titles: (string | undefined)[] = [];
     for (const path of ["org/briefs/orientation.html", "briefs/orientation.html"]) {
       const page = await browser.open("about:blank");
       try {
@@ -104,9 +104,9 @@ describe("the site under its base", () => {
         await page.close();
       }
     }
-    const [rendered, hand] = titles;
+    const [rendered, written] = titles;
     assert.ok(rendered?.includes("<svg"), "the rendered title has a glyph");
-    assert.equal(hand, rendered);
+    assert.equal(written, rendered);
   });
 
   test("the index lists every site sites.json lists, in its order, each at its base", async () => {

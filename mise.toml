@@ -7,9 +7,8 @@
 # Adapted from spike-html-hosting (c161b7d): mise.toml, its chrome-headless-shell 157.0.8103.38.
 # Adapted from spike-html-hosting-architecture (27d70e1): mise.toml, its tiers the SDK's checks and
 # its currency the SDK's bin.
-# Adapted from spike-html-hosting-sdk (v0.3.0): template/mise.toml, its build the root's one page
-# and its check without a unit tier: the root copies no Markdown tree, so it has no content check
-# to run.
+# Adapted from spike-html-hosting-sdk (v0.4.0): template/mise.toml, its build the root's hand
+# index beside the rendered pages of its two copied trees.
 [settings]
 task.run_auto_install = false
 
@@ -87,27 +86,33 @@ run = "tsc -p tsconfig.test.json"
 dir = "{{config_root}}"
 
 [tasks.build]
-description = "Build the site with Vite (vite.config.ts): index.html, the root's one page, and the foundation modules it loads into dist/, under the Pages base; reads no network, writes dist/"
+description = "Build the site with Vite (vite.config.ts): index.html, the root's hand page, a page for each Markdown file of the two trees in content/, in page.html's shell, and the foundation modules the pages load into dist/, under the Pages base; reads no network, writes dist/"
 depends = ["preflight"]
 run = "pnpm exec vite build"
 dir = "{{config_root}}"
 
+[tasks."test:unit"]
+description = "Run the unit tier under node --test: each tree in content/ against content.json's blob hashes, with the SDK's content check; reads no network, writes nothing"
+depends = ["preflight"]
+run = "node --test 'test/unit/*.test.ts'"
+dir = "{{config_root}}"
+
 [tasks."test:browser"]
-description = "Run the browser tier after the build, the SDK's checks: dist/ under the base by Vite's preview, in the pinned chrome-headless-shell, the shell checks on the index; and the screenshots command on the index, its captures under a scratch TMPDIR removed after unless --keep; reads no network, writes dist/"
+description = "Run the browser tier after the build, the SDK's checks: dist/ under the base by Vite's preview, in the pinned chrome-headless-shell, the shell checks on the hand index and on each rendered page, and the crawl of every copied page from the index; and the screenshots command on the index, its captures under a scratch TMPDIR removed after unless --keep; reads no network, writes dist/"
 depends = ["preflight browser", "build"]
 run = "BROWSER_EXECUTABLE=$(mise which chrome-headless-shell) node --test 'test/browser/*.test.ts'"
 dir = "{{config_root}}"
 
 [tasks.check]
-description = "Run every check: lint, types, build, and test:browser; reads no network, writes dist/ (gitignored) and nothing else outside TMPDIR"
-depends = ["lint", "types", "build", "test:browser"]
+description = "Run every check: lint, types, build, test:unit, and test:browser; reads no network, writes dist/ (gitignored) and nothing else outside TMPDIR"
+depends = ["lint", "types", "build", "test:unit", "test:browser"]
 
-# Never a dependency of check: a reviewer's look at the site's page, not a test. The capture is
+# Never a dependency of check: a reviewer's look at the site's pages, not a test. The capture is
 # spike-html-apps-tooling's spike-html-apps-screenshots, on scripts/screenshots.config.ts; the
 # browser tier runs it once (test/browser/screenshots.test.ts).
 # Adapted from spike-html-apps-components (19d4f59): mise.toml, its screenshots task.
 [tasks.screenshots]
-description = "Capture the index whole, wide and narrow, and with its theme menu open, light and dark, in tiles, at the defaults, or --palette/--space/--type <name>, or --all; --page <name> (repeatable), --scheme light|dark, --output terminal|directory|browser, --dir <path>, --keep; reads no network, writes dist/ and the captures, under TMPDIR unless --dir"
+description = "Capture every page whole, wide and narrow, and the index's theme menu open, light and dark, in tiles, at the defaults, or --palette/--space/--type <name>, or --all; --page <name> (repeatable), --scheme light|dark, --output terminal|directory|browser, --dir <path>, --keep; reads no network, writes dist/ and the captures, under TMPDIR unless --dir"
 depends = ["preflight browser", "build"]
 # Its arguments follow the description, with or without a leading --.
 # raw: with dependencies, mise prefixes a task's output through a pipe; icat needs the terminal.

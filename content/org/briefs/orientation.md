@@ -1,0 +1,107 @@
+# Standards Lab: an orientation
+
+This brief is an orientation to an initiative I have been working on: Standards Lab, a
+blueprint for a modern, agentic software architecture strategy. It covers what I am
+building, why I believe it matters, how it is being built, and how to explore it in depth with
+your own agent. There are no asks in this briefing beyond any feedback or questions you may have.
+
+If you have further questions or would like to dig deeper into what has been fleshed out so far,
+paste the line below into your agent of choice. It initializes an interview session over the
+organization's context and source, answering your questions with cited sources.
+
+> [!IMPORTANT]
+> Validated with Claude and ChatGPT. Does not work with Gemini.
+
+```md
+launch interview: https://github.com/standards-lab/org/blob/main/interview.md
+```
+
+## The vision
+
+The thesis is simple to state: clear architectural principles and standards, broken down into
+appropriately layered boundaries, optimize the utility of agentic workflows in creating
+well-structured software. The same structure that keeps a system legible to people is what lets
+agents build it well.
+
+The boundaries in that thesis are concrete: the modern primitives of what software emits — the
+library, the binary, the container image. Each primitive is a modular boundary: the artifact
+where maintenance is contained, vulnerabilities and technical debt are mitigated, and a
+capability becomes reusable. Layered appropriately, the boundaries compose into an ecosystem of
+reusable components: foundations get solved once and adopted rather than re-derived project by
+project, and our capacity shifts toward creating, innovating, and leading the standard forward.
+They also keep ownership and change legible: lines of effort and responsibility attach to
+tangible artifacts, and a small, deliberate dependency surface stays pinned and current, so we
+drive change rather than react to it. A few examples of the patterns in play:
+
+- **Interoperable, domain-driven services.** Services scoped to a domain, composing across
+  clear interfaces rather than accumulating into monoliths.
+
+- **Data composition over rigid schema.** Data modeled for composition rather than locked into
+  tightly coupled schema.
+
+- **Software architecture above the transport layer.** Our enterprise has operationalized the
+  OSI model's lower layers well: building and configuring networks, VNETs, VLANs, and firewalls
+  is settled practice. The higher, data-driven layers are not held to a comparable discipline,
+  even though the commercial sector's standards for them are mature; this strategy establishes
+  that discipline for us.
+
+The agentic questions sit alongside the architectural ones. How do we integrate AI agents well,
+and capture the principles of successful harness programming? How does the technology raise the
+velocity of the enterprise rather than one person? How does the same blueprint pattern serve
+other disciplines? And, if this proves successful, a longer-term question worth holding: how does
+an enterprise designate its experts to cultivate a discipline's evolution and adoption strategy?
+
+## How it is being built
+
+The development workflow is part of the work, not tooling on the side. Harness programming
+treats how agents develop software — the workflows, conventions, and skills they run — as
+something to engineer with the same discipline as the software itself, and its principles are
+part of the architecture this effort captures.
+
+The concrete workflow is the agent skill marathon (from the notion that it's a marathon, not a
+sprint). It is an extensible long-haul development skill built in this effort. Each session
+plans one concrete step, and a maintained reset context carries continuity from one session to
+the next. The written context lives alongside the code and holds only what the code does not yet
+express: a note is deleted once the work expresses it, and knowledge that holds beyond one
+repository is promoted to a principle. Its workspace feature coordinates development across
+repositories, letting one step move the libraries, the service, and the docs together.
+Extensions attach at its hook points; the first is a roadmap extension that keeps the
+remaining path current as a side effect of the sessions themselves.
+
+The entire effort runs on this workflow, dogfooding it on the very system it exists to build:
+every session tunes it, and the principles it proves are captured as development evolves. In an
+agentic system, context maintenance matters as much as the source code: the written context is
+the specification that the agent and the developers working with it align on, the source of
+truth for the design. The reset context, the notes, and the live roadmap are all public in the
+working context.
+
+## The roadmap at a glance
+
+The target is a holistic reference: a web service at v1.0, with every capability layer a
+production service reasonably encounters complete in one running composition. Each layer is
+proven end to end, and what it teaches feeds the SDKs, the infrastructure libraries, the
+template that future services start from, and the underlying principles that shape the
+architecture and standard. Solve a layer holistically once and it becomes a repeatable blueprint
+that does not need to be solved again.
+
+The [live roadmap](https://github.com/standards-lab/org/blob/main/context/roadmap.toml) holds the
+remaining layers and their order.
+
+This is a comprehensive review of how we can optimize the way we build production software, worked
+out in running code toward the vision laid out above. It does not have all the answers yet. The
+point is taking the time to find enough of the right conventions to build effectively; it is coming
+together well, and dialing it in takes time.
+
+## Explore it yourself
+
+- [Organization profile](https://github.com/standards-lab) — the vision and the organization's
+  repositories.
+- [Architecture](https://github.com/standards-lab/architecture) — the architecture repository:
+  the Elemental Architecture, its principles, and its standards.
+- [Standards](https://github.com/standards-lab/architecture/blob/main/standards/README.md) —
+  each standard and its member repositories, starting with Go Elemental.
+- [Harness](https://github.com/standards-lab/claude-plugins) — `claude-plugins`, the plugin
+  marketplace codifying the organization's development processes: the `marathon` workflow and
+  its extensions.
+- [Roadmap](https://github.com/standards-lab/org/blob/main/context/roadmap.toml) — what
+  remains, with `next` as the order.

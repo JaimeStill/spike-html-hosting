@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** building
+- **Task:** icons
+- **Branch:** icons
 
 ## Tasks
 
@@ -18,252 +18,250 @@
 10. [ ] review
 11. [ ] answer
 
-## Task brief · org
+## Task brief · icons
 
 ```
-Problem       The org stand-in is a placeholder page. Evidence 2
-              needs its charter, an index of every site, and a
-              hosted persistent report, correct under its /<repo>/
-              base. Evidence 5 needs the shared navigation measured:
-              sl-site-nav lists only the sites built into its
-              components release, so a site deployed ahead shows a
-              different list until every site rebuilds. Evidence 8
-              needs the HTML/Markdown line shown by example, with
-              verdicts for the coordinator's briefs/ and for
-              v1.harness.sitrep. The root renders no Markdown, and
-              the SDK's renderer, provenance check and crawl take one
-              copied tree from one source repository, while the root
-              copies two: the org profile from standards-lab/.github
-              and the orientation brief from standards-lab/org.
-              marked renders no GitHub alerts, and the orientation
-              brief opens with one. The SDK's shell checks open only
-              a site's base, so a hand page at any other path goes
-              unchecked.
-Behaviors     1. spike-html-hosting-components moves to pnpm 12.18.0,
-                 eslint-plugin-boundaries 7.4.2 and globals 17.14.0,
-                 their notes read before the bump. Its currency
-                 prints nothing, and its check passes.
-              2. sl-site-nav takes an optional src naming a list of
-                 sites to fetch with the browser's fetch(). It
-                 renders its built-in list at first paint, still
-                 render-blocking, and replaces it with the fetched
-                 list once the fetch succeeds. A failed fetch, an
-                 error status or a malformed list leaves the built
-                 list in place. With no src it behaves exactly as
-                 v0.2.2 does. The current site is still marked by
-                 the path's first segment, in either list.
-              3. The components' browser tier measures one site
-                 deployed ahead, on fixture sites under their
-                 project bases on one local origin:
-                 - an org fixture serves a list of four sites;
-                 - the ahead site loads a site-nav module that the
-                   fixture server answers with the built module's
-                   list changed to add a fourth site, written to no
-                   file;
-                 - the behind site loads the built module.
-                 With no src, the ahead site lists four sites and the
-                 behind site three: build-time-by-tag skew. With src
-                 naming the org fixture's list, both list the four.
-                 With the list delayed, the built list is already
-                 painted before it arrives. With the list failing,
-                 the built list stays.
-              4. spike-html-hosting-components v0.3.0 is released as
-                 its release workflow describes: the README documents
-                 src and the list's form, and CHANGELOG [0.3.0] lists
-                 the change. It releases at a BUILD checkpoint before
-                 the SDK pins it.
-              5. The SDK renders Markdown from several copied trees,
-                 each with its own source repository and pinned
-                 commit, as one site:
-                 - each tree's pages sit under a directory named for
-                   its source repository, at their source paths;
-                 - one site index lists every page of every tree;
-                 - the provenance record holds each tree's source
-                   and each file's blob hash, and the content check
-                   fails on any mismatch;
-                 - a record naming one source, as the architecture
-                   and sqlate sites have it, stays valid unchanged.
-              6. The SDK's crawl checks every copied page of every
-                 tree from the pages it is given. It tolerates hand
-                 pages the site also builds and still fails on any
-                 copied page left unchecked. The shell checks take a
-                 page URL apart from the site's base, so a hand page
-                 at any path is checked under the base.
-              7. The renderer draws GitHub alerts as callouts through
-                 marked-alert 2.1.2, an exact SDK dependency, styled
-                 by site.css from foundation tokens. Each callout
-                 keeps its kind as visible text, and its icon is
-                 aria-hidden. The SDK's unit tier pins the markup.
-              8. spike-html-hosting-sdk v0.4.0 is released as its
-                 release workflow describes: the template pins
-                 components v0.3.0, its sl-site-nav without src; the
-                 scaffold test runs the copy's full check offline;
-                 the README documents several trees, alerts and the
-                 shell checks' page URL; CHANGELOG [0.4.0] lists
-                 them. It releases at a BUILD checkpoint before the
-                 root pins it. Its currency reports only the held
-                 rolldown.
-              9. The root pins SDK v0.4.0 and components v0.3.0 and
-                 calls the SDK workflows at v0.4.0. Its index stays a
-                 hand page. Its rendered pages fill a shell of their
-                 own, with the Pages drawer and the section tree.
-              10. The root carries two byte-for-byte copies, each
-                 with its provenance record, and renders them at
-                 build:
-                 - the charter: standards-lab/.github's
-                   profile/README.md at dd10b25, served under the
-                   github directory at its source path;
-                 - the orientation brief: standards-lab/org's
-                   briefs/orientation.md at c812496, served under
-                   the org directory at its source path, its
-                   IMPORTANT alert a callout.
-                 The crawl checks both, and the content check holds
-                 both to their records.
-              11. The orientation brief is also a hand-written HTML
-                 page, at /briefs/orientation.html beside the
-                 rendered Markdown. It carries the same text and adds
-                 what Markdown can't hold: at least one diagram as
-                 inline SVG with a text alternative, and the section
-                 tree over its own headings. Each of the two
-                 orientation pages links the other.
-              12. The hosted report is a dated sitrep-style entry,
-                 written directly as HTML, at
-                 /sitreps/<date>-spike-html-hosting.html, dated the
-                 day it is written. It reports spike-html-hosting's
-                 six shipped tasks, PRs #1 to #6, 2026-11-03 to
-                 2026-11-06, drafted from the goal record's history
-                 and the merged pull requests' bodies, and names
-                 each source.
-              13. The root deploys /spike-html-hosting/sites.json:
-                 the three sites, each by repository and label.
-                 Its sl-site-nav sets src to that list, so the
-                 root's nav is the one fetched live, under its own
-                 base.
-              14. The root's index is the org stand-in's index of
-                 every site: a hand-written list linking each site,
-                 each with a line on what it holds, which the
-                 browser test holds equal to sites.json. The index
-                 also links the charter, both orientation pages, and
-                 a dated list of sitrep entries, newest first.
-              15. Every page the root builds passes the shell checks
-                 under the base: the index, both hand pages and the
-                 rendered pages. The rendered pages also pass the
-                 crawl. Every request, sites.json's fetch included,
-                 resolves under the base. No page scrolls sideways
-                 at 390px.
-              16. The root's capture file lists every page it
-                 builds. Its screenshots run leaves no capture file.
-              17. The root's README adds icons and design to the
-                 Path between org and review, Icons to its
-                 Capabilities, and evidence 12 to its evidence list:
-                 one icon toolkit, every set available while
-                 designing, each build shipping only the icons it
-                 uses. Its Building the sites notes say the root
-                 renders two copied trees and fetches its nav list.
-                 Its References name standards-lab/.github at
-                 dd10b25 and standards-lab/org at c812496.
-              18. The session brief states the briefs/ verdict from
-                 the two orientation pages:
-                 - each form's source bytes, and the brotli weight
-                   of each built page;
-                 - the tokens to draft each form, counted by one
-                   tokenizer;
-                 - what the HTML adds, shown by captures of both
-                   pages at 1280px and 390px, light and dark.
-              19. The session brief states the v1.harness.sitrep
-                 verdict from the sitrep entry:
-                 - its source bytes and brotli weight;
-                 - its drafting tokens, against a Markdown draft of
-                   the same entry counted by the same tokenizer;
-                 - captures at 1280px and 390px, light and dark.
-              20. The session brief states the evidence 5 measure:
-                 the browser tier's skew and convergence results,
-                 and the deployed root's fetch of sites.json with its
-                 response headers, Pages' cache-control max-age=600
-                 among them, and its timing.
-              21. The session brief shows the live stored theme,
-                 owed since the components task: a theme saved on
-                 one deployed site applies on the other two, on
-                 jaimestill.github.io.
+Problem       Evidence 12 needs one icon toolkit, every set
+              available while designing, each build shipping
+              only the icons it uses. No layer ships glyphs: the
+              header's Pages, Help and Theme buttons and the
+              section tree's Previous and Next show words, the
+              drawer's Close is a word, and the alert callouts
+              use marked-alert's own Octicons strings, which lack
+              focusable="false". The architecture and sqlate
+              sites still pin SDK v0.3.1 and components v0.2.2,
+              and the components and the SDK trail mise-action
+              v5.2.7.
+Behaviors     1. spike-html-hosting-components takes mise-action
+                 v5.2.7, its notes read before the bump. Its
+                 currency prints nothing, and its check passes.
+              2. spike-html-hosting-sdk takes mise-action v5.2.7
+                 in its own workflows and its reusable ones. Its
+                 currency reports only the held rolldown, and its
+                 check passes.
+              3. The architecture and sqlate sites pin SDK
+                 v0.4.0 and components v0.3.0 and call the SDK
+                 workflows at v0.4.0. Each site's currency prints
+                 nothing, and its check passes.
+              4. spike-html-hosting-icons exists as a public
+                 repository managed with marathon, on the
+                 pattern of the components and the SDK: an
+                 offline check, CI on pull requests, a release
+                 workflow that does nothing at 0.0.0 and cuts the
+                 tag its version names, a currency command, and
+                 standards that point into the architecture
+                 repository. Its README records Iconify as the
+                 glyph source and its single-maintainer risk.
+              5. Given an Iconify set by name, the icons layer's
+                 build generates one ES module per icon of that
+                 set through @iconify/utils. Each module's
+                 default export is one complete svg string:
+                 viewBox, 1em square, currentColor,
+                 aria-hidden="true", focusable="false". Each
+                 module's declaration types it as a string. A
+                 fixture set in Iconify's format proves that any
+                 set's name works, not only the released one.
+              6. The generator accepts a set only when its
+                 licence is satisfied by shipping the licence
+                 text: MIT, ISC, Apache-2.0, BSD, CC0-1.0 or
+                 Unlicense. It fails the build on any other set,
+                 CC-BY, CC-BY-SA and GPL among them, naming the
+                 set and its licence. Each released set ships its
+                 upstream LICENSE byte for byte, with a
+                 provenance line naming the upstream repository
+                 and commit.
+              7. The package releases Octicons alone. A consumer
+                 imports one icon by its set and name, such as
+                 octicon/x-16. The package has no runtime
+                 dependencies; Iconify's packages are dev
+                 dependencies of the build. The pack test
+                 resolves an icon and its declaration from the
+                 tarball.
+              8. A dev-only browse page, kept out of the package,
+                 shows every glyph of the released sets with its
+                 name, under the foundation's profiles, light and
+                 dark. It is the layer's capture fixture, and its
+                 browser tier checks it.
+              9. A fixture build that imports some icons carries
+                 exactly those icons' markup and no other icon's.
+                 The unit tier asserts which icons the output
+                 holds.
+              10. spike-html-hosting-icons v0.1.0 is released as
+                 its release workflow describes, at a BUILD
+                 checkpoint, before the components pin it.
+              11. The components peer the icons layer.
+                 sl-section-tree's Previous and Next show
+                 Octicons arrow-up-16 and arrow-down-16 with
+                 their H and L hints in a kbd. Their accessible
+                 names stay "Previous" and "Next", and the keys
+                 help still lists "Previous section" and "Next
+                 section". sl-drawer's Close shows Octicons
+                 x-16 alone and is still named "Close <label>",
+                 its close slot's text visually hidden. The
+                 README's header snippet shows each glyph's
+                 marker. The components' browser tier and
+                 captures cover each glyph in light and dark,
+                 wide and narrow.
+              12. spike-html-hosting-components v0.4.0 is
+                 released as its release workflow describes, at
+                 a BUILD checkpoint, before the SDK pins it.
+              13. The SDK's build fills every
+                 <svg data-icon="<set>/<name>"> in each page a
+                 site builds, the hand pages and the rendered
+                 pages' shell alike, with that icon's markup from
+                 the icons package, and adds no script. An
+                 unknown name fails the build, naming the page
+                 and the icon. The SDK peers the icons layer.
+              14. The renderer's alert callouts take Octicons
+                 info-16, light-bulb-16, report-16, alert-16 and
+                 stop-16 from the icons package, for note, tip,
+                 important, warning and caution, through
+                 marked-alert's variants. Each glyph is
+                 aria-hidden and focusable="false", the kind
+                 stays visible text, and the SDK's unit tier pins
+                 the markup.
+              15. The template's header buttons show Octicons
+                 list-unordered-16 for Pages, question-16 for
+                 Help and paintbrush-16 for Theme, each with its
+                 kbd hint and its name in aria-label, the word
+                 itself no longer shown. The keys help dialog's
+                 Close shows x-16 with its ? hint and is named
+                 Close. The shell checks assert each glyph and
+                 name, and the keys help still lists P Pages,
+                 ? Help, T Theme. The template pins icons v0.1.0
+                 and components v0.4.0. The scaffold test runs
+                 the copy's full check offline.
+              16. spike-html-hosting-sdk v0.5.0 is released as
+                 its release workflow describes, at a BUILD
+                 checkpoint, before any site pins it. Its
+                 currency reports only the held rolldown.
+              17. The architecture, sqlate and root sites pin
+                 SDK v0.5.0, components v0.4.0 and icons v0.1.0,
+                 and call the SDK workflows at v0.5.0. Every page
+                 template each site builds shows the glyphs of
+                 behavior 15. Every page passes the shell checks,
+                 copied pages pass the crawl, and no page scrolls
+                 sideways at 390px. Each site's currency prints
+                 nothing.
+              18. The prose that org left over 100 columns is
+                 rewrapped: the SDK README's lines on Crawled,
+                 sl-site-index and the drawer, and its crawl
+                 paragraph's early break; the components
+                 README's screenshots line and served.ts's
+                 handler comment.
+              19. The root's README notes the icons layer in
+                 Building the sites, the pins at SDK v0.5.0,
+                 components v0.4.0 and icons v0.1.0 on all three
+                 sites, and names primer/octicons at the commit
+                 whose LICENSE the package copies under
+                 References.
+              20. The session brief shows evidence 12:
+                 - every set available while designing: the
+                   generator run on the fixture set, and the
+                   browse page's captures;
+                 - each build ships only what it uses: for each
+                   site, the icons its built output holds,
+                   counted against the icons its pages name and
+                   against the package's Octicons modules, with
+                   the brotli weight of the glyph markup per
+                   page.
 Test seams    each repository's `mise run check`:
-              - the components' browser tier over fixture sites under
-                their bases on one origin, the org fixture's list and
-                the served ahead module among them
-              - the SDK's unit tier over the renderer's output, the
-                multi-tree record and the alert markup; its crawl and
-                shell checks; the scaffold test
-              - the root's content check, crawl and shell checks on
-                its build under Vite's preview
-Slices        1. Components upgrade: pnpm, eslint-plugin-boundaries
-                 and globals bumped; currency prints nothing, and the
-                 check passes (spike-html-hosting-components)
-              2. Components fetch mode and measure: sl-site-nav's
-                 src; the org fixture list, the served ahead module,
-                 and the skew, convergence, first-paint and failure
-                 cases; captures of the ahead and behind fixture
-                 sites (spike-html-hosting-components)
-              3. Components release: README, version 0.3.0,
-                 CHANGELOG [0.3.0]
-                 → checkpoint 1 (escalation): the architect views
-                   the fixture captures first; the components'
-                   standards and spec reviews run; the architect
-                   accepts the components; their pull request
-                   merges, and the release workflow cuts v0.3.0,
-                   which the record logs this session pushed
+              - the icons layer's unit tier over the generator's
+                output, the licence refusal and the fixture
+                build's contents; its pack test; its browser tier
+                on the browse page
+              - the components' browser tier over the section
+                tree's and the drawer's buttons
+              - the SDK's unit tier over the build-time fill and
+                the alert markup; its shell checks; the scaffold
+                test
+              - each site's shell checks and crawl on its build
+                under Vite's preview
+Slices        1. Components upgrade: mise-action v5.2.7; currency
+                 prints nothing, and the check passes
                  (spike-html-hosting-components)
-              4. SDK several trees: the renderer, provenance record,
-                 content check, page list and crawl over several
-                 trees with one site index; the shell checks' page
-                 URL; marked-alert with site.css callouts; a
-                 template build shown by captures
+              2. SDK upgrade: mise-action v5.2.7 in every
+                 workflow; currency reports only the held
+                 rolldown (spike-html-hosting-sdk)
+              3. Architecture upgrade: SDK v0.4.0, components
+                 v0.3.0, workflows at v0.4.0
+                 (spike-html-hosting-architecture)
+              4. Sqlate upgrade: the same pins
+                 (spike-html-hosting-sqlate)
+              5. Icons repository: created and managed with
+                 marathon, the scaffold with its check, CI,
+                 release workflow at 0.0.0, currency and
+                 standards; the public remote
+                 (spike-html-hosting-icons)
+              6. Icons generator: Octicons modules and
+                 declarations, the licence rule with the
+                 upstream LICENSE, the fixture set, the pack test
+                 and the fixture build's contents
+                 (spike-html-hosting-icons)
+              7. Icons browse page and release: the browse page
+                 and its captures; README, version 0.1.0,
+                 CHANGELOG [0.1.0]
+                 → checkpoint 1 (escalation): the architect
+                   views the browse page's captures first; the
+                   standards and spec reviews run; the architect
+                   accepts; the pull request merges, and the
+                   release workflow cuts v0.1.0, which the record
+                   logs this session pushed
+                 (spike-html-hosting-icons)
+              8. Components glyphs: the icons peer, the section
+                 tree's and the drawer's buttons, the README's
+                 snippet, the 100-column fixes; captures
+                 (spike-html-hosting-components)
+              9. Components release: version 0.4.0, CHANGELOG
+                 [0.4.0]
+                 → checkpoint 2, as checkpoint 1
+                 (spike-html-hosting-components)
+              10. SDK glyphs: the build-time fill with its
+                 unknown-name failure, the alert callouts'
+                 glyphs, the icons peer
                  (spike-html-hosting-sdk)
-              5. SDK release: the template pins components v0.3.0;
-                 the scaffold test green offline; README, version
-                 0.4.0, CHANGELOG [0.4.0]
-                 → checkpoint 2 (escalation): the architect views
-                   the captures first; the SDK's standards and spec
-                   reviews run; the architect accepts the SDK; its
-                   pull request merges, and the release workflow
-                   cuts v0.4.0, which the record logs this session
-                   pushed (spike-html-hosting-sdk)
-              6. Root adopts and renders: the pins and workflow
-                 calls bumped; the two copied trees with their
-                 records; the rendered-page shell; the crawl and the
-                 shell checks on every page (spike-html-hosting)
-              7. Root artifacts: the hand orientation page, the
-                 sitrep entry, sites.json with the nav's src, the
-                 index of every site with its dated list, the README
-                 edits; captures for the two verdicts
-                 (spike-html-hosting)
-              8. Root live: after the deploy, the fetch of
-                 sites.json with its headers, and the stored theme
-                 carrying across the three deployed sites, shown in
-                 the session brief (spike-html-hosting)
-Out of scope  icons of any kind beyond marked-alert's callout glyphs,
-              and the icon set, the glyphs and the icons repository
-              (the icons task); the design review of the three sites'
-              layout (the design task); the architecture and sqlate
-              sites adopting SDK v0.4.0 or components v0.3.0, which
-              the icons task's upgrade slices take; a live fetched
-              nav on any site but the root; a sitreps listing page
-              or feed; a dev-blog skill, sitrep audiences or the
-              marathon-sitrep extension; consolidating the currency
-              script or sl-drawer (recorded for the answer task and
-              the intake); the foundation's lean entry; any change
-              to spike-html-apps-foundation, spike-html-apps-
-              components or spike-html-apps-tooling, or to
-              standards-lab/org or standards-lab/.github (all
-              references); rolldown 1.3.0; a standards-lab.github.io
-              root site
-Door          one-way: spike-html-hosting-components v0.3.0 and
-              spike-html-hosting-sdk v0.4.0, which every later site
-              and scaffold consume, and sites.json at a public URL;
-              two-way: the root's change, which redeploys its pages
-              and reverts by reverting its merge
-Release       spike-html-hosting-components v0.3.0 (released);
-              spike-html-hosting-sdk v0.4.0 (released); the root's live measures (slice 8)
-              run after its merge and are posted on its pull request
+              11. SDK template and release: the template's header
+                 and help dialog glyphs, the shell checks, the
+                 pins at icons v0.1.0 and components v0.4.0, the
+                 scaffold test, the 100-column fixes; README,
+                 version 0.5.0, CHANGELOG [0.5.0]; captures
+                 → checkpoint 3, as checkpoint 1
+                 (spike-html-hosting-sdk)
+              12. Architecture adopts: the three pins and the
+                 workflow calls, the header glyphs, captures
+                 (spike-html-hosting-architecture)
+              13. Sqlate adopts: the same
+                 (spike-html-hosting-sqlate)
+              14. Root adopts and measures: the same on all four
+                 page templates; the README edits; evidence 12's
+                 measure across the three sites for the session
+                 brief (spike-html-hosting)
+Out of scope  names on hover or tooltips for icon-only controls,
+              and the theme button's name and key (the design
+              task); any set but Octicons in a release; glyphs
+              in sl-site-nav, sl-page-header, sl-site-index or
+              copied content; any change to
+              spike-html-apps-foundation, spike-html-apps-
+              components or spike-html-apps-tooling, the theme
+              dialog's heading among them; rolldown 1.3.0;
+              consolidating the currency script, which gains a
+              copy in the icons layer (recorded for the answer
+              task); a prose-width check; the design review of
+              the three sites
+Door          one-way: the new public repository spike-html-
+              hosting-icons and the tags icons v0.1.0,
+              components v0.4.0 and SDK v0.5.0, which every later
+              site and scaffold consume; two-way: the three
+              sites' changes, which redeploy their pages and
+              revert by reverting their merges
+Release       spike-html-hosting-icons v0.1.0;
+              spike-html-hosting-components v0.4.0;
+              spike-html-hosting-sdk v0.5.0
 ```
+
+## Progress
+
+slices 0/14 committed · standards — · spec — · editor —
 
 ## Decisions
 
@@ -897,6 +895,51 @@ Release       spike-html-hosting-components v0.3.0 (released);
 - org: prose left over 100 columns in the released repositories, for the icons task's slices
   there: the SDK README's lines on Crawled, sl-site-index and the drawer, and its crawl paragraph's
   early break; the components README's screenshots line and served.ts's handler comment.
+- icons: Octicons is the default set: GitHub's UI set, MIT, with a glyph for every control, and
+  the alert callouts already draw it. Rejected: Lucide, Tabler, Phosphor.
+- icons: "every set available while designing" is a generator that takes any Iconify set by name,
+  a released list of sets, and a dev-only browse page that is also the layer's capture fixture.
+  Rejected: releasing all 276 sets (about 474k modules); a browse page over @iconify/json (643 MB).
+- icons: the generator accepts only sets whose licence the shipped licence text satisfies (MIT,
+  ISC, Apache-2.0, BSD, CC0-1.0, Unlicense), and the package ships each set's upstream LICENSE
+  with provenance, since Iconify's packages carry none. Rejected: CC-BY, CC-BY-SA and GPL sets.
+- icons: each per-icon module default-exports one complete svg string. Rejected: Iconify's data
+  object, which needs a renderer, as @iconify-icons/* do; a Lit template.
+- icons: the header's Pages, Help and Theme buttons stay hand markup in each page template.
+  Rejected: an sl-* header element, left to the design task.
+- icons: sl-section-tree's Previous and Next show a glyph and their kbd hint, the word their
+  accessible name; sl-drawer's Close is the glyph alone, still named "Close <label>". Rejected: a
+  glyph beside the visible word.
+- icons: the alert callouts take their glyphs from the icons package through marked-alert's
+  variants. Rejected: marked-alert's own strings, which lack focusable="false".
+- icons: spike-html-hosting-icons is a peer of the components and the SDK, pinned by every site.
+  Rejected: a pinned dependency of each.
+- icons: the task releases icons v0.1.0, components v0.4.0, then SDK v0.5.0, each at a BUILD
+  checkpoint where the architect views captures before the standards and spec reviews; the
+  architecture, sqlate and root sites adopt after.
+- icons: org's prose over 100 columns is rewrapped by hand. Rejected: a prose-width check, which
+  tables, URLs and code would need exempting from.
+- icons: every glyph uses Octicons' 16px grid. Rejected: 24px.
+- icons: Pages is Octicons list-unordered. Rejected: book, sidebar-expand.
+- icons: Help is Octicons question.
+- icons: Theme is Octicons paintbrush, since the dialog sets palette, spacing and type as well as
+  the scheme. Rejected: sun and moon.
+- icons: the section tree's Previous and Next are Octicons arrow-up and arrow-down. Rejected:
+  chevrons, which read as expand and collapse.
+- icons: the drawer's Close is Octicons x.
+- icons: the alert callouts keep GitHub's glyphs: info, light-bulb, report, alert and stop.
+- icons: v0.1.0 releases Octicons alone; a set joins with its devDependency and a minor release.
+  Rejected: Octicons with Lucide.
+- icons: an SDK build step fills <svg data-icon="<set>/<name>"> in every page a site builds and
+  fails on an unknown name. Rejected: SVG pasted into each page template by hand.
+- icons: the keys help dialog's Close shows Octicons x with its ? hint, named Close. Rejected:
+  text as before.
+- icons: names on hover for icon-only controls go to the design task. Rejected: the title
+  attribute, which never shows on keyboard focus or touch; a tooltip of our own, which needs
+  script in Safari until it ships popover="hint" and must meet WCAG 1.4.13.
+- icons: the theme button keeps its name, Theme, and its key, T: the foundation's dialog heading
+  is "Theme" and its Save is T. The name and key are weighed in the design task. Rejected:
+  Settings or Appearance now.
 
 ## Pending edits
 
@@ -986,3 +1029,18 @@ Release       spike-html-hosting-components v0.3.0 (released);
   deployed sites. That evidence exists only after SHIP merges the root, while the session brief
   that authorizes the merge is meant to show it. The brief format has no step for evidence
   gathered after the merge.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.icons`: in place of the pending
+  new-task summary, the task as planned: spike-html-hosting-icons, a generator that takes any
+  Iconify set by name through @iconify/utils, releasing Octicons alone at v0.1.0 as per-icon svg
+  string modules, with a dev-only browse page; licence-text sets only, each shipping its upstream
+  LICENSE; a peer of the components and the SDK; an SDK build step that fills
+  <svg data-icon="<set>/<name>">; glyphs on the header, the help dialog's Close, the section tree,
+  the drawer's Close and the alert callouts; releases icons v0.1.0, components v0.4.0 and SDK
+  v0.5.0, adopted by all three sites. Evidence 12.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.design`: the summary adds the
+  theme button's name (Theme, Settings or Appearance) and key, weighed with the foundation's
+  dialog heading; and names on hover for icon-only controls. Each goes to the intake as a
+  foundation change if the foundation must change.
+- coordinator · references.toml and references.local.toml: add primer/octicons
+  (`https://github.com/primer/octicons.git`), read at the commit whose LICENSE
+  spike-html-hosting-icons copies.

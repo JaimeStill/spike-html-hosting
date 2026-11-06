@@ -29,8 +29,8 @@ its own docs/ guide.
    report, correct under its `/<repo>/` base path.
 3. The architecture stand-in: its pages rendered with their front matter, relative `.md` links
    resolved across the site.
-4. The sqlate stand-in: its README index and docs/ guide with the section tree (bracketed key
-   hints, reading progress, arrow-key scrolling).
+4. The sqlate stand-in: its README index and docs/ guide with the section tree (key hints in
+   `kbd`, reading progress, and H and L section keys that leave the arrow keys to scrolling).
 5. Shared navigation on every site that stays correct when one site deploys ahead of the
    others, with build-time-by-tag measured against fetched-at-runtime.
 6. One baseline pin, with the reader's stored theme carrying across sites on the shared origin.
@@ -96,8 +96,8 @@ The tasks, in the order they run; each cites the evidence it proves.
     than a shell to fill: it loads the components' site nav and the keys help dialog, and leaves
     out the Pages button, its drawer, and the components' other modules. `vite.config.ts` runs no
     `markdownPages` and keeps appType `mpa`. The browser test runs the shell checks alone, with no
-    crawl. `mise.toml` has no unit tier, since the root copies no Markdown tree to check. The capture file lists the index alone. Its
-    `.gitignore` keeps marathon's working files.
+    crawl. `mise.toml` has no unit tier, since the root copies no Markdown tree to check. The
+    capture file lists the index alone. Its `.gitignore` keeps marathon's working files.
 - Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
   `name`. Every shell links `site.css` by its package export,
   `@jaimestill/spike-html-hosting-sdk/site.css`, and Vite bundles it into the entry's sheet.
@@ -120,6 +120,11 @@ The tasks, in the order they run; each cites the evidence it proves.
   Currency moves each pin to its latest release, and pnpm's default one-day wait fails a frozen
   install of a lockfile that pins a release under a day old. Reading each release's notes before
   its bump lands stands in for the wait.
+- spike-html-hosting-components' `sl-site-nav` holds the list of sites, built into each release,
+  so adding a site is a components release that every site takes by moving its pin. This list is
+  the build-time-by-tag side of evidence 5, which the `org` task measures against a list fetched
+  at runtime. A layer that names its consumers breaks the architecture's downward-dependencies
+  principle; the spike accepts that exception until the `org` task's measure settles it.
 - Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the shell checks look for that sheet in `document.adoptedStyleSheets`.

@@ -69,7 +69,8 @@ Behaviors     1. The components layer builds as a library on the
                  scrolls sideways. Where the tree's column doesn't
                  fit, the tree shows as a sticky bar at the top of
                  the viewport holding only the progress and the
-                 [H] and [L] buttons, its section links hidden.
+                 Previous and Next buttons, its section links
+                 hidden.
               4. The section tree's reading progress follows the
                  page's scroll through a CSS scroll timeline, with
                  no script drawing it. In an engine without scroll
@@ -140,7 +141,7 @@ Behaviors     1. The components layer builds as a library on the
                  The shell checks add the 390px check. The 1600px
                  check still holds main to a centered reading
                  width.
-              14. The SDK's template shell loads components v0.1.0
+              14. The SDK's template shell loads components v0.2.2
                  by tag, so a scaffolded site shows all four
                  components. The scaffold test still runs the
                  copy's full check offline.
@@ -152,14 +153,14 @@ Behaviors     1. The components layer builds as a library on the
                  CHANGELOG [0.3.0] lists them. SDK v0.3.0 is
                  released as its release workflow describes, at a
                  BUILD checkpoint before the sites adopt it.
-              17. The architecture and sqlate sites pin SDK v0.3.0
+              17. The architecture and sqlate sites pin SDK v0.3.1
                  and components v0.2.2, and call the SDK workflows
-                 at v0.3.0. They take the v0.3.0 template shell
+                 at v0.3.1. They take the v0.3.1 template shell
                  with its provenance and keep their adaptations.
                  They build the same pages at the same paths, pass
                  their checks, print only the held rolldown from
                  currency, and deploy.
-              18. The root pins SDK v0.3.0 and components v0.2.2,
+              18. The root pins SDK v0.3.1 and components v0.2.2,
                  and its page gains sl-site-nav, the Help button
                  and the keys help dialog only; the page is
                  otherwise unchanged. It passes its check, including
@@ -263,7 +264,7 @@ Release       spike-html-hosting-components v0.1.0 (released);
 
 ## Progress
 
-slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change: components c446ff5, standards 2330eb1, spec no gaps, PR #6 merged 190dbac, v0.2.2 released by this session (release run 42149691751, tag v0.2.2) · SDK d5116e3 (v0.2.2, no brackets), standards d2b18d8 1351912, spec: pnpm drift closed 8e1e11b; sdk PR #4 merged dfbb2d7, v0.3.0 released by this session (release run 42151094511, tag v0.3.0) · slice 7: architecture 0afdad7 355edd8; slice 8: sqlate abc7a56; slice 9: root 0794801 · standards: root 4f2d603, sqlate cf1ee7f · spec: short-page drop fixed (sdk be4fc9d a54dead, standards 1082cdf, spec no gaps), Theme hint e5be0e2 (standards 21ece9a, spec no gaps), as v0.3.1; sdk PR #5 merged 1c1d552, v0.3.1 released by this session (release run 42214089393, tag v0.3.1); sites pinning v0.3.1; brief captures in scratchpad/brief-shots · editor —
+slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the held rolldown 1.3.0; slice 2: components 99824f7; slice 3: components 1d80e17; slice 4: components d0aedb7; slice 5: sdk 96f5602, f294385; slice 6: sdk f6668fc) · checkpoint 1: standards (73735bd, 6b45161, 4b4fc9e), spec gaps closed (1d34fc9), components PR #3 merged d4bbbd5, v0.1.0 released by this session (release run 42096936848, tag v0.1.0) · checkpoint 2: standards (sdk aadb81e), spec no gaps, weak spot closed (sdk 1c5c56e), redirected: slices 6a, 6b · slice 6a: components cd86f3f, fd3bf72, 4127991 (v0.2.0), standards dbc0377, spec no blocking gaps, d627f53; PR #4 merged 70a1122, v0.2.0 released by this session (release run 42122025990, tag v0.2.0) · slice 6b: sdk 31dfe4a, f5a9826, standards 4e74795 f875ca6, spec 2 gaps: SDK fixed (58e09e3, acb1ec8), components v0.2.1 6a2a0b7, standards 624bd84 968ca69, spec no gaps, refinements 7810d55 c6a5cf5, standards 208ae31, spec no gaps; PR #5 merged 646b864, v0.2.1 released by this session (release run 42133877521, tag v0.2.1) · SDK pins v0.2.1 (3d6c971), checkpoint 2 accepted with the no-brackets change: components c446ff5, standards 2330eb1, spec no gaps, PR #6 merged 190dbac, v0.2.2 released by this session (release run 42149691751, tag v0.2.2) · SDK d5116e3 (v0.2.2, no brackets), standards d2b18d8 1351912, spec: pnpm drift closed 8e1e11b; sdk PR #4 merged dfbb2d7, v0.3.0 released by this session (release run 42151094511, tag v0.3.0) · slice 7: architecture 0afdad7 355edd8; slice 8: sqlate abc7a56; slice 9: root 0794801 · standards: root 4f2d603, sqlate cf1ee7f · spec: short-page drop fixed (sdk be4fc9d a54dead, standards 1082cdf, spec no gaps), Theme hint e5be0e2 (standards 21ece9a, spec no gaps), as v0.3.1; sdk PR #5 merged 1c1d552, v0.3.1 released by this session (release run 42214089393, tag v0.3.1); sites pin v0.3.1 (architecture 20bf0f1, sqlate 3a7a1ea, root d4d8eb5); brief captures in scratchpad/brief-shots · editor done; components and SDK docs on main flagged
 
 ## Decisions
 
@@ -589,219 +590,196 @@ slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the he
   principle.
 - highlighting: the components task adds pnpm-workspace.yaml with `minimumReleaseAge: 0` to
   spike-html-hosting-components, as the SDK's template has it.
-- components: the SDK joins the task: its Markdown renderer makes the section tree, page header,
-  and site index's data at build, from the heading ids getHeadingList() gives, the parsed front
-  matter, and every page's path and title, and SDK v0.3.0 releases at a BUILD checkpoint before
-  the sites adopt. Rejected: components building it in the browser from each page's DOM; tocbot
-  4.36.8, which rebuilds the heading list and adds no keys or progress.
-- components: the components are Lit 3.3.3 elements with a shadow root, adopting the
-  foundation's reset and elements sheets before a layout-only sheet, the stack's convention
-  (spike-html-conventions' answer 4), as spike-html-apps-components has them. Rejected: plain
-  light-DOM custom elements on the foundation's dom.js.
+- components: the SDK joins the task. Its Markdown renderer makes the section tree's, page
+  header's, and site index's data at build, from the heading ids getHeadingList() gives, the parsed
+  front matter, and every page's path and title. Rejected: the components building it in the
+  browser from each page's DOM; tocbot 4.36.8, which rebuilds the heading list and adds no keys or
+  progress.
+- components: the renderer hands off real HTML inside each element (nested lists of links for the
+  section tree and site index, a description list for the header), which the element slots and
+  enhances, so every page reads and links with no script and the crawl follows its links. A table
+  region is named "Table: <header cells>", or "Table" when every header cell is empty; tree labels
+  come from the heading tokens' text, since getHeadingList()'s raw text drops &; a front-matter
+  sequence or mapping shows as text joined by ", "; site-index links are relative to each page.
+  Rejected: a JSON block each element renders from.
+- components: the renderer writes div.section-tree before main, sl-page-header opening main
+  (always written, empty with no front matter), and the site index inside sl-drawer (label Pages,
+  id pages) after main, so reading and keyboard order match the page and the narrow bar sticks to
+  the viewport. Divs, not asides: the components carry their own named nav landmarks. Supersedes
+  slice 5's order, both panels after main so a reader reached the text first.
+- components: the components are Lit 3.3.3 elements with a shadow root and the stack's sl- prefix,
+  as the foundation's sl-theme-menu and spike-html-apps-components' elements are. Each adopts the
+  foundation's reset and elements sheets, then a sheet of its own holding its layout and its own
+  state marks, from foundation color tokens (the progress track and bar, sl-site-nav's current
+  link), since a shadow root's parts can't be styled from the page (spike-html-conventions' answer
+  4; the state marks settled at checkpoint 1). Rejected: plain light-DOM custom elements on the
+  foundation's dom.js; every color in the page's sheet through ::part().
 - components: spike-html-hosting-components' toolchain is copied with provenance from
   spike-html-apps-components: tsc emit build, ESLint, Prettier, a unit tier, and a browser tier on
-  spike-html-apps-tooling v0.3.0 in chrome-headless-shell 157.0.8103.38, ending the lint-only
-  check of "layers: spike-html-hosting-components' check is shellcheck, actionlint, and Prettier
-  until its first component". Rejected: the site SDK's ESLint, tsconfig, and Prettier exports,
-  which check a Vite site's build and peer vite.
-- components: the site index is every page of the current site, shown on each of its pages.
-  Rejected: the org stand-in's index of every site, which the org task writes as content.
-- components: cross-site navigation's list of sites ships in the components release, the
-  build-time-by-tag form org measures against fetched-at-runtime; a new site is a components
-  release. Rejected: the list written into each site's shell.
-- components: the page header shows every front-matter key and value in source order, in place
-  of the front-matter table; a page with none shows no fields. Supersedes "content: front matter
-  shows as a key/value table above the page; the title comes from name, else the first h1." as to
-  the table; the title rule stands. Rejected: the header above the table, which shows each key
-  twice.
-- components: (superseded at checkpoint 1) Left and Right arrows move to the previous and next section, shown as bracketed [←]
-  and [→] key hints and bound through the foundation's keys.js; Up and Down stay the browser's
-  scrolling. Rejected: digits 1-9 per entry, which reach only nine of sqlate quick-start's 13
-  sections.
+  spike-html-apps-tooling v0.3.0 in chrome-headless-shell 157.0.8103.38. Supersedes "layers:
+  spike-html-hosting-components' check is shellcheck, actionlint, and Prettier until its first
+  component". Rejected: the site SDK's ESLint, tsconfig, and Prettier exports, which check a Vite
+  site's build and peer vite.
+- components: the section tree nests h2 and h3. Rejected: h2 only; sqlate's features page uses its
+  11 h3 as package sections.
+- components: (superseded at checkpoint 1 by the H and L line below) Left and Right arrows move to
+  the previous and next section, shown as bracketed [←] and [→] hints. Rejected then: digits 1-9
+  per entry, which reach only nine of sqlate quick-start's 13 sections.
+- components: H and L move to the previous and next stop through the foundation's keys module, so
+  its help dialog lists them and its off switch turns them off; every arrow stays the browser's
+  scrolling. The page's top is a stop and the moves wrap: L past the last section goes to the top,
+  H from the top to the last section. At checkpoint 1 the spec review found the keys module cancels
+  every key a binding matches and its off switch covers character keys only, so bound arrows
+  hijacked sideways scrolling in code blocks and table regions and stayed live with keys off; the
+  wrap came with the checkpoint 2 redirect. Rejected: the arrows, kept with the element unbinding
+  them by focus and setting; P and N, which left H free for a later Home key; the top as a stop
+  with H and L stopping at each end. The wrap retires checkpoint 1's note that a later Home key
+  takes a sequence such as G H.
+- components: a move counts from the last stop H or L reached until the reader scrolls, and a
+  followed tree link, or any fragment change to a heading the tree lists (a link elsewhere, a
+  script, history), makes that section the held stop; a page loaded with a fragment is marked by
+  the reading line. A move ends on a run of still frames when no scrollend comes, since Safari 26,
+  within the browser floor, may not fire it. The 2px landing tolerance stays, untested, as
+  insurance against fractional scaling. Components v0.2.1, from checkpoint 2's spec review (moves
+  skipping or stalling on sections shorter than the reading line's distance) and standards review
+  (scrollend). Rejected: releasing on v0.2.0 and fixing later.
+- components: every key hint is a kbd alone, with no brackets: the section tree's Previous and
+  Next (components v0.2.2) and the shells' Pages, Help, Theme and Close buttons (SDK v0.3.0, the
+  Theme button's T in v0.3.1). The kbd already reads as a shortcut (the architect, accepting
+  checkpoint 2; the Theme hint the architect noticed on the sites). The keys help check fails any
+  header control that binds a key without showing it. The noctis palette fixture's lone Theme
+  button stays as it is, since no keys help check runs on it. Supersedes the bracketed [H] [L] of
+  checkpoint 1 and the brief's "bracketed key hints".
 - components: reading progress is drawn by a CSS scroll timeline with no script, and an
-  IntersectionObserver marks the section in view; Firefox 147-158, within the stack's floor,
-  shows no progress. Rejected: a script tracking the scroll position.
-- components: a table wider than the column scrolls inside its own keyboard-focusable region, as
-  code blocks do, held by a 390px check on every page; measured on 2026-11-05 at main, the
-  architecture index (426px), architecture standards/go-elemental/ (392px), and sqlate
-  docs/features.html (623px) scrolled sideways. Rejected: wrapping cells, which breaks code names
-  such as errors.Is.
+  IntersectionObserver marks the section in view; Firefox 147-158, within the stack's floor, shows
+  no progress. Rejected: a script tracking the scroll position.
+- components: below the tree's dock the section tree is a sticky bar at the top of the viewport
+  holding only the progress and the Previous and Next buttons, its links hidden: on a narrow screen
+  the links aren't critical (the architect's direction, at the checkpoint 2 redirect).
+  sl-section-tree takes `dock` (70rem by default, exported as DOCK), read in a media query as
+  sl-drawer reads its own, and switches through a custom state, so with no script the list renders
+  inline at every width; at the top no section is current, so L from the top lands on the first.
+  Rejected: the tree stacked after the page; a second "Sections" drawer, which the copied drawer
+  can't open from the inline-end edge; the tree inside the Pages drawer.
+- components: the page header shows every front-matter key and value in source order, in place of
+  the front-matter table; a page with none shows no fields. Supersedes "content: front matter shows
+  as a key/value table above the page" as to the table; the title rule stands. Rejected: the
+  header above the table, which shows each key twice.
+- components: the site index is every page of the current site, nested by directory, each by its
+  title, a directory with an index page labeled by that page's title. sl-site-index is the one
+  writer of the current page's aria-current, at runtime, so one rendered list serves every page of
+  a site. Rejected: the org stand-in's index of every site, which the org task writes as content;
+  one flat list by title; the renderer writing the mark.
+- components: sl-drawer is copied with provenance from spike-html-apps-components into
+  spike-html-hosting-components, as the toolchain was, so the sites stay on the foundation and
+  their own components layer; drawer.css keeps the reference's non-token values (100%, 100dvh, the
+  200ms slide, 1px, --line-s, --radius-md), and the lengths test holds that one sheet to exactly
+  them. The site index's drawer opens from a "Pages" header button with the P key. Rejected:
+  spike-html-apps-components v0.3.0 as a dependency, with its marked dependency and another spike's
+  pin; "Documents" with D, as spike-html-apps has it, since these sites list pages.
+- components: cross-site navigation's list of sites ships in the components release, the
+  build-time-by-tag form the org task measures against fetched-at-runtime; a new site is a
+  components release. Links are root-relative, /<repo>/, which resolve on the shared Pages origin
+  and in the two-base local test. sl-site-nav renders nothing with no script, which behavior 2
+  exempts. Naming the three sites, its dependents, is this spike's accepted exception to the
+  architecture's downward-dependencies principle (checkpoint 1's standards review), which the org
+  task's measure settles. Rejected: the list written into each site's shell, or no-script fallback
+  links there (the hand-edited copies round 1 rejected); absolute
+  https://jaimestill.github.io/<repo>/ links; moving the list to the consumers now, which removes
+  the measure's build-time-by-tag side.
+- components: a table wider than the column scrolls inside its own named, keyboard-focusable
+  region, as code blocks do, which the renderer writes, since focus needs markup, and site.css
+  styles; a 390px check on every page holds it. At main before the task, the architecture index
+  (426px), architecture standards/go-elemental/ (392px), and sqlate docs/features.html (623px)
+  scrolled sideways. Rejected: wrapping cells, which breaks code names such as errors.Is; site.css
+  alone, which can't make a table focusable.
 - components: the stored theme across sites is proven by a components browser test serving two
   fixture sites under two bases on one local origin, and shown live on the deployed sites in the
   session brief. Rejected: the live capture alone; each site's own preview is its own origin.
-- components: the section tree nests h2 and h3. Rejected: h2 only; sqlate's features page uses
-  its 11 h3 as package sections.
-- components: held rolldown at 1.2.16: Vite 8.3.6, the latest, depends on rolldown ~1.2.16, and
-  rolldown 1.3.0's notes say Vite 8.3.6 and earlier can't run it.
-- components: the SDK's template shell loads components v0.1.0 by tag, so the release order is
-  components v0.1.0, then SDK v0.3.0, then the architecture, sqlate, and root sites, at two BUILD
-  checkpoints. Rejected: an unchanged template shell, with the components a per-site adaptation.
-- components: the renderer hands off real HTML inside each element (nested lists of links for the
-  section tree and site index, a description list for the header), which the element slots and
-  enhances, so every page reads and links with no script and the crawl follows its links.
-  Rejected: a JSON block each element renders from.
-- components: the renderer wraps each body table in a named, focusable scrolling region, since
-  focus needs markup, and site.css styles it. Rejected: site.css alone, which can't make a table
-  focusable.
-- components: the site index nests the current site's pages by directory, each by its title, a
-  directory with an index page labeled by that page's title, the current page aria-current.
-  Rejected: one flat list by title.
-- components: cross-site links are root-relative, /<repo>/, which resolve on the shared Pages
-  origin and in the two-base local test. Rejected: absolute https://jaimestill.github.io/<repo>/.
-- components: the root takes cross-site navigation only; its page has no front matter and one
-  heading until org. Rejected: the page header and section tree on its placeholder page.
-- components: the components take the stack's sl- prefix, as the foundation's sl-theme-menu and
-  spike-html-apps-components' elements do.
-- components: checkpoint 1: H and L move between sections, with [H] [L] hints, character keys the
-  foundation's off switch and help dialog already handle; every arrow stays the browser's
-  scrolling. The spec review found the foundation's keys module cancels every key a binding
-  matches and its off switch covers character keys only, so bound arrows hijacked sideways
-  scrolling in code blocks and table regions and went dead with keys off. Supersedes the arrows.
-  Rejected: P and N, which leave H free for a later Home key; arrows kept with the element
-  unbinding them by focus and setting. H is now taken; a later Home key takes a sequence such as
-  G H.
-- components: checkpoint 1: sl-site-nav, whose list the components release holds, renders nothing
-  with no script; behavior 2 exempts it. Rejected: no-script fallback links in every site's shell,
-  the hand-edited copies round 1 rejected.
-- components: checkpoint 1: sl-site-nav naming the three sites, its dependents, is this spike's
-  accepted exception to the architecture's downward-dependencies principle (standards review);
-  the org task's measure of build-time-by-tag against fetched-at-runtime settles it. Rejected:
-  moving the list to the consumers now, which removes the measure's build-time-by-tag side.
-- components: checkpoint 1: a component's own sheet holds its layout and its own state marks, from
-  foundation color tokens (the progress track and bar, sl-site-nav's current link), since a shadow
-  root's parts can't be styled from the page. Rejected: every color in the page's sheet through
-  ::part().
-- components: checkpoint 1 closes on these answers: once the fixes land and both reviews pass
-  again, the components merge and the release workflow cuts v0.1.0 without another stop.
-- components: sl-site-index is the one writer of the current page's mark, at runtime, so one
-  rendered list serves every page of a site; the renderer writes no mark.
-- components: v0.1.0 released at checkpoint 1 by this session: spike-html-hosting-components PR #3
-  merged as d4bbbd5, and its release run 42096936848 cut v0.1.0.
-- components: the template shell's components wiring moved from slice 6 into slice 5: the
-  screenshots tool waits for every hyphenated tag to be defined, so the renderer's sl-* markup needs
-  the shells to load components v0.1.0 in the same slice. Slice 6 is the v0.3.0 release
-  preparation alone. No behavior changed.
-- components: the SDK and its template pin components v0.1.0 as a dev dependency, since no SDK module
-  imports it; the shells load the four modules render-blocking after the foundation's, with
-  sl-site-nav in the header beside the Theme button.
-- components: renderBlocking groups every module a page loads statically into one chunk (rolldown
-  codeSplitting group "index", tags $initial), keeping one module script per page once the keys
-  module's dynamic help-dialog import split Vite's preload helper into its own chunk; the theme
-  menu and the keys help stay lazy chunks.
-- components: the renderer still fills only title and main: sl-page-header opens main, always
-  written, empty with no front matter; div.section-tree (left out with no h2 or h3) and
-  div.site-index follow main, so a reader reaches the text first. At 70rem and wider site.css lays
-  the body out as three columns with main centered at 80ch and the panels sticky; narrower, they
-  stack after main. Divs, not asides: the components carry their own named nav landmarks.
-- components: a table region is named "Table: <header cells>", or "Table" with every header cell
-  empty; tree labels come from the heading tokens' text, since getHeadingList()'s raw text drops
-  &; a front-matter sequence or mapping shows as text joined by ", "; site-index links are relative
-  to each page.
-- components: the crawl keeps its restart from content.json and its unreachable result as a guard,
-  though every page's site index now reaches every page; removing it would change the crawl
-  beyond this task (standards review).
+- components: each side column docks only where it fits, at a minimum of 16rem beside main's 80ch,
+  measured in the pinned shell: three columns at 86rem and wider; from 70rem the section tree
+  docked and the site index in the Pages drawer; below 70rem one column with the tree's sticky bar.
+  The renderer writes both widths as each element's dock, exported as docks, and a unit test holds
+  site.css to them. sl-drawer keeps the reference's 48rem default. Navigation text never breaks
+  mid-word, though a hyphenated compound may wrap after its hyphen, the words on each side whole.
+  Supersedes the v0.2.0 estimate of about 88rem for both docks. Rejected: three columns from 70rem,
+  cramped at about 1400px (the architect, at the redirect); treating a wrap after a hyphen as a
+  mid-word break, which would widen the side columns or move the 86rem dock.
+- components: the SDK's shell checks and crawl hold the layout: fitsNarrowWidth (no sideways
+  scroll at 390px); keepsNavigationWords (at 390, 1119, 1120, 1375, 1376 and 1400px, no
+  navigation word across lines, no docked side column under 16rem); holdsBetweenDocks (main
+  centered at 1200px on a page with no section tree); startsUnderHeader (main's gap under the
+  header, or the sticky bar at 390px, the same on the page as built and made taller than the
+  viewport, so no margin, row or alignment rule is restated in the check; not bounded absolutely,
+  since a gap the same on every page is the captures' and the design review's to catch); and
+  opensKeysHelp ("?" opens it, it lists exactly the page's bindings, and the off switch stops L
+  and P). definesEveryElement fails a page holding an undefined custom element, naming the tags, so
+  a shell missing a component module fails the check instead of hanging the screenshots tool's
+  whenDefined() wait (checkpoint 1's spec weak spot, sdk 1c5c56e).
+- components: the shells carry a "Help" button with its ? hint and the foundation's keys help
+  dialog, after its demo/keys.html (18e0c55); Pages, Help, Theme and Close take aria-labels, since
+  the help module would name a row from the text with its kbd hint removed. Checkpoint 2's spec
+  review found no help dialog in the shells, so readers couldn't see H, L, P and T or reach the off
+  switch, and main off-center between 70rem and 84rem on pages with no section tree; both fixed in
+  SDK v0.3.0.
 - components: the crawl computes the header's expected dd text with the renderer's exported
-  frontMatterText; the unit tier pins pageHeader's exact output, so a formatting bug there still
-  fails (standards review).
-- components: the shell checks and the crawl fail on any page holding an undefined custom element,
-  naming the tags, so a shell missing a component module fails the check instead of hanging the
-  screenshots tool's whenDefined() wait (spec review's weak spot; sdk 1c5c56e).
-- components: checkpoint 2 redirect: the architect's look at the local builds found the three
+  frontMatterText, and the unit tier pins pageHeader's exact output, so a formatting bug there
+  still fails. The crawl keeps its restart from content.json and its unreachable result as a guard,
+  though every page's site index now reaches every page; removing it would change the crawl beyond
+  this task (standards reviews).
+- components: the SDK and its template pin components as a dev dependency, since no SDK module
+  imports it. The shells load the components' modules render-blocking after the foundation's, with
+  sl-site-nav at the header's start. renderBlocking groups every module a page loads statically
+  into one chunk (rolldown codeSplitting group "index", tags $initial), so a page keeps one module
+  script once the keys module's dynamic help-dialog import split Vite's preload helper into its own
+  chunk; the theme menu and the keys help stay lazy chunks.
+- components: the root takes sl-site-nav, the Help button and the keys help dialog only, since its
+  shell runs the shell checks; its page has no front matter and one heading until org. Rejected:
+  the page header and section tree on its placeholder page.
+- components: held rolldown at 1.2.16: Vite 8.3.6, the latest, depends on rolldown ~1.2.16, and
+  rolldown 1.3.0's notes say Vite 8.3.6 and earlier can't run it. The SDK and its template pin pnpm
+  12.18.0, whose notes add pnpr registry, agent-skill and outdated features the SDK doesn't use, so
+  the SDK's currency reports only the held rolldown. The three sites' currency prints nothing: the
+  hold is the SDK's own pin and no site pins rolldown, so behavior 17's "only the held rolldown"
+  holds with no line at all.
+- components: the release order is components, then the SDK, then the architecture, sqlate and
+  root sites, each release at a BUILD checkpoint before its consumers pin it. The template shell's
+  components wiring moved from slice 6 into slice 5, since the screenshots tool waits for every
+  hyphenated tag to be defined; slice 6 became the v0.3.0 release preparation alone. Rejected: an
+  unchanged template shell, with the components a per-site adaptation.
+- components: the checkpoint 2 redirect: the architect's look at the local builds found the three
   columns cramped at about 1400px, the site index breaking words mid-word, and H unable to return
-  to the top. The fixes ship as components v0.2.0 at a reopened checkpoint 1, and SDK v0.3.0, not
-  yet released, pins it. Rejected: holding the fixes for a later task.
-- components: H and L cycle through every stop, the top of the page one of them: L past the last
-  section goes to the top, H from the top to the last section. Rejected: the top as a stop with
-  H and L stopping at each end. This retires the checkpoint 1 note that a later Home key takes a
-  sequence: there is no Home key to plan for.
-- components: sl-drawer is copied with provenance from spike-html-apps-components into
-  spike-html-hosting-components, as the toolchain was, so the sites stay on the foundation and
-  their own components layer. Rejected: spike-html-apps-components v0.3.0 as a dependency, with
-  its marked dependency and another spike's pin.
-- components: the site index's drawer opens from a "Pages" header button with the P key.
-  Rejected: "Documents" with D, as spike-html-apps has it; these sites list pages.
-- components: at narrow widths the section tree is a sticky bar at the top of the viewport holding
-  only the progress and the [H] and [L] buttons, its section links hidden: while reading on a
-  narrow screen the links aren't critical (the architect's direction). Rejected: the tree stacked
-  after the page; a second "Sections" drawer, which the copied drawer can't open from the
-  inline-end edge; the tree inside the Pages drawer.
-- components: each side column docks only where it fits, at a minimum of about 16rem, and
-  navigation text never breaks mid-word (decided as a fact with the redirect).
-- components: v0.2.0's sl-section-tree takes `dock` (70rem by default, exported as DOCK), read in a
-  media query as sl-drawer reads its own, and switches to the sticky bar below it through a custom
-  state, so with no script the list renders inline at every width; at the top of the page no
-  section is current, so L from the top lands on the first section. sl-drawer keeps the
-  reference's 48rem default; the SDK sets both to the width where its centered three columns fit
-  (about 88rem).
-- components: drawer.css keeps the reference's non-token values (100%, 100dvh, the 200ms slide,
-  1px, --line-s, --radius-md), and the lengths test holds that one sheet to exactly them.
-- components: v0.2.0 released at the reopened checkpoint 1 by this session: spike-html-hosting-components
-  PR #4 merged as 70a1122, and its release run 42122025990 cut v0.2.0.
-- components: the SDK's layout docks each side column only where it fits, measured in the pinned
-  shell: three columns (16rem minimum each beside main's 80ch) at 86rem and wider; the section tree
-  docked beside main with the site index in the Pages drawer from 70rem; one column below 70rem,
-  with the tree's sticky bar. The renderer writes both lengths as each element's dock, exported as
-  docks, and a unit test holds site.css to them.
-- components: the renderer now writes div.section-tree before main, so reading and keyboard order
-  match the page and the bar sticks to the viewport; this reverses slice 5's main-first order. The
-  site index is written inside sl-drawer (label Pages, id pages) after main.
-- components: keepsNavigationWords, in the shell checks and the crawl at 390, 1119, 1120, 1375,
-  1376 and 1400px, fails on a navigation word rendered across lines, or a docked side column under
-  16rem; a hyphenated compound may wrap after its hyphen, a line break between its halves.
-- components: checkpoint 2: the spec review found H and L skipping or stalling on real pages: after a
-  move to a section shorter than the distance to the reading line, v0.2.0 moved the mark to the
-  next section and counted the next move from there. Fixed as components v0.2.1, a patch: each
-  move counts from the last stop H or L reached until the reader scrolls, tested on sections
-  shorter than a screen; SDK v0.3.0 pins v0.2.1. Rejected: releasing on v0.2.0 and fixing later.
-- components: checkpoint 2: a hyphenated compound in navigation may wrap after its hyphen; the
-  words on each side stay whole. Rejected: treating it as a mid-word break, which would widen the
-  side columns or move the 86rem dock point.
-- components: checkpoint 2: the spec review found main off-center between 70rem and 84rem on pages
-  with no section tree, and no keys help dialog in the site shells, so readers couldn't see H, L,
-  P and T or reach the off switch; both fixed in the SDK.
-- components: the SDK's shell checks and crawl assert main centered at 1200px on a page with no
-  section tree (holdsBetweenDocks) and the keys help: "?" opens it, it lists exactly the page's
-  bindings, and the off switch stops L and P (opensKeysHelp). The shells carry a "Help [?]" button
-  and the foundation's help dialog, after its demo/keys.html (18e0c55); Pages, Help and Close take
-  aria-labels, since the help module would name a row from the text with its kbd hint removed. The
-  root's shell, which runs the shell checks, adds the Help button and dialog when it adopts.
-- components: v0.2.1: a followed tree link, and any fragment change to a heading the tree lists (a
-  link elsewhere, a script, history), makes that section the held stop, as an H or L move to it
-  would; a page loaded with a fragment is marked by the reading line, so clicking a short section's link marks that section (spec review). And a move ends on a
-  run of still frames when no scrollend comes, since Safari 26, within the browser floor, may not
-  fire it (standards review). Kept: the 2px landing tolerance, untested, as insurance against
-  fractional scaling.
-- components: v0.2.1 released at checkpoint 2 by this session: spike-html-hosting-components PR #5
-  merged as 646b864, and its release run 42133877521 cut v0.2.1.
-- components: checkpoint 2 accepted, with one change: key hints render in kbd alone, without the
-  brackets around them, on the section tree's buttons and on the shells' Pages, Help and Close
-  buttons; the kbd already reads as a shortcut (the architect). Ships as components v0.2.2, a
-  patch, which SDK v0.3.0 pins; then v0.3.0 releases and the three sites adopt with no further
-  stop until the session brief.
-- components: v0.2.2 released by this session: spike-html-hosting-components PR #6 merged as
-  190dbac, and its release run 42149691751 cut v0.2.2.
-- components: the SDK and its template pin pnpm 12.18.0, released on the task's day (12.17.0 on
-  2026-10-30); its notes add pnpr registry, agent-skill and outdated features this SDK doesn't use,
-  so nothing adapts, and currency reports only the held rolldown again (spec review).
-- components: SDK v0.3.0 released at checkpoint 2 by this session: spike-html-hosting-sdk PR #4
-  merged as dfbb2d7, and its release run 42151094511 cut v0.3.0.
-- components: the three sites' currency prints nothing: the rolldown hold is the SDK's own pin, and
-  no site pins rolldown, so behavior 17's "only the held rolldown" holds with no line at all.
-- components: startsUnderHeader measures main's gap under the header (or the sticky bar at 390px)
-  on the page as built and again on the page made taller than the viewport, so the allowed gap is
-  the layout's own and no margin, row or alignment rule is restated in the check; main never
-  starts inside the header or the bar (standards review). Not bounded absolutely: a gap the same on
-  every page is the captures' and the design review's to catch.
-- components: the Theme button shows its T in a kbd, as Pages, Help and Close do (the architect
-  noticed); the keys help check fails any header control that binds a key without showing it.
-  Ships in SDK v0.3.1. The noctis palette fixture's lone Theme button stays as it is: no keys help
-  check runs on it.
-- components: the spec review of the sites found main pushed down on pages shorter than the
-  viewport at 70rem and wider (the root 333px low; six architecture pages at 1200px); the
-  architect then noticed the Theme button showed no key. Both ship as SDK v0.3.1, which the three
-  sites pin before they merge. Rejected: shipping the sites on v0.3.0.
-- components: SDK v0.3.1 released by this session: spike-html-hosting-sdk PR #5 merged as 1c1d552,
-  and its release run 42214089393 cut v0.3.1.
+  to the top. The fixes shipped as components v0.2.0 at a reopened checkpoint 1, pinned by SDK
+  v0.3.0 before it released. Rejected: holding the fixes for a later task.
+- components: the sites' spec review found main pushed down on pages shorter than the viewport at
+  70rem and wider (the root 333px low; six architecture pages at 1200px), and the architect then
+  noticed the Theme button showed no key. Both shipped as SDK v0.3.1, which the three sites pin
+  before they merge. Rejected: shipping the sites on v0.3.0.
+- components: released by this session, each by its release workflow on the merge:
+  spike-html-hosting-components v0.1.0 (PR #3, d4bbbd5, run 42096936848), v0.2.0 (PR #4, 70a1122,
+  run 42122025990), v0.2.1 (PR #5, 646b864, run 42133877521) and v0.2.2 (PR #6, 190dbac, run
+  42149691751); spike-html-hosting-sdk v0.3.0 (PR #4, dfbb2d7, run 42151094511) and v0.3.1 (PR #5,
+  1c1d552, run 42214089393). Checkpoint 1 closed on the architect's answers: once the fixes landed
+  and both reviews passed again, the components merged and released without another stop.
+- components: evidence 4, as validated: the components' browser tier proves sl-section-tree's
+  nested h2 and h3 links, the section in view marked aria-current, H and L cycling through the top
+  and every section through the foundation's keys module (listed in its help dialog, off with its
+  switch), the arrows left to the browser's scrolling, the Previous and Next buttons with their
+  hints in kbd, the narrow sticky bar, and the reading progress following the scroll, absent
+  without scroll timelines and shown under reduced motion. The SDK's crawl proves, on every page
+  of the sqlate and architecture builds, the page header against the source's front matter, the
+  site index listing every built page, and every link, the tree's among them, reaching its
+  fragment's element.
+- components: evidence 6, as validated: every site pins spike-html-apps-foundation v0.3.0, which
+  the components take as a peer at ^0.3.0, so one copy serves the page and the components' shadow
+  roots. The components' two-base test proves a theme saved through the menu on one site applies
+  before first paint on the other on one local origin, and a palette the second site doesn't
+  register falls back to its default and stays stored. Nothing yet proves it live on
+  jaimestill.github.io (behavior 19).
+- components: the org task inherits sl-site-nav's site list, built into each components release
+  (the build-time-by-tag side of its measure against fetched-at-runtime); the accepted exception to
+  the downward-dependencies principle, which that measure settles; and the live stored-theme
+  capture across the three deployed sites, owed once this task's merge deploys them.
 
 ## Pending edits
 
@@ -827,6 +805,31 @@ slices 9/9 committed (+6a, 6b) (slice 1: no change, currency reports only the he
   `gh pr checks --watch` through `tail`, which hid the command's exit status; the session should
   run the configured merge command exactly as written.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.components`: add
-  spike-html-hosting-sdk to its repos, since the task changes the SDK's renderer and template and
-  releases SDK v0.3.0; and in its summary, the 390px fix is the renderer's table regions and
-  site.css, both in the SDK, at three pages rather than the architecture index alone.
+  spike-html-hosting-sdk to its repos, since the task changes the SDK's renderer, layout, shell
+  checks and template and releases SDK v0.3.0 and v0.3.1. Rewrite its summary to what the task
+  built: the section tree (key hints in kbd without brackets, reading progress, H and L moving
+  between sections, the arrow keys left to scrolling, a sticky bar at narrow widths), the page
+  header from front matter, the site index in a Pages drawer below its dock, and cross-site
+  navigation, on the foundation as a peer; components v0.2.2 and SDK v0.3.1 pinned by tag on all
+  three sites, with the reader's stored theme carrying across the shared origin. The 390px fix is
+  the renderer's table regions and site.css, both in the SDK, at three pages (the architecture
+  index, architecture standards/go-elemental/, sqlate docs/features.html) rather than the
+  architecture index alone.
+- coordinator · html-artifacts.md, the Keyboard bullet on claude.dev's article pages: the section
+  tree is built, as spike-html-hosting-components' sl-section-tree, and departs from the reference
+  in two ways the foundation's keys module forced or the architect chose. H and L move between
+  sections and the arrow keys stay the browser's scrolling, because the keys module cancels every
+  key a binding matches and its off switch covers character keys only, so bound arrows took over
+  sideways scrolling and ignored the switch. Key hints are a kbd alone, without brackets, by the
+  architect's direction.
+- claude-plugins · marathon retro: the checkpoint 2 redirect came from the architect viewing the
+  three sites' local builds, which found cramped columns at about 1400px, mid-word breaks in the
+  site index, and H unable to reach the top, after the standards and spec reviews had passed. A
+  checkpoint that releases a visual layer could show the architect captures or a local build at
+  several widths before the release, not only the reviews' results.
+- claude-plugins · marathon retro: `gh pr checks --watch` run straight after `gh pr create` can
+  start before GitHub registers the pull request's check runs: on spike-html-hosting-components
+  PR #5 it printed "no checks reported on the 'components' branch" and exited 1, so the `&&`
+  stopped before `gh pr merge` and nothing merged. The session waited until `gh pr checks` listed
+  a check, then ran the configured merge command again. The merge step could wait for the pull
+  request to report its checks before it watches them.

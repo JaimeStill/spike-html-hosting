@@ -6,7 +6,8 @@
  * page's own through currentColor, so a diagram follows the reader's palette and scheme; in
  * forced colors each takes the system colors instead, its boxes Canvas, its lines and text
  * CanvasText, its accent box's rule Highlight. A diagram is as wide as main up to 32rem, its
- * viewBox scaling with it, so it never scrolls sideways.
+ * viewBox scaling with it, so it never scrolls sideways; its text is 13px, the viewBox's user
+ * units, so it scales with the boxes it sits in rather than with the text scale.
  */
 
 @layer root {

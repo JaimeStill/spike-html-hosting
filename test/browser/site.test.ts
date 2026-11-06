@@ -6,7 +6,7 @@
 // orientation brief at org/briefs/orientation.html, whose IMPORTANT alert is a callout. Every page
 // sets its site nav's src to the root's sites.json under the base and fetches it there, and the
 // index's list of sites is that list. Each orientation page links the other, and each hand
-// diagram is an img named and described in the page. The crawl, from the hand index, checks
+// diagram is an image named by its title and described by its desc. The crawl, from the hand index, checks
 // every copied page of both trees and loads each hand page it reaches; it reaches exactly the
 // root's three hand pages. Nothing here names the site: its base is package.json's name, and the
 // list is public/sites.json.
@@ -153,21 +153,41 @@ describe("the site under its base", () => {
     }
   });
 
-  test("the hand orientation page's diagrams are each an img with a title and a description", async () => {
+  test("the hand orientation page's diagrams are each an image named by its title and described by its desc", async () => {
     const page = await browser.open("about:blank");
     try {
       await page.goto(`${server.origin}briefs/orientation.html`);
-      const diagrams = (await page.evaluate(`[...document.querySelectorAll("main figure > svg")]
+      const { root: document } = await page.cdp("DOM.getDocument");
+      const { nodeIds } = (await page.cdp("DOM.querySelectorAll", {
+        nodeId: document.nodeId,
+        selector: "main figure > svg",
+      })) as { nodeIds: number[] };
+      assert.ok(nodeIds.length > 0, "the page has a diagram");
+      const texts = (await page.evaluate(`[...document.querySelectorAll("main figure > svg")]
         .map((svg) => ({
-          role: svg.getAttribute("role"),
-          named: (svg.getAttribute("aria-labelledby") ?? "").split(" ")
-            .map((id) => svg.querySelector(\`#\${id}\`)?.textContent.trim() ?? "")
-            .every((text) => text !== ""),
-          caption: svg.parentElement.querySelector("figcaption")?.textContent.trim() !== "",
-        }))`)) as unknown[];
-      assert.ok(diagrams.length > 0, "the page has a diagram");
-      for (const diagram of diagrams) {
-        assert.deepEqual(diagram, { role: "img", named: true, caption: true });
+          name: svg.querySelector(":scope > title")?.textContent.replace(/\\s+/g, " ").trim(),
+          description: svg.querySelector(":scope > desc")?.textContent.replace(/\\s+/g, " ").trim(),
+          caption: svg.parentElement.querySelector(":scope > figcaption")?.textContent.trim() ?? "",
+        }))`)) as { name?: string; description?: string; caption: string }[];
+      for (const [i, nodeId] of nodeIds.entries()) {
+        const { nodes } = (await page.cdp("Accessibility.getPartialAXTree", {
+          nodeId,
+          fetchRelatives: false,
+        })) as {
+          nodes: {
+            role?: { value: string };
+            name?: { value: string };
+            description?: { value: string };
+          }[];
+        };
+        const [node] = nodes;
+        const { name, description, caption } = texts[i];
+        assert.ok(name && description, `diagram ${i + 1} has a title and a desc`);
+        assert.notEqual(caption, "", `diagram ${i + 1} has a caption`);
+        assert.deepEqual(
+          { role: node.role?.value, name: node.name?.value, description: node.description?.value },
+          { role: "image", name, description },
+        );
       }
     } finally {
       await page.close();

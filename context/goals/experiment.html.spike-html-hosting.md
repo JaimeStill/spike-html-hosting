@@ -261,7 +261,7 @@ Release       spike-html-hosting-icons v0.1.0;
 
 ## Progress
 
-slices 0/14 committed · standards — · spec — · editor —
+slices 7/14 committed (components aa9d491, sdk 7c20880, architecture 5e812ac, sqlate 4bf1ee7; icons 79aa6f1, f21fba8, 73e7374, 6296d9a, standards 2cc2b54, 58ab0ba, spec no gaps) · checkpoint 1 accepted: spike-html-hosting-icons PR #1 merged (37ee82d), v0.1.0 cut by its release workflow on the merge push, which this session pushed · standards — · spec — · editor —
 
 ## Decisions
 
@@ -940,6 +940,10 @@ slices 0/14 committed · standards — · spec — · editor —
 - icons: the theme button keeps its name, Theme, and its key, T: the foundation's dialog heading
   is "Theme" and its Save is T. The name and key are weighed in the design task. Rejected:
   Settings or Appearance now.
+- icons: the browse page's glyph names break only at hyphens, never within a word (a <wbr> after
+  each hyphen), so its grid shows two cells a row at 390px. Checkpoint 1's direction.
+- icons: the icons layer pins rolldown 1.3.0 for its fixture build; the SDK's hold at 1.2.16 is
+  Vite's constraint, and the icons layer has no Vite. Checkpoint 1's direction.
 
 ## Pending edits
 

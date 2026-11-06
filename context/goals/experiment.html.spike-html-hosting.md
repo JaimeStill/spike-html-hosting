@@ -260,13 +260,13 @@ Door          one-way: spike-html-hosting-components v0.3.0 and
               and scaffold consume, and sites.json at a public URL;
               two-way: the root's change, which redeploys its pages
               and reverts by reverting its merge
-Release       spike-html-hosting-components v0.3.0;
-              spike-html-hosting-sdk v0.4.0
+Release       spike-html-hosting-components v0.3.0 (released);
+              spike-html-hosting-sdk v0.4.0 (released)
 ```
 
 ## Progress
 
-slices 0/8 committed · standards — · spec — · editor —
+slices 7/8 committed (8 runs after the deploy) (1 components ac754f1; 2 components d90781d; 3 components 20e25d9; 4 sdk d8c4e36; 5 sdk 6777269; 6 root 39cf65c; 7 root f0225a8 3879d0a) · checkpoint 2 accepted: standards 2ea1d1d, spec gap closed 4f8058a; PR #7 merged 3a2a381; v0.4.0 released by the release workflow on this session's push (tag 798841a, 2026-11-06T16:37Z); note for slice 6: the root's test asserts crawled.hand exactly · checkpoint 1 accepted: standards b952db9, spec gap closed 77af71a; PR #8 merged a8edfd8; v0.3.0 released by the release workflow on this session's push (tag 9c4e75c, 2026-11-06T15:44Z) · editor —
 
 ## Decisions
 
@@ -865,6 +865,41 @@ slices 0/8 committed · standards — · spec — · editor —
 - org: the live stored-theme capture owed by the components task is shown in org's session brief,
   after the root's deploy.
 - org: the goal's Tasks gain icons and design between org and review.
+- org: renderBlocking sets rolldown's output.strictExecutionOrder for every site, so each page runs
+  only its own scripts; a shared chunk ran every page's scripts, and the Pages-drawer script threw
+  on a hand page with no drawer. Every page now loads three JS files (its entry, the shared index
+  chunk, rolldown's runtime) instead of one; the review task's cost measure records it. Rejected:
+  an opt-in option set by the root alone.
+- org: a copied tree's directory is its repository's name with one leading dot dropped
+  (`.github` → `github/`), and content.json holds `{ "trees": [ ... ] }`, each entry the
+  single-source shape with files keyed by source path.
+- org: the SDK's site index lists only copied pages; hand pages are not in it.
+- org: sl-site-nav treats an empty list as malformed and keeps its built list. A changed src
+  renders the built list until the new list arrives; removing src restores the built list and
+  fetches nothing.
+- org: the ahead fixture site's module is the built dist/site-nav.js requested with ?ahead, which
+  the fixture server rewrites in memory on each request.
+- org: the SDK's crawl counts a built page that no content.json record names as a hand page,
+  listed in Crawled.hand, instead of failing. The root's test asserts Crawled.hand exactly; a
+  scaffolded site's test asserts the page count.
+- org: the SDK fails the build when a hand build input resolves to a copied page's path.
+- org: sites.json ships as public/sites.json, with publicDir "public"; every root page's
+  sl-site-nav src is %BASE_URL%sites.json.
+- org: the rendered orientation page links its hand form through page.html's render-blocking
+  script, which maps a copied page's path to its hand page's, so the copy stays byte for byte; the
+  link needs script, as the fetched nav does. Rejected: a link on every page, hidden by :has().
+- org: root.css, the root's own layer after site.css, holds the diagram and form-note styles. Hand
+  pages carry no Pages drawer, since the site index lists only copied pages.
+- org: the hand orientation page's two diagrams, the three primitives layered and the marathon
+  session's cycle, are SVGs with role=img, named by their title and described by their desc.
+- org: the root's browser test leaves out highlightsEachPalette: the root's one code fence is a
+  plain line, with nothing to highlight.
+- org: the verdicts' drafting-token counts use the Gemma 4 tokenizer (google/gemma-4-E4B-it,
+  cached locally), since no Anthropic tokenizer was available offline.
+
+- org: prose left over 100 columns in the released repositories, for the icons task's slices
+  there: the SDK README's lines on Crawled, sl-site-index and the drawer, and its crawl paragraph's
+  early break; the components README's screenshots line and served.ts's handler comment.
 
 ## Pending edits
 
@@ -949,3 +984,8 @@ slices 0/8 committed · standards — · spec — · editor —
   coordinator's `public/`), read at dd10b25 for the charter, and standards-lab/org (the
   coordinator), read at c812496 for the orientation brief, unless the catalog already lists the
   coordinator.
+- claude-plugins · marathon retro: org's slice 8 and behaviors 20 and 21 measure the deployed
+  site: the fetch of the live sites.json with its headers, and the stored theme across the three
+  deployed sites. That evidence exists only after SHIP merges the root, while the session brief
+  that authorizes the merge is meant to show it. The brief format has no step for evidence
+  gathered after the merge.

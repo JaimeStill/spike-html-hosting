@@ -99,21 +99,30 @@ The tasks, in the order they run; each cites the evidence it proves.
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
     `vite.config.ts`, whose `external` lists the source's LICENSE, which the copied README
     links; and `.gitignore`, which keeps marathon's working files.
-  - This repository is a root-style site. It renders two copied trees through its own
-    `page.html` shell: standards-lab/.github's profile at dd10b25, the charter, at
-    `github/profile/`, and standards-lab/org's `briefs/orientation.md` at c812496 at
-    `org/briefs/orientation.html`. Beside them it builds three hand pages, each a build input:
-    `index.html`, the index of every site; `briefs/orientation.html`, the orientation brief by
-    hand, with diagrams; and the sitrep entry under `sitreps/`. Hand pages carry no Pages button
-    or drawer. Every page's `sl-site-nav` fetches its list from the root's own `sites.json`,
-    `public/sites.json` copied to the base, by `src="%BASE_URL%sites.json"`. `root.css` holds the
-    hand pages' diagrams and the line under each orientation page's h1 that links the other,
-    which `page.html`'s script adds to the copy's page. The unit tier holds the copies to
-    `content.json`; the browser test runs the shell checks on every page and crawls the copies;
-    the capture file lists every page the root builds.
+  - This repository is a root-style site: hand pages beside the rendered pages of two copied
+    trees. The rendered pages fill its own shell, `page.html`:
+    - standards-lab/.github's `profile/README.md` at dd10b25, the charter, at `github/profile/`;
+    - standards-lab/org's `briefs/orientation.md` at c812496 at `org/briefs/orientation.html`.
+
+    Its three hand pages are build inputs in `vite.config.ts`: `index.html`, the index of every
+    site; `briefs/orientation.html`, the orientation brief written by hand, with two diagrams; and
+    the sitrep entry under `sitreps/`. Hand pages have no Pages button or drawer, because the
+    SDK's site index lists only copied pages.
+
+    Every page's `sl-site-nav` fetches the list of sites from `src="%BASE_URL%sites.json"`, which
+    Vite copies from `public/sites.json` to the base. Each orientation page links the other under
+    its h1; on the rendered page, `page.html`'s script adds that link, so the copy stays byte for
+    byte. `root.css` styles the link's line and the hand pages' diagrams.
+
+    The unit tier holds the copies to `content.json`. The browser test runs the shell checks on
+    every page and crawls the copies. The capture file lists every page the root builds.
 - Each site's Vite base, `/<repo>/`, comes from the SDK's `base()`, which reads package.json's
   `name`. Every shell links `site.css` by its package export,
   `@jaimestill/spike-html-hosting-sdk/site.css`, and Vite bundles it into the entry's sheet.
+- From SDK v0.4.0, which this repository pins, `renderBlocking` sets rolldown's
+  `output.strictExecutionOrder`, so each page runs only its own scripts. Each page loads three JS
+  files: its entry, the shared `index` chunk, and rolldown's runtime. The SDK's README describes
+  the plugin. The architecture and sqlate sites, on v0.3.1, load one JS file a page.
 - Each Markdown site's `content/` holds byte-for-byte copies of its source at the pin: the
   architecture repository's 29 front-matter pages at 8706d04, and sqlate's README and docs/ at
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
@@ -127,17 +136,20 @@ The tasks, in the order they run; each cites the evidence it proves.
   themes whose green the SDK moves to the foundation's hue 142°. A site appends an entry for an
   outside palette, as the SDK's Noctis fixture site does.
 - The architecture and sqlate sites' browser tests call the SDK's `highlightsEachPalette` check
-  on their indexes, which hold highlighted code. The root's only code is the orientation brief's
-  one-line block, a single token, and its test leaves the check out.
+  on their indexes, which hold highlighted code. The root's test leaves the check out: its only
+  code is the orientation brief's one-line block, which has nothing to highlight.
 - Every site and the SDK's template set `minimumReleaseAge: 0` in `pnpm-workspace.yaml`.
   Currency moves each pin to its latest release, and pnpm's default one-day wait fails a frozen
   install of a lockfile that pins a release under a day old. Reading each release's notes before
   its bump lands stands in for the wait.
-- spike-html-hosting-components' `sl-site-nav` holds the list of sites, built into each release,
-  so adding a site is a components release that every site takes by moving its pin. This list is
-  the build-time-by-tag side of evidence 5, which the `org` task measures against a list fetched
-  at runtime. A layer that names its consumers breaks the architecture's downward-dependencies
-  principle; the spike accepts that exception until the `org` task's measure settles it.
+- spike-html-hosting-components' `sl-site-nav` holds a list of sites, `SITES`, built into each
+  release, so adding a site to it is a components release that every site takes by moving its
+  pin. From v0.3.0 its optional `src` names a list it fetches at runtime instead; the
+  components' README documents it. The root sets `src`; the architecture and sqlate sites list
+  `SITES`. These are evidence 5's two sides, build-time-by-tag and fetched-at-runtime, which the
+  components' browser tier measures on fixture sites with one deployed ahead. A layer that names
+  its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
+  exception until evidence 5's measure settles it.
 - Every site's chrome-headless-shell is 157.0.8103.38.
 - The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
   the shell checks look for that sheet in `document.adoptedStyleSheets`.

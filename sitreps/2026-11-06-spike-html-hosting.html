@@ -231,9 +231,9 @@
         moving between sections, and a site index that docks as a column where it fits and is a
         Pages drawer, opened by P, where it doesn't. The SDK's checks now hold every page to no
         sideways scroll at 390px, no navigation word broken mid-word, main centered and directly
-        under the header, and a keys help dialog that lists every binding. Two of those
-        regressions had passed the earlier reviews; the architect found them viewing the local
-        builds at checkpoint 2.
+        under the header, and a keys help dialog that lists every binding. Two of the faults
+        these checks now catch had passed the earlier reviews; the architect found them by viewing
+        the local builds at checkpoint 2.
       </p>
 
       <h2 id="what-was-decided">What was decided</h2>
@@ -263,8 +263,9 @@
           the browser's.
         </li>
         <li>
-          <strong>A side column docks only where it fits.</strong> Below 16rem beside main's 80ch,
-          the site index is a drawer and the section tree a sticky bar.
+          <strong>A side column docks only where it fits.</strong> Where a column would be
+          narrower than 16rem beside main's 80ch, the site index is a drawer and the section tree
+          a sticky bar.
         </li>
         <li>
           <strong>Rolling currency.</strong> Every repository sets pnpm's minimum release age to 0

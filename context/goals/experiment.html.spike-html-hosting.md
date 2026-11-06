@@ -122,7 +122,7 @@ Behaviors     1. spike-html-hosting-components takes mise-action
                  the markup.
               15. The template's header buttons show Octicons
                  list-unordered-16 for Pages, question-16 for
-                 Help and paintbrush-16 for Theme, each with its
+                 Help and gear-16 for Theme (checkpoint 3), each with its
                  kbd hint and its name in aria-label, the word
                  itself no longer shown. The keys help dialog's
                  Close shows x-16 with its ? hint and is named
@@ -922,8 +922,9 @@ slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 m
 - icons: every glyph uses Octicons' 16px grid. Rejected: 24px.
 - icons: Pages is Octicons list-unordered. Rejected: book, sidebar-expand.
 - icons: Help is Octicons question.
-- icons: Theme is Octicons paintbrush, since the dialog sets palette, spacing and type as well as
-  the scheme. Rejected: sun and moon.
+- icons: Theme is Octicons gear, chosen at checkpoint 3 over the planned paintbrush, since the
+  design task turns the theme dialog into the Settings dialog. Rejected: paintbrush, sliders, sun
+  and moon.
 - icons: the section tree's Previous and Next are Octicons arrow-up and arrow-down. Rejected:
   chevrons, which read as expand and collapse.
 - icons: the drawer's Close is Octicons x.
@@ -947,6 +948,11 @@ slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 m
 - icons: glyphs on the theme dialog's Save and Cancel, which the foundation renders, go to the
   design task with the dialog's heading and the opener's name and key, for the intake as one
   foundation change. Checkpoint 2's direction.
+- icons: the design task turns the Theme dialog into the Settings dialog and moves the keyboard
+  settings out of Help, which then only describes the shortcuts; the glyph is gear already, so
+  only the name, key and dialog change there. The architect's direction at checkpoint 3.
+- icons: the narrow header wrapping Help and Theme onto a second line at 390px is left for the
+  design task. Checkpoint 3's direction.
 
 ## Pending edits
 
@@ -1045,9 +1051,12 @@ slices 9/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 m
   the drawer's Close and the alert callouts; releases icons v0.1.0, components v0.4.0 and SDK
   v0.5.0, adopted by all three sites. Evidence 12.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.design`: the summary adds the
-  theme button's name (Theme, Settings or Appearance) and key, weighed with the foundation's
-  dialog heading and glyphs on the dialog's Save and Cancel; and names on hover for icon-only
-  controls. Each goes to the intake as a
+  architect's direction: the Theme dialog becomes the Settings dialog, and the keyboard settings
+  (character keys on or off, the wait between presses) move from the Help dialog into it, so Help
+  only describes the shortcuts; with it, the opener's name and key, the dialog's heading, and
+  glyphs on its Save and Cancel; and names on hover for icon-only controls. The components
+  README's header snippet, released at v0.4.0 with paintbrush-16 for Theme, takes gear-16 in the
+  components' next release. Each goes to the intake as a
   foundation change if the foundation must change.
 - coordinator · references.toml and references.local.toml: add primer/octicons
   (`https://github.com/primer/octicons.git`), read at the commit whose LICENSE

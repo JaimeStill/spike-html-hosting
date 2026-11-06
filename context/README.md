@@ -53,8 +53,11 @@ its own docs/ guide.
 - **Documentation components:** the section tree, page header, site index, and cross-site
   navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
-- **Icons:** one icon toolkit, spike-html-hosting-icons, its glyphs typed per-icon modules, so a
-  build ships only the icons it imports.
+- **Icons:** spike-html-hosting-icons, released by tag: a generator that builds any Iconify set
+  whose licence is satisfied by shipping its text, Octicons released alone as one svg-string
+  module per icon, and a dev-only browse page of every released glyph. The SDK's build fills each
+  page's glyph markers and draws the alert callouts' glyphs from the package, so a build ships
+  only the icons it uses.
 - **Review and demos:** the screenshot review and VHS-recorded CLI demos.
 
 ## Path
@@ -73,7 +76,8 @@ The tasks, in the order they run; each cites the evidence it proves.
    (evidence 4, 6).
 7. `org`: the charter, the index, the hosted report, shared navigation measured, and the
    HTML/Markdown line (evidence 2, 5, 8).
-8. `icons`: one icon toolkit, spike-html-hosting-icons (evidence 12).
+8. `icons`: one icon toolkit, spike-html-hosting-icons, its glyphs on every site's header
+   buttons, section tree, drawer, and alert callouts (evidence 12).
 9. `design`: the design review of the three sites.
 10. `review`: the review across every site, the sqlint VHS demo, and the cost per site
     (evidence 9, 10, 11).
@@ -97,9 +101,9 @@ The tasks, in the order they run; each cites the evidence it proves.
   svg string, 1em square in `currentColor`. A page places a glyph as a marker,
   `<svg data-icon="octicon/<name>"></svg>`, which the SDK's `markdownPages` fills at build on
   every page it writes, hand pages included, so a build ships only the icons its pages name. Each
-  shell's header buttons, Pages, Help, and Theme, and the keys help's Close show a glyph and a
-  key hint, named by their `aria-label`; a GitHub alert's title shows the icons layer's Octicon.
-  The SDK's `showsGlyphs` shell check holds each button to its glyph.
+  shell's Pages, Help, and Theme buttons and the keys help's Close show a glyph and a key hint and
+  are named by their `aria-label`. A GitHub alert's title shows its kind's Octicon. The SDK's
+  `showsGlyphs` shell check holds each button to its glyph.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -195,7 +199,8 @@ release nothing; each deploys on its push to main.
 ## References
 
 The spike reads these repositories and never writes to them. Each is a key in the coordinator's
-`references.toml`, with its local checkout in `references.local.toml`:
+`references.toml`, with its local checkout in `references.local.toml`, except `primer/octicons`,
+which a pending edit in the goal record adds:
 
 - `architecture`, at 8706d04: the architecture stand-in's pages.
 - `sqlate`, at v0.6.1, with `sqlint/v0.1.1`: the sqlate stand-in's README and docs/, and the

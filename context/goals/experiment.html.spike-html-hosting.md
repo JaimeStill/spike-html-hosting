@@ -891,7 +891,6 @@ slices 14/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 
   plain line, with nothing to highlight.
 - org: the verdicts' drafting-token counts use the Gemma 4 tokenizer (google/gemma-4-E4B-it,
   cached locally), since no Anthropic tokenizer was available offline.
-
 - org: prose left over 100 columns in the released repositories, for the icons task's slices
   there: the SDK README's lines on Crawled, sl-site-index and the drawer, and its crawl paragraph's
   early break; the components README's screenshots line and served.ts's handler comment.
@@ -903,63 +902,71 @@ slices 14/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 
 - icons: the generator accepts only sets whose licence the shipped licence text satisfies (MIT,
   ISC, Apache-2.0, BSD, CC0-1.0, Unlicense), and the package ships each set's upstream LICENSE
   with provenance, since Iconify's packages carry none. Rejected: CC-BY, CC-BY-SA and GPL sets.
+- icons: v0.1.0 releases Octicons alone; a set joins with its devDependency and a minor release.
+  Rejected: Octicons with Lucide.
 - icons: each per-icon module default-exports one complete svg string. Rejected: Iconify's data
   object, which needs a renderer, as @iconify-icons/* do; a Lit template.
+- icons: spike-html-hosting-icons is a peer of the components and the SDK, pinned by every site.
+  Rejected: a pinned dependency of each.
+- icons: an SDK build step fills <svg data-icon="<set>/<name>"> in every page a site builds and
+  fails on an unknown name. Rejected: SVG pasted into each page template by hand.
+- icons: a malformed glyph marker (self-closed, unquoted, not empty) fails the build, naming the
+  page and its tag, and the fill skips comments, so every marker is filled. The standards
+  review's fix, kept by the session.
+- icons: the alert callouts take their glyphs from the icons package through marked-alert's
+  variants. Rejected: marked-alert's own strings, which lack focusable="false".
 - icons: the header's Pages, Help and Theme buttons stay hand markup in each page template.
   Rejected: an sl-* header element, left to the design task.
 - icons: sl-section-tree's Previous and Next show a glyph and their kbd hint, the word their
   accessible name; sl-drawer's Close is the glyph alone, still named "Close <label>". Rejected: a
   glyph beside the visible word.
-- icons: the alert callouts take their glyphs from the icons package through marked-alert's
-  variants. Rejected: marked-alert's own strings, which lack focusable="false".
-- icons: spike-html-hosting-icons is a peer of the components and the SDK, pinned by every site.
-  Rejected: a pinned dependency of each.
+- icons: the keys help dialog's Close shows Octicons x with its ? hint, named Close. Rejected:
+  text as before.
+- icons: every glyph is an Octicon on its 16px grid: list-unordered for Pages, question for Help,
+  arrow-up and arrow-down for Previous and Next, x for each Close, and GitHub's own info,
+  light-bulb, report, alert and stop for the alert callouts. Rejected: the 24px grid; book and
+  sidebar-expand for Pages; chevrons for Previous and Next, which read as expand and collapse.
+- icons: Theme is Octicons gear, chosen at checkpoint 3 over the planned paintbrush. The
+  architect's direction there: the design task turns the Theme dialog into the Settings dialog and
+  moves the keyboard settings out of Help, which then only describes the shortcuts, so only the
+  name, key and dialog change there. Rejected: paintbrush, sliders, sun and moon.
+- icons: the Theme button keeps its name, Theme, and its key, T, since the foundation's dialog
+  heading is "Theme" and its Save is T. The design task weighs them with the dialog's heading and
+  glyphs on its Save and Cancel, which the foundation renders, for the intake as one foundation
+  change (checkpoint 2's direction). Rejected: Settings or Appearance now.
+- icons: names on hover for icon-only controls go to the design task. Rejected: the title
+  attribute, which never shows on keyboard focus or touch; a tooltip of our own, which needs
+  script in Safari until it ships popover="hint" and must meet WCAG 1.4.13.
+- icons: the narrow header wrapping Help and Theme onto a second line at 390px is left for the
+  design task. Checkpoint 3's direction.
+- icons: the browse page's glyph names break only at hyphens, never within a word (a <wbr> after
+  each hyphen), so its grid shows two cells a row at 390px. Checkpoint 1's direction.
+- icons: the icons layer pins rolldown 1.3.0 for its fixture build; the SDK's hold at 1.2.16 is
+  Vite's constraint, and the icons layer has no Vite. Checkpoint 1's direction.
 - icons: the task releases icons v0.1.0, components v0.4.0, then SDK v0.5.0, each at a BUILD
   checkpoint where the architect views captures before the standards and spec reviews; the
   architecture, sqlate and root sites adopt after.
 - icons: org's prose over 100 columns is rewrapped by hand. Rejected: a prose-width check, which
   tables, URLs and code would need exempting from.
-- icons: every glyph uses Octicons' 16px grid. Rejected: 24px.
-- icons: Pages is Octicons list-unordered. Rejected: book, sidebar-expand.
-- icons: Help is Octicons question.
-- icons: Theme is Octicons gear, chosen at checkpoint 3 over the planned paintbrush, since the
-  design task turns the theme dialog into the Settings dialog. Rejected: paintbrush, sliders, sun
-  and moon.
-- icons: the section tree's Previous and Next are Octicons arrow-up and arrow-down. Rejected:
-  chevrons, which read as expand and collapse.
-- icons: the drawer's Close is Octicons x.
-- icons: the alert callouts keep GitHub's glyphs: info, light-bulb, report, alert and stop.
-- icons: v0.1.0 releases Octicons alone; a set joins with its devDependency and a minor release.
-  Rejected: Octicons with Lucide.
-- icons: an SDK build step fills <svg data-icon="<set>/<name>"> in every page a site builds and
-  fails on an unknown name. Rejected: SVG pasted into each page template by hand.
-- icons: the keys help dialog's Close shows Octicons x with its ? hint, named Close. Rejected:
-  text as before.
-- icons: names on hover for icon-only controls go to the design task. Rejected: the title
-  attribute, which never shows on keyboard focus or touch; a tooltip of our own, which needs
-  script in Safari until it ships popover="hint" and must meet WCAG 1.4.13.
-- icons: the theme button keeps its name, Theme, and its key, T: the foundation's dialog heading
-  is "Theme" and its Save is T. The name and key are weighed in the design task. Rejected:
-  Settings or Appearance now.
-- icons: the browse page's glyph names break only at hyphens, never within a word (a <wbr> after
-  each hyphen), so its grid shows two cells a row at 390px. Checkpoint 1's direction.
-- icons: the icons layer pins rolldown 1.3.0 for its fixture build; the SDK's hold at 1.2.16 is
-  Vite's constraint, and the icons layer has no Vite. Checkpoint 1's direction.
-- icons: glyphs on the theme dialog's Save and Cancel, which the foundation renders, go to the
-  design task with the dialog's heading and the opener's name and key, for the intake as one
-  foundation change. Checkpoint 2's direction.
-- icons: the design task turns the Theme dialog into the Settings dialog and moves the keyboard
-  settings out of Help, which then only describes the shortcuts; the glyph is gear already, so
-  only the name, key and dialog change there. The architect's direction at checkpoint 3.
-- icons: the narrow header wrapping Help and Theme onto a second line at 390px is left for the
-  design task. Checkpoint 3's direction.
-- icons: the SDK's shell checks click only once the element's center is in the viewport and is
-  the element, and showsGlyphs waits for no open dialog and a page held at its top, after PR #8's
-  CI failed once on the Help click; the likely cause, a late smooth scroll from the keys-help
-  check's L, wasn't reproduced locally, so the click's failure now names what it would hit.
-- icons: a malformed glyph marker (self-closed, unquoted, not empty) fails the build, naming the
-  page and its tag, and comments are skipped, so every marker is filled. The standards review's
-  fix, kept by the session.
+- icons: the SDK's shell checks click an element only once its center is in the viewport and hits
+  the element, and showsGlyphs waits until no dialog is open and the page is held at its top. PR
+  #8's CI failed once on the Help click; the likely cause, a late smooth scroll from the keys-help
+  check's L, wasn't reproduced locally, so a failed click now names the element it would hit.
+- icons: evidence 12, as validated: the icons layer's unit tier generates a fixture set in
+  Iconify's format by name, refuses CC-BY, CC-BY-SA, GPL and OFL sets, and holds a fixture build
+  to exactly the icons it imports; its browser tier checks the browse page, every Octicon in every
+  profile. The architecture, sqlate and root builds ship 6, 6 and 7 of the package's 986 Octicons,
+  each exactly the icons its pages name.
+- icons: for the design task: spike-html-hosting-icons' STANDARDS.md has no Design section,
+  which the components' STANDARDS.md has, though its browse page draws on the foundation.
+- icons: for the review task: a refused set built after an accepted one leaves the accepted set's
+  output in the icons layer's dist/, though the build still exits 1.
+- icons: for the review task: the icons layer's browse test expects a set's licence label to be
+  its SPDX identifier, else its title, while browse.js shows the title when a set has an SPDX
+  identifier but no URL.
+- icons: for the answer task: SDK provenance follows two conventions. The root's pages keep each
+  earlier SDK provenance line and add a v0.5.0 line, while the architecture and sqlate sites
+  change their one SDK line to the new tag.
 
 ## Pending edits
 
@@ -1049,22 +1056,24 @@ slices 14/14 committed · checkpoint 1 accepted: spike-html-hosting-icons PR #1 
   deployed sites. That evidence exists only after SHIP merges the root, while the session brief
   that authorizes the merge is meant to show it. The brief format has no step for evidence
   gathered after the merge.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.icons`: in place of the pending
-  new-task summary, the task as planned: spike-html-hosting-icons, a generator that takes any
-  Iconify set by name through @iconify/utils, releasing Octicons alone at v0.1.0 as per-icon svg
-  string modules, with a dev-only browse page; licence-text sets only, each shipping its upstream
-  LICENSE; a peer of the components and the SDK; an SDK build step that fills
-  <svg data-icon="<set>/<name>">; glyphs on the header, the help dialog's Close, the section tree,
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.icons`: its summary becomes
+  the task as built, in place of the summary the new-task edit above drafts:
+  spike-html-hosting-icons, a generator that takes any Iconify set by name through
+  @iconify/utils and accepts only sets whose licence is satisfied by shipping its text, each
+  shipping its upstream LICENSE; Octicons released alone at v0.1.0 as per-icon svg string modules, with a
+  dev-only browse page; a peer of the components and the SDK; an SDK build step that fills
+  <svg data-icon="<set>/<name>">; glyphs on the header, the keys help's Close, the section tree,
   the drawer's Close and the alert callouts; releases icons v0.1.0, components v0.4.0 and SDK
-  v0.5.0, adopted by all three sites. Evidence 12.
+  v0.5.0, which all three sites pin. Evidence 12.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.design`: the summary adds the
   architect's direction: the Theme dialog becomes the Settings dialog, and the keyboard settings
   (character keys on or off, the wait between presses) move from the Help dialog into it, so Help
   only describes the shortcuts; with it, the opener's name and key, the dialog's heading, and
-  glyphs on its Save and Cancel; and names on hover for icon-only controls. The components
-  README's header snippet, released at v0.4.0 with paintbrush-16 for Theme, takes gear-16 in the
-  components' next release. Each goes to the intake as a
-  foundation change if the foundation must change.
+  glyphs on its Save and Cancel; and names on hover for icon-only controls. Each goes to the
+  intake as a foundation change if the foundation must change. The components README's header
+  snippet, released at v0.4.0 with paintbrush-16 for Theme, takes gear-16 in the components' next
+  release.
 - coordinator · references.toml and references.local.toml: add primer/octicons
-  (`https://github.com/primer/octicons.git`), read at the commit whose LICENSE
-  spike-html-hosting-icons copies.
+  (`https://github.com/primer/octicons.git`), read at 9a274e2 (tag `@primer/octicons@19.42.0`),
+  whose LICENSE spike-html-hosting-icons copies. The root's context/README.md, References,
+  already lists it.

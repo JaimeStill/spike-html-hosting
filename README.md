@@ -27,7 +27,7 @@ glyphs the build fills into every page's `<svg data-icon="octicon/<name>"></svg>
   Prettier, shellcheck, and actionlint; tsc's type check; the build; the unit tier, the copied
   trees against `content.json`; and the browser tier, the SDK's checks on every page the build
   writes in the pinned chrome-headless-shell. It reads no network.
-- `mise run screenshots`: capture every page, light and dark, wide and narrow.
+- `mise run screenshots`: capture every page, light and dark, at 390px, 1120px, and 1376px.
 - `mise run currency`: every pin behind its latest, the SDK's tag among them.
 
 ## Keeping pace with the SDK

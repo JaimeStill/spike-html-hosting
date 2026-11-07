@@ -3,20 +3,28 @@
      site, each linked at its base with a line on what it holds, in sites.json's order and by its
      labels, which the browser test holds equal; the charter, the orientation brief in both its
      forms; and the sitrep entries, newest first. The foundation's full page entry and its
-     registrations, every built-in profile, so the theme menu offers each, its preferences module,
-     and its keys module, render-blocking, as the build makes every module script one entry; the
-     SDK's site.css by the package's name, after the entry; a button that opens the theme menu,
-     which keys.js clicks on T; the components' site nav, its module render-blocking too, at the
+     registrations, every built-in profile, so the settings offer each, its preferences module,
+     and its keys module, render-blocking, as the build makes every module script one entry; then
+     the components' glyph-button.css and the SDK's site.css, each by its package's name, in that
+     order after the entry. The components' site nav, its module render-blocking too, at the
      header's start, its src the root's sites.json under the base, %BASE_URL%, which Vite writes
-     as the base at build, so the nav lists the sites the root deploys, fetched live; the Help
-     button, before the Theme button, which opens the keys help dialog by the invoker command
-     show-modal, keys.js clicking it on ? and filling the dialog's [data-keys-list] as it opens
-     with the page's bindings and the reader's switch that turns the character keys off (WCAG
-     2.1.4); and its own main content. The Help and Theme buttons, and the dialog's Close, each show
-     a glyph and its key hint, a kbd alone and aria-hidden, and no word: each is named by its
-     aria-label, which the dialog lists. Each glyph is a marker, <svg data-icon="octicon/<name>">,
-     which the SDK's markdownPages fills at build with the icons layer's svg: question-16 for Help,
-     gear-16 for Theme, and x-16 for Close.
+     as the base at build, so the nav lists the sites the root deploys, fetched live; and the
+     shortcuts list and the settings, their modules render-blocking too, which the two shortcut
+     dialogs hold. The header is the site nav and one group of buttons at its inline end,
+     header-actions: Help and Settings, in that order, which site.css keeps on the header's first
+     line at every width. Help and Settings are the openers of the components' shortcut dialogs,
+     each sending show-modal to its dialog by the invoker command, keys.js clicking it on its key:
+     Help, on ?, opens dialog#help, headed "Keyboard shortcuts", whose sl-shortcuts lists every
+     binding the page has outside it; Settings, on S, opens dialog#settings, headed "Settings",
+     whose sl-settings applies and stores the theme and the keyboard settings at once, the switch
+     that turns the character keys off (WCAG 2.1.4) among them. Each dialog is named by its
+     heading through aria-labelledby and closed by its Close or by Escape. Each header button, and
+     each dialog's Close, is a glyph button: it shows a glyph and its key hint, a kbd alone and
+     aria-hidden, and no word, is named by its aria-label, and shows that name in its interest
+     hint, a glyph-hint popover; a Close's hint is Esc and it binds no key. Each glyph is a
+     marker, <svg data-icon="octicon/<name>">, which the SDK's markdownPages fills at build with
+     the icons layer's svg: question-16 for Help, gear-16 for Settings, and x-16 for Close. Then
+     its own main content.
      No Markdown fills it: the copied trees' rendered pages fill page.html, so the index loads none
      of the components' other modules and has no Pages button or drawer.
      Adapted from spike-html-hosting (cb0511c): index.html, its title and text this site's, and its
@@ -29,42 +37,61 @@
      stand-in's and its main element the root's own content, not a shell to fill, without the Pages
      button, its drawer, and the components' other modules.
      Adapted from spike-html-hosting-sdk (v0.5.0): template/index.html, each header button's and
-     the dialog Close's glyph marker in place of its word. -->
+     the dialog Close's glyph marker in place of its word.
+     Adapted from spike-html-hosting-sdk (a7538b8): template/index.html, its header-actions group
+     without the Pages button, and the Settings button and the two shortcut dialogs in place of
+     the Theme button, the theme menu, and the keys help.
+     Adapted from spike-html-hosting-components (e3e60a8): README.md, the header-actions group,
+     the Settings opener, each glyph button's class and interest hint, and the shortcut dialogs,
+     Help's and Settings', each with its heading, its content, and its Close. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The org stand-in</title>
     <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
+    <link rel="stylesheet" href="@jaimestill/spike-html-hosting-components/glyph-button.css" />
     <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/preferences.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/site-nav.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/shortcuts.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/settings.js"></script>
   </head>
   <body>
     <header>
       <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
-      <button
-        type="button"
-        commandfor="help"
-        command="show-modal"
-        aria-label="Help"
-        data-keys="?"
-      >
-        <svg data-icon="octicon/question-16"></svg>
-        <span aria-hidden="true"><kbd>?</kbd></span>
-      </button>
-      <button
-        type="button"
-        commandfor="theme"
-        command="--open"
-        aria-label="Theme"
-        data-keys="t"
-      >
-        <svg data-icon="octicon/gear-16"></svg>
-        <span aria-hidden="true"><kbd>T</kbd></span>
-      </button>
+      <div class="header-actions">
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="help"
+          command="show-modal"
+          aria-label="Help"
+          data-keys="?"
+          interestfor="help-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/question-16"></svg>
+          <span aria-hidden="true"><kbd>?</kbd></span>
+        </button>
+        <div id="help-hint" class="glyph-hint" popover="hint" aria-hidden="true">Help</div>
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="settings"
+          command="show-modal"
+          aria-label="Settings"
+          data-keys="s"
+          interestfor="settings-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/gear-16"></svg>
+          <span aria-hidden="true"><kbd>S</kbd></span>
+        </button>
+        <div id="settings-hint" class="glyph-hint" popover="hint" aria-hidden="true">Settings</div>
+      </div>
     </header>
     <main>
       <h1>The org stand-in</h1>
@@ -113,21 +140,42 @@
         </li>
       </ol>
     </main>
-    <sl-theme-menu id="theme"></sl-theme-menu>
     <dialog id="help" aria-labelledby="help-title">
       <h2 id="help-title">Keyboard shortcuts</h2>
-      <div data-keys-list></div>
+      <sl-shortcuts></sl-shortcuts>
       <footer>
         <button
           type="button"
+          class="glyph-button"
           commandfor="help"
           command="close"
           aria-label="Close"
-          data-keys="?"
+          interestfor="help-close-hint"
+          aria-description=""
         >
           <svg data-icon="octicon/x-16"></svg>
-          <span aria-hidden="true"><kbd>?</kbd></span>
+          <span aria-hidden="true"><kbd>Esc</kbd></span>
         </button>
+        <div id="help-close-hint" class="glyph-hint" popover="hint" aria-hidden="true">Close</div>
+      </footer>
+    </dialog>
+    <dialog id="settings" aria-labelledby="settings-title">
+      <h2 id="settings-title">Settings</h2>
+      <sl-settings></sl-settings>
+      <footer>
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="settings"
+          command="close"
+          aria-label="Close"
+          interestfor="settings-close-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/x-16"></svg>
+          <span aria-hidden="true"><kbd>Esc</kbd></span>
+        </button>
+        <div id="settings-close-hint" class="glyph-hint" popover="hint" aria-hidden="true">Close</div>
       </footer>
     </dialog>
   </body>

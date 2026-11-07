@@ -101,9 +101,11 @@ The tasks, in the order they run; each cites the evidence it proves.
   svg string, 1em square in `currentColor`. A page places a glyph as a marker,
   `<svg data-icon="octicon/<name>"></svg>`, which the SDK's `markdownPages` fills at build on
   every page it writes, hand pages included, so a build ships only the icons its pages name. Each
-  shell's Pages, Help, and Theme buttons and the keys help's Close show a glyph and a key hint and
-  are named by their `aria-label`. A GitHub alert's title shows its kind's Octicon. The SDK's
-  `showsGlyphs` shell check holds each button to its glyph.
+  shell's header holds the site nav and one `header-actions` group: Pages, on a page with the
+  Pages drawer, then Help and Settings. Those buttons and each shortcut dialog's Close are glyph
+  buttons: each shows a glyph and a key hint, is named by its `aria-label`, and shows that name
+  in an interest hint. A GitHub alert's title shows its kind's Octicon. The SDK's `showsGlyphs`
+  shell check holds each button to its glyph.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -137,8 +139,10 @@ The tasks, in the order they run; each cites the evidence it proves.
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
   each file's git blob hash, and a unit test fails when a copy differs.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
-  theme menu offers every profile. It also loads `keys.js`, which clicks the Theme button, marked
-  `data-keys="t"`, when the reader presses T.
+  settings offer every profile. It also loads `keys.js`, which clicks the Help button, marked
+  `data-keys="?"`, on ?, and the Settings button, marked `data-keys="s"`, on S. Help opens a
+  dialog whose `sl-shortcuts` lists the page's keys; Settings opens one whose `sl-settings` sets
+  the theme and the keyboard settings. Each dialog closes on Escape.
 - The renderer highlights each fenced block at build with Shiki, so no script reaches the page.
   A syntax theme is `{ palette, light, dark }`. The SDK's built-ins map primer, catppuccin, and
   everforest to Shiki's bundled themes, and flexoki to a byte-for-byte copy of Flexoki's VS Code
@@ -172,8 +176,9 @@ of the check.
 - The capture file exports the SDK's `description()` over the site's page list, every page the
   site builds. A page's name is its built path under the base without `.html`: the index is
   `index`, and a `dir/` page is `dir`.
-- Each page is captured whole, in tiles, at 1280x800 and 390x844, in light and dark. The index
-  is also captured with its theme menu open at both widths.
+- Each page is captured whole, in tiles, at 390x844, 1120x700, and 1376x860, in light and dark:
+  a phone's width and the layout's two docks. The index is also captured with Help open and with
+  Settings open at each width, nine states in all.
 - `--page <name>` captures that page alone and can be given more than once, so a site's pages
   can be split across runs; an unknown name exits 2 and lists the names. `--scheme light|dark`
   picks one scheme.

@@ -7,12 +7,15 @@
      own headings. It links the rendered page, which page.html links back. The head and header are
      the index's, the section tree's module beside the site nav's; no Markdown fills it, so it has
      no site index and no Pages button or drawer. The IMPORTANT alert is written as the renderer
-     writes one, so site.css draws it the same, and the interview line is a plain pre, focusable so
-     a keyboard scrolls it where it overflows.
+     writes one, so site.css draws it the same, its title's glyph a marker, octicon/report-16, which
+     the SDK's markdownPages fills at build with the icons layer's svg, as it fills the header's;
+     and the interview line is a plain pre, focusable so a keyboard scrolls it where it overflows.
      The diagrams draw from the foundation's tokens, the text in currentColor, so they follow the
      reader's palette and scheme; in forced colors they take the system colors.
      Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/briefs/orientation.html,
-     its text the brief's, with diagrams. -->
+     its text the brief's, with diagrams.
+     Adapted from spike-html-hosting-sdk (v0.5.0): template/index.html, each header button's and
+     the dialog Close's glyph marker in place of its word. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -37,7 +40,8 @@
         aria-label="Help"
         data-keys="?"
       >
-        Help <span aria-hidden="true"><kbd>?</kbd></span>
+        <svg data-icon="octicon/question-16"></svg>
+        <span aria-hidden="true"><kbd>?</kbd></span>
       </button>
       <button
         type="button"
@@ -46,7 +50,8 @@
         aria-label="Theme"
         data-keys="t"
       >
-        Theme <span aria-hidden="true"><kbd>T</kbd></span>
+        <svg data-icon="octicon/gear-16"></svg>
+        <span aria-hidden="true"><kbd>T</kbd></span>
       </button>
     </header>
     <div class="section-tree">
@@ -78,7 +83,7 @@
         over the organization's context and source, answering your questions with cited sources.
       </p>
       <div class="markdown-alert markdown-alert-important">
-        <p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p>
+        <p class="markdown-alert-title"><svg data-icon="octicon/report-16"></svg>Important</p>
         <p>Validated with Claude and ChatGPT. Does not work with Gemini.</p>
       </div>
       <pre tabindex="0"><code>launch interview: https://github.com/standards-lab/org/blob/main/interview.md</code></pre>
@@ -307,7 +312,8 @@
           aria-label="Close"
           data-keys="?"
         >
-          Close <span aria-hidden="true"><kbd>?</kbd></span>
+          <svg data-icon="octicon/x-16"></svg>
+          <span aria-hidden="true"><kbd>?</kbd></span>
         </button>
       </footer>
     </dialog>

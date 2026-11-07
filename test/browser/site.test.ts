@@ -1,15 +1,15 @@
 // The site's build, as Pages serves it: dist/ under the base, by the SDK's served(), Vite's
 // preview, loaded in the pinned chrome-headless-shell. Each of the SDK's shell checks is a test on
 // a fresh page of each page the root builds, by its URL apart from the base: the hand pages, the
-// index at the base, the orientation brief by hand at briefs/orientation.html, and the sitrep
-// entry under sitreps/, and the two trees' rendered pages, the charter at github/profile/ and the
-// orientation brief at org/briefs/orientation.html, whose IMPORTANT alert is a callout. Every page
-// sets its site nav's src to the root's sites.json under the base and fetches it there, and the
-// index's list of sites is that list. Each orientation page links the other, and each hand
-// diagram is an image named by its title and described by its desc. The crawl, from the hand index, checks
-// every copied page of both trees and loads each hand page it reaches; it reaches exactly the
-// root's three hand pages. Nothing here names the site: its base is package.json's name, and the
-// list is public/sites.json.
+// index at the base, the orientation brief by hand at briefs/orientation.html, and the sitrep entry
+// under sitreps/, and the two trees' rendered pages, the charter at github/profile/ and the
+// orientation brief at org/briefs/orientation.html, whose IMPORTANT alert is a callout, its title
+// the hand page's, glyph and all. Every page sets its site nav's src to the root's sites.json under
+// the base and fetches it there, and the index's list of sites is that list. Each orientation page
+// links the other, and each hand diagram is an image named by its title and described by its desc.
+// The crawl, from the hand index, checks every copied page of both trees and loads each hand page
+// it reaches; it reaches exactly the root's three hand pages. Nothing here names the site: its base
+// is package.json's name, and the list is public/sites.json.
 // Adapted from spike-html-hosting-architecture (27d70e1): test/browser/site.test.ts, its checks
 // the SDK's.
 // Adapted from spike-html-hosting-sdk (v0.4.0): test/browser/trees.test.ts, its shell checks on
@@ -86,6 +86,27 @@ describe("the site under its base", () => {
     } finally {
       await page.close();
     }
+  });
+
+  // The hand page writes its alert's glyph as a marker, which the build fills from the icons layer,
+  // as the renderer's variants take the same icon: the two titles hold the same markup.
+  test("the hand orientation page's IMPORTANT alert title is the rendered page's", async () => {
+    const titles: (string | undefined)[] = [];
+    for (const path of ["org/briefs/orientation.html", "briefs/orientation.html"]) {
+      const page = await browser.open("about:blank");
+      try {
+        await page.goto(`${server.origin}${path}`);
+        titles.push(
+          await page.evaluate(`document.querySelector(
+            "main .markdown-alert.markdown-alert-important > .markdown-alert-title")?.outerHTML`),
+        );
+      } finally {
+        await page.close();
+      }
+    }
+    const [rendered, written] = titles;
+    assert.ok(rendered?.includes("<svg"), "the rendered title has a glyph");
+    assert.equal(written, rendered);
   });
 
   test("the index lists every site sites.json lists, in its order, each at its base", async () => {

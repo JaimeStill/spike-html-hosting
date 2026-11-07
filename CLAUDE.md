@@ -24,8 +24,8 @@ repository is managed with the marathon workflow; start from `context/README.md`
 - **Goals:** this spike's tasks live in the coordinator's roadmap,
   `standards-lab/context/roadmap.toml`, under `experiment.html.spike-html-hosting`. Its goal
   record is `context/goals/experiment.html.spike-html-hosting.md`.
-- **Repositories:** the root (the org stand-in's site) and four more:
-  spike-html-hosting-sdk, -components, -architecture, and -sqlate. The coordinator's
+- **Repositories:** the root (the org stand-in's site) and five more:
+  spike-html-hosting-sdk, -components, -icons, -architecture, and -sqlate. The coordinator's
   `[workspace.paths]` locates them.
 - **References:** the repositories this spike reads are listed in `context/README.md`. The spike
   reads them and never writes to them.

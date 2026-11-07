@@ -1023,6 +1023,11 @@ slices 2/15 committed · checkpoint 1 closed, no marks · checkpoint 2 — · st
   are carried to checkpoint 2: every shortcut dialog's width capped near the reading measure, and
   the front-matter table that reads as page content above the title.
 
+- design: the spike repositories may release several times in this task (the architect's
+  direction: that is the point of a design review in spike repositories). components v0.5.0 and
+  SDK v0.6.0 are the first; each later round of checkpoint marks may release the next patch or
+  minor, and the sites adopt each.
+
 ## Pending edits
 
 - architecture · principles/rolling-currency.md: a web module that installs with pnpm sets

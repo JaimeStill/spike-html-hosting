@@ -271,7 +271,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 0/15 committed · checkpoint 1 — · checkpoint 2 — · standards — · spec — · editor —
+slices 2/15 committed · checkpoint 1 capturing · checkpoint 2 — · standards — · spec — · editor —
 
 ## Decisions
 

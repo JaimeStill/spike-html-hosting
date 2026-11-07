@@ -271,7 +271,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 2/15 committed · checkpoint 1 capturing · checkpoint 2 — · standards — · spec — · editor —
+slices 2/15 committed · checkpoint 1 closed, no marks · checkpoint 2 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -1016,6 +1016,12 @@ slices 2/15 committed · checkpoint 1 capturing · checkpoint 2 — · standards
   checkpoint 2; icons stays v0.1.0.
 - design: components take eslint-plugin-import-x 4.18.0; SDK rolldown stays held at 1.2.16 (Vite
   8.3.6 pins ~1.2.16).
+
+- design: checkpoint 1 closed with no marks beyond the brief (the architect's direction): BUILD
+  runs the fixes already aligned on (slices 3-12), and the architect marks what changes next at
+  checkpoint 2, from the fixed builds. The session's two candidates from checkpoint 1's captures
+  are carried to checkpoint 2: every shortcut dialog's width capped near the reading measure, and
+  the front-matter table that reads as page content above the title.
 
 ## Pending edits
 

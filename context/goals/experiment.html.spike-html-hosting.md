@@ -271,7 +271,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 7/15 committed (1-6, 9) · checkpoint 1 closed, no marks · checkpoint 2 — · standards — · spec — · editor —
+slices 9/15 committed (1-9) · checkpoint 1 closed, no marks · checkpoint 2 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -1035,6 +1035,15 @@ slices 7/15 committed (1-6, 9) · checkpoint 1 closed, no marks · checkpoint 2 
   56rem), in the SDK's site.css, since sl-settings sizes nothing outside its shadow root.
 - design: the header's button group is `<div class="header-actions">`; the Pages opener is
   `glyph-button pages-opener`, displayed inline-flex at narrow widths.
+
+- design: the SDK's shell checks clear the stored theme and keys settings after each check that
+  sets them, since Settings stores at once and the checks share a browser's localStorage.
+- design: the SDK's template/content/README.md (a copy of the SDK README at 93d68b5, recorded by
+  blob hash) still says Theme on T; the SDK release slice re-copies it and updates content.json.
+- design: a site or the SDK builds against an unreleased layer by installing a copy of the layer's
+  package.json, README, LICENSE and dist/ (with a node_modules symlink to the layer's own) at
+  node_modules/@jaimestill/<layer>, since cssModuleScripts() parses only paths under node_modules;
+  no tracked file changes, and `pnpm install --frozen-lockfile --offline` restores the pin.
 
 ## Pending edits
 

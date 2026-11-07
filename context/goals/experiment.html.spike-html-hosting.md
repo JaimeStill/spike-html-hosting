@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** building
+- **Task:** design
+- **Branch:** design
 
 ## Tasks
 
@@ -18,246 +18,260 @@
 10. [ ] review
 11. [ ] answer
 
-## Task brief · icons
+## Task brief · design
 
 ```
-Problem       Evidence 12 needs one icon toolkit, every set
-              available while designing, each build shipping
-              only the icons it uses. No layer ships glyphs: the
-              header's Pages, Help and Theme buttons and the
-              section tree's Previous and Next show words, the
-              drawer's Close is a word, and the alert callouts
-              use marked-alert's own Octicons strings, which lack
-              focusable="false". The architecture and sqlate
-              sites still pin SDK v0.3.1 and components v0.2.2,
-              and the components and the SDK trail mise-action
-              v5.2.7.
-Behaviors     1. spike-html-hosting-components takes mise-action
-                 v5.2.7, its notes read before the bump. Its
-                 currency prints nothing, and its check passes.
-              2. spike-html-hosting-sdk takes mise-action v5.2.7
-                 in its own workflows and its reusable ones. Its
-                 currency reports only the held rolldown, and its
-                 check passes.
-              3. The architecture and sqlate sites pin SDK
-                 v0.4.0 and components v0.3.0 and call the SDK
-                 workflows at v0.4.0. Each site's currency prints
-                 nothing, and its check passes.
-              4. spike-html-hosting-icons exists as a public
-                 repository managed with marathon, on the
-                 pattern of the components and the SDK: an
-                 offline check, CI on pull requests, a release
-                 workflow that does nothing at 0.0.0 and cuts the
-                 tag its version names, a currency command, and
-                 standards that point into the architecture
-                 repository. Its README records Iconify as the
-                 glyph source and its single-maintainer risk.
-              5. Given an Iconify set by name, the icons layer's
-                 build generates one ES module per icon of that
-                 set through @iconify/utils. Each module's
-                 default export is one complete svg string:
-                 viewBox, 1em square, currentColor,
-                 aria-hidden="true", focusable="false". Each
-                 module's declaration types it as a string. A
-                 fixture set in Iconify's format proves that any
-                 set's name works, not only the released one.
-              6. The generator accepts a set only when its
-                 licence is satisfied by shipping the licence
-                 text: MIT, ISC, Apache-2.0, BSD, CC0-1.0 or
-                 Unlicense. It fails the build on any other set,
-                 CC-BY, CC-BY-SA and GPL among them, naming the
-                 set and its licence. Each released set ships its
-                 upstream LICENSE byte for byte, with a
-                 provenance line naming the upstream repository
-                 and commit.
-              7. The package releases Octicons alone. A consumer
-                 imports one icon by its set and name, such as
-                 octicon/x-16. The package has no runtime
-                 dependencies; Iconify's packages are dev
-                 dependencies of the build. The pack test
-                 resolves an icon and its declaration from the
-                 tarball.
-              8. A dev-only browse page, kept out of the package,
-                 shows every glyph of the released sets with its
-                 name, under the foundation's profiles, light and
-                 dark. It is the layer's capture fixture, and its
-                 browser tier checks it.
-              9. A fixture build that imports some icons carries
-                 exactly those icons' markup and no other icon's.
-                 The unit tier asserts which icons the output
-                 holds.
-              10. spike-html-hosting-icons v0.1.0 is released as
-                 its release workflow describes, at a BUILD
-                 checkpoint, before the components pin it.
-              11. The components peer the icons layer.
-                 sl-section-tree's Previous and Next show
-                 Octicons arrow-up-16 and arrow-down-16 with
-                 their H and L hints in a kbd. Their accessible
-                 names stay "Previous" and "Next", and the keys
-                 help still lists "Previous section" and "Next
-                 section". sl-drawer's Close shows Octicons
-                 x-16 alone and is still named "Close <label>",
-                 its close slot's text visually hidden. The
-                 README's header snippet shows each glyph's
-                 marker. The components' browser tier and
-                 captures cover each glyph in light and dark,
-                 wide and narrow.
-              12. spike-html-hosting-components v0.4.0 is
-                 released as its release workflow describes, at
-                 a BUILD checkpoint, before the SDK pins it.
-              13. The SDK's build fills every
-                 <svg data-icon="<set>/<name>"> in each page a
-                 site builds, the hand pages and the rendered
-                 pages' shell alike, with that icon's markup from
-                 the icons package, and adds no script. An
-                 unknown name fails the build, naming the page
-                 and the icon. The SDK peers the icons layer.
-              14. The renderer's alert callouts take Octicons
-                 info-16, light-bulb-16, report-16, alert-16 and
-                 stop-16 from the icons package, for note, tip,
-                 important, warning and caution, through
-                 marked-alert's variants. Each glyph is
-                 aria-hidden and focusable="false", the kind
-                 stays visible text, and the SDK's unit tier pins
-                 the markup.
-              15. The template's header buttons show Octicons
-                 list-unordered-16 for Pages, question-16 for
-                 Help and gear-16 for Theme (checkpoint 3), each with its
-                 kbd hint and its name in aria-label, the word
-                 itself no longer shown. The keys help dialog's
-                 Close shows x-16 with its ? hint and is named
-                 Close. The shell checks assert each glyph and
-                 name, and the keys help still lists P Pages,
-                 ? Help, T Theme. The template pins icons v0.1.0
-                 and components v0.4.0. The scaffold test runs
-                 the copy's full check offline.
-              16. spike-html-hosting-sdk v0.5.0 is released as
-                 its release workflow describes, at a BUILD
-                 checkpoint, before any site pins it. Its
-                 currency reports only the held rolldown.
-              17. The architecture, sqlate and root sites pin
-                 SDK v0.5.0, components v0.4.0 and icons v0.1.0,
-                 and call the SDK workflows at v0.5.0. Every page
-                 template each site builds shows the glyphs of
-                 behavior 15. Every page passes the shell checks,
-                 copied pages pass the crawl, and no page scrolls
-                 sideways at 390px. Each site's currency prints
-                 nothing.
-              18. The prose that org left over 100 columns is
-                 rewrapped: the SDK README's lines on Crawled,
-                 sl-site-index and the drawer, and its crawl
-                 paragraph's early break; the components
-                 README's screenshots line and served.ts's
-                 handler comment.
-              19. The root's README notes the icons layer in
-                 Building the sites, the pins at SDK v0.5.0,
-                 components v0.4.0 and icons v0.1.0 on all three
-                 sites, and names primer/octicons at the commit
-                 whose LICENSE the package copies under
-                 References.
-              20. The session brief shows evidence 12:
-                 - every set available while designing: the
-                   generator run on the fixture set, and the
-                   browse page's captures;
-                 - each build ships only what it uses: for each
-                   site, the icons its built output holds,
-                   counted against the icons its pages name and
-                   against the package's Octicons modules, with
-                   the brotli weight of the glyph markup per
-                   page.
-Test seams    each repository's `mise run check`:
-              - the icons layer's unit tier over the generator's
-                output, the licence refusal and the fixture
-                build's contents; its pack test; its browser tier
-                on the browse page
-              - the components' browser tier over the section
-                tree's and the drawer's buttons
-              - the SDK's unit tier over the build-time fill and
-                the alert markup; its shell checks; the scaffold
-                test
-              - each site's shell checks and crawl on its build
-                under Vite's preview
-Slices        1. Components upgrade: mise-action v5.2.7; currency
-                 prints nothing, and the check passes
+Problem       The three sites ship as the icons task left them,
+              and no one has reviewed them visually at the widths
+              where their layout changes. Captures are taken at
+              1280 and 390 only, so neither dock (1120px, the
+              section tree; 1376px, three columns) is ever seen.
+              The header wraps Help and Theme onto a second line
+              at 390px. Glyph buttons carry the native button's
+              --space-s inline padding, about 36px of a header
+              button's 81px. Icon-only controls show no name on
+              hover. The keyboard settings sit in Help, Theme
+              holds only the theme, and both dialogs are the
+              foundation's, whose heading, keys and contents a
+              site can't change. spike-html-hosting-components
+              trails eslint-plugin-import-x 4.18.0.
+Behaviors     1. spike-html-hosting-components takes
+                 eslint-plugin-import-x 4.18.0, its notes read
+                 before the bump. Its currency prints nothing,
+                 and its check passes.
+              2. The SDK's capture description captures every
+                 page whole at 390x844, 1120x700 and 1376x860,
+                 light and dark, with 1280 gone. The index is
+                 also captured with Help open and with the
+                 settings dialog open at each width; until the
+                 Settings dialog exists, the theme menu stands
+                 in for it. The SDK's capture test counts the
+                 index's nine states, and the run still leaves
+                 no capture file.
+              3. At checkpoint 1 the architect views the three
+                 sites as they stand, captured by behavior 2's
+                 description, and marks fixes. Each marked fix
+                 becomes a behavior of this brief, in the
+                 components' sheets or the SDK's site.css, and
+                 is shown fixed at checkpoint 2.
+              4. Glyph buttons are their own control: the class
+                 glyph-button on a native <button>, styled by one
+                 sheet the components export, glyph-button.css,
+                 which each component adopts in its shadow root
+                 and each page links. It lays the glyph and its
+                 key hint in a row, padding --space-3xs block and
+                 --space-2xs inline, --space-3xs between glyph
+                 and hint, and keeps the native button's border
+                 and surface. Every glyph button on the sites
+                 takes it: the header's, each dialog's Close, the
+                 section tree's Previous and Next, and the
+                 drawer's Close. Every one is at least 24x24 CSS
+                 px in every space and type profile, at every
+                 capture width.
+              5. Every glyph button shows its name on hover and
+                 keyboard focus through an interest invoker: an
+                 interestfor naming a popover="hint" holding the
+                 same text as its aria-label. With no script of
+                 ours it shows in Chromium and Escape dismisses
+                 it; where interestfor isn't supported nothing
+                 shows and the control keeps its name. Assistive
+                 technology announces the name once.
+              6. The header's buttons are one group at the inline
+                 end of its first line at every width; the site
+                 nav takes the rest of the row and wraps its own
+                 links. At 390px no button falls to a second line
+                 and nothing scrolls sideways; at 1120 and 1376
+                 the header is one row.
+              7. sl-shortcuts, a components element placed in a
+                 dialog, lists exactly the page's bindings as the
+                 foundation's bindings() gives them with that
+                 dialog closed: each binding's keys in kbd, a row
+                 button named by the binding that closes the
+                 dialog and runs it, a row turned off by the
+                 reader's setting marked off, and the
+                 foundation's screen-reader note after the list.
+                 It holds no settings, and the foundation's
+                 keys-help.js is never requested.
+              8. sl-settings, a components element placed in a
+                 dialog, holds the theme (color, scheme, space
+                 and type rows with their ◀ ▶ steppers and h, l,
+                 j, k moves, and the foundation menu's live
+                 preview card, laid out by the foundation's
+                 theme-menu.css) and the keyboard (the
+                 character-key switch and the wait between
+                 presses). Each change applies and stores at
+                 once, with no Save or Cancel, and another tab
+                 follows it. Turning character keys off stops
+                 every character binding (P, ?, S, H and L) and
+                 updates aria-keyshortcuts on every control, the
+                 section tree's included. The foundation's
+                 theme-menu.js is never requested.
+              9. The Settings dialog has the heading Settings and
+                 holds sl-settings. It opens from the header's
+                 Settings glyph button (Octicons gear-16, S hint,
+                 named Settings) by the native show-modal
+                 invoker, which keys.js clicks on S. Its Close
+                 shows x-16 with an Esc hint and is named Close.
+                 Escape or Close closes it, and focus returns to
+                 the opener.
+              10. Help keeps its heading, Keyboard shortcuts, and
+                 holds sl-shortcuts alone, so it only describes
+                 the shortcuts. ? opens it, and it lists P Pages,
+                 ? Help, S Settings, and H and L where a page has
+                 a section tree. Its Close shows x-16 with an Esc
+                 hint in place of ?, and Escape closes it.
+              11. The shortcut dialog is a documented pattern,
+                 not a component. The components README states
+                 it: a key and its opener glyph button (data-keys,
+                 key hint, interest-invoker name, show-modal
+                 invoker) open a native modal dialog with a
+                 heading naming it, any content its focused
+                 operation needs, and a Close glyph button with
+                 an Esc hint. It gives Settings and Help as its
+                 two worked instances, and an upload dialog
+                 under U as one way to extend it to any focused
+                 overlaid interface. An SDK shell check fails a
+                 page where any dialog opened by a keyed
+                 show-modal opener breaks the pattern, naming the
+                 dialog and what it lacks.
+              12. The SDK's keys help check expects ? to open
+                 Help listing exactly the page's bindings, Escape
+                 to close it, the off switch in Settings to stop
+                 L and P, and each header control to show the key
+                 it binds.
+              13. The components README's header snippet shows
+                 the button group, each glyph-button's class and
+                 interest hint, gear-16 named Settings with its S
+                 hint, and the Settings and Help dialogs.
+              14. spike-html-hosting-icons' STANDARDS.md gains a
+                 Design section, as the components' has, for its
+                 browse page on the foundation. No icons release.
+              15. At checkpoint 2 the architect views the three
+                 sites built with the unreleased components and
+                 SDK, at the three widths, light and dark, with
+                 the dialogs open, before the standards and spec
+                 reviews and before any release.
+              16. spike-html-hosting-components v0.5.0 is released
+                 as its release workflow describes, after
+                 checkpoint 2 and before the SDK pins it.
+              17. spike-html-hosting-sdk v0.6.0 is released after
+                 the components'. It pins components v0.5.0, its
+                 template carries behaviors 4-6 and 9-10, its
+                 scaffold test runs the copy's full check offline,
+                 and its currency reports only the held rolldown.
+              18. The architecture, sqlate and root sites pin SDK
+                 v0.6.0, components v0.5.0 and icons v0.1.0, and
+                 call the SDK workflows at v0.6.0. Every page
+                 template carries behaviors 4-6 and 9-10, the
+                 root's four included; every page passes the
+                 shell checks, the copied pages pass the crawl,
+                 nothing scrolls sideways at 390px, and each
+                 site's currency prints nothing.
+              19. The root's README records the pins at SDK
+                 v0.6.0, components v0.5.0 and icons v0.1.0, and
+                 the capture widths.
+              20. The session brief carries each site's captures
+                 at 390, 1120 and 1376, light and dark, the
+                 index's dialogs open, beside checkpoint 1's
+                 marks and how each was fixed.
+Test seams    each repository's `mise run check`: the components'
+              browser tier over glyph-button, sl-shortcuts,
+              sl-settings, the section tree's and the drawer's
+              buttons, and the interest hints; the SDK's shell
+              checks (the shortcut-dialog pattern, the keys help,
+              target sizes, the 390px header) and its capture
+              test; each site's shell checks and crawl on its
+              build under Vite's preview
+Slices        1. Components upgrade: eslint-plugin-import-x
+                 4.18.0; currency prints nothing, check passes
                  (spike-html-hosting-components)
-              2. SDK upgrade: mise-action v5.2.7 in every
-                 workflow; currency reports only the held
-                 rolldown (spike-html-hosting-sdk)
-              3. Architecture upgrade: SDK v0.4.0, components
-                 v0.3.0, workflows at v0.4.0
-                 (spike-html-hosting-architecture)
-              4. Sqlate upgrade: the same pins
-                 (spike-html-hosting-sqlate)
-              5. Icons repository: created and managed with
-                 marathon, the scaffold with its check, CI,
-                 release workflow at 0.0.0, currency and
-                 standards; the public remote
-                 (spike-html-hosting-icons)
-              6. Icons generator: Octicons modules and
-                 declarations, the licence rule with the
-                 upstream LICENSE, the fixture set, the pack test
-                 and the fixture build's contents
-                 (spike-html-hosting-icons)
-              7. Icons browse page and release: the browse page
-                 and its captures; README, version 0.1.0,
-                 CHANGELOG [0.1.0]
-                 → checkpoint 1 (escalation): the architect
-                   views the browse page's captures first; the
-                   standards and spec reviews run; the architect
-                   accepts; the pull request merges, and the
-                   release workflow cuts v0.1.0, which the record
-                   logs this session pushed
-                 (spike-html-hosting-icons)
-              8. Components glyphs: the icons peer, the section
-                 tree's and the drawer's buttons, the README's
-                 snippet, the 100-column fixes; captures
+              2. SDK captures: the 390, 1120 and 1376 widths, and
+                 Help open and the theme menu open on the index;
+                 the capture test (spike-html-hosting-sdk)
+                 → checkpoint 1 (escalation): the session
+                   captures the three sites with this SDK branch
+                   linked locally, nothing committed to the
+                   sites. The architect views them and marks
+                   fixes; the session drafts the marks as
+                   behaviors and slices here, which the architect
+                   approves before BUILD goes on
+              3. Glyph button: glyph-button.css exported; the
+                 section tree's and the drawer's buttons take it,
+                 with interest hints; captures
                  (spike-html-hosting-components)
-              9. Components release: version 0.4.0, CHANGELOG
-                 [0.4.0]
-                 → checkpoint 2, as checkpoint 1
+              4. Shortcut list: sl-shortcuts over bindings()
                  (spike-html-hosting-components)
-              10. SDK glyphs: the build-time fill with its
-                 unknown-name failure, the alert callouts'
-                 glyphs, the icons peer
+              5. Settings content: sl-settings, with the theme
+                 rows, the preview card on the foundation's
+                 theme-menu.css, and the keys settings, stored at
+                 once (spike-html-hosting-components)
+              6. Components README and marked fixes: the shortcut
+                 dialog pattern; the header snippet; checkpoint
+                 1's fixes in the components' sheets; captures
+                 (spike-html-hosting-components)
+              7. SDK header: the button group, glyph-button on
+                 every header button, interest hints, the Settings
+                 opener on S; the 390px and target-size checks;
+                 checkpoint 1's fixes in site.css; built against
+                 the components branch linked locally
                  (spike-html-hosting-sdk)
-              11. SDK template and release: the template's header
-                 and help dialog glyphs, the shell checks, the
-                 pins at icons v0.1.0 and components v0.4.0, the
-                 scaffold test, the 100-column fixes; README,
-                 version 0.5.0, CHANGELOG [0.5.0]; captures
-                 → checkpoint 3, as checkpoint 1
-                 (spike-html-hosting-sdk)
-              12. Architecture adopts: the three pins and the
-                 workflow calls, the header glyphs, captures
-                 (spike-html-hosting-architecture)
-              13. Sqlate adopts: the same
+              8. SDK shortcut dialogs: the template's Settings
+                 and Help dialogs with their Esc Closes; the
+                 pattern check; the keys help check; the
+                 Settings-open capture state in place of the
+                 theme menu's (spike-html-hosting-sdk)
+              9. Icons standards: the Design section
+                 (spike-html-hosting-icons)
+              10. Architecture adopts: its shell carries the
+                 header and dialogs, against the linked layers;
+                 captures (spike-html-hosting-architecture)
+              11. Sqlate adopts: the same
                  (spike-html-hosting-sqlate)
-              14. Root adopts and measures: the same on all four
-                 page templates; the README edits; evidence 12's
-                 measure across the three sites for the session
-                 brief (spike-html-hosting)
-Out of scope  names on hover or tooltips for icon-only controls,
-              and the theme button's name and key (the design
-              task); any set but Octicons in a release; glyphs
-              in sl-site-nav, sl-page-header, sl-site-index or
-              copied content; any change to
-              spike-html-apps-foundation, spike-html-apps-
-              components or spike-html-apps-tooling, the theme
-              dialog's heading among them; rolldown 1.3.0;
-              consolidating the currency script, which gains a
-              copy in the icons layer (recorded for the answer
-              task); a prose-width check; the design review of
-              the three sites
-Door          one-way: the new public repository spike-html-
-              hosting-icons and the tags icons v0.1.0,
-              components v0.4.0 and SDK v0.5.0, which every later
-              site and scaffold consume; two-way: the three
+              12. Root adopts: the same on all four page
+                 templates (spike-html-hosting)
+                 → checkpoint 2 (escalation): the architect views
+                   the fixed builds' captures first; the
+                   standards and spec reviews run over every
+                   branch; the architect accepts
+              13. Components release: version 0.5.0, CHANGELOG
+                 [0.5.0]; the pull request merges and the release
+                 workflow cuts v0.5.0
+                 (spike-html-hosting-components)
+              14. SDK release: the pin and template at components
+                 v0.5.0, the scaffold test; README, version
+                 0.6.0, CHANGELOG [0.6.0]; it merges and the
+                 release workflow cuts v0.6.0. If anything shown
+                 at checkpoint 2 changed, it stops again for
+                 captures first (spike-html-hosting-sdk)
+              15. Sites pin: architecture, sqlate and root pin
+                 SDK v0.6.0 and components v0.5.0 and call the
+                 workflows at v0.6.0; the root's README; each
+                 site's currency prints nothing
+                 (spike-html-hosting-architecture,
+                 spike-html-hosting-sqlate, spike-html-hosting)
+Out of scope  any change to spike-html-apps-foundation: its theme
+              menu and keys help stay as they are, and the
+              Settings and Help dialogs, the shortcut-dialog
+              pattern, and the lazy theme-menu and keys-help
+              chunks the sites still build are recorded for the
+              experiment.html intake; the architecture
+              repository's pattern page (the intake); names on
+              hover in browsers without interestfor; the title
+              attribute or a tooltip of our own; an icons
+              release; glyphs beyond those named; rolldown 1.3.0;
+              the review task's cost measures
+Door          one-way: the tags components v0.5.0 and SDK v0.6.0,
+              which every later site and scaffold consume;
+              two-way: the icons standards edit and the three
               sites' changes, which redeploy their pages and
               revert by reverting their merges
-Release       spike-html-hosting-icons v0.1.0;
-              spike-html-hosting-components v0.4.0;
-              spike-html-hosting-sdk v0.5.0
+Release       spike-html-hosting-components v0.5.0;
+              spike-html-hosting-sdk v0.6.0
 ```
+
+## Progress
+
+slices 0/15 committed · checkpoint 1 — · checkpoint 2 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -964,6 +978,45 @@ Release       spike-html-hosting-icons v0.1.0;
   earlier SDK provenance line and add a v0.5.0 line, while the architecture and sqlate sites
   change their one SDK line to the new tag.
 
+- design: two capture checkpoints, captures first: the architect marks fixes from the sites as they
+  stand, then sees the fixed builds before any release. Rejected: carried fixes first, one checkpoint.
+- design: capture widths 390x844, 1120x700, 1376x860 replace 1280. Rejected: adding beside 1280.
+- design: Theme becomes Settings, heading Settings, key S. Rejected: keeping Theme and T; comma.
+- design: Settings and Help are built in spike-html-hosting-components on the foundation's public
+  modules, and recorded for the intake as foundation changes. Rejected: intake only; editing the
+  foundation in this spike.
+- design: the keyboard-shortcut dialog is a documented pattern, not a component (the architect's
+  direction): key + opener glyph button → native modal with heading, any content its focused
+  operation needs, and an Esc Close; Settings and Help are its worked instances; it extends to any
+  focused overlaid interface (U to upload). Written in the components README, held by an SDK shell
+  check, promoted to an architecture pattern page at the intake. No built-in Save or Cancel.
+  Rejected: a light-DOM element, a Lit base class, a wiring function.
+- design: Settings applies and stores each change at once, Close only. Rejected: preview,
+  Save/Cancel with revert.
+- design: every shortcut dialog's Close shows Esc; Help's ? Close becomes Esc. Rejected: the
+  opener's key, which keys.js ignores while a field has focus.
+- design: Settings keeps the live preview card on the foundation's theme-menu.css. Rejected:
+  dropping it.
+- design: Help's list is built by the components from bindings(). Rejected: hiding the
+  foundation's settings fieldset by CSS.
+- design: the index is captured with Settings open and with Help open at each width. Rejected:
+  Settings alone.
+- design: names on hover by interest invokers (interestfor + popover="hint"), Chromium only today.
+  Rejected: a CSS anchor-positioned label Escape can't dismiss (WCAG 1.4.13); the intake.
+- design: header buttons are one group at the inline end; the nav wraps its own links. Rejected:
+  the nav on its own row; hiding key hints.
+- design: glyph buttons are their own control (the architect's direction): class glyph-button on a
+  native <button>, one exported components sheet glyph-button.css, adopted in shadow roots and
+  linked by pages; padding --space-3xs block, --space-2xs inline, --space-3xs gap; native border
+  and surface kept. Rejected: wrapper or shadow-root elements; --space-3xs all round; borderless;
+  icon-button.
+- design: new elements sl-shortcuts and sl-settings; dialog ids help and settings (defaults).
+- design: spike-html-hosting-icons' STANDARDS.md gains a Design section; no icons release.
+- design: releases are those the review needs: components v0.5.0, then SDK v0.6.0, after
+  checkpoint 2; icons stays v0.1.0.
+- design: components take eslint-plugin-import-x 4.18.0; SDK rolldown stays held at 1.2.16 (Vite
+  8.3.6 pins ~1.2.16).
+
 ## Pending edits
 
 - architecture · principles/rolling-currency.md: a web module that installs with pnpm sets
@@ -1073,3 +1126,14 @@ Release       spike-html-hosting-icons v0.1.0;
   (`https://github.com/primer/octicons.git`), read at 9a274e2 (tag `@primer/octicons@19.42.0`),
   whose LICENSE spike-html-hosting-icons copies. The root's context/README.md, References,
   already lists it.
+- coordinator · roadmap, `tasks.design`: add spike-html-hosting-icons to repos; summary becomes the
+  task as built (captures at 390/1120/1376 at two checkpoints, glyph-button, interest-invoker
+  names, one-group header, the shortcut-dialog pattern with Settings (S) and Help in the
+  components, releases components v0.5.0 and SDK v0.6.0 pinned by all three sites).
+- coordinator · intake, architecture: a pattern page for the keyboard-shortcut dialog, Settings and
+  Help as worked instances, upload under U as an extension.
+- coordinator · intake, spike-html-apps-foundation: Settings and Help as foundation changes (the
+  theme menu's fixed heading and T save, the keys help's built-in settings, force a rebuild today).
+- coordinator · intake, spike-html-apps-foundation: preferences.js and keys.js dynamically import
+  theme-menu.js and keys-help.js, so every site builds both chunks without requesting them.
+- coordinator · intake: glyph-button as a candidate foundation control.

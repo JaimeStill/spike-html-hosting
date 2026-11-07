@@ -271,7 +271,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 5/15 committed (1-4, 9) · checkpoint 1 closed, no marks · checkpoint 2 — · standards — · spec — · editor —
+slices 7/15 committed (1-6, 9) · checkpoint 1 closed, no marks · checkpoint 2 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -1027,6 +1027,14 @@ slices 5/15 committed (1-4, 9) · checkpoint 1 closed, no marks · checkpoint 2 
   direction: that is the point of a design review in spike repositories). components v0.5.0 and
   SDK v0.6.0 are the first; each later round of checkpoint marks may release the next patch or
   minor, and the sites adopt each.
+
+- design: a shortcut dialog returns focus natively, to what held it when the dialog opened: the
+  opener when it was clicked, the prior focus when its key opened it (keys.js clicks without
+  focusing). Behavior 9's "focus returns to the opener" holds for a click; no script is added.
+- design: both shortcut dialogs take the foundation menu's width cap, min(100% - 2 * --space-s,
+  56rem), in the SDK's site.css, since sl-settings sizes nothing outside its shadow root.
+- design: the header's button group is `<div class="header-actions">`; the Pages opener is
+  `glyph-button pages-opener`, displayed inline-flex at narrow widths.
 
 ## Pending edits
 

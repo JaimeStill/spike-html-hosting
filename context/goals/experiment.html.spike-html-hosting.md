@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards running · spec — · editor —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec running · editor —
 
 ## Decisions
 
@@ -1225,6 +1225,11 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   change. Recorded for the intake's pattern page.
 - design: NOTE in sl-shortcuts copies the foundation's screen-reader note; a unit test reads the
   pinned foundation's keys-help source and fails on drift, since the element never loads it.
+
+- design: for the review task: the SDK's landing() adds a Page.loadEventFired listener per call
+  that the tooling's Page can't remove (it has on() but no off()), so listeners pile up over a
+  crawl; and the crawl's front-matter meta check, on a page with no front matter, only confirms
+  that no meta takes a key's name.
 
 ## Pending edits
 

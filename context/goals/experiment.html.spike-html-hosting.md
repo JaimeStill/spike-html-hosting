@@ -382,7 +382,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 12/24 committed (1-12) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 — · standards — · spec — · editor —
+slices 15/24 committed (1-15) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 — · standards — · spec — · editor —
 
 ## Decisions
 

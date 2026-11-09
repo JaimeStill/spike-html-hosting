@@ -1218,6 +1218,14 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
 
 - design: checkpoint 4 closed with no marks (the architect: "looks great").
 
+- design: standards review (components): includeInternal dropped from eslint.config.js, inert
+  since eslint-plugin-import-x 4.18.0; the own name is refused by the layer table alone.
+- design: sl-shortcuts reads bindings against the topmost modal; a second modal over Help is
+  ruled out by the pattern (the page is inert and keys fire only inside the open modal), so no
+  change. Recorded for the intake's pattern page.
+- design: NOTE in sl-shortcuts copies the foundation's screen-reader note; a unit test reads the
+  pinned foundation's keys-help source and fails on drift, since the element never loads it.
+
 ## Pending edits
 
 - architecture · principles/rolling-currency.md: a web module that installs with pnpm sets

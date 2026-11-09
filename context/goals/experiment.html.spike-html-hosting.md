@@ -269,9 +269,120 @@ Release       spike-html-hosting-components v0.5.0;
               spike-html-hosting-sdk v0.6.0
 ```
 
+### Amendment 1 · after checkpoint 2 (approved)
+
+Superseded or amended: 4 and 5 (the glyph-button list drops the section tree's Previous and Next,
+gains the Contents opener); 6 (by 25); 7's row buttons (by 21); 9, 10, 11's Close placement (by
+26); 10's list becomes P, ?, S, C, J/K where a tree, H/L where a pager; 12 (the off switch stops J
+and P, and H/L where bound; focus lands on Help's Close); 13 (adds the Contents opener and drawer
+and the dialog header row); 15 (checkpoint 2 done; 30 adds checkpoint 3); 18 (also 21-28); 20
+(also checkpoint 2's marks and checkpoint 3's captures). Retired: sl-page-header and the section
+tree's progress bar, sticky bar and buttons.
+
+```
+Behaviors     21. Help's rows are plain text: each binding's keys
+                  in kbd and its label, no button, no action.
+                  Opening Help puts focus on its Close.
+              22. sl-section-tree is links alone: the section in
+                  view marked by an inline-start accent rule and
+                  bold text (aria-current="location"); no progress
+                  bar, no Previous or Next buttons, no sticky bar;
+                  J and K move to the next and previous section
+                  through register(), wrapping as H and L did; Help
+                  lists them; the off switch stops them.
+              23. The section tree sits in sl-drawer#contents,
+                  labeled Contents, docked from 70rem; below 70rem
+                  a modal drawer from the inline-start edge, opened
+                  by a Contents glyph button in the header actions
+                  after Pages (list-ordered-16, C hint, named
+                  Contents, clicked by keys.js on C, aria-expanded
+                  in step as Pages'), shown only below 70rem on a
+                  page whose contents drawer is defined; with no
+                  script the links render inline; following a link
+                  closes the drawer.
+              24. Each copied page has a pager at the top and the
+                  bottom of its article: Previous and Next links to
+                  its neighbours in the site index's order, each
+                  with arrow-left-16 or arrow-right-16, the word,
+                  the neighbour's title and its kbd hint; both
+                  pagers' links carry data-keys h and l, Help lists
+                  each once; no Previous on the first page, no Next
+                  on the last, no wrap; hand pages have no pager and
+                  bind no H or L; the SDK renders it from the site
+                  index and the crawl follows and asserts both.
+              25. Below 40rem the header is two rows: the site nav
+                  on its own row, never wrapping, then the actions
+                  group at the inline end of the next; from 40rem
+                  one row. The header check asserts both, and
+                  nothing scrolls sideways at 390px.
+              26. Every shortcut dialog opens with a header row:
+                  its h2 and, at the inline end, its Close (x-16,
+                  Esc hint, named Close), with more space under the
+                  h2; the README pattern, the template and every
+                  shell, and the pattern check require it.
+              27. Help is as wide as its content, capped at 56rem
+                  and the viewport less --space-s each side;
+                  Settings keeps its width.
+              28. Front matter is not shown: one <meta name="<key>"
+                  content="<value>"> per key in the head, in source
+                  order, as frontMatterText gives it; the crawl
+                  asserts them, no sl-page-header, and no key: value
+                  line; sl-page-header leaves the shells and the
+                  components.
+              29. The capture description keeps behavior 2's widths
+                  and the index's Help-open and Settings-open
+                  states.
+              30. At checkpoint 3 the architect views the three
+                  sites on the linked, unreleased components and
+                  SDK, at 390, 1120 and 1376, light and dark,
+                  dialogs open, before the standards and spec
+                  reviews and any release.
+Slices        13. Shortcut list rows: plain text rows
+                  (spike-html-hosting-components)
+              14. Section tree form (a): links, accent rule and
+                  bold, J/K; progress, buttons and bar removed;
+                  sl-page-header removed
+                  (spike-html-hosting-components)
+              15. Components README: the header-row Close; the
+                  snippet with the Contents opener and drawer
+                  (spike-html-hosting-components)
+              16. SDK renderer: front matter to meta and its crawl;
+                  the tree in sl-drawer#contents at docks.tree; the
+                  sticky-bar checks rewritten for the drawer
+                  (spike-html-hosting-sdk)
+              17. SDK pager: top and bottom from the site index,
+                  H/L by data-keys, the crawl's pager checks
+                  (spike-html-hosting-sdk)
+              18. SDK shell and template: the Contents opener, the
+                  40rem two-row header and its check, the dialog
+                  header row and the pattern check, h2 spacing,
+                  Help's fit-content width, the keys check's
+                  J/K/H/L/C (spike-html-hosting-sdk)
+              19. Architecture adopts; captures
+                  (spike-html-hosting-architecture)
+              20. Sqlate adopts (spike-html-hosting-sqlate)
+              21. Root adopts, all four templates
+                  (spike-html-hosting)
+                  → checkpoint 3 (escalation): captures first; marks
+                    become behaviors and slices, approved before
+                    BUILD goes on; then the standards and spec
+                    reviews; the architect accepts
+              22. Components release (was 13): v0.5.0
+              23. SDK release (was 14): components v0.5.0, the
+                  scaffold test, template/content README re-copy,
+                  v0.6.0
+              24. Sites pin (was 15)
+Out of scope  (adds) a nav menu or sub-navs at narrow widths; a
+              wrap from the last page to the first
+Release       spike-html-hosting-components v0.5.0;
+              spike-html-hosting-sdk v0.6.0 (first; a later
+              checkpoint's fixes may release more, each at its own
+              checkpoint)
+```
+
 ## Progress
 
-slices 12/15 committed (1-12) · checkpoint 1 closed, no marks · checkpoint 2 captured, awaiting the architect · standards — · spec — · editor —
+slices 12/24 committed (1-12) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -1045,6 +1156,35 @@ slices 12/15 committed (1-12) · checkpoint 1 closed, no marks · checkpoint 2 c
   node_modules/@jaimestill/<layer>, since cssModuleScripts() parses only paths under node_modules;
   no tracked file changes, and `pnpm install --frozen-lockfile --offline` restores the pin.
 
+- design: checkpoint 2's review (the architect): Help's rows are plain text, focus opening on
+  its Close. Rejected: a button per row that runs the binding.
+- design: full HJKL: J/K move to the next and previous section, H/L to the previous and next page
+  in the site index's order; hand pages bind no H/L. Rejected: H/L for sections.
+- design: the section tree is links alone, the current section marked by an inline-start accent
+  rule and bold text. Rejected: the scroll-timeline progress bar and the Previous/Next buttons,
+  which read as disjointed from the design; the progress redrawn as a vertical rail.
+- design: below 70rem the section links live in sl-drawer#contents, opened by a header-actions
+  glyph button as Pages is (the architect's direction); this supersedes the components decision
+  that rejected a second drawer, since it slides from the inline-start edge as Pages does.
+  Rejected: the sticky bar; a disclosure under the current section's title.
+- design: the Contents opener is list-ordered-16, key C, named Contents (session defaults, open
+  to the architect at checkpoint 3). Rejected: O; Sections.
+- design: a pager at the top and the bottom of each copied page (the architect: for easier
+  discovery), no wrap, H/L by data-keys on its links; hand pages get none. Rejected: a pager at
+  the bottom only; keyboard-only page moves.
+- design: below 40rem the site nav keeps its own row and never wraps, and the actions group takes
+  the next row; from 40rem one row. Rejected: the one-group header with the nav wrapping; a
+  break that depends on each site's nav width.
+- design: a nav menu at narrow widths, and sub-navs (a nav within a nav), are recorded for later
+  (the architect), not built.
+- design: each shortcut dialog's Close sits at the top inline end, in a header row with its h2.
+  Rejected: a trailing footer.
+- design: more space under each dialog's h2; Help is as wide as its content, capped at 56rem
+  (the architect: maximized around its contents, not the space); Settings keeps 56rem.
+- design: front matter is not visible (the architect: metadata that clutters the layout); one
+  meta element per key in the head; sl-page-header removed. Rejected: the visible dl; dropping
+  the metadata entirely.
+
 ## Pending edits
 
 - architecture · principles/rolling-currency.md: a web module that installs with pnpm sets
@@ -1165,3 +1305,11 @@ slices 12/15 committed (1-12) · checkpoint 1 closed, no marks · checkpoint 2 c
 - coordinator · intake, spike-html-apps-foundation: preferences.js and keys.js dynamically import
   theme-menu.js and keys-help.js, so every site builds both chunks without requesting them.
 - coordinator · intake: glyph-button as a candidate foundation control.
+- answer task / intake: a nav menu at narrow widths, and sub-navs (a nav within a nav element),
+  for the Pages sites; below 40rem the site nav holds one row and doesn't wrap, so a longer site
+  list needs it.
+- coordinator · roadmap, `tasks.design`: the summary as built also names HJKL (J/K sections, H/L
+  pages), the Contents drawer, the pager at top and bottom, front matter as head meta, the
+  two-row header below 40rem, and the dialog header row.
+- intake: front matter as head meta, not visible, as the convention for v1.repository-docs.
+- intake, the shortcut-dialog pattern page: its Close sits in the header row with the h2.

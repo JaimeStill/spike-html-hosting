@@ -1238,6 +1238,14 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   interest hints are tested; the components README places the group at the inline start below
   40rem. The SDK release slice also takes typescript-eslint 8.72.2 and vite 8.3.7.
 
+- design: the SDK's target-size check measures every space and type the foundation registers at
+  the capture widths (WIDTHS, now exported from screenshots.js), dropping 1600px; it costs about
+  0.8s more per page, 19% on the SDK's browser tier.
+- design: for the review task and the intake: in a modal, Escape with a glyph hint shown closes
+  the dialog (and the hint with it), not the hint alone; on a plain page it closes the hint
+  alone. Opening the drawer by mouse shows its Close's hint at once, since focus there counts as
+  interest though :focus-visible doesn't match.
+
 ## Pending edits
 
 - architecture · principles/rolling-currency.md: a web module that installs with pnpm sets

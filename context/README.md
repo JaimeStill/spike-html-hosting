@@ -27,10 +27,11 @@ its own docs/ guide.
    workflow.
 2. The org stand-in: a charter page, an index linking every site, and a hosted persistent
    report, correct under its `/<repo>/` base path.
-3. The architecture stand-in: its pages rendered with their front matter, relative `.md` links
-   resolved across the site.
+3. The architecture stand-in: its pages rendered with their front matter as head meta, relative
+   `.md` links resolved across the site.
 4. The sqlate stand-in: its README index and docs/ guide with the section tree (key hints in
-   `kbd`, reading progress, and H and L section keys that leave the arrow keys to scrolling).
+   `kbd`, and J and K section keys that leave the arrow keys to scrolling) and a pager, H and L,
+   on each copied page.
 5. Shared navigation on every site that stays correct when one site deploys ahead of the
    others, with build-time-by-tag measured against fetched-at-runtime.
 6. One baseline pin, with the reader's stored theme carrying across sites on the shared origin.
@@ -47,11 +48,12 @@ its own docs/ guide.
 ## Capabilities
 
 - **Sites:** three Pages project sites, each built by Vite and deployed by its own workflow.
-- **Content:** Markdown sources rendered at build, with front matter and resolved links.
+- **Content:** Markdown sources rendered at build, with front matter as head meta, resolved
+  links, and a pager to the previous and the next page.
 - **Site SDK:** spike-html-hosting-sdk, released by tag: the template each site is scaffolded
   from, the build and check pieces, and the reusable workflows.
-- **Documentation components:** the section tree, page header, site index, and cross-site
-  navigation, released by tag.
+- **Documentation components:** the section tree, the site index, the drawers that hold them,
+  and cross-site navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
 - **Icons:** spike-html-hosting-icons, released by tag: a generator that builds any Iconify set
   whose licence is satisfied by shipping its text, Octicons released alone as one svg-string
@@ -102,7 +104,10 @@ The tasks, in the order they run; each cites the evidence it proves.
   `<svg data-icon="octicon/<name>"></svg>`, which the SDK's `markdownPages` fills at build on
   every page it writes, hand pages included, so a build ships only the icons its pages name. Each
   shell's header holds the site nav and one `header-actions` group: Pages, on a page with the
-  Pages drawer, then Help and Settings. Those buttons and each shortcut dialog's Close are glyph
+  Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
+  and Settings. From 40rem the header is one row, the group on the nav's first line; below it,
+  two rows, the nav over the group. Each shortcut dialog opens with a header row, its heading and
+  its Close. Those buttons and each shortcut dialog's Close are glyph
   buttons: each shows a glyph and a key hint, is named by its `aria-label`, and shows that name
   in an interest hint. A GitHub alert's title shows its kind's Octicon. The SDK's `showsGlyphs`
   shell check holds each button to its glyph.
@@ -119,7 +124,10 @@ The tasks, in the order they run; each cites the evidence it proves.
     Its three hand pages are build inputs in `vite.config.ts`: `index.html`, the index of every
     site; `briefs/orientation.html`, the orientation brief written by hand, with two diagrams; and
     the sitrep entry under `sitreps/`. Hand pages have no Pages button or drawer, because the
-    SDK's site index lists only copied pages.
+    SDK's site index lists only copied pages. The orientation and sitrep hand pages write their
+    section tree into a Contents drawer, with the Contents button and a script of their own that
+    wires it, as the rendered pages' shell does; the index has no section tree and no Contents
+    button. Hand pages have no pager: the SDK writes one only on the copied pages.
 
     Every page's `sl-site-nav` fetches the list of sites from `src="%BASE_URL%sites.json"`, which
     Vite copies from `public/sites.json` to the base. Each orientation page links the other under
@@ -139,8 +147,10 @@ The tasks, in the order they run; each cites the evidence it proves.
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
   each file's git blob hash, and a unit test fails when a copy differs.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
-  settings offer every profile. It also loads `keys.js`, which clicks the Help button, marked
-  `data-keys="?"`, on ?, and the Settings button, marked `data-keys="s"`, on S. Help opens a
+  settings offer every profile. It also loads `keys.js`, which clicks the Pages button on P and
+  the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
+  the Settings button, marked `data-keys="s"`, on S; the section tree's J and K; and, on the
+  copied pages, the pager's H and L. Help opens a
   dialog whose `sl-shortcuts` lists the page's keys; Settings opens one whose `sl-settings` sets
   the theme and the keyboard settings. Each dialog closes on Escape.
 - The renderer highlights each fenced block at build with Shiki, so no script reaches the page.

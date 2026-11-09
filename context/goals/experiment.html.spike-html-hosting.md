@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec running · editor —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec 1 round, gaps closing · editor —
 
 ## Decisions
 
@@ -1230,6 +1230,13 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   that the tooling's Page can't remove (it has on() but no off()), so listeners pile up over a
   crawl; and the crawl's front-matter meta check, on a page with no front matter, only confirms
   that no meta takes a key's name.
+
+- design: spec review: every behavior met or not yet due (16-20, the releases and pins). Gaps
+  closed: the components take eslint-plugin-import-x 4.18.1 and typescript-eslint 8.72.2, since
+  behavior 1 means current dependencies (4.18.0 was latest when the brief was written); the
+  SDK's target-size check runs every type at each capture width; hover and Escape on the
+  interest hints are tested; the components README places the group at the inline start below
+  40rem. The SDK release slice also takes typescript-eslint 8.72.2 and vite 8.3.7.
 
 ## Pending edits
 

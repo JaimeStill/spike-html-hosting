@@ -1,5 +1,6 @@
 <!-- Adapted from spike-html-hosting-sdk (v0.4.0): template/README.md, its site the root's hand
-     pages beside the rendered pages of its two copied trees. -->
+     pages beside the rendered pages of its two copied trees.
+     Adapted from spike-html-hosting-sdk (a7538b8): template/README.md, its screenshots line. -->
 
 # spike-html-hosting
 

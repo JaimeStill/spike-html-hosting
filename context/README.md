@@ -107,10 +107,10 @@ The tasks, in the order they run; each cites the evidence it proves.
   Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
   and Settings. From 40rem the header is one row, the group on the nav's first line; below it,
   two rows, the nav over the group. Each shortcut dialog opens with a header row, its heading and
-  its Close. Those buttons and each shortcut dialog's Close are glyph
-  buttons: each shows a glyph and a key hint, is named by its `aria-label`, and shows that name
-  in an interest hint. A GitHub alert's title shows its kind's Octicon. The SDK's `showsGlyphs`
-  shell check holds each button to its glyph.
+  its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
+  and a key hint, is named by its `aria-label`, and shows that name in an interest hint. A GitHub
+  alert's title shows its kind's Octicon. The SDK's `showsGlyphs` shell check holds each button
+  to its glyph.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -150,9 +150,9 @@ The tasks, in the order they run; each cites the evidence it proves.
   settings offer every profile. It also loads `keys.js`, which clicks the Pages button on P and
   the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
   the Settings button, marked `data-keys="s"`, on S; the section tree's J and K; and, on the
-  copied pages, the pager's H and L. Help opens a
-  dialog whose `sl-shortcuts` lists the page's keys; Settings opens one whose `sl-settings` sets
-  the theme and the keyboard settings. Each dialog closes on Escape.
+  copied pages, the pager's H and L. Help opens a dialog whose `sl-shortcuts` lists the page's
+  keys; Settings opens one whose `sl-settings` sets the theme and the keyboard settings. Each
+  dialog closes on Escape.
 - The renderer highlights each fenced block at build with Shiki, so no script reaches the page.
   A syntax theme is `{ palette, light, dark }`. The SDK's built-ins map primer, catppuccin, and
   everforest to Shiki's bundled themes, and flexoki to a byte-for-byte copy of Flexoki's VS Code

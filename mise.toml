@@ -9,6 +9,8 @@
 # its currency the SDK's bin.
 # Adapted from spike-html-hosting-sdk (v0.4.0): template/mise.toml, its build the root's hand
 # pages beside the rendered pages of its two copied trees.
+# Adapted from spike-html-hosting-sdk (a7538b8): template/mise.toml, its screenshots task's
+# description.
 [settings]
 task.run_auto_install = false
 

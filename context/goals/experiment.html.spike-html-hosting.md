@@ -380,9 +380,32 @@ Release       spike-html-hosting-components v0.5.0;
               checkpoint)
 ```
 
+### Amendment 2 · after checkpoint 3 (approved)
+
+```
+Behaviors     31. Below 40rem the actions group sits on the
+                  header's second row at the inline start, aligned
+                  with the nav above it (supersedes 25's inline
+                  end).
+              32. Below 40rem each pager shows only its arrow and
+                  word, "← Previous" and "Next →", in one row; the
+                  neighbour's title is visually hidden but stays in
+                  the link's name, and the kbd hint is hidden. From
+                  40rem it is unchanged (amends 24).
+              33. At checkpoint 4 the architect views the captures
+                  of these changes before the reviews and releases.
+Slices        22. SDK: site.css for 31 and 32, the header-row and
+                  pager checks at 390, the template's comment
+                  (spike-html-hosting-sdk)
+              23. Sites rebuilt on the linked SDK and captured;
+                  each commits only a doc line that changes
+                  → checkpoint 4 (escalation)
+              24-26. Releases and pins (were 22-24)
+```
+
 ## Progress
 
-slices 21/24 committed (1-21, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 captured, awaiting the architect · standards — · spec — · editor —
+slices 21/26 committed (1-21, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 — · standards — · spec — · editor —
 
 ## Decisions
 
@@ -1184,6 +1207,14 @@ slices 21/24 committed (1-21, with two fixes: the shortcuts note, the pager name
 - design: front matter is not visible (the architect: metadata that clutters the layout); one
   meta element per key in the head; sl-page-header removed. Rejected: the visible dl; dropping
   the metadata entirely.
+
+- design: checkpoint 3's marks (the architect): below 40rem the actions row aligns to the inline
+  start, under the nav. Rejected: the inline end, which read as a separate band.
+- design: below 40rem the pager shows only "← Previous" and "Next →" (the architect: a narrow
+  screen is likely a phone with no keyboard); the title stays in the link's name, visually
+  hidden, so label-in-name holds; the kbd hint is hidden. The header's key hints stay at every
+  width (the keys check fails a control hiding the key it binds). Rejected: titles and hints at
+  every width; hints tied to pointer: coarse, left for later.
 
 ## Pending edits
 

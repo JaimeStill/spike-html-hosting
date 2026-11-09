@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validated · components v0.5.0 released (PR #10) · SDK —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validated · components v0.5.0 released (PR #10) · SDK v0.6.0 released (PR #9) · pins —
 
 ## Decisions
 
@@ -1252,6 +1252,11 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   290px on the runner against the 288px minimum); the test now builds its own short and long
   tables, shown to hold under five simulated font metrics. The Escape hint tests wait for the
   hint's queued toggle event (a flake seen once locally).
+
+- design: SDK v0.6.0 released (PR #9, merged at 97f4fca, tag v0.6.0) on components v0.5.0, with
+  typescript-eslint 8.72.2, vite 8.3.7 (which moves rolldown to ~1.2.18; 1.3.x stays held) and
+  chrome-headless-shell 157.0.8103.50. Its scaffold test caught the README's pager names as raw
+  <title> markup, which swallowed the template's rendered copy; they are code spans now.
 
 ## Pending edits
 

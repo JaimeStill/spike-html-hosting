@@ -105,8 +105,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   every page it writes, hand pages included, so a build ships only the icons its pages name. Each
   shell's header holds the site nav and one `header-actions` group: Pages, on a page with the
   Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
-  and Settings. From 40rem the header is one row, the group on the nav's first line; below it,
-  two rows, the nav over the group. Each shortcut dialog opens with a header row, its heading and
+  and Settings. From 40rem the header is one row, the group on the nav's first line at its inline
+  end; below it, two rows, the nav over the group at its inline start. Each shortcut dialog opens with a header row, its heading and
   its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
   and a key hint, is named by its `aria-label`, and shows that name in an interest hint. A GitHub
   alert's title shows its kind's Octicon. The SDK's `showsGlyphs` shell check holds each button
@@ -174,8 +174,9 @@ The tasks, in the order they run; each cites the evidence it proves.
   its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
   exception until evidence 5's measure settles it.
 - Every site's chrome-headless-shell is 157.0.8103.38.
-- The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
-  the shell checks look for that sheet in `document.adoptedStyleSheets`.
+- `sl-settings` lays out its theme rows with the foundation v0.3.0's `theme-menu.css`, which it
+  adopts in its shadow root, so the shell checks look for that sheet's layer in the settings'
+  `adoptedStyleSheets`.
 
 ## Taking captures
 

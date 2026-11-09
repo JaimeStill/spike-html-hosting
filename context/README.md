@@ -106,8 +106,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   shell's header holds the site nav and one `header-actions` group: Pages, on a page with the
   Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
   and Settings. From 40rem the header is one row, the group on the nav's first line at its inline
-  end; below it, two rows, the nav over the group at its inline start. Each shortcut dialog opens with a header row, its heading and
-  its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
+  end; below it, two rows, the nav over the group at its inline start. Each shortcut dialog opens
+  with a header row, its heading and its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
   and a key hint, is named by its `aria-label`, and shows that name in an interest hint. A GitHub
   alert's title shows its kind's Octicon. The SDK's `showsGlyphs` shell check holds each button
   to its glyph.

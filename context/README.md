@@ -27,10 +27,11 @@ its own docs/ guide.
    workflow.
 2. The org stand-in: a charter page, an index linking every site, and a hosted persistent
    report, correct under its `/<repo>/` base path.
-3. The architecture stand-in: its pages rendered with their front matter, relative `.md` links
-   resolved across the site.
+3. The architecture stand-in: its pages rendered with their front matter as head meta, relative
+   `.md` links resolved across the site.
 4. The sqlate stand-in: its README index and docs/ guide with the section tree (key hints in
-   `kbd`, reading progress, and H and L section keys that leave the arrow keys to scrolling).
+   `kbd`, and J and K section keys that leave the arrow keys to scrolling) and a pager, H and L,
+   on each copied page.
 5. Shared navigation on every site that stays correct when one site deploys ahead of the
    others, with build-time-by-tag measured against fetched-at-runtime.
 6. One baseline pin, with the reader's stored theme carrying across sites on the shared origin.
@@ -47,11 +48,12 @@ its own docs/ guide.
 ## Capabilities
 
 - **Sites:** three Pages project sites, each built by Vite and deployed by its own workflow.
-- **Content:** Markdown sources rendered at build, with front matter and resolved links.
+- **Content:** Markdown sources rendered at build, with front matter as head meta, resolved
+  links, and a pager to the previous and the next page.
 - **Site SDK:** spike-html-hosting-sdk, released by tag: the template each site is scaffolded
   from, the build and check pieces, and the reusable workflows.
-- **Documentation components:** the section tree, page header, site index, and cross-site
-  navigation, released by tag.
+- **Documentation components:** the section tree, the site index, the drawers that hold them,
+  and cross-site navigation, released by tag.
 - **Artifacts:** the charter, the hosted report, and the HTML/Markdown line.
 - **Icons:** spike-html-hosting-icons, released by tag: a generator that builds any Iconify set
   whose licence is satisfied by shipping its text, Octicons released alone as one svg-string
@@ -94,16 +96,21 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.5.0, spike-html-hosting-components at v0.4.0, and the icons
+- Every site pins the SDK at v0.6.0, spike-html-hosting-components at v0.5.0, and the icons
   layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
   svg string, 1em square in `currentColor`. A page places a glyph as a marker,
   `<svg data-icon="octicon/<name>"></svg>`, which the SDK's `markdownPages` fills at build on
   every page it writes, hand pages included, so a build ships only the icons its pages name. Each
-  shell's Pages, Help, and Theme buttons and the keys help's Close show a glyph and a key hint and
-  are named by their `aria-label`. A GitHub alert's title shows its kind's Octicon. The SDK's
-  `showsGlyphs` shell check holds each button to its glyph.
+  shell's header holds the site nav and one `header-actions` group: Pages, on a page with the
+  Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
+  and Settings. From 40rem the header is one row, the group on the nav's first line at its inline
+  end; below it, two rows, the nav over the group at its inline start. Each shortcut dialog opens
+  with a header row, its heading and its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
+  and a key hint, is named by its `aria-label`, and shows that name in an interest hint. A GitHub
+  alert's title shows its kind's Octicon. The SDK's `showsGlyphs` shell check holds each button
+  to its glyph.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -117,7 +124,10 @@ The tasks, in the order they run; each cites the evidence it proves.
     Its three hand pages are build inputs in `vite.config.ts`: `index.html`, the index of every
     site; `briefs/orientation.html`, the orientation brief written by hand, with two diagrams; and
     the sitrep entry under `sitreps/`. Hand pages have no Pages button or drawer, because the
-    SDK's site index lists only copied pages.
+    SDK's site index lists only copied pages. The orientation and sitrep hand pages write their
+    section tree into a Contents drawer, with the Contents button and a script of their own that
+    wires it, as the rendered pages' shell does; the index has no section tree and no Contents
+    button. Hand pages have no pager: the SDK writes one only on the copied pages.
 
     Every page's `sl-site-nav` fetches the list of sites from `src="%BASE_URL%sites.json"`, which
     Vite copies from `public/sites.json` to the base. Each orientation page links the other under
@@ -137,8 +147,12 @@ The tasks, in the order they run; each cites the evidence it proves.
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
   each file's git blob hash, and a unit test fails when a copy differs.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
-  theme menu offers every profile. It also loads `keys.js`, which clicks the Theme button, marked
-  `data-keys="t"`, when the reader presses T.
+  settings offer every profile. It also loads `keys.js`, which clicks the Pages button on P and
+  the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
+  the Settings button, marked `data-keys="s"`, on S; the section tree's J and K; and, on the
+  copied pages, the pager's H and L. Help opens a dialog whose `sl-shortcuts` lists the page's
+  keys; Settings opens one whose `sl-settings` sets the theme and the keyboard settings. Each
+  dialog closes on Escape.
 - The renderer highlights each fenced block at build with Shiki, so no script reaches the page.
   A syntax theme is `{ palette, light, dark }`. The SDK's built-ins map primer, catppuccin, and
   everforest to Shiki's bundled themes, and flexoki to a byte-for-byte copy of Flexoki's VS Code
@@ -160,8 +174,9 @@ The tasks, in the order they run; each cites the evidence it proves.
   its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
   exception until evidence 5's measure settles it.
 - Every site's chrome-headless-shell is 157.0.8103.38.
-- The foundation v0.3.0 theme menu has no shadow root: it adopts its sheet on the document, so
-  the shell checks look for that sheet in `document.adoptedStyleSheets`.
+- `sl-settings` lays out its theme rows with the foundation v0.3.0's `theme-menu.css`, which it
+  adopts in its shadow root, so the shell checks look for that sheet's layer in the settings'
+  `adoptedStyleSheets`.
 
 ## Taking captures
 
@@ -172,8 +187,9 @@ of the check.
 - The capture file exports the SDK's `description()` over the site's page list, every page the
   site builds. A page's name is its built path under the base without `.html`: the index is
   `index`, and a `dir/` page is `dir`.
-- Each page is captured whole, in tiles, at 1280x800 and 390x844, in light and dark. The index
-  is also captured with its theme menu open at both widths.
+- Each page is captured whole, in tiles, at 390x844, 1120x700, and 1376x860, in light and dark:
+  a phone's width and the layout's two docks. The index is also captured with Help open and with
+  Settings open at each width, nine states in all.
 - `--page <name>` captures that page alone and can be given more than once, so a site's pages
   can be split across runs; an unknown name exits 2 and lists the names. `--scheme light|dark`
   picks one scheme.
@@ -192,8 +208,8 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.5.0, the
-components' is v0.4.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
+release workflow tags a version bump that lands on main. Its current release is v0.6.0, the
+components' is v0.5.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
 release nothing; each deploys on its push to main.
 
 ## References

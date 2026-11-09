@@ -1,27 +1,43 @@
 <!doctype html>
 <!-- The orientation brief by hand, a hand page of the root's at briefs/orientation.html, beside its
      Markdown rendered at org/briefs/orientation.html: the same text as standards-lab/org's
-     briefs/orientation.md at c812496, written as HTML, with what Markdown can't hold, two
-     diagrams as inline SVG, each a figure whose svg is an img named by its title and described by
-     its desc, its caption the text alternative a reader sees, and the section tree over the page's
-     own headings. It links the rendered page, which page.html links back. The head and header are
-     the index's, the section tree's module beside the site nav's; no Markdown fills it, so it has
-     no site index and no Pages button or drawer. The IMPORTANT alert is written as the renderer
-     writes one, so site.css draws it the same, its title's glyph a marker, octicon/report-16, which
-     the SDK's markdownPages fills at build with the icons layer's svg, as it fills the header's;
-     and the interview line is a plain pre, focusable so a keyboard scrolls it where it overflows.
-     The diagrams draw from the foundation's tokens, the text in currentColor, so they follow the
+     briefs/orientation.md at c812496, written as HTML, with what Markdown can't hold, two diagrams
+     as inline SVG, each a figure whose svg is an img named by its title and described by its desc,
+     its caption the text alternative a reader sees, and the section tree over the page's own
+     headings, in its Contents drawer. It links the rendered page, which page.html links back. The
+     head, the header, and the shortcut dialogs are the index's, with the section tree's and the
+     drawer's modules beside the site nav's, and the header's Contents button before Help, which
+     opens the drawer, keys.js clicking it on C; site.css shows it only below the drawer's dock,
+     once the drawer is defined. The page's script closes the drawer as a link in it is followed, so
+     the link lands on the page the drawer covered, wires the button's click to the drawer's show(),
+     and keeps its aria-expanded in step with the drawer's open and close events, as the rendered
+     pages' shell has each drawer and its button. No Markdown fills it, so it has no site index and
+     no Pages button or drawer. The IMPORTANT alert is written as the renderer writes one, so
+     site.css draws it the same, its title's glyph a marker, octicon/report-16, which the SDK's
+     markdownPages fills at build with the icons layer's svg, as it fills the header's; and the
+     interview line is a plain pre, focusable so a keyboard scrolls it where it overflows. The
+     diagrams draw from the foundation's tokens, the text in currentColor, so they follow the
      reader's palette and scheme; in forced colors they take the system colors.
      Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/briefs/orientation.html,
      its text the brief's, with diagrams.
      Adapted from spike-html-hosting-sdk (v0.5.0): template/index.html, each header button's and
-     the dialog Close's glyph marker in place of its word. -->
+     the dialog Close's glyph marker in place of its word.
+     Adapted from spike-html-hosting-sdk (v0.6.0): template/index.html, its header-actions group
+     without the Pages button, the Settings button and the two shortcut dialogs in place of the
+     Theme button, the theme menu, and the keys help, and the dialogs' header rows; and
+     test/fixtures/trees/briefs/orientation.html, the section tree in its Contents drawer, the
+     header's Contents button, and their script.
+     Adapted from spike-html-hosting-components (v0.5.0): README.md, the header-actions group,
+     the Settings and Contents openers, sl-drawer's script, the drawer closed as a link in it is
+     followed, each glyph button's class and interest hint, and the shortcut dialogs, Help's and
+     Settings', each with its header row, its heading, its content, and its Close. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Standards Lab: an orientation</title>
     <link rel="stylesheet" href="@jaimestill/spike-html-apps-foundation/page-full.css" />
+    <link rel="stylesheet" href="@jaimestill/spike-html-hosting-components/glyph-button.css" />
     <link rel="stylesheet" href="@jaimestill/spike-html-hosting-sdk/site.css" />
     <link rel="stylesheet" href="/root.css" />
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/register-full.js"></script>
@@ -29,41 +45,73 @@
     <script type="module" blocking="render" src="@jaimestill/spike-html-apps-foundation/keys.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/site-nav.js"></script>
     <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/section-tree.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/drawer.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/shortcuts.js"></script>
+    <script type="module" blocking="render" src="@jaimestill/spike-html-hosting-components/settings.js"></script>
+    <script type="module" blocking="render">
+      // The Contents drawer closes as a link in it is followed, and the header's Contents button
+      // opens it and says through aria-expanded whether it is open, as the rendered pages' shell
+      // has each drawer and its button.
+      const contents = document.getElementById("contents");
+      contents.addEventListener("click", (event) => {
+        if (event.target instanceof Element && event.target.closest("a[href]")) contents.close();
+      });
+      const opener = document.querySelector('[aria-controls="contents"]');
+      opener.addEventListener("click", () => contents.show());
+      const expanded = () => opener.setAttribute("aria-expanded", String(contents.open));
+      contents.addEventListener("open", expanded);
+      contents.addEventListener("close", expanded);
+    </script>
   </head>
   <body>
     <header>
       <sl-site-nav src="%BASE_URL%sites.json"></sl-site-nav>
-      <button
-        type="button"
-        commandfor="help"
-        command="show-modal"
-        aria-label="Help"
-        data-keys="?"
-      >
-        <svg data-icon="octicon/question-16"></svg>
-        <span aria-hidden="true"><kbd>?</kbd></span>
-      </button>
-      <button
-        type="button"
-        commandfor="theme"
-        command="--open"
-        aria-label="Theme"
-        data-keys="t"
-      >
-        <svg data-icon="octicon/gear-16"></svg>
-        <span aria-hidden="true"><kbd>T</kbd></span>
-      </button>
+      <div class="header-actions">
+        <button
+          type="button"
+          class="glyph-button contents-opener"
+          aria-controls="contents"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-label="Contents"
+          data-keys="c"
+          interestfor="contents-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/list-ordered-16"></svg>
+          <span aria-hidden="true"><kbd>C</kbd></span>
+        </button>
+        <div id="contents-hint" class="glyph-hint" popover="hint" aria-hidden="true">Contents</div>
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="help"
+          command="show-modal"
+          aria-label="Help"
+          data-keys="?"
+          interestfor="help-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/question-16"></svg>
+          <span aria-hidden="true"><kbd>?</kbd></span>
+        </button>
+        <div id="help-hint" class="glyph-hint" popover="hint" aria-hidden="true">Help</div>
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="settings"
+          command="show-modal"
+          aria-label="Settings"
+          data-keys="s"
+          interestfor="settings-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/gear-16"></svg>
+          <span aria-hidden="true"><kbd>S</kbd></span>
+        </button>
+        <div id="settings-hint" class="glyph-hint" popover="hint" aria-hidden="true">Settings</div>
+      </div>
     </header>
-    <div class="section-tree">
-      <sl-section-tree dock="70rem">
-        <ul>
-          <li><a href="#the-vision">The vision</a></li>
-          <li><a href="#how-it-is-being-built">How it is being built</a></li>
-          <li><a href="#the-roadmap-at-a-glance">The roadmap at a glance</a></li>
-          <li><a href="#explore-it-yourself">Explore it yourself</a></li>
-        </ul>
-      </sl-section-tree>
-    </div>
     <main>
       <h1 id="standards-lab-an-orientation">Standards Lab: an orientation</h1>
       <p class="form-note">
@@ -300,22 +348,53 @@
         </li>
       </ul>
     </main>
-    <sl-theme-menu id="theme"></sl-theme-menu>
+    <sl-drawer id="contents" label="Contents" dock="70rem">
+      <sl-section-tree>
+        <ul>
+          <li><a href="#the-vision">The vision</a></li>
+          <li><a href="#how-it-is-being-built">How it is being built</a></li>
+          <li><a href="#the-roadmap-at-a-glance">The roadmap at a glance</a></li>
+          <li><a href="#explore-it-yourself">Explore it yourself</a></li>
+        </ul>
+      </sl-section-tree>
+    </sl-drawer>
     <dialog id="help" aria-labelledby="help-title">
-      <h2 id="help-title">Keyboard shortcuts</h2>
-      <div data-keys-list></div>
-      <footer>
+      <header class="dialog-header">
+        <h2 id="help-title">Keyboard shortcuts</h2>
         <button
           type="button"
+          class="glyph-button"
           commandfor="help"
           command="close"
           aria-label="Close"
-          data-keys="?"
+          interestfor="help-close-hint"
+          aria-description=""
         >
           <svg data-icon="octicon/x-16"></svg>
-          <span aria-hidden="true"><kbd>?</kbd></span>
+          <span aria-hidden="true"><kbd>Esc</kbd></span>
         </button>
-      </footer>
+        <div id="help-close-hint" class="glyph-hint" popover="hint" aria-hidden="true">Close</div>
+      </header>
+      <sl-shortcuts></sl-shortcuts>
+    </dialog>
+    <dialog id="settings" aria-labelledby="settings-title">
+      <header class="dialog-header">
+        <h2 id="settings-title">Settings</h2>
+        <button
+          type="button"
+          class="glyph-button"
+          commandfor="settings"
+          command="close"
+          aria-label="Close"
+          interestfor="settings-close-hint"
+          aria-description=""
+        >
+          <svg data-icon="octicon/x-16"></svg>
+          <span aria-hidden="true"><kbd>Esc</kbd></span>
+        </button>
+        <div id="settings-close-hint" class="glyph-hint" popover="hint" aria-hidden="true">Close</div>
+      </header>
+      <sl-settings></sl-settings>
     </dialog>
   </body>
 </html>

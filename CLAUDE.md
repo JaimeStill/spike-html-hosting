@@ -17,8 +17,8 @@ repository is managed with the marathon workflow; start from `context/README.md`
   chrome-headless-shell, and runs the screenshots command once to show it leaves no capture file.
   It reads no network.
 - **Screenshots:** `mise run screenshots` captures every page the root builds, light and dark,
-  wide and narrow, and the index with its theme menu open; `context/README.md`, "Taking
-  captures", lists its flags.
+  at 390px, 1120px, and 1376px, and the index with Help open and with Settings open;
+  `context/README.md`, "Taking captures", lists its flags.
 - **Currency:** `mise run currency`, the SDK's currency bin: every mise tool, package.json pin,
   `github:` tag, workflow action pin, and reusable workflow call behind its latest.
 - **Goals:** this spike's tasks live in the coordinator's roadmap,

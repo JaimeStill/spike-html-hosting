@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validation —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validated · components v0.5.0 released (PR #10) · SDK —
 
 ## Decisions
 
@@ -1246,6 +1246,12 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   the dialog (and the hint with it), not the hint alone; on a plain page it closes the hint
   alone. Opening the drawer by mouse shows its Close's hint at once, since focus there counts as
   interest though :focus-visible doesn't match.
+
+- design: components v0.5.0 released (PR #10, merged at 0bc7e41, tag v0.5.0). Its first CI run
+  failed a font-dependent precondition in the shortcuts width test (the fixture table measured
+  290px on the runner against the 288px minimum); the test now builds its own short and long
+  tables, shown to hold under five simulated font metrics. The Escape hint tests wait for the
+  hint's queued toggle event (a flake seen once locally).
 
 ## Pending edits
 

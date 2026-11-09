@@ -11,7 +11,7 @@
 // description the SDK's.
 // Adapted from spike-html-hosting-sdk (v0.4.0): test/fixtures/trees/screenshots.config.ts, a
 // root-style site's pages, its hand pages the root's three.
-// Adapted from spike-html-hosting-sdk (a7538b8): template/scripts/screenshots.config.ts, its
+// Adapted from spike-html-hosting-sdk (v0.6.0): template/scripts/screenshots.config.ts, its
 // widths and the index's Help and Settings states.
 
 import { join } from "node:path";

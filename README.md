@@ -1,14 +1,14 @@
 <!-- Adapted from spike-html-hosting-sdk (v0.4.0): template/README.md, its site the root's hand
      pages beside the rendered pages of its two copied trees.
-     Adapted from spike-html-hosting-sdk (a7538b8): template/README.md, its screenshots line. -->
+     Adapted from spike-html-hosting-sdk (v0.6.0): template/README.md, its screenshots line. -->
 
 # spike-html-hosting
 
 The GitHub Pages site of spike-html-hosting, the org stand-in, made from the template of
-[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.5.0 and served
+[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.6.0 and served
 under `/spike-html-hosting/`. It pins
 [spike-html-hosting-components](https://github.com/JaimeStill/spike-html-hosting-components)
-v0.4.0 and the icons layer,
+v0.5.0 and the icons layer,
 [spike-html-hosting-icons](https://github.com/JaimeStill/spike-html-hosting-icons) v0.1.0, whose
 glyphs the build fills into every page's `<svg data-icon="octicon/<name>"></svg>` markers.
 

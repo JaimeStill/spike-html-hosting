@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 21/26 committed (1-21, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 — · standards — · spec — · editor —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 captured, awaiting the architect · standards — · spec — · editor —
 
 ## Decisions
 

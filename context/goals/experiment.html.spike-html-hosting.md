@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 captured, awaiting the architect · standards — · spec — · editor —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards running · spec — · editor —
 
 ## Decisions
 
@@ -1215,6 +1215,8 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   hidden, so label-in-name holds; the kbd hint is hidden. The header's key hints stay at every
   width (the keys check fails a control hiding the key it binds). Rejected: titles and hints at
   every width; hints tied to pointer: coarse, left for later.
+
+- design: checkpoint 4 closed with no marks (the architect: "looks great").
 
 ## Pending edits
 

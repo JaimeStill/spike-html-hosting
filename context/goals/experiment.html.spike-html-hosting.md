@@ -382,7 +382,7 @@ Release       spike-html-hosting-components v0.5.0;
 
 ## Progress
 
-slices 18/24 committed (1-18, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 — · standards — · spec — · editor —
+slices 21/24 committed (1-21, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 captured, awaiting the architect · standards — · spec — · editor —
 
 ## Decisions
 

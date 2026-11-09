@@ -405,7 +405,7 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
 
 ## Progress
 
-slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec 1 round, gaps closing · editor —
+slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validation —
 
 ## Decisions
 
@@ -1112,8 +1112,9 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   earlier SDK provenance line and add a v0.5.0 line, while the architecture and sqlate sites
   change their one SDK line to the new tag.
 
-- design: two capture checkpoints, captures first: the architect marks fixes from the sites as they
-  stand, then sees the fixed builds before any release. Rejected: carried fixes first, one checkpoint.
+- design: two capture checkpoints, captures first: the architect marks fixes from the sites as
+  they stand, then sees the fixed builds before any release. Rejected: carried fixes first, one
+  checkpoint.
 - design: capture widths 390x844, 1120x700, 1376x860 replace 1280. Rejected: adding beside 1280.
 - design: Theme becomes Settings, heading Settings, key S. Rejected: keeping Theme and T; comma.
 - design: Settings and Help are built in spike-html-hosting-components on the foundation's public
@@ -1282,11 +1283,13 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   architecture index alone.
 - coordinator · html-artifacts.md, the Keyboard bullet on claude.dev's article pages: the section
   tree is built, as spike-html-hosting-components' sl-section-tree, and departs from the reference
-  in two ways the foundation's keys module forced or the architect chose. H and L move between
-  sections and the arrow keys stay the browser's scrolling, because the keys module cancels every
-  key a binding matches and its off switch covers character keys only, so bound arrows took over
-  sideways scrolling and ignored the switch. Key hints are a kbd alone, without brackets, by the
-  architect's direction.
+  in ways the foundation's keys module forced or the architect chose. J and K move between
+  sections, through the keys module's register(), and H and L move to the previous and the next
+  page, through the SDK's pager links. The arrow keys stay the browser's scrolling, because the
+  keys module cancels every key a binding matches and its off switch covers character keys only,
+  so bound arrows took over sideways scrolling and ignored the switch. Key hints are a kbd alone,
+  without brackets, and the tree marks the current section by an accent rule and bold text, with
+  no reading progress, by the architect's direction.
 - claude-plugins · marathon retro: the checkpoint 2 redirect came from the architect viewing the
   three sites' local builds, which found cramped columns at about 1400px, mid-word breaks in the
   site index, and H unable to reach the top, after the standards and spec reviews had passed. A
@@ -1315,10 +1318,21 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   alert callouts. Its upgrade slices take SDK v0.4.0 and components v0.3.0 on the architecture and
   sqlate sites. Evidence 12.
 - coordinator · roadmap: new task `experiment.html.spike-html-hosting.tasks.design`, "The design
-  review", between icons and review. repos: spike-html-hosting, -components, -sdk, -architecture,
-  -sqlate. Summary: tightens the three sites' layout and design; the architect views each site's
-  captures at the dock widths, in light and dark, and marks fixes before any release; the fixes
-  land in the components' sheets and the SDK's site.css, released and adopted by every site.
+  review", between icons and review. repos: spike-html-hosting, -components, -sdk, -icons,
+  -architecture, -sqlate. Summary, the task as built: the architect reviews the three sites from
+  captures at 390, 1120 and 1376px, light and dark, the index also with Help and with Settings
+  open, at four checkpoints before any release. Glyph buttons are their own control,
+  glyph-button.css, each named on hover by an interest invoker. The header holds the site nav and
+  one header-actions group, Pages (P), Contents (C), Help (?) and Settings (S): one row from 40rem,
+  and below it two, the group at the inline start under the nav. Help and Settings follow the
+  shortcut-dialog pattern the components README documents, each opening with a header row of its
+  h2 and an Esc Close: Settings (sl-settings) holds the theme and the keyboard settings and stores
+  each change at once, and Help (sl-shortcuts) only lists the shortcuts. The section tree is links
+  alone, the current section marked, in a Contents drawer below 70rem, J and K moving between
+  sections; each copied page has a pager at its top and bottom, H and L moving between pages in
+  the site index's order, compact below 40rem. Front matter becomes head meta, and sl-page-header
+  is removed. Releases components v0.5.0 and SDK v0.6.0, which all three sites pin with icons
+  v0.1.0.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: its summary drops "with
   a check that no capture file remains", which shipped in the screenshots task.
 - coordinator · roadmap, `experiment.html.spike-html-hosting`'s repos, `[workspace.paths]`, and
@@ -1338,29 +1352,21 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
   the task as built, in place of the summary the new-task edit above drafts:
   spike-html-hosting-icons, a generator that takes any Iconify set by name through
   @iconify/utils and accepts only sets whose licence is satisfied by shipping its text, each
-  shipping its upstream LICENSE; Octicons released alone at v0.1.0 as per-icon svg string modules, with a
-  dev-only browse page; a peer of the components and the SDK; an SDK build step that fills
+  shipping its upstream LICENSE; Octicons released alone at v0.1.0 as per-icon svg string modules,
+  with a dev-only browse page; a peer of the components and the SDK; an SDK build step that fills
   <svg data-icon="<set>/<name>">; glyphs on the header, the keys help's Close, the section tree,
   the drawer's Close and the alert callouts; releases icons v0.1.0, components v0.4.0 and SDK
   v0.5.0, which all three sites pin. Evidence 12.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.design`: the summary adds the
-  architect's direction: the Theme dialog becomes the Settings dialog, and the keyboard settings
-  (character keys on or off, the wait between presses) move from the Help dialog into it, so Help
-  only describes the shortcuts; with it, the opener's name and key, the dialog's heading, and
-  glyphs on its Save and Cancel; and names on hover for icon-only controls. Each goes to the
-  intake as a foundation change if the foundation must change. The components README's header
-  snippet, released at v0.4.0 with paintbrush-16 for Theme, takes gear-16 in the components' next
-  release.
 - coordinator · references.toml and references.local.toml: add primer/octicons
   (`https://github.com/primer/octicons.git`), read at 9a274e2 (tag `@primer/octicons@19.42.0`),
   whose LICENSE spike-html-hosting-icons copies. The root's context/README.md, References,
   already lists it.
-- coordinator · roadmap, `tasks.design`: add spike-html-hosting-icons to repos; summary becomes the
-  task as built (captures at 390/1120/1376 at two checkpoints, glyph-button, interest-invoker
-  names, one-group header, the shortcut-dialog pattern with Settings (S) and Help in the
-  components, releases components v0.5.0 and SDK v0.6.0 pinned by all three sites).
-- coordinator · intake, architecture: a pattern page for the keyboard-shortcut dialog, Settings and
-  Help as worked instances, upload under U as an extension.
+- coordinator · intake, architecture: a pattern page for the keyboard-shortcut dialog, with
+  Settings and Help as its worked instances and an upload under U as an extension. The dialog's
+  Close sits in its header row with the h2. The page is inert under a modal and keys fire only
+  inside it, so no second modal opens over Help, and sl-shortcuts reads the bindings against the
+  topmost modal. In a modal, Escape with a glyph hint showing closes the dialog and the hint; on a
+  plain page it closes the hint alone.
 - coordinator · intake, spike-html-apps-foundation: Settings and Help as foundation changes (the
   theme menu's fixed heading and T save, the keys help's built-in settings, force a rebuild today).
 - coordinator · intake, spike-html-apps-foundation: preferences.js and keys.js dynamically import
@@ -1369,8 +1375,5 @@ slices 23/26 committed (1-23, with two fixes: the shortcuts note, the pager name
 - answer task / intake: a nav menu at narrow widths, and sub-navs (a nav within a nav element),
   for the Pages sites; below 40rem the site nav holds one row and doesn't wrap, so a longer site
   list needs it.
-- coordinator · roadmap, `tasks.design`: the summary as built also names HJKL (J/K sections, H/L
-  pages), the Contents drawer, the pager at top and bottom, front matter as head meta, the
-  two-row header below 40rem, and the dialog header row.
-- intake: front matter as head meta, not visible, as the convention for v1.repository-docs.
-- intake, the shortcut-dialog pattern page: its Close sits in the header row with the h2.
+- coordinator · intake: front matter as head meta, not visible, as the convention for
+  v1.repository-docs.

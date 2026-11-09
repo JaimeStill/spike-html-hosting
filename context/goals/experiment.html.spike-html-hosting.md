@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** design
-- **Branch:** design
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
@@ -14,7 +14,7 @@
 6. [x] components
 7. [x] org
 8. [x] icons
-9. [ ] design
+9. [x] design
 10. [ ] review
 11. [ ] answer
 
@@ -403,9 +403,6 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
               24-26. Releases and pins (were 22-24)
 ```
 
-## Progress
-
-slices 26/26 committed (1-26, with two fixes: the shortcuts note, the pager names) · checkpoint 1 closed, no marks · checkpoint 2 marked, amendment 1 approved · checkpoint 3 marked, amendment 2 approved · checkpoint 4 closed, no marks · standards done · spec done (2 rounds) · editor done · validated · components v0.5.0 released (PR #10) · SDK v0.6.0 released (PR #9) · sites pinned · brief ready
 
 ## Decisions
 
@@ -1263,6 +1260,8 @@ slices 26/26 committed (1-26, with two fixes: the shortcuts note, the pager name
   provenance lines become one line per layer at its release tag. For the review task: the SDK
   template's fba414c provenance line still names the Theme button on T; the sites keep their
   corrected wording.
+
+- design: the architect accepted the session brief; the task shipped.
 
 ## Pending edits
 

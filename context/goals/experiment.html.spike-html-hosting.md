@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** brief ready
-- **Task:** review
-- **Branch:** review
+- **State:** idle
+- **Task:** none
+- **Branch:** none
 
 ## Tasks
 
@@ -15,7 +15,7 @@
 7. [x] org
 8. [x] icons
 9. [x] design
-10. [ ] review
+10. [x] review
 11. [ ] answer
 
 ## Task brief · review
@@ -297,26 +297,6 @@ Door          one-way: the tag spike-html-hosting-sdk v0.6.1,
               and the root's cost command and README
 Release       spike-html-hosting-sdk v0.6.1
 ```
-
-## Progress
-
-slices 12/12 · checkpoint 1 ✓ · standards ✓ · spec ✓ · editor ✓ · checkpoint 2 ✓ (recordings and
-program removed: sqlate b964f99)
-SDK v0.6.1 released (PR #10, d5e9da4); architecture (PR #9, 04d2271), sqlate (PR #9, e9fcb5b) and
-root (PR #10, b5f9591) merged and deployed at v0.6.1; root `review` re-cut for slices 11-12, sqlate
-and sdk `review` re-cut for the editor's docs
-
-- icons: 69d0be1 (1); fb7143f, e279e3b (4); 0826ca9 (standards); b4b76cd (editor)
-- components: 17cf52b (2)
-- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9);
-  6db6351 (editor, after the release)
-- root: 3c699eb (10); 5be4fae, c3e55d9, c02d992 (11); 7492a44 (12); a59784e (editor)
-- architecture: 5b62e35 (10)
-- sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
-  46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
-  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal);
-  63ecedc (layout, from the brief); f369456 (step 11, from the brief);
-  7d4d22c (step 12 order, from the brief)
 
 ## Decisions
 

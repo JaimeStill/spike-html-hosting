@@ -315,7 +315,8 @@ and sdk `review` re-cut for the editor's docs
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
   46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
   4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal);
-  63ecedc (layout, from the brief); f369456 (step 11, from the brief)
+  63ecedc (layout, from the brief); f369456 (step 11, from the brief);
+  7d4d22c (step 12 order, from the brief)
 
 ## Decisions
 
@@ -1249,6 +1250,12 @@ and sdk `review` re-cut for the editor's docs
   `refused` helper naming each matched error, with prose for each line (sqlate f369456). Verified
   against the restored program: blocks match, vet, tests, sqlint and gopls clean, and the output
   shown is a live run on PostgreSQL 18.
+- review: at the session brief the architect found step 12's root projects.go embedding
+  seeds/projects.json before the guide wrote it. The seed statements now precede
+  projects/projects.go, which names them, and the seed data precedes projects.go (sqlate 7d4d22c).
+  Every command the guide runs, steps 1 to 13, was then run on the program as written up to that
+  point, live on PostgreSQL 18, with vet and gopls clean at each; that found step 9's
+  `mise run test` block missing its `[no test files]` line, now fixed.
 - review: cost is per page, every response the page loads, gzip as served and brotli computed,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,

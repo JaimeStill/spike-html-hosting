@@ -1155,38 +1155,83 @@ Door          two-way: only the root's two READMEs and its goal
 
 ## Pending edits
 
-- architecture · principles/rolling-currency.md: a web module that installs with pnpm sets
-  `minimumReleaseAge: 0` in its pnpm-workspace.yaml, so the package manager installs the latest
-  release currency reports. Otherwise pnpm 12's default one-day wait refuses a same-day release
-  in CI (spike-html-hosting-sdk PR #3, vite 8.3.6). Reading each release's notes before its bump
-  lands replaces the wait as the review. The trade: the wait keeps out a compromised publish that
-  the registry pulls within hours, and reading the notes doesn't. This is the architect's
-  direction, proven by spike-html-hosting-sdk v0.2.0 and the three sites that pin it.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.template`'s summary: it names
-  a template/ subtree tagged template/v* that each site copies once; the task shipped the
-  template inside the SDK's v* release, which a site scaffolds from with `pnpm dlx
-  github:JaimeStill/spike-html-hosting-sdk#vX.Y.Z <repo>`.
-- coordinator · references.toml and references.local.toml: add spike-html-hosting-sdk
-  (`https://github.com/JaimeStill/spike-html-hosting-sdk.git`,
-  `~/experiments/spike-html-hosting-sdk`) beside the spike's other four repositories.
-- claude-plugins · marathon retro: pipeline.md's Releasing assumes the session tags the merge
-  commit, but this spike's release workflows commit the pack's tree and cut their own tag on the
-  push to main; and a task whose own repositories consume its release needs a BUILD checkpoint,
-  which the pipeline doesn't describe.
-- claude-plugins · marathon retro: the session merged a pull request with red CI because it piped
-  `gh pr checks --watch` through `tail`, which hid the command's exit status; the session should
-  run the configured merge command exactly as written.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.components`: add
-  spike-html-hosting-sdk to its repos, since the task changes the SDK's renderer, layout, shell
-  checks and template and releases SDK v0.3.0 and v0.3.1. Rewrite its summary to what the task
-  built: the section tree (key hints in kbd without brackets, reading progress, H and L moving
-  between sections, the arrow keys left to scrolling, a sticky bar at narrow widths), the page
-  header from front matter, the site index in a Pages drawer below its dock, and cross-site
-  navigation, on the foundation as a peer; components v0.2.2 and SDK v0.3.1 pinned by tag on all
-  three sites, with the reader's stored theme carrying across the shared origin. The 390px fix is
-  the renderer's table regions and site.css, both in the SDK, at three pages (the architecture
-  index, architecture standards/go-elemental/, sqlate docs/features.html) rather than the
-  architecture index alone.
+- coordinator · context/html-artifacts.md, under `## Answers · experiment.html`, after
+  spike-html-apps' section: add the answer section below. Its lines condense context/README.md's
+  "The answer".
+
+  ```markdown
+  ### Answer · experiment.html.spike-html-hosting
+
+  **Question:** What do the repositories' Pages sites and the hosting of persistent artifacts look
+  like, published as native web?
+
+  **Answer:** The hypothesis holds with the org site moved to the origin root: architecture and
+  each code repository's docs/ guide are project sites under `/<repo>/`, built by Vite from
+  Markdown through one site SDK and one documentation components layer, each released by tag, and
+  the org site is a standards-lab.github.io repository holding the charter, the index of sites,
+  and the site list every nav fetches.
+
+  1. Three project sites. Proven by the live sites, each answering 200 on 2026-11-10, and by each
+     site's `mise run check`, which runs its Vite build.
+  2. The org stand-in. Proven by the root's browser tier: the SDK's shell checks on its five
+     pages, its index held to sites.json, and the SDK's crawl; live from the org task, PR #7.
+  3. The architecture stand-in. Proven by the architecture site's crawl, each page's head held to
+     its front matter's meta and every in-site link followed to its page and fragment.
+  4. The sqlate stand-in. Proven by the components' `sl-section-tree` tests for J, K and the
+     arrow keys, and by the sqlate site's crawl, with H and L pressed at 390px.
+  5. Shared navigation when one site deploys ahead. Proven only by tests: the components' fixture
+     tests on one local origin, where the built list skews and the fetched list converges. Live,
+     only the root fetches its list, served with `max-age=600`.
+  6. One baseline pin and a theme across sites. Proven by the components' two-base test, and live
+     on the three deployed sites, the theme set in storage rather than through the menu.
+  7. No CSS module script in any build. Proven only by the check: the SDK's ESLint leftover check
+     over each build. No page was loaded in Safari.
+  8. The HTML/Markdown line. Proven by the root's orientation brief both ways and its sitrep
+     entry, PR #7. Hand HTML cost 3.6 and 1.9 times the drafting tokens, counted with Gemma 4's
+     tokenizer.
+  9. The review across every site. Proven by `mise run screenshots` and the browser test that it
+     leaves no capture file, and by the architect's review of the captures at the design task's
+     four checkpoints.
+  10. The CLI demo: built and rejected. The review task recorded five VHS demos and removed them
+      at its second checkpoint.
+  11. Cost per site. Proven by `mise run cost`, its run of 2026-11-10 over the live sites and
+      their Pages runs: Pages serves gzip, not brotli; GitHub's deployment queue dominates
+      push-to-live; a CDN node can serve the previous deploy minutes after a new one.
+  12. One icon toolkit. Proven by the icons layer's unit and browser tiers and each site's
+      `showsGlyphs` shell check. The builds ship 6, 6 and 7 of 986 Octicons.
+
+  For the intake:
+
+  - A pattern page for the keyboard-shortcut dialog, with Settings and Help its worked instances.
+  - Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
+    keys help's settings.
+  - The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
+    `keys-help.js`, so every site builds both chunks without requesting them.
+  - glyph-button as a foundation control.
+  - Front matter as head meta, not visible, as v1.repository-docs' convention.
+  - The sqlate quick-start revision against sqlate f2b2117, from spike-html-hosting-sqlate's
+    revised copy, `content/docs/quick-start.md`.
+  - A site-nav menu at narrow widths, and sub-navs: below 40rem the nav is one row and doesn't
+    wrap, and a real org's ten or so sites won't fit.
+  - The VHS verdict: recorded terminal demos aren't worth the overhead for a guide whose text
+    shows the output. v1.repository-docs shows a CLI's output as text.
+  - One `sl-drawer` in the foundation, its Close glyph passed through a slot.
+  - 14 web repositories each keep their own `scripts/currency.sh`, where the sites run the SDK's
+    currency bin.
+  - The SDK provenance convention differs: the root keeps one provenance line per SDK tag it
+    adopted, and the architecture and sqlate sites one line naming the latest tag whose content
+    the file carries.
+
+  [The answer](https://github.com/JaimeStill/spike-html-hosting/blob/main/context/README.md#the-answer) · [spike-html-hosting](https://github.com/JaimeStill/spike-html-hosting)
+  ```
+
+- coordinator · context/html-artifacts.md, the "Experiment: spike-html-hosting" paragraph: the
+  sentence that it "records a sqlint demo through VHS, rendered in the Pages workflow" becomes
+  that the review task built VHS demos and rejected them, the guide showing a CLI's output as
+  text; the site SDK is released by tag (spike-html-hosting-sdk, a template inside its release)
+  with an icons layer beneath the components and the SDK (spike-html-hosting-icons, Octicons);
+  and the org site is recommended at the origin root, a standards-lab.github.io repository, in
+  place of the sourced option not built.
 - coordinator · html-artifacts.md, the Keyboard bullet on claude.dev's article pages: the section
   tree is built, as spike-html-hosting-components' sl-section-tree, and departs from the reference
   in ways the foundation's keys module forced or the architect chose. J and K move between
@@ -1196,104 +1241,37 @@ Door          two-way: only the root's two READMEs and its goal
   so bound arrows took over sideways scrolling and ignored the switch. Key hints are a kbd alone,
   without brackets, and the tree marks the current section by an accent rule and bold text, with
   no reading progress, by the architect's direction.
-- claude-plugins · marathon retro: the checkpoint 2 redirect came from the architect viewing the
-  three sites' local builds, which found cramped columns at about 1400px, mid-word breaks in the
-  site index, and H unable to reach the top, after the standards and spec reviews had passed. A
-  checkpoint that releases a visual layer could show the architect captures or a local build at
-  several widths before the release, not only the reviews' results.
-- claude-plugins · marathon retro: `gh pr checks --watch` run straight after `gh pr create` can
-  start before GitHub registers the pull request's check runs: on spike-html-hosting-components
-  PR #5 it printed "no checks reported on the 'components' branch" and exited 1, so the `&&`
-  stopped before `gh pr merge` and nothing merged. The session waited until `gh pr checks` listed
-  a check, then ran the configured merge command again. The merge step could wait for the pull
-  request to report its checks before it watches them.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.org`: repos become
-  spike-html-hosting, spike-html-hosting-components and spike-html-hosting-sdk. The summary adds
-  sl-site-nav's fetch mode (built list first, the fetched list on success) measured with one site
-  deployed ahead on fixture sites; the org's sites.json, fetched live by the root alone; SDK
-  v0.4.0's several copied trees and alert callouts; releases components v0.3.0 and SDK v0.4.0.
-- coordinator · roadmap: new task `experiment.html.spike-html-hosting.tasks.icons`, "One icon
-  toolkit", between org and design. repos: spike-html-hosting-icons (created by the task, as layers
-  and template created theirs), -components, -sdk, spike-html-hosting, -architecture, -sqlate.
-  Summary: spike-html-hosting-icons, one package under the components and the SDK, generates typed
-  per-icon ES modules at its build from Iconify's per-set data via @iconify/utils (recorded with
-  Iconify's single-maintainer risk; each set's licence and attribution named); icons render inline
-  in currentColor, aria-hidden and focusable="false"; a bundle carries only the icons it imports.
-  The task chooses the default set and the glyphs: the header's Pages, Help and Theme (icon and key
-  hint, the name in aria-label), the section tree's Previous and Next, the drawer's Close, and the
-  alert callouts. Its upgrade slices take SDK v0.4.0 and components v0.3.0 on the architecture and
-  sqlate sites. Evidence 12.
-- coordinator · roadmap: new task `experiment.html.spike-html-hosting.tasks.design`, "The design
-  review", between icons and review. repos: spike-html-hosting, -components, -sdk, -icons,
-  -architecture, -sqlate. Summary, the task as built: the architect reviews the three sites from
-  captures at 390, 1120 and 1376px, light and dark, the index also with Help and with Settings
-  open, at four checkpoints before any release. Glyph buttons are their own control,
-  glyph-button.css, each named on hover by an interest invoker. The header holds the site nav and
-  one header-actions group, Pages (P), Contents (C), Help (?) and Settings (S): one row from 40rem,
-  and below it two, the group at the inline start under the nav. Help and Settings follow the
-  shortcut-dialog pattern the components README documents, each opening with a header row of its
-  h2 and an Esc Close: Settings (sl-settings) holds the theme and the keyboard settings and stores
-  each change at once, and Help (sl-shortcuts) only lists the shortcuts. The section tree is links
-  alone, the current section marked, in a Contents drawer below 70rem, J and K moving between
-  sections; each copied page has a pager at its top and bottom, H and L moving between pages in
-  the site index's order, compact below 40rem. Front matter becomes head meta, and sl-page-header
-  is removed. Releases components v0.5.0 and SDK v0.6.0, which all three sites pin with icons
-  v0.1.0.
-- coordinator · roadmap, `experiment.html.spike-html-hosting`'s repos, `[workspace.paths]`, and
-  references.toml / references.local.toml: add spike-html-hosting-icons
-  (`https://github.com/JaimeStill/spike-html-hosting-icons.git`,
-  `~/experiments/spike-html-hosting-icons`), landing with the icons task.
-- coordinator · references.toml and references.local.toml: add standards-lab/.github (the
-  coordinator's `public/`), read at dd10b25 for the charter, and standards-lab/org (the
-  coordinator), read at c812496 for the orientation brief, unless the catalog already lists the
-  coordinator.
-- claude-plugins · marathon retro: org's slice 8 and behaviors 20 and 21 measure the deployed
-  site: the fetch of the live sites.json with its headers, and the stored theme across the three
-  deployed sites. That evidence exists only after SHIP merges the root, while the session brief
-  that authorizes the merge is meant to show it. The brief format has no step for evidence
-  gathered after the merge.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.icons`: its summary becomes
-  the task as built, in place of the summary the new-task edit above drafts:
-  spike-html-hosting-icons, a generator that takes any Iconify set by name through
-  @iconify/utils and accepts only sets whose licence is satisfied by shipping its text, each
-  shipping its upstream LICENSE; Octicons released alone at v0.1.0 as per-icon svg string modules,
-  with a dev-only browse page; a peer of the components and the SDK; an SDK build step that fills
-  <svg data-icon="<set>/<name>">; glyphs on the header, the keys help's Close, the section tree,
-  the drawer's Close and the alert callouts; releases icons v0.1.0, components v0.4.0 and SDK
-  v0.5.0, which all three sites pin. Evidence 12.
+- coordinator · roadmap: remove experiment.html.spike-html-hosting from `active` and delete its
+  `[goals.experiment.html.spike-html-hosting]` table and its tasks. The header comment (about
+  line 12, "spike-html-hosting is active") and wave A's line (about line 24) say
+  spike-html-hosting has answered (html-artifacts.md, "Answers · experiment.html").
+- coordinator · roadmap: stage experiment.html.spike-html-go-wasm, moving it from `planned` to
+  `active`, on the session brief's acceptance.
+- coordinator · references.toml and references.local.toml: add spike-html-hosting-sdk
+  (`https://github.com/JaimeStill/spike-html-hosting-sdk.git`,
+  `~/experiments/spike-html-hosting-sdk`) beside the spike's other four repositories.
+- coordinator · `[workspace.paths]`, references.toml and references.local.toml: add
+  spike-html-hosting-icons (`https://github.com/JaimeStill/spike-html-hosting-icons.git`,
+  `~/experiments/spike-html-hosting-icons`).
 - coordinator · references.toml and references.local.toml: add primer/octicons
   (`https://github.com/primer/octicons.git`), read at 9a274e2 (tag `@primer/octicons@19.42.0`),
   whose LICENSE spike-html-hosting-icons copies. The root's context/README.md, References,
   already lists it.
-- coordinator · intake, architecture: a pattern page for the keyboard-shortcut dialog, with
-  Settings and Help as its worked instances and an upload under U as an extension. The dialog's
-  Close sits in its header row with the h2. The page is inert under a modal and keys fire only
-  inside it, so no second modal opens over Help, and sl-shortcuts reads the bindings against the
-  topmost modal. In a modal, Escape with a glyph hint showing closes the dialog and the hint; on a
-  plain page it closes the hint alone.
-- coordinator · intake, spike-html-apps-foundation: Settings and Help as foundation changes (the
-  theme menu's fixed heading and T save, the keys help's built-in settings, force a rebuild today).
-- coordinator · intake, spike-html-apps-foundation: preferences.js and keys.js dynamically import
-  theme-menu.js and keys-help.js, so every site builds both chunks without requesting them.
-- coordinator · intake: glyph-button as a candidate foundation control.
-- answer task / intake: a nav menu at narrow widths, and sub-navs (a nav within a nav element),
-  for the Pages sites; below 40rem the site nav holds one row and doesn't wrap, so a longer site
-  list needs it.
-- coordinator · intake: front matter as head meta, not visible, as the convention for
-  v1.repository-docs.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: repos become
-  spike-html-hosting, -sqlate, -sdk, -icons, -components and -architecture; the summary becomes the
-  task as built: evidence 9 recorded from the screenshots and design tasks; the five parked fixes,
-  behavior 6 needing none; SDK v0.6.1, adding marked 18.2.0, the crawl's exact front-matter meta,
-  the template's provenance fix, the `data:` and `blob:` exemption for native video controls, and
-  currency over each `mise.<env>.toml`, pinned by all three sites; the sqlate quick-start revised in
-  place and proposed to sqlate; VHS recordings of sqlint v0.3.0 and the guide's program built behind
-  an input-hash check and removed, with the verdict that they are not worth the overhead for a docs
-  guide whose text shows the output; `mise run cost`. Evidence 9, 10 and 11. Replaces the pending
-  edit that only dropped "with a check that no capture file remains".
-- intake · sqlate, docs/quick-start.md: apply the revision as the diff of the
-  spike-html-hosting-sqlate site's revised copy, `content/docs/quick-start.md`, against blob
-  0c54507 at f2b2117. Its substantive changes:
+- architecture · principles/rolling-currency.md: a web module that installs with pnpm sets
+  `minimumReleaseAge: 0` in its pnpm-workspace.yaml, so the package manager installs the latest
+  release currency reports. Otherwise pnpm 12's default one-day wait refuses a same-day release
+  in CI (spike-html-hosting-sdk PR #3, vite 8.3.6). Reading each release's notes before its bump
+  lands replaces the wait as the review. The trade: the wait keeps out a compromised publish that
+  the registry pulls within hours, and reading the notes doesn't. This is the architect's
+  direction, proven by spike-html-hosting-sdk v0.2.0 and the three sites that pin it.
+- architecture · principles/rolling-currency.md: a currency check reads every mise environment's
+  config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml, so a tool pinned
+  for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd and ffmpeg, stays
+  current. spike-html-hosting-sdk v0.6.1's currency bin does this.
+- intake · sqlate, docs/quick-start.md, the change list behind the answer section's "sqlate
+  quick-start revision" item: apply the revision as the diff of the spike-html-hosting-sqlate
+  site's revised copy, `content/docs/quick-start.md`, against blob 0c54507 at f2b2117. Its
+  substantive changes:
   - step 1 adds `go get github.com/jackc/pgx/v5/stdlib`, without which step 5 doesn't build as
     published;
   - the task that runs the program is `program` throughout;
@@ -1315,17 +1293,26 @@ Door          two-way: only the root's two READMEs and its goal
     `sql.guard_set` and `sql.guard_where` in a guarded returning command and cursor paging on
     PostgreSQL's keyset overlay, and the intro gains a bullet for it;
   - the clean-up step becomes 13.
-- answer task / intake: recorded terminal demos are not worth the overhead for a docs guide whose
-  text shows the output (evidence 10). v1.repository-docs shows a CLI's output as text in the
-  guide. Rejected: VHS recordings committed behind an input hash, which the review task built and
-  removed.
-- coordinator · intake, architecture principles/rolling-currency.md: a currency check reads every
-  mise environment's config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml,
-  so a tool pinned for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd and
-  ffmpeg, stays current. spike-html-hosting-sdk v0.6.1's currency bin does this.
-- answer task: the Pages findings from evidence 11, recorded in the root README's "Evidence".
-  Pages serves gzip, not brotli, and brotli 11 would save 11 to 15% on a typical page. GitHub's
-  Pages deployment queue dominates push-to-live: the task's merges took 1m52s to 6m24s, against
-  dispatch medians of 56s to 2m03s. Pages' CDN served a site's previous index from one node
-  minutes after a deploy, and the index's Last-Modified trailed deploy-pages' reported success by
-  up to 28 s.
+- retro · claude-plugins, for the sync PR body: pipeline.md's Releasing assumes the session tags
+  the merge commit, but this spike's release workflows commit the pack's tree and cut their own
+  tag on the push to main; and a task whose own repositories consume its release needs a BUILD
+  checkpoint, which the pipeline doesn't describe.
+- retro · claude-plugins, for the sync PR body: the session merged a pull request with red CI
+  because it piped `gh pr checks --watch` through `tail`, which hid the command's exit status; the
+  session should run the configured merge command exactly as written.
+- retro · claude-plugins, for the sync PR body: the checkpoint 2 redirect came from the architect
+  viewing the three sites' local builds, which found cramped columns at about 1400px, mid-word
+  breaks in the site index, and H unable to reach the top, after the standards and spec reviews
+  had passed. A checkpoint that releases a visual layer could show the architect captures or a
+  local build at several widths before the release, not only the reviews' results.
+- retro · claude-plugins, for the sync PR body: `gh pr checks --watch` run straight after `gh pr
+  create` can start before GitHub registers the pull request's check runs: on
+  spike-html-hosting-components PR #5 it printed "no checks reported on the 'components' branch"
+  and exited 1, so the `&&` stopped before `gh pr merge` and nothing merged. The session waited
+  until `gh pr checks` listed a check, then ran the configured merge command again. The merge step
+  could wait for the pull request to report its checks before it watches them.
+- retro · claude-plugins, for the sync PR body: org's slice 8 and behaviors 20 and 21 measure the
+  deployed site: the fetch of the live sites.json with its headers, and the stored theme across
+  the three deployed sites. That evidence exists only after SHIP merges the root, while the
+  session brief that authorizes the merge is meant to show it. The brief format has no step for
+  evidence gathered after the merge.

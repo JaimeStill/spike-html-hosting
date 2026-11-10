@@ -314,7 +314,8 @@ and sdk `review` re-cut for the editor's docs
 - architecture: 5b62e35 (10)
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
   46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
-  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal)
+  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal);
+  63ecedc (layout, from the brief)
 
 ## Decisions
 
@@ -1236,6 +1237,12 @@ and sdk `review` re-cut for the editor's docs
   note stay, and SDK v0.6.1's `data:`/`blob:` exemption and currency over `mise.<env>.toml` stay as
   general fixes. The program's removal leaves the guide's code unchecked; the revision was proven
   against it (build, tests, sqlint, a live run) before the removal.
+- review: at the session brief the architect, following the guide by hand, found two gopls
+  warnings in its `layout` helper: `unusedfunc`, since layout_test.go came a block before
+  sql_test.go, its only caller, and `writestring`, a concatenation passed to WriteString. `layout`
+  now ends each package's sql_test.go, and writes its newline with WriteByte (sqlate 63ecedc).
+  Verified against the program restored from b964f99^: the guide's blocks match it, vet, tests and
+  sqlint pass, the printed SQL is unchanged, and `gopls check` reports nothing.
 - review: cost is per page, every response the page loads, gzip as served and brotli computed,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,
@@ -1404,8 +1411,8 @@ and sdk `review` re-cut for the editor's docs
   - the task that runs the program is `program` throughout;
   - step 5 builds the catalog on `postgres.Patterns()`, with a paragraph on overlays, and closes
     the pool when the catalog fails (`errors.Join(err, pool.Close())`);
-  - each package gains a `layout_test.go` helper that puts each SQL clause on its own line,
-    changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
+  - each package's `sql_test.go` ends with a `layout` helper that puts each SQL clause on its
+    own line, changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
     PostgreSQL receives, in place of a `sql` task;
   - step 9 adds a test printing the composed list read;
   - step 10 plants a statement with `guard_set` and no `guard_where`, and a RETURNING in a

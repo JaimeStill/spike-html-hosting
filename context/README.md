@@ -96,7 +96,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.6.0, spike-html-hosting-components at v0.5.0, and the icons
+- Every site pins the SDK at v0.6.1, spike-html-hosting-components at v0.5.0, and the icons
   layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
@@ -208,7 +208,7 @@ of the check.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.6.0, the
+release workflow tags a version bump that lands on main. Its current release is v0.6.1, the
 components' is v0.5.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
 release nothing; each deploys on its push to main.
 

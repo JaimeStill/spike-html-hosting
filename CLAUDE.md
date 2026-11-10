@@ -21,6 +21,7 @@ repository is managed with the marathon workflow; start from `context/README.md`
   `context/README.md`, "Taking captures", lists its flags.
 - **Currency:** `mise run currency`, the SDK's currency bin: every mise tool, package.json pin,
   `github:` tag, workflow action pin, and reusable workflow call behind its latest.
+- **Cost:** `mise run cost` prints each live site's page weight, build, and push-to-live times.
 - **Goals:** this spike's tasks live in the coordinator's roadmap,
   `standards-lab/context/roadmap.toml`, under `experiment.html.spike-html-hosting`. Its goal
   record is `context/goals/experiment.html.spike-html-hosting.md`.

@@ -315,7 +315,7 @@ and sdk `review` re-cut for the editor's docs
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
   46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
   4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal);
-  63ecedc (layout, from the brief)
+  63ecedc (layout, from the brief); f369456 (step 11, from the brief)
 
 ## Decisions
 
@@ -1243,6 +1243,12 @@ and sdk `review` re-cut for the editor's docs
   now ends each package's sql_test.go, and writes its newline with WriteByte (sqlate 63ecedc).
   Verified against the program restored from b964f99^: the guide's blocks match it, vet, tests and
   sqlint pass, the printed SQL is unchanged, and `gopls check` reports nothing.
+- review: at the session brief the architect found step 11's output didn't say what each line
+  submitted. Its run.go now prints each request and its outcome, in step 12's form ("rename
+  platform to "Platform Engineering" at version 1: version 2"), the refused requests through a
+  `refused` helper naming each matched error, with prose for each line (sqlate f369456). Verified
+  against the restored program: blocks match, vet, tests, sqlint and gopls clean, and the output
+  shown is a live run on PostgreSQL 18.
 - review: cost is per page, every response the page loads, gzip as served and brotli computed,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,
@@ -1419,7 +1425,10 @@ and sdk `review` re-cut for the editor's docs
     standard file, shows sqlint's two findings and exit 1, then removes it, and says that
     `guard_where` gives a guarded command optimistic concurrency: the write applies only if the
     row's version is still the one the caller read, and a stale write fails;
-  - step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print;
+  - step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print,
+    and each line of its output names the request it made and its outcome, the refused requests
+    through a `refused` helper naming the error each matches, with prose explaining each line and
+    that `Replace` deletes and creates in one transaction;
   - a new step 12 scopes projects by organization, with `app.tenant` and `app.live` layered with
     `sql.guard_set` and `sql.guard_where` in a guarded returning command and cursor paging on
     PostgreSQL's keyset overlay, and the intro gains a bullet for it;

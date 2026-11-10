@@ -58,19 +58,25 @@ Evidence 9 is recorded from earlier tasks' work, not from a new capture pass.
 
 ### 10. The CLI demo
 
-The sqlate site's quick-start,
-https://jaimestill.github.io/spike-html-hosting-sqlate/docs/quick-start.html, holds five VHS
-recordings: under step 9, the composed SQL; step 10, sqlint's findings; step 11, the program on
-PostgreSQL; and step 12, the layered archive statement and cursor pages, then the org-scoped run.
-They record sqlint v0.3.0 and the revised guide's program.
+Verdict: recorded terminal demos are not worth the overhead for a docs guide whose text shows the
+output. The review task built them and removed them.
 
-- Each is committed as WebM with a WebP poster, behind an input-hash check. `mise run tapes`
-  renders only the recordings whose inputs changed, and CI never renders.
-- The sqlate site's `tapes/README.md` holds the practices: a 77x24 terminal, CaskaydiaMono at
-  20px, `zenwritten_dark` rendered once for every site theme, one output per screen, and pauses
-  sized to the output.
-- The quick-start is revised in place from sqlate f2b2117. The revision includes a fix to step 1,
-  without which step 5 doesn't build as published, and goes to sqlate at the intake.
+- It recorded sqlint v0.3.0 and the revised guide's program through VHS: five recordings under
+  the sqlate quick-start's steps 9 to 12, committed as WebM with WebP posters behind a hash of
+  their inputs, rendered locally with vhs, ttyd, ffmpeg, Docker, and the pinned headless shell,
+  never in CI.
+- The guide already prints every output the recordings showed, as text a reader can search, copy,
+  and read with a screen reader. What the recordings added was motion, for commands that finish
+  in under three seconds.
+- They cost a second mise environment for the render tools, four scripts of hashing, placement,
+  and tape checks, a re-render on every change to the guide's program (three in the one task),
+  and 206 kB of posters on the quick-start. The architect removed them, and the program the check
+  held the guide to, at the task's second checkpoint.
+- What stays is the quick-start, revised in place from sqlate f2b2117 and proposed to sqlate at
+  the intake. The revision fixes step 1, without which step 5 doesn't build as published, prints
+  the SQL PostgreSQL receives, shows what sqlint catches, and adds a step that layers the
+  library's guard patterns with the program's own. The program it was proven against built,
+  passed its tests and sqlint, and ran on PostgreSQL 18 before its removal.
 
 ### 11. Cost per site
 
@@ -98,8 +104,9 @@ creation to its deploy's reported success:
 - Pages serves gzip, not brotli. Brotli 11 would save only 11 to 15% on a typical page.
 - Every page loads three JS files, its entry, the shared `index` chunk, and rolldown's runtime,
   about 21.5 kB served: the bulk of a page's weight.
-- The sqlate quick-start is the outlier, at about 274 kB, 206 kB of it the five WebP posters. It
-  loads no video bytes, since each video is `preload="none"`.
+- The sqlate quick-start was the outlier, at about 274 kB, 206 kB of it the five recordings' WebP
+  posters, measured before evidence 10's recordings were removed; it loaded no video bytes, since
+  each video was `preload="none"`.
 - GitHub's Pages deployment queue dominates push-to-live. The merge runs took 1m52s to 6m24s,
   against dispatch medians of about 56s, 2m, and 85s.
 - The architecture site's check step, about 93s, is the longest build cost.

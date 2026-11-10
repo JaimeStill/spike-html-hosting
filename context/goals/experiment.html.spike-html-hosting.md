@@ -300,19 +300,20 @@ Release       spike-html-hosting-sdk v0.6.1
 
 ## Progress
 
-slices 12/12 · checkpoint 1 ✓ · standards ✓ · spec ✓ · editor ✓ · checkpoint 2 open
+slices 12/12 · checkpoint 1 ✓ · standards ✓ · spec ✓ · editor ✓ · checkpoint 2 ✓ (recordings and
+program removed: sqlate b964f99)
 SDK v0.6.1 released (PR #10, d5e9da4); architecture (PR #9, 04d2271), sqlate (PR #9, e9fcb5b) and
 root (PR #10, b5f9591) merged and deployed at v0.6.1; root `review` re-cut for slices 11-12, sqlate
 and sdk `review` re-cut for the editor's docs
 
-- icons: 69d0be1 (1); fb7143f, e279e3b (4)
+- icons: 69d0be1 (1); fb7143f, e279e3b (4); 0826ca9 (standards); b4b76cd (editor)
 - components: 17cf52b (2)
-- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9)
-- root: 3c699eb (10); 5be4fae, c3e55d9, c02d992 (11); 7492a44 (12)
+- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9); 6db6351 (editor, after the release)
+- root: 3c699eb (10); 5be4fae, c3e55d9, c02d992 (11); 7492a44 (12); a59784e (editor)
 - architecture: 5b62e35 (10)
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
   46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
-  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10)
+  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10); c6e6486 (editor); b964f99 (removal)
 
 ## Decisions
 
@@ -1227,6 +1228,13 @@ and sdk `review` re-cut for the editor's docs
   sqlate with the revision at the intake. Kept: the program's `go = "1.27"`, as the guide tells a
   reader to write it; a later 1.27.x on the rendering machine could render a tape without staling
   its hash.
+- review: at checkpoint 2 the architect removed the VHS recordings and the quick-start program
+  from the sqlate site: recordings are "not worth the overhead for a docs guide whose text shows
+  the output". Behaviors 13 to 16 and 22 to 25 were built, accepted at checkpoint 1, and then
+  removed; evidence 10 records the verdict. The revised quick-start, its `revised` record and its
+  note stay, and SDK v0.6.1's `data:`/`blob:` exemption and currency over `mise.<env>.toml` stay as
+  general fixes. The program's removal leaves the guide's code unchecked; the revision was proven
+  against it (build, tests, sqlint, a live run) before the removal.
 - review: cost is per page, every response the page loads, gzip as served and brotli computed,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,
@@ -1378,15 +1386,15 @@ and sdk `review` re-cut for the editor's docs
 - coordinator · intake: front matter as head meta, not visible, as the convention for
   v1.repository-docs.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: repos become
-  spike-html-hosting, -sqlate, -sdk, -icons, -components and -architecture; the summary becomes
-  the task as built: evidence 9 recorded from the screenshots and design tasks; the five parked
-  fixes, behavior 6 needing none; SDK v0.6.1, adding marked 18.2.0, the crawl's exact front-matter
-  meta, the template's provenance fix, the `data:` and `blob:` exemption for native video
-  controls, and currency over each `mise.<env>.toml`, pinned by all three sites; the sqlate
-  quick-start revised in place with five VHS recordings of sqlint v0.3.0 and the guide's program,
-  committed as WebM with WebP posters behind an input-hash check (zenwritten_dark, CaskaydiaMono,
-  77x24); `mise run cost`. Evidence 9, 10 and 11. Replaces the pending edit that only dropped
-  "with a check that no capture file remains".
+  spike-html-hosting, -sqlate, -sdk, -icons, -components and -architecture; the summary becomes the
+  task as built: evidence 9 recorded from the screenshots and design tasks; the five parked fixes,
+  behavior 6 needing none; SDK v0.6.1, adding marked 18.2.0, the crawl's exact front-matter meta,
+  the template's provenance fix, the `data:` and `blob:` exemption for native video controls, and
+  currency over each `mise.<env>.toml`, pinned by all three sites; the sqlate quick-start revised in
+  place and proposed to sqlate; VHS recordings of sqlint v0.3.0 and the guide's program built behind
+  an input-hash check and removed, with the verdict that they are not worth the overhead for a docs
+  guide whose text shows the output; `mise run cost`. Evidence 9, 10 and 11. Replaces the pending
+  edit that only dropped "with a check that no capture file remains".
 - intake · sqlate, docs/quick-start.md: apply the revision as the diff of the
   spike-html-hosting-sqlate site's revised copy, `content/docs/quick-start.md`, against blob
   0c54507 at f2b2117. Its substantive changes:
@@ -1408,15 +1416,13 @@ and sdk `review` re-cut for the editor's docs
     `sql.guard_set` and `sql.guard_where` in a guarded returning command and cursor paging on
     PostgreSQL's keyset overlay, and the intro gains a bullet for it;
   - the clean-up step becomes 13.
-- coordinator · intake, architecture: a convention for CLI recordings in a docs page, from the
-  practices in spike-html-hosting-sqlate's `tapes/README.md`: the terminal sized to the content
-  column (77x24 at 20px in the 712px column), one neutral dark theme rendered once for every site
-  theme, one output per screen with no scroll, a pause sized to each output, setup hidden, the
-  poster the last frame, and each recording committed as WebM behind a hash of its inputs, which
-  the check verifies offline and CI never renders.
+- answer task / intake: recorded terminal demos are not worth the overhead for a docs guide whose
+  text shows the output (evidence 10). v1.repository-docs shows a CLI's output as text in the
+  guide. Rejected: VHS recordings committed behind an input hash, which the review task built and
+  removed.
 - coordinator · intake, architecture principles/rolling-currency.md: a currency check reads every
   mise environment's config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml,
-  so a tool pinned for one task alone, as the sqlate site's mise.tapes.toml pins vhs, ttyd and
+  so a tool pinned for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd and
   ffmpeg, stays current. spike-html-hosting-sdk v0.6.1's currency bin does this.
 - answer task: the Pages findings from evidence 11, recorded in the root README's "Evidence".
   Pages serves gzip, not brotli, and brotli 11 would save 11 to 15% on a typical page. GitHub's

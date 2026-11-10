@@ -60,7 +60,8 @@ its own docs/ guide.
   module per icon, and a dev-only browse page of every released glyph. The SDK's build fills each
   page's glyph markers and draws the alert callouts' glyphs from the package, so a build ships
   only the icons it uses.
-- **Review and demos:** the screenshot review and VHS-recorded CLI demos.
+- **Review and demos:** the screenshot review, and VHS-recorded CLI demos, built and then
+  rejected (README, "Evidence", 10).
 
 ## Path
 
@@ -147,9 +148,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
   each file's git blob hash, and a unit test fails when a copy differs.
 - The sqlate site revises one copy in place, `docs/quick-start.md`, which `content.json`'s
-  `revised` entry holds against its original, blob 0c54507 at f2b2117. Its build places five VHS
-  recordings of the guide's program under their steps; the sqlate site's README describes the
-  program, the recordings, and `mise run tapes`.
+  `revised` entry holds against its original, blob 0c54507 at f2b2117, and its build opens the
+  page with a note naming that original. The revision goes to sqlate at the intake.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
   settings offer every profile. It also loads `keys.js`, which clicks the Pages button on P and
   the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
@@ -239,7 +239,7 @@ which a pending edit in the goal record adds:
 
 - `architecture`, at 8706d04: the architecture stand-in's pages.
 - `sqlate`, at v0.6.1, with `sqlint/v0.3.0`: the sqlate stand-in's README and docs/, and the
-  recorded CLI, which the sqlate site renders with vhs, ttyd, and ffmpeg.
+  CLI the review task recorded, then removed (README, "Evidence", 10).
 - `standards-lab/.github`, at dd10b25: the charter, its `profile/README.md`.
 - `standards-lab/org`, at c812496: the orientation brief, its `briefs/orientation.md`.
 - `spike-html-apps-foundation`, at v0.3.0: the baseline every site pins.

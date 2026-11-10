@@ -308,7 +308,8 @@ and sdk `review` re-cut for the editor's docs
 
 - icons: 69d0be1 (1); fb7143f, e279e3b (4); 0826ca9 (standards); b4b76cd (editor)
 - components: 17cf52b (2)
-- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9); 6db6351 (editor, after the release)
+- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9);
+  6db6351 (editor, after the release)
 - root: 3c699eb (10); 5be4fae, c3e55d9, c02d992 (11); 7492a44 (12); a59784e (editor)
 - architecture: 5b62e35 (10)
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);

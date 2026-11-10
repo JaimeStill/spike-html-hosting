@@ -1198,19 +1198,50 @@ Door          two-way: only the root's two READMEs and its goal
       their Pages runs: Pages serves gzip, not brotli; GitHub's deployment queue dominates
       push-to-live; a CDN node can serve the previous deploy minutes after a new one.
   12. One icon toolkit. Proven by the icons layer's unit and browser tiers and each site's
-      `showsGlyphs` shell check. The builds ship 6, 6, and 7 of 986 Octicons.
+      `showsGlyphs` shell check. Counted on today's builds, the architecture, sqlate, and root
+      builds ship 7, 7, and 8 of 986 Octicons: arrow-left, arrow-right, gear, list-ordered,
+      list-unordered, question, and x, and the root also report.
 
   For the intake:
 
   - A pattern page for the keyboard-shortcut dialog, with Settings and Help its worked instances.
+    - An upload under U is an extension of the pattern.
+    - Close sits in the dialog's header row with the h2.
+    - The page is inert under a modal and keys fire only inside it, so no second modal opens over
+      Help; `sl-shortcuts` reads the bindings against the topmost modal.
+    - In a modal, Escape with a glyph hint showing closes the dialog and the hint; on a plain page
+      it closes the hint alone.
   - Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
-    keys help's settings.
+    keys help's built-in settings.
+    - Both force a rebuild today.
   - The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
     `keys-help.js`, so every site builds both chunks without requesting them.
   - glyph-button as a foundation control.
   - Front matter as head meta, not visible, as v1.repository-docs' convention.
   - The sqlate quick-start revision against sqlate f2b2117, from spike-html-hosting-sqlate's
     revised copy, `content/docs/quick-start.md`.
+    - Apply the copy's diff against blob 0c54507 at sqlate f2b2117.
+    - Step 1 adds `go get github.com/jackc/pgx/v5/stdlib`, without which step 5 doesn't build as
+      published.
+    - The task that runs the program is `program` throughout.
+    - Step 5 builds the catalog on `postgres.Patterns()`, with a paragraph on overlays, and closes
+      the pool when the catalog fails (`errors.Join(err, pool.Close())`).
+    - Each package's `sql_test.go` ends with a `layout` helper that puts each SQL clause on its own
+      line, changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
+      PostgreSQL receives, in place of a `sql` task.
+    - Step 9 adds a test printing the composed list read.
+    - Step 10 plants a statement with `guard_set` and no `guard_where`, and a RETURNING in a
+      standard file, shows sqlint's two findings and exit 1, then removes it. `guard_where` gives a
+      guarded command optimistic concurrency: the write applies only if the row's version is still
+      the one the caller read, and a stale write fails.
+    - Step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print.
+      Each output line names its request and outcome, the refused requests through a `refused`
+      helper naming the error each matches, with prose explaining each line and that `Replace`
+      deletes and creates in one transaction.
+    - A new step 12 scopes projects by organization: `app.tenant` and `app.live` layered with
+      `sql.guard_set` and `sql.guard_where` in a guarded returning command, and cursor paging on
+      PostgreSQL's keyset overlay. The intro gains a bullet for it.
+    - The clean-up step becomes 13.
   - A site-nav menu at narrow widths, and sub-navs: below 40rem the nav is one row and doesn't
     wrap, and a real org's ten or so sites won't fit.
   - The VHS verdict: recorded terminal demos aren't worth the overhead for a guide whose text
@@ -1268,40 +1299,6 @@ Door          two-way: only the root's two READMEs and its goal
   config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml, so a tool pinned
   for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd, and ffmpeg, stays
   current. spike-html-hosting-sdk v0.6.1's currency bin does this.
-- intake · architecture, the detail behind the answer section's shortcut-dialog item: a pattern
-  page for the keyboard-shortcut dialog, with Settings and Help as its worked instances and an
-  upload under U as an extension. The dialog's Close sits in its header row with the h2. The page
-  is inert under a modal and keys fire only inside it, so no second modal opens over Help, and
-  sl-shortcuts reads the bindings against the topmost modal. In a modal, Escape with a glyph hint
-  showing closes the dialog and the hint; on a plain page it closes the hint alone.
-- intake · spike-html-apps-foundation, the detail behind the answer section's Settings and Help
-  item: the theme menu's fixed heading and T save, and the keys help's built-in settings, force a
-  rebuild today.
-- intake · sqlate, docs/quick-start.md, the change list behind the answer section's "sqlate
-  quick-start revision" item: apply the revision as the diff of the spike-html-hosting-sqlate
-  site's revised copy, `content/docs/quick-start.md`, against blob 0c54507 at f2b2117. Its
-  substantive changes:
-  - step 1 adds `go get github.com/jackc/pgx/v5/stdlib`, without which step 5 doesn't build as
-    published;
-  - the task that runs the program is `program` throughout;
-  - step 5 builds the catalog on `postgres.Patterns()`, with a paragraph on overlays, and closes
-    the pool when the catalog fails (`errors.Join(err, pool.Close())`);
-  - each package's `sql_test.go` ends with a `layout` helper that puts each SQL clause on its
-    own line, changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
-    PostgreSQL receives, in place of a `sql` task;
-  - step 9 adds a test printing the composed list read;
-  - step 10 plants a statement with `guard_set` and no `guard_where`, and a RETURNING in a
-    standard file, shows sqlint's two findings and exit 1, then removes it, and says that
-    `guard_where` gives a guarded command optimistic concurrency: the write applies only if the
-    row's version is still the one the caller read, and a stale write fails;
-  - step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print,
-    and each line of its output names the request it made and its outcome, the refused requests
-    through a `refused` helper naming the error each matches, with prose explaining each line and
-    that `Replace` deletes and creates in one transaction;
-  - a new step 12 scopes projects by organization, with `app.tenant` and `app.live` layered with
-    `sql.guard_set` and `sql.guard_where` in a guarded returning command and cursor paging on
-    PostgreSQL's keyset overlay, and the intro gains a bullet for it;
-  - the clean-up step becomes 13.
 - retro · claude-plugins, for the sync PR body: pipeline.md's Releasing assumes the session tags
   the merge commit, but this spike's release workflows commit the pack's tree and cut their own
   tag on the push to main; and a task whose own repositories consume its release needs a BUILD

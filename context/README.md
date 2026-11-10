@@ -299,8 +299,9 @@ Each item's proof is recorded in the root README's "Evidence".
 11. **Cost per site** ([README](../README.md#11-cost-per-site)): `mise run cost`, its run of
     2026-11-10 over the live sites and their Pages runs.
 12. **One icon toolkit** ([README](../README.md#12-one-icon-toolkit)): the icons layer's unit and
-    browser tiers, and each site's `showsGlyphs` shell check. The builds ship 6, 6, and 7 of 986
-    Octicons.
+    browser tiers, and each site's `showsGlyphs` shell check. Counted on today's builds, the
+    architecture, sqlate, and root builds ship 7, 7, and 8 of 986 Octicons: arrow-left,
+    arrow-right, gear, list-ordered, list-unordered, question, and x, and the root also report.
 
 Items 5 and 7 are proven only by tests: 5 by fixture tests on one local origin, 7 by the check
 alone. Item 9 rests on the architect's reviews, item 11 on a measure run on demand, and the rest
@@ -342,14 +343,43 @@ intake, web-client.md's persistent artifacts, "written as HTML and hosted in the
 ### For the intake
 
 - A pattern page for the keyboard-shortcut dialog, with Settings and Help its worked instances.
+  - An upload under U is an extension of the pattern.
+  - Close sits in the dialog's header row with the h2.
+  - The page is inert under a modal and keys fire only inside it, so no second modal opens over
+    Help; `sl-shortcuts` reads the bindings against the topmost modal.
+  - In a modal, Escape with a glyph hint showing closes the dialog and the hint; on a plain page it
+    closes the hint alone.
 - Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
-  keys help's settings.
+  keys help's built-in settings.
+  - Both force a rebuild today.
 - The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
   `keys-help.js`, so every site builds both chunks without requesting them.
 - glyph-button as a foundation control.
 - Front matter as head meta, not visible, as v1.repository-docs' convention.
 - The sqlate quick-start revision against sqlate f2b2117, from spike-html-hosting-sqlate's
   revised copy, `content/docs/quick-start.md`.
+  - Apply the copy's diff against blob 0c54507 at sqlate f2b2117.
+  - Step 1 adds `go get github.com/jackc/pgx/v5/stdlib`, without which step 5 doesn't build as
+    published.
+  - The task that runs the program is `program` throughout.
+  - Step 5 builds the catalog on `postgres.Patterns()`, with a paragraph on overlays, and closes the
+    pool when the catalog fails (`errors.Join(err, pool.Close())`).
+  - Each package's `sql_test.go` ends with a `layout` helper that puts each SQL clause on its own
+    line, changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
+    PostgreSQL receives, in place of a `sql` task.
+  - Step 9 adds a test printing the composed list read.
+  - Step 10 plants a statement with `guard_set` and no `guard_where`, and a RETURNING in a standard
+    file, shows sqlint's two findings and exit 1, then removes it. `guard_where` gives a guarded
+    command optimistic concurrency: the write applies only if the row's version is still the one the
+    caller read, and a stale write fails.
+  - Step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print.
+    Each output line names its request and outcome, the refused requests through a `refused` helper
+    naming the error each matches, with prose explaining each line and that `Replace` deletes and
+    creates in one transaction.
+  - A new step 12 scopes projects by organization: `app.tenant` and `app.live` layered with
+    `sql.guard_set` and `sql.guard_where` in a guarded returning command, and cursor paging on
+    PostgreSQL's keyset overlay. The intro gains a bullet for it.
+  - The clean-up step becomes 13.
 - A site-nav menu at narrow widths, and sub-navs: below 40rem the nav is one row and doesn't
   wrap, and a real org's ten or so sites won't fit.
 - The VHS verdict: recorded terminal demos aren't worth the overhead for a guide whose text shows

@@ -1,0 +1,29 @@
+pages / deploy	UNKNOWN STEP	﻿2026-11-10T15:49:35.6775622Z Current runner version: '2.338.2'
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:35.6803631Z ##[group]Runner Image Provisioner
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:35.6805212Z Hosted Compute Agent
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:41.9398101Z ##[group]Run mise run install
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:41.9398489Z ^[[36;1mmise run install^[[0m
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:41.9427492Z shell: /usr/bin/bash -e {0}
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:42.9998785Z ##[group]Run mise run check
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:42.9999112Z ^[[36;1mmise run check^[[0m
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:43.0021211Z shell: /usr/bin/bash -e {0}
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:43.0021779Z env:
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:44.2859425Z ^[[34m[build]^[[0m dist/assets/index-BPtCh8cw.js                          65.35 kB │ gzip: 21.57 kB
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:44.2860230Z ^[[34m[build]^[[0m 
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:44.2860810Z ^[[34m[build]^[[0m ^[[32m✓ built in 419ms^[[39m
+pages / deploy	UNKNOWN STEP	2026-11-10T15:49:44.3232052Z ^[[34m[build]^[[0m Finished in 1.24s
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:15.4664606Z ^[[38;5;14m[test:browser]^[[0m Finished in 31.14s
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:15.4707572Z ^[[2mFinished in 32.44s^[[0m
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:15.4857905Z ##[group]Run actions/upload-pages-artifact@v5.0.0
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:15.4858273Z with:
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:16.5815777Z Artifact download URL: https://github.com/JaimeStill/spike-html-hosting/actions/runs/42848387666/artifacts/13779780263
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:16.5948497Z ##[end-action id=__actions_upload-pages-artifact.upload-artifact;outcome=success;conclusion=success;duration_ms=1070]
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:16.6028730Z ##[group]Run actions/deploy-pages@v5.0.1
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:16.6029042Z with:
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:16.6032060Z   token: ***
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:55.6815090Z Getting Pages deployment status...
+pages / deploy	UNKNOWN STEP	2026-11-10T15:50:55.8154130Z Current status: deployment_queued
+pages / deploy	UNKNOWN STEP	2026-11-10T15:51:21.2745911Z Getting Pages deployment status...
+pages / deploy	UNKNOWN STEP	2026-11-10T15:51:21.3957394Z Reported success!
+pages / deploy	UNKNOWN STEP	2026-11-10T15:51:21.4280948Z Post job cleanup.
+pages / deploy	UNKNOWN STEP	2026-11-10T15:51:21.6416903Z Post job cleanup.

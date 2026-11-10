@@ -82,7 +82,7 @@ run = "tsc -p ."
 dir = "{{config_root}}"
 
 [tasks."types:test"]
-description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, and the capture file, scripts/screenshots.config.ts, with tsc against tsconfig.test.json; reads no network, writes nothing"
+description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, the capture file, scripts/screenshots.config.ts, and mise run cost's scripts, with tsc against tsconfig.test.json; reads no network, writes nothing"
 depends = ["preflight"]
 run = "tsc -p tsconfig.test.json"
 dir = "{{config_root}}"
@@ -94,7 +94,7 @@ run = "pnpm exec vite build"
 dir = "{{config_root}}"
 
 [tasks."test:unit"]
-description = "Run the unit tier under node --test: each tree in content/ against content.json's blob hashes, with the SDK's content check; reads no network, writes nothing"
+description = "Run the unit tier under node --test: each tree in content/ against content.json's blob hashes, with the SDK's content check, and mise run cost's pure parts on fixtures of gh's output; reads no network, writes nothing"
 depends = ["preflight"]
 run = "node --test 'test/unit/*.test.ts'"
 dir = "{{config_root}}"

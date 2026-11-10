@@ -62,6 +62,8 @@ its own docs/ guide.
   only the icons it uses.
 - **Review and demos:** the screenshot review, and VHS-recorded CLI demos, built and then
   rejected (README, "Evidence", 10).
+- **Answer:** all twelve evidence items recorded in the root README's "Evidence", and the answer
+  below, written by the answer task.
 
 ## Path
 
@@ -84,7 +86,8 @@ The tasks, in the order they run; each cites the evidence it proves.
 9. `design`: the design review of the three sites.
 10. `review`: the review across every site, the sqlint VHS demo, and the cost per site
     (evidence 9, 10, 11).
-11. `answer`: the Pages topology, the root URL option, and the components layer's verdict.
+11. `answer`: the Pages topology, the root URL option, and the components layer's verdict, done:
+    every evidence item recorded in the root README and the answer written ("The answer").
 
 ## Building the sites
 
@@ -252,4 +255,108 @@ which a pending edit in the goal record adds:
 
 ## The answer
 
-Pending: the `answer` task writes it.
+The question: what do the repositories' Pages sites and the hosting of persistent artifacts look
+like, published as native web?
+
+**The hypothesis holds, with the org site moved to the origin root: architecture and each code
+repository's docs/ guide are project sites under `/<repo>/`, built by Vite from Markdown through
+one site SDK and one documentation components layer, each released by tag, and the org site is a
+standards-lab.github.io repository that holds the charter and the index of sites and serves the
+site list every nav fetches.**
+
+Each item's proof is recorded in the root README's "Evidence".
+
+1. **Three project sites** ([README](../README.md#1-three-project-sites)): each live site
+   answered 200 on 2026-11-10, and each site's `mise run check` runs its Vite build.
+2. **The org stand-in** ([README](../README.md#2-the-org-stand-in)): the root's browser tier,
+   the SDK's shell checks on its five pages, its index held to sites.json, and the SDK's crawl;
+   live from the org task, PR #7.
+3. **The architecture stand-in** ([README](../README.md#3-the-architecture-stand-in)): the
+   architecture site's crawl, each page's head held to its front matter's meta and every in-site
+   link followed to its page and fragment.
+4. **The sqlate stand-in** ([README](../README.md#4-the-sqlate-stand-in)): the components'
+   `sl-section-tree` tests for J, K and the arrow keys, and the sqlate site's crawl, with H and L
+   pressed at 390px.
+5. **Shared navigation when one site deploys ahead**
+   ([README](../README.md#5-shared-navigation-when-one-site-deploys-ahead)): proven only by the
+   components' fixture tests on one local origin. The built list skews and the fetched list
+   converges. Live, only the root fetches its list, served with `max-age=600`.
+6. **One baseline pin and a theme across sites**
+   ([README](../README.md#6-one-baseline-pin-and-a-theme-across-sites)): the components'
+   two-base test, and live on the three deployed sites, the theme set in storage rather than
+   through the menu.
+7. **No CSS module script in any build**
+   ([README](../README.md#7-no-css-module-script-in-any-build)): proven only by the check, the
+   SDK's ESLint leftover check over each build. No page was loaded in Safari.
+8. **The HTML/Markdown line** ([README](../README.md#8-the-htmlmarkdown-line)): the root's
+   orientation brief both ways and its sitrep entry, PR #7. Hand HTML cost 3.6 and 1.9 times the
+   drafting tokens, counted with Gemma 4's tokenizer.
+9. **The review across every site** ([README](../README.md#9-the-review-across-every-site)):
+   `mise run screenshots` and the browser test that it leaves no capture file, and the
+   architect's review of the captures at the design task's four checkpoints.
+10. **The CLI demo** ([README](../README.md#10-the-cli-demo)): built and rejected. The review
+    task recorded five VHS demos and removed them at its second checkpoint.
+11. **Cost per site** ([README](../README.md#11-cost-per-site)): `mise run cost`, its run of
+    2026-11-10 over the live sites and their Pages runs.
+12. **One icon toolkit** ([README](../README.md#12-one-icon-toolkit)): the icons layer's unit and
+    browser tiers, and each site's `showsGlyphs` shell check. The builds ship 6, 6 and 7 of 986
+    Octicons.
+
+Items 5 and 7 are proven only by tests: 5 by fixture tests on one local origin, 7 by the check
+alone. Item 9 rests on the architect's reviews, item 11 on a measure run on demand, and the rest
+on tests and the live sites.
+
+### The topology v1.client and v1.repository-docs build
+
+- **The org site at the origin root,** a standards-lab.github.io repository. It needs a root-base
+  option in the site SDK, since `base()` returns `/<name>/` today (spike-html-hosting-sdk
+  `src/served.ts`). A custom domain set on the org site carries to every project site of the
+  owner that has no domain of its own, per GitHub's docs ("About custom domains and GitHub
+  Pages"). The coordinator keeps no build: it is a context repository with no CI. Once
+  status-reports takes in briefs/, the org site holds only the charter and the index of sites.
+  Rejected: Pages on standards-lab/org at `/org/`.
+- **One site list,** fetched at runtime from the org site's `sites.json`, with the built-in list
+  as fallback. The built list stays wrong until every site rebuilds; the fetched one is right at
+  once. It needs the SDK's check that every request resolves under the site's base
+  (`requestsUnderBase`) to allow the org site's `sites.json`.
+- **The Pages costs,** from evidence 11. Pages serves gzip, not brotli. GitHub's deployment queue
+  dominates push-to-live. A CDN node can serve the previous deploy minutes after a new one.
+
+### The components layer
+
+- spike-html-hosting-components is the documentation layer the org site and v1.repository-docs'
+  sites build on. It stays apart from spike-html-apps-components, the pipeline primitives; the
+  two share only `sl-drawer`.
+- status-reports and training.foundation each build their own components layer on the
+  foundation, for their content.
+- Only overlap those layers prove moves into a shared documentation layer.
+- The drawer is foundation chrome: one `sl-drawer` in the foundation, the consumer passing its
+  Close glyph through a slot.
+
+### The HTML/Markdown line
+
+Markdown source rendered at build is the default for briefs/ and status-reports' entries. Hand
+HTML is written only where a diagram earns it, as evidence 8's figures do. This sharpens, for the
+intake, web-client.md's persistent artifacts, "written as HTML and hosted in the coordinator".
+
+### For the intake
+
+- A pattern page for the keyboard-shortcut dialog, with Settings and Help its worked instances.
+- Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
+  keys help's settings.
+- The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
+  `keys-help.js`, so every site builds both chunks without requesting them.
+- glyph-button as a foundation control.
+- Front matter as head meta, not visible, as v1.repository-docs' convention.
+- The sqlate quick-start revision against sqlate f2b2117, from spike-html-hosting-sqlate's
+  revised copy, `content/docs/quick-start.md`.
+- A site-nav menu at narrow widths, and sub-navs: below 40rem the nav is one row and doesn't
+  wrap, and a real org's ten or so sites won't fit.
+- The VHS verdict: recorded terminal demos aren't worth the overhead for a guide whose text shows
+  the output. v1.repository-docs shows a CLI's output as text.
+- One `sl-drawer` in the foundation, its Close glyph passed through a slot.
+- 14 web repositories each keep their own `scripts/currency.sh`, where the sites run the SDK's
+  currency bin.
+- The SDK provenance convention differs: the root keeps one provenance line per SDK tag it
+  adopted, and the architecture and sqlate sites one line naming the latest tag whose content
+  the file carries.

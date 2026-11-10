@@ -2,9 +2,9 @@
 // of a Pages run's log, on test/fixtures/cost/run.log, lines of the root's merge run 42848387666
 // as gh run view --log printed them, its byte-order mark and color codes kept; the pin a pages.yml
 // names and the runs at it, on test/fixtures/cost/runs.json, the architecture site's runs as the
-// runs API listed them, one still running, three at v0.6.1, two at older pins; the deploy the live
-// Last-Modified falls in; which link is an in-site page; the kind of a response; the brotli weight;
-// and the table's layout.
+// runs API listed them, one still running, three at v0.6.1, two at older pins; the run the live
+// index's Last-Modified came from; which link is an in-site page; the kind of a response; the
+// brotli weight; and the table's layout.
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -14,11 +14,11 @@ import { gzipSync } from "node:zlib";
 
 import {
   brotli,
-  confirms,
   duration,
   inSite,
   kB,
   kind,
+  liveRun,
   max,
   median,
   parseLog,
@@ -122,21 +122,32 @@ describe("the runs at the pin", () => {
   });
 });
 
-describe("confirms", () => {
-  const log = {
-    built: 419,
-    check: 32_486,
-    deployStarted: "2026-11-10T15:50:16.6028730Z",
-    deployed: "2026-11-10T15:51:21.3957394Z",
-  };
-  test("a Last-Modified inside the deploy, the second it started included", () => {
-    assert.ok(confirms("Tue, 10 Nov 2026 15:51:16 GMT", log));
-    assert.ok(confirms("Tue, 10 Nov 2026 15:50:16 GMT", log));
+describe("liveRun", () => {
+  // The root's runs 42849283631 and 42849473286: deploy-pages started 15:55:24.99 and 15:56:30.14,
+  // and reported success at 15:55:30.71 and 15:56:36.33.
+  const at = (deployStarted: string | null, deployed: string | null) => ({
+    built: null,
+    check: null,
+    deployStarted,
+    deployed,
   });
-  test("not one before or after it, nor a run with no deploy", () => {
-    assert.ok(!confirms("Tue, 10 Nov 2026 15:50:15 GMT", log));
-    assert.ok(!confirms("Tue, 10 Nov 2026 15:51:22 GMT", log));
-    assert.ok(!confirms("Tue, 10 Nov 2026 15:51:16 GMT", { ...log, deployed: null }));
+  const logs = [
+    at("2026-11-10T15:55:24.9865774Z", "2026-11-10T15:55:30.7058515Z"),
+    at("2026-11-10T15:56:30.1403549Z", "2026-11-10T15:56:36.3312558Z"),
+  ];
+  test("is the run whose deploy the Last-Modified falls in", () => {
+    assert.equal(liveRun("Tue, 10 Nov 2026 15:56:32 GMT", logs), 1);
+  });
+  test("counts the second a deploy started in", () => {
+    assert.equal(liveRun("Tue, 10 Nov 2026 15:56:30 GMT", logs), 1);
+  });
+  test("keeps a Last-Modified that came after the reported success with that deploy", () => {
+    // Seen live: 15:55:58, 27 s after the first deploy's success, before the second's start.
+    assert.equal(liveRun("Tue, 10 Nov 2026 15:55:58 GMT", logs), 0);
+  });
+  test("is -1 before every deploy, and skips a run with none", () => {
+    assert.equal(liveRun("Tue, 10 Nov 2026 15:55:23 GMT", logs), -1);
+    assert.equal(liveRun("Tue, 10 Nov 2026 15:56:32 GMT", [logs[0], at(null, null)]), 0);
   });
 });
 
@@ -245,7 +256,10 @@ describe("the tables", () => {
     assert.match(out, /^\.\/\s+2\s+9\.0 kB\s+3\.0 kB\s+2\.7 kB$/m);
     assert.match(out, /^median\s+1\.5\s+9\.0 kB\s+3\.0 kB\s+2\.7 kB$/m);
     assert.match(out, /^html\s+1\s+gzip\s+2\.0 kB\s+3\.0 kB\s+1\.8 kB\s+2\.7 kB$/m);
-    assert.match(out, /^1\s+push\s+2026-11-10T15:49:29Z\s+0\.42 s\s+32\.5 s\s+1 m 52 s\s+yes$/m);
+    assert.match(
+      out,
+      /^1\s+push\s+2026-11-10T15:49:29Z\s+0\.42 s\s+32\.5 s\s+1 m 52 s\s+yes, -5 s$/m,
+    );
     assert.ok(lines.some((line) => line.startsWith("js ")));
     assert.ok(!lines.some((line) => line.startsWith("image ")), "a kind no page loads has no row");
   });

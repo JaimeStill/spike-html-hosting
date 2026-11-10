@@ -6,17 +6,17 @@
 //   that no test ever reads the network. Here the Fetch domain pauses every request the page makes
 //   and this script makes it instead, to the live site, with the Accept-Encoding the browser sends,
 //   and fulfills it with the decoded body: the page loads what it would, and each response is
-//   weighed as Pages served it, its raw encoded bytes, then decoded, then at brotli 11. The cache is
-//   off, so each page weighs as a first visit. The pages are the crawl of the site's in-site links
-//   from its live index: on the architecture and sqlate sites the site index every page carries
-//   lists them all; on the root, a hand index, its links reach its hand pages and its two trees'
-//   pages, whose own links reach the rest. Nothing names a page.
+//   weighed as Pages served it, its raw encoded bytes, then decoded, then at brotli 11. The cache
+//   is off, so each page weighs as a first visit. The pages are the crawl of the site's in-site
+//   links from its live index: on the architecture and sqlate sites the site index every page
+//   carries lists them all; on the root, a hand index, its links reach its hand pages and its two
+//   trees' pages, whose own links reach the rest. Nothing names a page.
 // - Build time and push-to-live, from the site's Pages runs at its current pin, the reusable
 //   workflow its pages.yml on main calls (the runs API reports each run's), each run's log by gh
 //   run view --log: Vite's "built in", the check step, and the time from the run's creation to
-//   deploy-pages' "Reported success!". The run whose deploy the live index's Last-Modified falls in
-//   is marked live. The dispatched runs are made by hand (gh workflow run pages.yml); this only
-//   reads them.
+//   deploy-pages' "Reported success!". The run the live index's Last-Modified came from, the last
+//   whose deploy started by then, is marked live. The dispatched runs are made by hand (gh
+//   workflow run pages.yml); this only reads them.
 // gh, authenticated, reads the repositories: their owner is the root's, each site's live URL its
 // Pages html_url.
 
@@ -212,10 +212,20 @@ async function weigh(browser: Browser, url: string): Promise<Weighed[]> {
   }
 }
 
-/** The live index's Last-Modified, asked past the CDN's cache. */
+/** How many times the live index's Last-Modified is asked. */
+const ASKS = 5;
+
+/** The live index's Last-Modified, the newest of ASKS answers, each asked past the CDN's cache:
+ * Pages' CDN answers from several nodes, and one can serve the index of a deploy before the
+ * latest for minutes after it, no-cache or not. */
 async function lastModified(url: string): Promise<string | null> {
-  const { headers } = await fetchRaw(url, "HEAD", { "Cache-Control": "no-cache" });
-  return headers.find(([name]) => name.toLowerCase() === "last-modified")?.[1] ?? null;
+  const dates: string[] = [];
+  for (let i = 0; i < ASKS; i++) {
+    const { headers } = await fetchRaw(url, "HEAD", { "Cache-Control": "no-cache" });
+    const date = headers.find(([name]) => name.toLowerCase() === "last-modified")?.[1];
+    if (date !== undefined) dates.push(date);
+  }
+  return dates.toSorted((a, b) => Date.parse(b) - Date.parse(a))[0] ?? null;
 }
 
 /** The site's runs at its pin, each with its log read. */

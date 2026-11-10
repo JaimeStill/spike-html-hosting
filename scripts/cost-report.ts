@@ -126,15 +126,26 @@ export function pinnedRuns(runs: ApiRun[], current: string): Run[] {
     .toSorted((a, b) => Date.parse(a.created) - Date.parse(b.created));
 }
 
-/** Whether the live index's Last-Modified, an HTTP date to the second, falls in the run's deploy,
- * from its deploy step's start, to the second, through its reported success: the deploy that put
- * the index there. */
-export function confirms(lastModified: string, { deployStarted, deployed }: RunLog): boolean {
-  if (!deployStarted || !deployed) return false;
+/**
+ * The index of the run whose deploy the live index came from: of the runs, the last whose deploy
+ * step started, to the second, at or before the index's Last-Modified, an HTTP date to the second;
+ * -1 when none did. Pages dates the index a few seconds into the deploy, and at times up to half a
+ * minute after deploy-pages reports success, so a deploy's end doesn't bound it; the next deploy's
+ * start does.
+ */
+export function liveRun(lastModified: string, logs: RunLog[]): number {
   const live = Date.parse(lastModified);
-  return (
-    live >= Math.floor(Date.parse(deployStarted) / 1000) * 1000 && live <= Date.parse(deployed)
-  );
+  let found = -1;
+  let latest = -Infinity;
+  logs.forEach(({ deployStarted }, i) => {
+    if (!deployStarted) return;
+    const started = Math.floor(Date.parse(deployStarted) / 1000) * 1000;
+    if (started <= live && started >= latest) {
+      found = i;
+      latest = started;
+    }
+  });
+  return found;
 }
 
 /** The page an in-site link names, as a URL without its fragment or query, a directory's
@@ -239,8 +250,8 @@ export interface Site {
 
 /** The site's table: each page's weight, the median and max page, the per-page weight of each
  * kind of response, and each Pages run at the pin, its build, check, and push-to-live, the time
- * from its creation to its deploy's reported success, with the run whose deploy the live index's
- * Last-Modified falls in marked. */
+ * from its creation to its deploy's reported success, with the run the live index came from marked
+ * (liveRun). */
 export function siteTable(site: Site): string {
   const totals = site.pages.map(({ path, responses }) => {
     const sum = (key: "served" | "decoded" | "brotli") =>
@@ -282,9 +293,20 @@ export function siteTable(site: Site): string {
       ],
     ];
   });
-  const live = site.runs.find(
-    ({ log }) => site.lastModified !== null && confirms(site.lastModified, log),
-  );
+  const live =
+    site.lastModified === null
+      ? undefined
+      : site.runs[
+          liveRun(
+            site.lastModified,
+            site.runs.map(({ log }) => log),
+          )
+        ];
+  /** The live index's Last-Modified less the live run's reported success, in whole seconds. */
+  const lag = (log: RunLog) =>
+    site.lastModified === null || log.deployed === null
+      ? ""
+      : `${Math.round((Date.parse(site.lastModified) - Date.parse(log.deployed)) / 1000)} s`;
   const runs = site.runs.map(({ run, log }) => ({
     run,
     log,
@@ -331,7 +353,7 @@ export function siteTable(site: Site): string {
       rows: byKind,
     },
     {
-      caption: `Pages runs at ${site.pin}: push-to-live from the run's creation to its deploy's reported success; live, the run whose deploy the index's Last-Modified (${site.lastModified ?? "none"}) falls in`,
+      caption: `Pages runs at ${site.pin}: push-to-live from the run's creation to its deploy's reported success; live, the last run whose deploy started by the index's Last-Modified (${site.lastModified ?? "none"}), and that date less its reported success`,
       header: ["run", "event", "created", "built in", "check step", "push-to-live", "live"],
       rows: runs.map(({ run, log, toLive }) => [
         String(run.id),
@@ -340,7 +362,7 @@ export function siteTable(site: Site): string {
         duration(log.built),
         duration(log.check),
         duration(toLive),
-        run === live?.run ? "yes" : "",
+        run === live?.run ? `yes, ${lag(log)}` : "",
       ]),
       footer: [runSummary("median", median), runSummary("max", max)],
     },

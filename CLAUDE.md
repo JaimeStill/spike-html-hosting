@@ -12,7 +12,8 @@ repository is managed with the marathon workflow; start from `context/README.md`
 - **Check:** `mise run check`, after `mise run install`: ESLint on the SDK's configuration,
   which includes the check that no CSS module script is left in the build output; Prettier,
   shellcheck, actionlint, and typescript-go's tsc; the Vite build; the unit tier, the SDK's
-  content check of the copied trees against `content.json`; and the browser tier, which runs the
+  content check of the copied trees against `content.json` and tests of the cost command's pure
+  parts on fixtures; and the browser tier, which runs the
   SDK's shell checks on every page the root builds and its crawl of the copied pages in the pinned
   chrome-headless-shell, and runs the screenshots command once to show it leaves no capture file.
   It reads no network.
@@ -22,6 +23,8 @@ repository is managed with the marathon workflow; start from `context/README.md`
 - **Currency:** `mise run currency`, the SDK's currency bin: every mise tool, package.json pin,
   `github:` tag, workflow action pin, and reusable workflow call behind its latest.
 - **Cost:** `mise run cost` prints each live site's page weight, build, and push-to-live times.
+  It reads the network and gh and isn't part of the check; `context/README.md`, "Measuring
+  cost", describes it.
 - **Goals:** this spike's tasks live in the coordinator's roadmap,
   `standards-lab/context/roadmap.toml`, under `experiment.html.spike-html-hosting`. Its goal
   record is `context/goals/experiment.html.spike-html-hosting.md`.

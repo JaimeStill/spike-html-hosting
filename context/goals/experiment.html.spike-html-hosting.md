@@ -300,16 +300,19 @@ Release       spike-html-hosting-sdk v0.6.1
 
 ## Progress
 
-slices 10/12 · SDK v0.6.1 released (PR #10, d5e9da4) · architecture merged (PR #9, 04d2271) and
-sqlate merged (PR #9, e9fcb5b), both deployed · checkpoint 1 ✓ · standards ✓ (icons 0826ca9; sdk 4220b43; sqlate d3412ce,
-aa16e7f) · standards' program findings fixed (sqlate 4a922a1,
-7020797) · spec ✓ (step-12-program's pause, sqlate 0769aba) · editor — · checkpoint 2 —
+slices 12/12 · checkpoint 1 ✓ · standards ✓ · spec ✓ · editor ✓ · checkpoint 2 open
+SDK v0.6.1 released (PR #10, d5e9da4); architecture (PR #9, 04d2271), sqlate (PR #9, e9fcb5b) and
+root (PR #10, b5f9591) merged and deployed at v0.6.1; root `review` re-cut for slices 11-12, sqlate
+and sdk `review` re-cut for the editor's docs
 
 - icons: 69d0be1 (1); fb7143f, e279e3b (4)
 - components: 17cf52b (2)
 - sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9)
+- root: 3c699eb (10); 5be4fae, c3e55d9, c02d992 (11); 7492a44 (12)
+- architecture: 5b62e35 (10)
 - sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
-  46cc7e0, 7e3653d, cb66ed4, cc77318 (8b)
+  46cc7e0, 7e3653d, cb66ed4, cc77318 (8b);
+  4a922a1, 7020797, 0769aba (review fixes); 8196a7a (10)
 
 ## Decisions
 
@@ -1228,6 +1231,23 @@ aa16e7f) · standards' program findings fixed (sqlate 4a922a1,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,
   outside the check.
+- review: SDK v0.6.1's request check and crawl hold a `data:` or `blob:` URL to no base, since
+  Chrome's native `<video controls>` loads its control icons as `data:image/svg+xml` URLs, which
+  failed "every request resolves under the base" on the sqlate quick-start. Every network request
+  is still held under the base.
+- review: the recordings' vhs, ttyd and ffmpeg are pinned in the sqlate site's mise.tapes.toml,
+  which mise loads only under MISE_ENV=tapes, set by `mise run tapes`, so `mise run install` and
+  the workflows' mise-action never fetch them. The recordings' input hash reads each pin there.
+- review: SDK v0.6.1's currency reads each `mise.<env>.toml` at a site's root with
+  `mise -E <env>` and reports only the tools whose source is that file, since mise.tapes.toml's
+  pins went unchecked. mise.local.toml and `mise.<env>.local.toml` are local overrides and aren't
+  read as environments.
+- review: `mise run cost` marks the live run as the last whose deploy step started, to the second,
+  at or before the index's Last-Modified, and reads the index five times, keeping the newest
+  date. Over the task's 18 runs Pages dated the index 2 to 6 s into the deploy and, on four, 5 to
+  28 s after deploy-pages reported success, and one CDN node served the previous deploy's index
+  minutes after the latest. Rejected: confirming a run by the Last-Modified falling between its
+  deploy step's start and its reported success.
 
 ## Pending edits
 
@@ -1359,14 +1379,48 @@ aa16e7f) · standards' program findings fixed (sqlate 4a922a1,
   v1.repository-docs.
 - coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: repos become
   spike-html-hosting, -sqlate, -sdk, -icons, -components and -architecture; the summary becomes
-  the task as built (evidence 9 recorded from screenshots and design; the five parked fixes; SDK
-  v0.6.1 pinned by all three sites; the sqlate quick-start revised in place with five VHS
-  recordings of sqlint v0.3.0 and the program, committed as WebM behind an input-hash check;
-  `mise run cost`). Evidence 9, 10 and 11. Replaces the pending edit that only dropped "with a
-  check that no capture file remains".
-- intake · sqlate, docs/quick-start.md: apply the revision as the diff of the site's revised copy
-  against blob 0c54507 at f2b2117, including step 1's pgx/v5/stdlib fix (step 5 doesn't build as
-  published), the `program` and `sql` tasks, postgres.Patterns(), step 9's SQL test, step 10's
-  findings, and step 12.
-- root context/README.md, References: sqlate "with sqlint/v0.3.0" in place of sqlint/v0.1.1; vhs,
-  ttyd and ffmpeg in the sqlate site's toolchain.
+  the task as built: evidence 9 recorded from the screenshots and design tasks; the five parked
+  fixes, behavior 6 needing none; SDK v0.6.1, adding marked 18.2.0, the crawl's exact front-matter
+  meta, the template's provenance fix, the `data:` and `blob:` exemption for native video
+  controls, and currency over each `mise.<env>.toml`, pinned by all three sites; the sqlate
+  quick-start revised in place with five VHS recordings of sqlint v0.3.0 and the guide's program,
+  committed as WebM with WebP posters behind an input-hash check (zenwritten_dark, CaskaydiaMono,
+  77x24); `mise run cost`. Evidence 9, 10 and 11. Replaces the pending edit that only dropped
+  "with a check that no capture file remains".
+- intake · sqlate, docs/quick-start.md: apply the revision as the diff of the
+  spike-html-hosting-sqlate site's revised copy, `content/docs/quick-start.md`, against blob
+  0c54507 at f2b2117. Its substantive changes:
+  - step 1 adds `go get github.com/jackc/pgx/v5/stdlib`, without which step 5 doesn't build as
+    published;
+  - the task that runs the program is `program` throughout;
+  - step 5 builds the catalog on `postgres.Patterns()`, with a paragraph on overlays, and closes
+    the pool when the catalog fails (`errors.Join(err, pool.Close())`);
+  - each package gains a `layout_test.go` helper that puts each SQL clause on its own line,
+    changing only whitespace, and `go test -C <package> -run TestSQL[/<name>]` prints what
+    PostgreSQL receives, in place of a `sql` task;
+  - step 9 adds a test printing the composed list read;
+  - step 10 plants a statement with `guard_set` and no `guard_where`, and a RETURNING in a
+    standard file, shows sqlint's two findings and exit 1, then removes it, and says that
+    `guard_where` gives a guarded command optimistic concurrency: the write applies only if the
+    row's version is still the one the caller read, and a stale write fails;
+  - step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print;
+  - a new step 12 scopes projects by organization, with `app.tenant` and `app.live` layered with
+    `sql.guard_set` and `sql.guard_where` in a guarded returning command and cursor paging on
+    PostgreSQL's keyset overlay, and the intro gains a bullet for it;
+  - the clean-up step becomes 13.
+- coordinator · intake, architecture: a convention for CLI recordings in a docs page, from the
+  practices in spike-html-hosting-sqlate's `tapes/README.md`: the terminal sized to the content
+  column (77x24 at 20px in the 712px column), one neutral dark theme rendered once for every site
+  theme, one output per screen with no scroll, a pause sized to each output, setup hidden, the
+  poster the last frame, and each recording committed as WebM behind a hash of its inputs, which
+  the check verifies offline and CI never renders.
+- coordinator · intake, architecture principles/rolling-currency.md: a currency check reads every
+  mise environment's config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml,
+  so a tool pinned for one task alone, as the sqlate site's mise.tapes.toml pins vhs, ttyd and
+  ffmpeg, stays current. spike-html-hosting-sdk v0.6.1's currency bin does this.
+- answer task: the Pages findings from evidence 11, recorded in the root README's "Evidence".
+  Pages serves gzip, not brotli, and brotli 11 would save 11 to 15% on a typical page. GitHub's
+  Pages deployment queue dominates push-to-live: the task's merges took 1m52s to 6m24s, against
+  dispatch medians of 56s to 2m03s. Pages' CDN served a site's previous index from one node
+  minutes after a deploy, and the index's Last-Modified trailed deploy-pages' reported success by
+  up to 28 s.

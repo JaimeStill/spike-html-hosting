@@ -26,8 +26,8 @@ glyphs the build fills into every page's `<svg data-icon="octicon/<name>"></svg>
 - `mise run install`: install the pinned tools and node_modules; reads the network.
 - `mise run check`: ESLint, with the check that no CSS module script is left in the build;
   Prettier, shellcheck, and actionlint; tsc's type check; the build; the unit tier, the copied
-  trees against `content.json`; and the browser tier, the SDK's checks on every page the build
-  writes in the pinned chrome-headless-shell. It reads no network.
+  trees against `content.json` and the cost command's pure parts; and the browser tier, the SDK's
+  checks on every page the build writes in the pinned chrome-headless-shell. It reads no network.
 - `mise run screenshots`: capture every page, light and dark, at 390px, 1120px, and 1376px.
 - `mise run currency`: every pin behind its latest, the SDK's tag among them.
 - `mise run cost`: one table per site, each live page's weight and the build, check, and
@@ -41,8 +41,8 @@ The SDK is pinned by its release tag, in `package.json` and in both workflows'
 
 ## Evidence
 
-The spike's evidence is numbered in `context/README.md`, "The evidence". These are the review
-task's three.
+This section records evidence 9, 10, and 11, which the review task proves. `context/README.md`,
+"The evidence", numbers all twelve.
 
 ### 9. The review across every site
 
@@ -53,16 +53,16 @@ Evidence 9 is recorded from earlier tasks' work, not from a new capture pass.
   it leaves no capture file behind.
 - At the design task's four checkpoints the architect reviewed all three sites at 390px, 1120px,
   and 1376px, light and dark, with the index's Help and Settings open.
-- At this task's checkpoint 1 the architect reviewed the revised sqlate quick-start at all three
-  widths, light and dark.
+- At the review task's first checkpoint the architect reviewed the revised sqlate quick-start at
+  all three widths, light and dark.
 
 ### 10. The CLI demo
 
-Five VHS recordings sit on the sqlate site's quick-start,
-https://jaimestill.github.io/spike-html-hosting-sqlate/docs/quick-start.html: under step 9, the
-composed SQL; step 10, sqlint's findings; step 11, the program on PostgreSQL; and step 12, the
-layered archive statement and cursor pages, then the org-scoped run. They record sqlint v0.3.0
-and the revised guide's program.
+The sqlate site's quick-start,
+https://jaimestill.github.io/spike-html-hosting-sqlate/docs/quick-start.html, holds five VHS
+recordings: under step 9, the composed SQL; step 10, sqlint's findings; step 11, the program on
+PostgreSQL; and step 12, the layered archive statement and cursor pages, then the org-scoped run.
+They record sqlint v0.3.0 and the revised guide's program.
 
 - Each is committed as WebM with a WebP poster, behind an input-hash check. `mise run tapes`
   renders only the recordings whose inputs changed, and CI never renders.

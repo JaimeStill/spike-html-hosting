@@ -223,9 +223,9 @@ creation to its deploy's reported success:
 ### 12. One icon toolkit
 
 One icon toolkit, spike-html-hosting-icons v0.1.0, releases Octicons as one module per icon. The
-SDK's build fills each page's glyph markers from it, so a build ships only the icons its pages
-name: counted on the builds at SDK v0.6.1 (2026-11-10), the architecture, sqlate, and root builds ship 7, 7, and 8 of its
-986 Octicons. The architecture and sqlate builds ship arrow-left, arrow-right, gear,
+SDK's build fills each page's glyph markers from it, so a build ships only the icons its pages name.
+Counted on the builds at SDK v0.6.1 (2026-11-10), the architecture, sqlate, and root builds ship 7,
+7, and 8 of its 986 Octicons. The architecture and sqlate builds ship arrow-left, arrow-right, gear,
 list-ordered, list-unordered, question, and x, and the root ships those seven and report.
 
 - The icons layer's unit tier holds a fixture build to exactly the icons it imports, "carries

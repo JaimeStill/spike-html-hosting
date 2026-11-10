@@ -300,10 +300,10 @@ Each item's proof is recorded in the root README's "Evidence".
 11. **Cost per site** ([README](../README.md#11-cost-per-site)): `mise run cost`, its run of
     2026-11-10 over the live sites and their Pages runs.
 12. **One icon toolkit** ([README](../README.md#12-one-icon-toolkit)): the icons layer's unit and
-    browser tiers, and each site's `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1 (2026-11-10), the
-    architecture, sqlate, and root builds ship 7, 7, and 8 of 986 Octicons: arrow-left,
-    arrow-right, gear, list-ordered, list-unordered, question, and x, and the root also ships
-    report.
+    browser tiers, and each site's `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1
+    (2026-11-10), the architecture, sqlate, and root builds ship 7, 7, and 8 of 986 Octicons:
+    arrow-left, arrow-right, gear, list-ordered, list-unordered, question, and x, and the root also
+    ships report.
 
 Items 5 and 7 are proven only by tests: 5 by fixture tests on one local origin, 7 by the check
 alone. Item 9 rests on the architect's reviews, item 11 on a measure run on demand, and the rest

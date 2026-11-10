@@ -1152,11 +1152,11 @@ Door          two-way: only the root's two READMEs and its goal
 - answer: the html-artifacts.md Keyboard bullet edit lands at sync as a coordinator edit.
 - answer: the answer recommends one sl-drawer, in the foundation, its Close glyph passed by the
   consumer through a slot. Rejected: the shared documentation layer; a copy per components layer.
-- answer: evidence 12 is counted on the builds at SDK v0.6.1 (2026-11-10): the architecture, sqlate, and root builds
-  ship 7, 7, and 8 of 986 Octicons. The architecture and sqlate builds ship arrow-left,
-  arrow-right, gear, list-ordered, list-unordered, question, and x, and the root ships those
-  seven and report. The brief's 6, 6, and 7 were the icons task's counts, before the design task
-  added the Settings and Contents glyphs.
+- answer: evidence 12 is counted on the builds at SDK v0.6.1 (2026-11-10): the architecture, sqlate,
+  and root builds ship 7, 7, and 8 of 986 Octicons. The architecture and sqlate builds ship
+  arrow-left, arrow-right, gear, list-ordered, list-unordered, question, and x, and the root ships
+  those seven and report. The brief's 6, 6, and 7 were the icons task's counts, before the design
+  task added the Settings and Contents glyphs.
 - answer: the intake detail (the shortcut-dialog pattern page, the foundation's Settings and Help
   changes, and the sqlate quick-start revision's change list) is carried as sub-points under its
   item in the "For the intake" list, in the README answer and in the answer section, since sync
@@ -1209,9 +1209,9 @@ Door          two-way: only the root's two READMEs and its goal
       their Pages runs: Pages serves gzip, not brotli; GitHub's deployment queue dominates
       push-to-live; a CDN node can serve the previous deploy minutes after a new one.
   12. One icon toolkit. Proven by the icons layer's unit and browser tiers and each site's
-      `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1 (2026-11-10), the architecture, sqlate, and root
-      builds ship 7, 7, and 8 of 986 Octicons: arrow-left, arrow-right, gear, list-ordered,
-      list-unordered, question, and x, and the root also ships report.
+      `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1 (2026-11-10), the architecture,
+      sqlate, and root builds ship 7, 7, and 8 of 986 Octicons: arrow-left, arrow-right, gear,
+      list-ordered, list-unordered, question, and x, and the root also ships report.
 
   For the intake:
 

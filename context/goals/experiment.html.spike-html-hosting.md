@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** building
+- **Task:** review
+- **Branch:** review
 
 ## Tasks
 
@@ -18,391 +18,262 @@
 10. [ ] review
 11. [ ] answer
 
-## Task brief · design
+## Task brief · review
 
 ```
-Problem       The three sites ship as the icons task left them,
-              and no one has reviewed them visually at the widths
-              where their layout changes. Captures are taken at
-              1280 and 390 only, so neither dock (1120px, the
-              section tree; 1376px, three columns) is ever seen.
-              The header wraps Help and Theme onto a second line
-              at 390px. Glyph buttons carry the native button's
-              --space-s inline padding, about 36px of a header
-              button's 81px. Icon-only controls show no name on
-              hover. The keyboard settings sit in Help, Theme
-              holds only the theme, and both dialogs are the
-              foundation's, whose heading, keys and contents a
-              site can't change. spike-html-hosting-components
-              trails eslint-plugin-import-x 4.18.0.
-Behaviors     1. spike-html-hosting-components takes
-                 eslint-plugin-import-x 4.18.0, its notes read
-                 before the bump. Its currency prints nothing,
+Problem       Evidence 9, 10 and 11 are unwritten. The design
+              task reviewed every page, but nothing records it
+              as evidence 9. Nothing on the sqlate site shows
+              sqlate running: its quick-start never prints the
+              SQL its includes and directives become, never
+              shows what the linter catches, never layers its
+              own patterns over the library's beyond one
+              include, and its step 1 leaves step 5 unbuildable
+              ("missing go.sum entry for … puddle/v2", go
+              1.27.3, pgx v5.11.0 and v5.12.0). No site measures
+              its page weight, build time or push-to-live time.
+              Five findings from earlier tasks sit unfixed in
+              the SDK and the icons layer. The SDK trails marked
+              18.2.0; the icons layer trails chrome-headless-
+              shell 157.0.8103.50, rolldown 1.3.1 and
+              typescript-eslint 8.72.2; the components trail
+              chrome-headless-shell 157.0.8103.50.
+Behaviors     1. spike-html-hosting-icons takes chrome-headless-
+                 shell 157.0.8103.50, rolldown 1.3.1 and
+                 typescript-eslint 8.72.2, their notes read
+                 before the bump. Its currency prints nothing
                  and its check passes.
-              2. The SDK's capture description captures every
-                 page whole at 390x844, 1120x700 and 1376x860,
-                 light and dark, with 1280 gone. The index is
-                 also captured with Help open and with the
-                 settings dialog open at each width; until the
-                 Settings dialog exists, the theme menu stands
-                 in for it. The SDK's capture test counts the
-                 index's nine states, and the run still leaves
-                 no capture file.
-              3. At checkpoint 1 the architect views the three
-                 sites as they stand, captured by behavior 2's
-                 description, and marks fixes. Each marked fix
-                 becomes a behavior of this brief, in the
-                 components' sheets or the SDK's site.css, and
-                 is shown fixed at checkpoint 2.
-              4. Glyph buttons are their own control: the class
-                 glyph-button on a native <button>, styled by one
-                 sheet the components export, glyph-button.css,
-                 which each component adopts in its shadow root
-                 and each page links. It lays the glyph and its
-                 key hint in a row, padding --space-3xs block and
-                 --space-2xs inline, --space-3xs between glyph
-                 and hint, and keeps the native button's border
-                 and surface. Every glyph button on the sites
-                 takes it: the header's, each dialog's Close, the
-                 section tree's Previous and Next, and the
-                 drawer's Close. Every one is at least 24x24 CSS
-                 px in every space and type profile, at every
-                 capture width.
-              5. Every glyph button shows its name on hover and
-                 keyboard focus through an interest invoker: an
-                 interestfor naming a popover="hint" holding the
-                 same text as its aria-label. With no script of
-                 ours it shows in Chromium and Escape dismisses
-                 it; where interestfor isn't supported nothing
-                 shows and the control keeps its name. Assistive
-                 technology announces the name once.
-              6. The header's buttons are one group at the inline
-                 end of its first line at every width; the site
-                 nav takes the rest of the row and wraps its own
-                 links. At 390px no button falls to a second line
-                 and nothing scrolls sideways; at 1120 and 1376
-                 the header is one row.
-              7. sl-shortcuts, a components element placed in a
-                 dialog, lists exactly the page's bindings as the
-                 foundation's bindings() gives them with that
-                 dialog closed: each binding's keys in kbd, a row
-                 button named by the binding that closes the
-                 dialog and runs it, a row turned off by the
-                 reader's setting marked off, and the
-                 foundation's screen-reader note after the list.
-                 It holds no settings, and the foundation's
-                 keys-help.js is never requested.
-              8. sl-settings, a components element placed in a
-                 dialog, holds the theme (color, scheme, space
-                 and type rows with their ◀ ▶ steppers and h, l,
-                 j, k moves, and the foundation menu's live
-                 preview card, laid out by the foundation's
-                 theme-menu.css) and the keyboard (the
-                 character-key switch and the wait between
-                 presses). Each change applies and stores at
-                 once, with no Save or Cancel, and another tab
-                 follows it. Turning character keys off stops
-                 every character binding (P, ?, S, H and L) and
-                 updates aria-keyshortcuts on every control, the
-                 section tree's included. The foundation's
-                 theme-menu.js is never requested.
-              9. The Settings dialog has the heading Settings and
-                 holds sl-settings. It opens from the header's
-                 Settings glyph button (Octicons gear-16, S hint,
-                 named Settings) by the native show-modal
-                 invoker, which keys.js clicks on S. Its Close
-                 shows x-16 with an Esc hint and is named Close.
-                 Escape or Close closes it, and focus returns to
-                 the opener.
-              10. Help keeps its heading, Keyboard shortcuts, and
-                 holds sl-shortcuts alone, so it only describes
-                 the shortcuts. ? opens it, and it lists P Pages,
-                 ? Help, S Settings, and H and L where a page has
-                 a section tree. Its Close shows x-16 with an Esc
-                 hint in place of ?, and Escape closes it.
-              11. The shortcut dialog is a documented pattern,
-                 not a component. The components README states
-                 it: a key and its opener glyph button (data-keys,
-                 key hint, interest-invoker name, show-modal
-                 invoker) open a native modal dialog with a
-                 heading naming it, any content its focused
-                 operation needs, and a Close glyph button with
-                 an Esc hint. It gives Settings and Help as its
-                 two worked instances, and an upload dialog
-                 under U as one way to extend it to any focused
-                 overlaid interface. An SDK shell check fails a
-                 page where any dialog opened by a keyed
-                 show-modal opener breaks the pattern, naming the
-                 dialog and what it lacks.
-              12. The SDK's keys help check expects ? to open
-                 Help listing exactly the page's bindings, Escape
-                 to close it, the off switch in Settings to stop
-                 L and P, and each header control to show the key
-                 it binds.
-              13. The components README's header snippet shows
-                 the button group, each glyph-button's class and
-                 interest hint, gear-16 named Settings with its S
-                 hint, and the Settings and Help dialogs.
-              14. spike-html-hosting-icons' STANDARDS.md gains a
-                 Design section, as the components' has, for its
-                 browse page on the foundation. No icons release.
-              15. At checkpoint 2 the architect views the three
-                 sites built with the unreleased components and
-                 SDK, at the three widths, light and dark, with
-                 the dialogs open, before the standards and spec
-                 reviews and before any release.
-              16. spike-html-hosting-components v0.5.0 is released
-                 as its release workflow describes, after
-                 checkpoint 2 and before the SDK pins it.
-              17. spike-html-hosting-sdk v0.6.0 is released after
-                 the components'. It pins components v0.5.0, its
-                 template carries behaviors 4-6 and 9-10, its
-                 scaffold test runs the copy's full check offline,
-                 and its currency reports only the held rolldown.
-              18. The architecture, sqlate and root sites pin SDK
-                 v0.6.0, components v0.5.0 and icons v0.1.0, and
-                 call the SDK workflows at v0.6.0. Every page
-                 template carries behaviors 4-6 and 9-10, the
-                 root's four included; every page passes the
-                 shell checks, the copied pages pass the crawl,
-                 nothing scrolls sideways at 390px, and each
-                 site's currency prints nothing.
-              19. The root's README records the pins at SDK
-                 v0.6.0, components v0.5.0 and icons v0.1.0, and
-                 the capture widths.
-              20. The session brief carries each site's captures
-                 at 390, 1120 and 1376, light and dark, the
-                 index's dialogs open, beside checkpoint 1's
-                 marks and how each was fixed.
-Test seams    each repository's `mise run check`: the components'
-              browser tier over glyph-button, sl-shortcuts,
-              sl-settings, the section tree's and the drawer's
-              buttons, and the interest hints; the SDK's shell
-              checks (the shortcut-dialog pattern, the keys help,
-              target sizes, the 390px header) and its capture
-              test; each site's shell checks and crawl on its
-              build under Vite's preview
-Slices        1. Components upgrade: eslint-plugin-import-x
-                 4.18.0; currency prints nothing, check passes
-                 (spike-html-hosting-components)
-              2. SDK captures: the 390, 1120 and 1376 widths, and
-                 Help open and the theme menu open on the index;
-                 the capture test (spike-html-hosting-sdk)
-                 → checkpoint 1 (escalation): the session
-                   captures the three sites with this SDK branch
-                   linked locally, nothing committed to the
-                   sites. The architect views them and marks
-                   fixes; the session drafts the marks as
-                   behaviors and slices here, which the architect
-                   approves before BUILD goes on
-              3. Glyph button: glyph-button.css exported; the
-                 section tree's and the drawer's buttons take it,
-                 with interest hints; captures
-                 (spike-html-hosting-components)
-              4. Shortcut list: sl-shortcuts over bindings()
-                 (spike-html-hosting-components)
-              5. Settings content: sl-settings, with the theme
-                 rows, the preview card on the foundation's
-                 theme-menu.css, and the keys settings, stored at
-                 once (spike-html-hosting-components)
-              6. Components README and marked fixes: the shortcut
-                 dialog pattern; the header snippet; checkpoint
-                 1's fixes in the components' sheets; captures
-                 (spike-html-hosting-components)
-              7. SDK header: the button group, glyph-button on
-                 every header button, interest hints, the Settings
-                 opener on S; the 390px and target-size checks;
-                 checkpoint 1's fixes in site.css; built against
-                 the components branch linked locally
-                 (spike-html-hosting-sdk)
-              8. SDK shortcut dialogs: the template's Settings
-                 and Help dialogs with their Esc Closes; the
-                 pattern check; the keys help check; the
-                 Settings-open capture state in place of the
-                 theme menu's (spike-html-hosting-sdk)
-              9. Icons standards: the Design section
-                 (spike-html-hosting-icons)
-              10. Architecture adopts: its shell carries the
-                 header and dialogs, against the linked layers;
-                 captures (spike-html-hosting-architecture)
-              11. Sqlate adopts: the same
-                 (spike-html-hosting-sqlate)
-              12. Root adopts: the same on all four page
-                 templates (spike-html-hosting)
-                 → checkpoint 2 (escalation): the architect views
-                   the fixed builds' captures first; the
-                   standards and spec reviews run over every
-                   branch; the architect accepts
-              13. Components release: version 0.5.0, CHANGELOG
-                 [0.5.0]; the pull request merges and the release
-                 workflow cuts v0.5.0
-                 (spike-html-hosting-components)
-              14. SDK release: the pin and template at components
-                 v0.5.0, the scaffold test; README, version
-                 0.6.0, CHANGELOG [0.6.0]; it merges and the
-                 release workflow cuts v0.6.0. If anything shown
-                 at checkpoint 2 changed, it stops again for
-                 captures first (spike-html-hosting-sdk)
-              15. Sites pin: architecture, sqlate and root pin
-                 SDK v0.6.0 and components v0.5.0 and call the
-                 workflows at v0.6.0; the root's README; each
-                 site's currency prints nothing
-                 (spike-html-hosting-architecture,
-                 spike-html-hosting-sqlate, spike-html-hosting)
-Out of scope  any change to spike-html-apps-foundation: its theme
-              menu and keys help stay as they are, and the
-              Settings and Help dialogs, the shortcut-dialog
-              pattern, and the lazy theme-menu and keys-help
-              chunks the sites still build are recorded for the
-              experiment.html intake; the architecture
-              repository's pattern page (the intake); names on
-              hover in browsers without interestfor; the title
-              attribute or a tooltip of our own; an icons
-              release; glyphs beyond those named; rolldown 1.3.0;
-              the review task's cost measures
-Door          one-way: the tags components v0.5.0 and SDK v0.6.0,
-              which every later site and scaffold consume;
-              two-way: the icons standards edit and the three
-              sites' changes, which redeploy their pages and
-              revert by reverting their merges
-Release       spike-html-hosting-components v0.5.0;
-              spike-html-hosting-sdk v0.6.0
+              2. spike-html-hosting-components takes chrome-
+                 headless-shell 157.0.8103.50. Its currency
+                 prints nothing and its check passes.
+              3. spike-html-hosting-sdk takes marked 18.2.0, its
+                 notes read before the bump. Rolldown stays held
+                 at 1.2.18 (vite 8.3.7 pins ~1.2.18). Its currency
+                 reports only the held rolldown, and its check
+                 passes with every fixture site's copied pages
+                 crawled under the new parser.
+              4. The icons build writes nothing when it refuses a
+                 set: a refused set listed after an accepted one
+                 leaves the output directory empty, and the build
+                 exits 1 naming the set and its licence. A unit
+                 test builds an accepted set then a refused one,
+                 and holds both. No icons release.
+              5. The icons browse page labels a set's licence
+                 with its SPDX identifier, else its title,
+                 whether or not the set gives a URL, as its
+                 browser test expects. A fixture set with an SPDX
+                 identifier and no URL shows the identifier.
+              6. The SDK's landing wait adds no listener that
+                 outlives it: over a crawl of every page of a
+                 fixture site, the load-event listeners don't
+                 grow with the pages crawled; a test counts them.
+              7. The SDK crawl's front-matter check holds each
+                 page's front-matter head meta to exactly its
+                 front matter's keys: a page with no front matter
+                 carries none, and a fixture page that carries
+                 one fails the crawl, naming it.
+              8. The SDK template's provenance names the Settings
+                 button on S, and no template file names a Theme
+                 button or T. The scaffold test reads every
+                 template provenance line against the shell.
+              9. spike-html-hosting-sdk v0.6.1 is released after
+                 behaviors 3 and 6-8, with CHANGELOG [0.6.1]. It
+                 pins components v0.5.0 and icons v0.1.0.
+              10. The architecture, sqlate and root sites pin SDK
+                 v0.6.1 in package.json and both workflows' uses:
+                 lines. Every page passes the shell checks, the
+                 copied pages pass the crawl, and each site's
+                 currency prints nothing.
+              11. The sqlate site's copied quick-start is revised
+                 in place:
+                 - step 1 gets pgx/v5/stdlib, so step 5 builds;
+                 - the task that runs the program is `program`
+                   throughout;
+                 - a `sql` task prints what PostgreSQL receives;
+                 - step 5 builds the catalog on postgres.Patterns()
+                   with a paragraph on overlays;
+                 - step 9 adds a test printing the composed list
+                   read;
+                 - step 10 plants a statement with guard_set and
+                   no guard_where, and a RETURNING in a standard
+                   file, shows two findings and exit 1, then
+                   removes it;
+                 - a new step 12 scopes projects by organization:
+                   a second migration (org, project); app.tenant
+                   and app.live; a projects package whose base
+                   includes both; archive, a standard-tier guarded
+                   returning command layering sql.guard_set,
+                   sql.guard_where, app.tenant and app.live, read
+                   back through project_row; seeds for two orgs;
+                   a run that pages one org by cursor, archives
+                   one project, shows a refusal, a stale version
+                   and another org's row as no rows, then reverts
+                   the newest migration;
+                 - the clean-up step becomes 13, its tree updated.
+                 Every other step stays byte for byte.
+              12. The copied tree's record marks the revision:
+                 the quick-start's entry holds the revised blob,
+                 and a revised entry names its original blob at
+                 sqlate f2b2117 and that the revision is proposed
+                 to sqlate at intake. The content check passes,
+                 and a unit test fails when a revised file
+                 matches its original or names an unrecorded
+                 file. The rendered page opens with a one-line
+                 note that it is revised from sqlate@f2b2117.
+              13. The finished program of the revised quick-start
+                 is committed in the sqlate site, against sqlate
+                 v0.6.1, postgres v0.6.0, pgx and sqlint v0.3.0
+                 through go get -tool, with go 1.27.3 pinned
+                 through mise. The site's check, offline:
+                 - vets and tests the program;
+                 - runs sqlint over it, which prints sqlint: ok;
+                 - fails when any file the guide writes in full
+                   differs from the committed program's (the last
+                   block per file wins).
+                 Install fetches the program's modules.
+              14. Five recordings are rendered by VHS 0.12.1 from
+                 committed tapes and committed as WebM:
+                 A (step 9: mise run sql, the team list read
+                   composed);
+                 B (step 10: lint ok, two findings and exit 1,
+                   ok again);
+                 C (step 11: mise run program against live
+                   PostgreSQL, through the four errors);
+                 D (step 12: mise run sql, archive's four
+                   patterns, its PostgreSQL form with RETURNING
+                   added by the dialect, the counted first page,
+                   the next page's row-value keyset);
+                 E (step 12: mise run program, ending on the
+                   projects lines and the reverted migration).
+                 The database starts off camera.
+              15. `mise run tapes` renders only the recordings
+                 whose inputs changed, and writes each one's input
+                 hash. Inputs: its tape, the program and go.sum,
+                 and the vhs, ttyd, ffmpeg, go and chrome-
+                 headless-shell pins. VHS drives the pinned
+                 chrome-headless-shell 157.0.8103.50. The site's
+                 check recomputes every hash offline and fails
+                 naming a recording whose inputs changed since it
+                 was rendered. CI never renders, and the SDK's
+                 workflows are unchanged.
+              16. The sqlate site's build places each recording
+                 under the step it demonstrates: a native video,
+                 muted, controls, playsinline, preload="metadata",
+                 an accessible name. The Markdown carries no video
+                 markup. The crawl finds the five videos, each
+                 under its step's heading, and nothing scrolls
+                 sideways at 390px.
+              17. `mise run cost` in the root reads the network,
+                 writes nothing, and isn't part of the check. For
+                 each of the three live sites:
+                 - each page's weight, every response it loads in
+                   the pinned chrome-headless-shell (HTML, CSS,
+                   the three JS files, video metadata where
+                   present), as gzip as Pages served it and as
+                   brotli via node:zlib at quality 11, reported as
+                   median and max per site;
+                 - build time, Vite's "built in" and the check
+                   step's duration, from the Pages runs;
+                 - push-to-live, a run's creation to its
+                   deploy-pages success, confirmed by the live
+                   index's last-modified, over the Pages runs at
+                   the current pins.
+                 It prints one table per site. Its pure parts
+                 (median, log parsing, the table) have unit tests.
+              18. Push-to-live is measured over fresh runs: each
+                 site's merge in this task, plus five
+                 workflow_dispatch runs per site at SDK v0.6.1.
+              19. The root's README records:
+                 - evidence 9, citing the screenshots task's
+                   capture command and no-capture test, the design
+                   task's four checkpoints at 390, 1120 and 1376px,
+                   and this task's checkpoint captures;
+                 - evidence 10, the five recordings and where they
+                   sit;
+                 - evidence 11, the cost table with its date,
+                   noting Pages serves gzip, not brotli, and each
+                   page loads three JS files;
+                 - the pins at SDK v0.6.1.
+              20. At checkpoint 1 the architect views the five
+                 recordings and the revised quick-start's captures
+                 at 390, 1120 and 1376, light and dark, built
+                 against the unreleased SDK, before the standards
+                 and spec reviews and before the SDK release.
+                 Marked changes become behaviors here.
+              21. At checkpoint 2 the architect views the cost
+                 tables and the evidence write-up after the sites
+                 deploy, before the root's README merges.
+Test seams    each repository's `mise run check`: the icons build
+              and browse tests; the SDK's crawl, landing and
+              scaffold tests on its fixture sites; the sqlate
+              site's unit tier (content and its revision marker,
+              the guide's blocks against the program, the
+              recordings' input hashes) and browser tier (shell
+              checks, crawl, the placed videos); the program's go
+              vet, go test and sqlint; the root's unit tier over
+              the cost command's pure parts
+Slices        Upgrades first, in dependency order (icons,
+              components, SDK):
+              1. Icons upgrade: headless-shell .50, rolldown
+                 1.3.1, typescript-eslint 8.72.2 (-icons)
+              2. Components upgrade: headless-shell .50
+                 (-components)
+              3. SDK upgrade: marked 18.2.0, rolldown hold
+                 renewed at 1.2.18 (-sdk)
+              4. Icons fixes: refused-set build, browse label;
+                 merged with no release (-icons)
+              5. SDK fixes: landing listener, crawl front-matter
+                 check, template provenance line (-sdk)
+              6. The program: the finished quick-start program,
+                 go pinned; the check vets, tests and lints it
+                 offline (-sqlate)
+              7. Revised quick-start: the copy edited in place,
+                 the revised entry and its test, the blocks-
+                 match-program check, the revision note;
+                 captures (-sqlate)
+              8. Recordings: tapes A-E, `mise run tapes` with
+                 pinned vhs, ttyd, ffmpeg and the headless shell,
+                 committed WebM and input hashes, the offline
+                 hash check, the build placing each video;
+                 captures (-sqlate)
+                 → checkpoint 1: the architect views the
+                   recordings and the quick-start's captures, SDK
+                   branch linked locally; then the standards and
+                   spec reviews over every branch
+              9. SDK release: 0.6.1, CHANGELOG [0.6.1]; merges,
+                 release workflow cuts v0.6.1 (-sdk)
+              10. Sites pin SDK v0.6.1 in package.json and both
+                 workflows; currency prints nothing; merge and
+                 deploy (-architecture, -sqlate, root)
+              11. Cost command: `mise run cost` with unit tests;
+                 five dispatch runs per site; the tables (root)
+              12. Evidence: README evidence 9, 10, 11 and pins
+                 (root)
+                 → checkpoint 2: the architect views the cost
+                   tables and the evidence before the root's last
+                   merge
+Out of scope  writing to sqlate (the revision and the step 1
+              defect go to the intake); an icons or components
+              release; Source.As in the guide; rendering in CI or
+              any change to the SDK's workflows; a revision
+              feature in the SDK's content check; brotli on Pages
+              itself; rolldown 1.3.x; the answer section; the
+              findings recorded for the intake (shortcut-dialog
+              pattern page, the foundation's lazy chunks,
+              glyph-button, the narrow-width nav menu)
+Door          one-way: the tag spike-html-hosting-sdk v0.6.1,
+              which every site and later scaffold consumes, and
+              the committed WebM, which stays in the sqlate
+              site's history after any revert; two-way: the icons
+              and components commits, the three sites' changes
+              (each redeploys and reverts by reverting its merge),
+              and the root's cost command and README
+Release       spike-html-hosting-sdk v0.6.1
 ```
 
-### Amendment 1 · after checkpoint 2 (approved)
+## Progress
 
-Superseded or amended: 4 and 5 (the glyph-button list drops the section tree's Previous and Next,
-gains the Contents opener); 6 (by 25); 7's row buttons (by 21); 9, 10, 11's Close placement (by
-26); 10's list becomes P, ?, S, C, J/K where a tree, H/L where a pager; 12 (the off switch stops J
-and P, and H/L where bound; focus lands on Help's Close); 13 (adds the Contents opener and drawer
-and the dialog header row); 15 (checkpoint 2 done; 30 adds checkpoint 3); 18 (also 21-28); 20
-(also checkpoint 2's marks and checkpoint 3's captures). Retired: sl-page-header and the section
-tree's progress bar, sticky bar and buttons.
-
-```
-Behaviors     21. Help's rows are plain text: each binding's keys
-                  in kbd and its label, no button, no action.
-                  Opening Help puts focus on its Close.
-              22. sl-section-tree is links alone: the section in
-                  view marked by an inline-start accent rule and
-                  bold text (aria-current="location"); no progress
-                  bar, no Previous or Next buttons, no sticky bar;
-                  J and K move to the next and previous section
-                  through register(), wrapping as H and L did; Help
-                  lists them; the off switch stops them.
-              23. The section tree sits in sl-drawer#contents,
-                  labeled Contents, docked from 70rem; below 70rem
-                  a modal drawer from the inline-start edge, opened
-                  by a Contents glyph button in the header actions
-                  after Pages (list-ordered-16, C hint, named
-                  Contents, clicked by keys.js on C, aria-expanded
-                  in step as Pages'), shown only below 70rem on a
-                  page whose contents drawer is defined; with no
-                  script the links render inline; following a link
-                  closes the drawer.
-              24. Each copied page has a pager at the top and the
-                  bottom of its article: Previous and Next links to
-                  its neighbours in the site index's order, each
-                  with arrow-left-16 or arrow-right-16, the word,
-                  the neighbour's title and its kbd hint; both
-                  pagers' links carry data-keys h and l, Help lists
-                  each once; no Previous on the first page, no Next
-                  on the last, no wrap; hand pages have no pager and
-                  bind no H or L; the SDK renders it from the site
-                  index and the crawl follows and asserts both.
-              25. Below 40rem the header is two rows: the site nav
-                  on its own row, never wrapping, then the actions
-                  group at the inline end of the next; from 40rem
-                  one row. The header check asserts both, and
-                  nothing scrolls sideways at 390px.
-              26. Every shortcut dialog opens with a header row:
-                  its h2 and, at the inline end, its Close (x-16,
-                  Esc hint, named Close), with more space under the
-                  h2; the README pattern, the template and every
-                  shell, and the pattern check require it.
-              27. Help is as wide as its content, capped at 56rem
-                  and the viewport less --space-s each side;
-                  Settings keeps its width.
-              28. Front matter is not shown: one <meta name="<key>"
-                  content="<value>"> per key in the head, in source
-                  order, as frontMatterText gives it; the crawl
-                  asserts them, no sl-page-header, and no key: value
-                  line; sl-page-header leaves the shells and the
-                  components.
-              29. The capture description keeps behavior 2's widths
-                  and the index's Help-open and Settings-open
-                  states.
-              30. At checkpoint 3 the architect views the three
-                  sites on the linked, unreleased components and
-                  SDK, at 390, 1120 and 1376, light and dark,
-                  dialogs open, before the standards and spec
-                  reviews and any release.
-Slices        13. Shortcut list rows: plain text rows
-                  (spike-html-hosting-components)
-              14. Section tree form (a): links, accent rule and
-                  bold, J/K; progress, buttons and bar removed;
-                  sl-page-header removed
-                  (spike-html-hosting-components)
-              15. Components README: the header-row Close; the
-                  snippet with the Contents opener and drawer
-                  (spike-html-hosting-components)
-              16. SDK renderer: front matter to meta and its crawl;
-                  the tree in sl-drawer#contents at docks.tree; the
-                  sticky-bar checks rewritten for the drawer
-                  (spike-html-hosting-sdk)
-              17. SDK pager: top and bottom from the site index,
-                  H/L by data-keys, the crawl's pager checks
-                  (spike-html-hosting-sdk)
-              18. SDK shell and template: the Contents opener, the
-                  40rem two-row header and its check, the dialog
-                  header row and the pattern check, h2 spacing,
-                  Help's fit-content width, the keys check's
-                  J/K/H/L/C (spike-html-hosting-sdk)
-              19. Architecture adopts; captures
-                  (spike-html-hosting-architecture)
-              20. Sqlate adopts (spike-html-hosting-sqlate)
-              21. Root adopts, all four templates
-                  (spike-html-hosting)
-                  → checkpoint 3 (escalation): captures first; marks
-                    become behaviors and slices, approved before
-                    BUILD goes on; then the standards and spec
-                    reviews; the architect accepts
-              22. Components release (was 13): v0.5.0
-              23. SDK release (was 14): components v0.5.0, the
-                  scaffold test, template/content README re-copy,
-                  v0.6.0
-              24. Sites pin (was 15)
-Out of scope  (adds) a nav menu or sub-navs at narrow widths; a
-              wrap from the last page to the first
-Release       spike-html-hosting-components v0.5.0;
-              spike-html-hosting-sdk v0.6.0 (first; a later
-              checkpoint's fixes may release more, each at its own
-              checkpoint)
-```
-
-### Amendment 2 · after checkpoint 3 (approved)
-
-```
-Behaviors     31. Below 40rem the actions group sits on the
-                  header's second row at the inline start, aligned
-                  with the nav above it (supersedes 25's inline
-                  end).
-              32. Below 40rem each pager shows only its arrow and
-                  word, "← Previous" and "Next →", in one row; the
-                  neighbour's title is visually hidden but stays in
-                  the link's name, and the kbd hint is hidden. From
-                  40rem it is unchanged (amends 24).
-              33. At checkpoint 4 the architect views the captures
-                  of these changes before the reviews and releases.
-Slices        22. SDK: site.css for 31 and 32, the header-row and
-                  pager checks at 390, the template's comment
-                  (spike-html-hosting-sdk)
-              23. Sites rebuilt on the linked SDK and captured;
-                  each commits only a doc line that changes
-                  → checkpoint 4 (escalation)
-              24-26. Releases and pins (were 22-24)
-```
-
+slices 0/12 committed · checkpoint 1 — · standards — · spec — · editor — · checkpoint 2 —
 
 ## Decisions
 
@@ -1262,6 +1133,41 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
   corrected wording.
 
 - design: the architect accepted the session brief; the task shipped.
+- review: evidence 9 is recorded from the screenshots task's capture command and no-capture test
+  and the design task's checkpoints; this task captures only what it changes. Rejected: a second
+  full capture pass over the three sites.
+- review: the five findings parked for the review task are fixed here, at the architect's
+  direction ("as optimal as possible for ingest"). Rejected: recording them for the answer task.
+- review: the SDK's two parked fixes, marked 18.2.0 and the template's provenance line release as
+  SDK v0.6.1, which all three sites pin. The icons fixes are dev-only (the package ships only
+  dist/, and a refused build fails the check before any pack), so by the architect's rule icons
+  stays at v0.1.0. Rejected: icons v0.1.1.
+- review: held rolldown at 1.2.18: vite 8.3.7, the latest, pins ~1.2.18.
+- review: the demo records sqlint v0.3.0, the version the copied v0.6.1 docs describe,
+  superseding setup's sqlint/v0.1.1. Rejected: v0.1.1, which `go run …@v0.1.1` can't resolve.
+- review: the recordings demonstrate a revised sqlate quick-start, its own program plus a new
+  step 12 (org-scoped projects; app.tenant and app.live layered with sql.guard_set and
+  sql.guard_where in a guarded returning command; cursor paging on PostgreSQL's keyset overlay).
+  Rejected: a sqlint-only fixture.
+- review: the sqlate site edits its quick-start copy in place, and content.json marks it `revised`
+  against the original blob; the intake proposes the revision to sqlate. Rejected: a patch or
+  revision option in the SDK; a site-authored page; a hand page.
+- review: the program's task is `program`. Rejected: `run` (stutters as `mise run run`), `app`
+  (clashes with the pattern namespace), `demo`.
+- review: five recordings, placed under steps 9, 10, 11, 12 and 12 by the site's build, not
+  written into the Markdown, so the revision goes to sqlate unchanged.
+- review: WebM in a native video. Rejected: GIF.
+- review: the recordings are committed as WebM with a hash of their inputs; the check verifies the
+  hash offline, `mise run tapes` re-renders only what changed, CI never renders. Supersedes
+  setup's "Rejected: committing the recording". Rejected: an actions-cache render (needs SDK
+  workflow hooks); a bot commit from a path-filtered workflow.
+- review: VHS drives the pinned chrome-headless-shell. Rejected: the browser found on PATH.
+- review: migrate, seed and run recordings use a live PostgreSQL 18 in Docker; composed SQL is
+  shown offline through sqltest.
+- review: cost is per page, every response the page loads, gzip as served and brotli computed,
+  median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
+  task's merges plus five dispatches per site); measured by a committed root `mise run cost`,
+  outside the check.
 
 ## Pending edits
 
@@ -1349,8 +1255,6 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
   the site index's order, compact below 40rem. Front matter becomes head meta, and sl-page-header
   is removed. Releases components v0.5.0 and SDK v0.6.0, which all three sites pin with icons
   v0.1.0.
-- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: its summary drops "with
-  a check that no capture file remains", which shipped in the screenshots task.
 - coordinator · roadmap, `experiment.html.spike-html-hosting`'s repos, `[workspace.paths]`, and
   references.toml / references.local.toml: add spike-html-hosting-icons
   (`https://github.com/JaimeStill/spike-html-hosting-icons.git`,
@@ -1393,3 +1297,16 @@ Slices        22. SDK: site.css for 31 and 32, the header-row and
   list needs it.
 - coordinator · intake: front matter as head meta, not visible, as the convention for
   v1.repository-docs.
+- coordinator · roadmap, `experiment.html.spike-html-hosting.tasks.review`: repos become
+  spike-html-hosting, -sqlate, -sdk, -icons, -components and -architecture; the summary becomes
+  the task as built (evidence 9 recorded from screenshots and design; the five parked fixes; SDK
+  v0.6.1 pinned by all three sites; the sqlate quick-start revised in place with five VHS
+  recordings of sqlint v0.3.0 and the program, committed as WebM behind an input-hash check;
+  `mise run cost`). Evidence 9, 10 and 11. Replaces the pending edit that only dropped "with a
+  check that no capture file remains".
+- intake · sqlate, docs/quick-start.md: apply the revision as the diff of the site's revised copy
+  against blob 0c54507 at f2b2117, including step 1's pgx/v5/stdlib fix (step 5 doesn't build as
+  published), the `program` and `sql` tasks, postgres.Patterns(), step 9's SQL test, step 10's
+  findings, and step 12.
+- root context/README.md, References: sqlate "with sqlint/v0.3.0" in place of sqlint/v0.1.1; vhs,
+  ttyd and ffmpeg in the sqlate site's toolchain.

@@ -275,7 +275,7 @@ Each item's proof is recorded in the root README's "Evidence".
    architecture site's crawl, each page's head held to its front matter's meta and every in-site
    link followed to its page and fragment.
 4. **The sqlate stand-in** ([README](../README.md#4-the-sqlate-stand-in)): the components'
-   `sl-section-tree` tests for J, K and the arrow keys, and the sqlate site's crawl, with H and L
+   `sl-section-tree` tests for J, K, and the arrow keys, and the sqlate site's crawl, with H and L
    pressed at 390px.
 5. **Shared navigation when one site deploys ahead**
    ([README](../README.md#5-shared-navigation-when-one-site-deploys-ahead)): proven only by the
@@ -299,7 +299,7 @@ Each item's proof is recorded in the root README's "Evidence".
 11. **Cost per site** ([README](../README.md#11-cost-per-site)): `mise run cost`, its run of
     2026-11-10 over the live sites and their Pages runs.
 12. **One icon toolkit** ([README](../README.md#12-one-icon-toolkit)): the icons layer's unit and
-    browser tiers, and each site's `showsGlyphs` shell check. The builds ship 6, 6 and 7 of 986
+    browser tiers, and each site's `showsGlyphs` shell check. The builds ship 6, 6, and 7 of 986
     Octicons.
 
 Items 5 and 7 are proven only by tests: 5 by fixture tests on one local origin, 7 by the check

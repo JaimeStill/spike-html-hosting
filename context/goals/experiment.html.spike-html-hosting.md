@@ -1177,7 +1177,7 @@ Door          two-way: only the root's two READMEs and its goal
      pages, its index held to sites.json, and the SDK's crawl; live from the org task, PR #7.
   3. The architecture stand-in. Proven by the architecture site's crawl, each page's head held to
      its front matter's meta and every in-site link followed to its page and fragment.
-  4. The sqlate stand-in. Proven by the components' `sl-section-tree` tests for J, K and the
+  4. The sqlate stand-in. Proven by the components' `sl-section-tree` tests for J, K, and the
      arrow keys, and by the sqlate site's crawl, with H and L pressed at 390px.
   5. Shared navigation when one site deploys ahead. Proven only by tests: the components' fixture
      tests on one local origin, where the built list skews and the fetched list converges. Live,
@@ -1198,7 +1198,7 @@ Door          two-way: only the root's two READMEs and its goal
       their Pages runs: Pages serves gzip, not brotli; GitHub's deployment queue dominates
       push-to-live; a CDN node can serve the previous deploy minutes after a new one.
   12. One icon toolkit. Proven by the icons layer's unit and browser tiers and each site's
-      `showsGlyphs` shell check. The builds ship 6, 6 and 7 of 986 Octicons.
+      `showsGlyphs` shell check. The builds ship 6, 6, and 7 of 986 Octicons.
 
   For the intake:
 
@@ -1266,7 +1266,7 @@ Door          two-way: only the root's two READMEs and its goal
   direction, proven by spike-html-hosting-sdk v0.2.0 and the three sites that pin it.
 - architecture · principles/rolling-currency.md: a currency check reads every mise environment's
   config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml, so a tool pinned
-  for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd and ffmpeg, stays
+  for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd, and ffmpeg, stays
   current. spike-html-hosting-sdk v0.6.1's currency bin does this.
 - intake · architecture, the detail behind the answer section's shortcut-dialog item: a pattern
   page for the keyboard-shortcut dialog, with Settings and Help as its worked instances and an

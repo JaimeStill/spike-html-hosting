@@ -203,6 +203,33 @@ Behaviors     1. spike-html-hosting-icons takes chrome-headless-
               21. At checkpoint 2 the architect views the cost
                  tables and the evidence write-up after the sites
                  deploy, before the root's README merges.
+              Checkpoint 1 amendments (the architect, 2026-11-10):
+              22. Each recording's terminal is sized to the space
+                 the page gives it: its text reads in the content
+                 column at 1120 and 1376 without fullscreen.
+              23. Each recording shows only what the reader needs
+                 to see, in a format chosen for it: long output is
+                 sequenced into smaller runs that each fit the
+                 terminal, with a short pause after each so the
+                 reader takes in its whole context, and no scroll.
+              24. A recording lasts about as long as its commands
+                 take plus the time to read each output, with no
+                 idle stretches. Best practices for the tapes are
+                 written down beside them, and every tape meets
+                 them.
+              25. Each video's poster is its recording's last
+                 frame, committed as WebP and held to the input
+                 hash, so the page shows the result before play.
+              26. The revision note is a muted aside, in the page's
+                 secondary text colour.
+              27. The revised prose reads plainly to a human
+                 reader. Step 10 says that guard_where gives a
+                 command optimistic concurrency, and what that
+                 means: the write applies only if the row's
+                 version is still the one the caller read, and a
+                 stale write fails rather than overwriting. Step
+                 12 is reordered and reworded so it reads in
+                 sequence.
 Test seams    each repository's `mise run check`: the icons build
               and browse tests; the SDK's crawl, landing and
               scaffold tests on its fixture sites; the sqlate
@@ -273,7 +300,16 @@ Release       spike-html-hosting-sdk v0.6.1
 
 ## Progress
 
-slices 0/12 committed · checkpoint 1 — · standards — · spec — · editor — · checkpoint 2 —
+slices 10/12 · SDK v0.6.1 released (PR #10, d5e9da4) · architecture merged (PR #9, 04d2271) and
+sqlate merged (PR #9, e9fcb5b), both deployed · checkpoint 1 ✓ · standards ✓ (icons 0826ca9; sdk 4220b43; sqlate d3412ce,
+aa16e7f) · standards' program findings fixed (sqlate 4a922a1,
+7020797) · spec ✓ (step-12-program's pause, sqlate 0769aba) · editor — · checkpoint 2 —
+
+- icons: 69d0be1 (1); fb7143f, e279e3b (4)
+- components: 17cf52b (2)
+- sdk: 6a9c28a (3); 8679c39, 7ef1333 (5); f6246e8, 3921877 (8a); c0fa2f8 (9)
+- sqlate: 45f534f, 829620e (6); cb4da2e, bb03426, 2a4f5c6 (7); 2cd52e6, 5492d0a, fcd2f11 (8);
+  46cc7e0, 7e3653d, cb66ed4, cc77318 (8b)
 
 ## Decisions
 
@@ -1164,6 +1200,30 @@ slices 0/12 committed · checkpoint 1 — · standards — · spec — · editor
 - review: VHS drives the pinned chrome-headless-shell. Rejected: the browser found on PATH.
 - review: migrate, seed and run recordings use a live PostgreSQL 18 in Docker; composed SQL is
   shown offline through sqltest.
+- review: behavior 6 already holds, so it ships no change: spike-html-apps-tooling v0.3.0's
+  Page.on() keeps one listener per session and method, replacing any before it
+  (dist/browser.js:101), so landing()'s Page.loadEventFired listener never piles up over a crawl.
+  The design Decision that parked it read on() as adding listeners. Rejected: a test counting
+  page.on calls as listeners (it would misstate the tooling); rewriting landing() to poll.
+- review: the recordings use VHS's built-in zenwritten_dark theme and CaskaydiaMono Nerd Font, one
+  render shown on every site theme, at the architect's direction: a site may offer any number of
+  themes, so a recording takes one neutral dark theme that clashes with none. zenwritten_dark's
+  background is pure grey (#191919), its foreground #bbbbbb at 9.2:1, and its ANSI colours muted,
+  each at least 5.2:1. Rejected: GitHub Dark and Primer (blue-tinted, too cool); Dark+ (vivid
+  colours, the darkest at 3.2:1); Primer's ANSI tokens as a custom theme; a render per page theme.
+- review: at checkpoint 1 the architect accepted the refined recordings: a 77x24 terminal at 20px
+  in the 712px column; output sequenced one screen at a time, and output taller than the screen
+  written to a file and shown with head and tail on camera, "an acceptable approach when content
+  would overflow the vertical space"; posters, with preload="none" (with a poster, Chrome cancels
+  the metadata request partway, and the crawl counts it as failed). The guide drops behavior 11's
+  `sql` task for `go test -C <package> -run TestSQL[/<name>]`, and adds a layout_test.go helper
+  per package that puts each SQL clause on its own line, changing only whitespace.
+- review: the revised quick-start also renames step 11's `print` helper to `printJSON` (it shadowed
+  Go's predeclared print) and closes the pool when step 5's catalog fails (`errors.Join(err,
+  pool.Close())`), from the standards review, and adds an intro bullet for step 12. Each goes to
+  sqlate with the revision at the intake. Kept: the program's `go = "1.27"`, as the guide tells a
+  reader to write it; a later 1.27.x on the rendering machine could render a tape without staling
+  its hash.
 - review: cost is per page, every response the page loads, gzip as served and brotli computed,
   median and max per site; build time from the Pages runs; push-to-live from fresh runs (the
   task's merges plus five dispatches per site); measured by a committed root `mise run cost`,

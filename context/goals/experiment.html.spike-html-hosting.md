@@ -1,8 +1,8 @@
 # goal · experiment.html.spike-html-hosting
 
-- **State:** idle
-- **Task:** none
-- **Branch:** none
+- **State:** building
+- **Task:** answer
+- **Branch:** answer
 
 ## Tasks
 
@@ -18,284 +18,158 @@
 10. [x] review
 11. [ ] answer
 
-## Task brief · review
+## Task brief · answer
 
 ```
-Problem       Evidence 9, 10 and 11 are unwritten. The design
-              task reviewed every page, but nothing records it
-              as evidence 9. Nothing on the sqlate site shows
-              sqlate running: its quick-start never prints the
-              SQL its includes and directives become, never
-              shows what the linter catches, never layers its
-              own patterns over the library's beyond one
-              include, and its step 1 leaves step 5 unbuildable
-              ("missing go.sum entry for … puddle/v2", go
-              1.27.3, pgx v5.11.0 and v5.12.0). No site measures
-              its page weight, build time or push-to-live time.
-              Five findings from earlier tasks sit unfixed in
-              the SDK and the icons layer. The SDK trails marked
-              18.2.0; the icons layer trails chrome-headless-
-              shell 157.0.8103.50, rolldown 1.3.1 and
-              typescript-eslint 8.72.2; the components trail
-              chrome-headless-shell 157.0.8103.50.
-Behaviors     1. spike-html-hosting-icons takes chrome-headless-
-                 shell 157.0.8103.50, rolldown 1.3.1 and
-                 typescript-eslint 8.72.2, their notes read
-                 before the bump. Its currency prints nothing
-                 and its check passes.
-              2. spike-html-hosting-components takes chrome-
-                 headless-shell 157.0.8103.50. Its currency
-                 prints nothing and its check passes.
-              3. spike-html-hosting-sdk takes marked 18.2.0, its
-                 notes read before the bump. Rolldown stays held
-                 at 1.2.18 (vite 8.3.7 pins ~1.2.18). Its currency
-                 reports only the held rolldown, and its check
-                 passes with every fixture site's copied pages
-                 crawled under the new parser.
-              4. The icons build writes nothing when it refuses a
-                 set: a refused set listed after an accepted one
-                 leaves the output directory empty, and the build
-                 exits 1 naming the set and its licence. A unit
-                 test builds an accepted set then a refused one,
-                 and holds both. No icons release.
-              5. The icons browse page labels a set's licence
-                 with its SPDX identifier, else its title,
-                 whether or not the set gives a URL, as its
-                 browser test expects. A fixture set with an SPDX
-                 identifier and no URL shows the identifier.
-              6. The SDK's landing wait adds no listener that
-                 outlives it: over a crawl of every page of a
-                 fixture site, the load-event listeners don't
-                 grow with the pages crawled; a test counts them.
-              7. The SDK crawl's front-matter check holds each
-                 page's front-matter head meta to exactly its
-                 front matter's keys: a page with no front matter
-                 carries none, and a fixture page that carries
-                 one fails the crawl, naming it.
-              8. The SDK template's provenance names the Settings
-                 button on S, and no template file names a Theme
-                 button or T. The scaffold test reads every
-                 template provenance line against the shell.
-              9. spike-html-hosting-sdk v0.6.1 is released after
-                 behaviors 3 and 6-8, with CHANGELOG [0.6.1]. It
-                 pins components v0.5.0 and icons v0.1.0.
-              10. The architecture, sqlate and root sites pin SDK
-                 v0.6.1 in package.json and both workflows' uses:
-                 lines. Every page passes the shell checks, the
-                 copied pages pass the crawl, and each site's
-                 currency prints nothing.
-              11. The sqlate site's copied quick-start is revised
-                 in place:
-                 - step 1 gets pgx/v5/stdlib, so step 5 builds;
-                 - the task that runs the program is `program`
-                   throughout;
-                 - a `sql` task prints what PostgreSQL receives;
-                 - step 5 builds the catalog on postgres.Patterns()
-                   with a paragraph on overlays;
-                 - step 9 adds a test printing the composed list
-                   read;
-                 - step 10 plants a statement with guard_set and
-                   no guard_where, and a RETURNING in a standard
-                   file, shows two findings and exit 1, then
-                   removes it;
-                 - a new step 12 scopes projects by organization:
-                   a second migration (org, project); app.tenant
-                   and app.live; a projects package whose base
-                   includes both; archive, a standard-tier guarded
-                   returning command layering sql.guard_set,
-                   sql.guard_where, app.tenant and app.live, read
-                   back through project_row; seeds for two orgs;
-                   a run that pages one org by cursor, archives
-                   one project, shows a refusal, a stale version
-                   and another org's row as no rows, then reverts
-                   the newest migration;
-                 - the clean-up step becomes 13, its tree updated.
-                 Every other step stays byte for byte.
-              12. The copied tree's record marks the revision:
-                 the quick-start's entry holds the revised blob,
-                 and a revised entry names its original blob at
-                 sqlate f2b2117 and that the revision is proposed
-                 to sqlate at intake. The content check passes,
-                 and a unit test fails when a revised file
-                 matches its original or names an unrecorded
-                 file. The rendered page opens with a one-line
-                 note that it is revised from sqlate@f2b2117.
-              13. The finished program of the revised quick-start
-                 is committed in the sqlate site, against sqlate
-                 v0.6.1, postgres v0.6.0, pgx and sqlint v0.3.0
-                 through go get -tool, with go 1.27.3 pinned
-                 through mise. The site's check, offline:
-                 - vets and tests the program;
-                 - runs sqlint over it, which prints sqlint: ok;
-                 - fails when any file the guide writes in full
-                   differs from the committed program's (the last
-                   block per file wins).
-                 Install fetches the program's modules.
-              14. Five recordings are rendered by VHS 0.12.1 from
-                 committed tapes and committed as WebM:
-                 A (step 9: mise run sql, the team list read
-                   composed);
-                 B (step 10: lint ok, two findings and exit 1,
-                   ok again);
-                 C (step 11: mise run program against live
-                   PostgreSQL, through the four errors);
-                 D (step 12: mise run sql, archive's four
-                   patterns, its PostgreSQL form with RETURNING
-                   added by the dialect, the counted first page,
-                   the next page's row-value keyset);
-                 E (step 12: mise run program, ending on the
-                   projects lines and the reverted migration).
-                 The database starts off camera.
-              15. `mise run tapes` renders only the recordings
-                 whose inputs changed, and writes each one's input
-                 hash. Inputs: its tape, the program and go.sum,
-                 and the vhs, ttyd, ffmpeg, go and chrome-
-                 headless-shell pins. VHS drives the pinned
-                 chrome-headless-shell 157.0.8103.50. The site's
-                 check recomputes every hash offline and fails
-                 naming a recording whose inputs changed since it
-                 was rendered. CI never renders, and the SDK's
-                 workflows are unchanged.
-              16. The sqlate site's build places each recording
-                 under the step it demonstrates: a native video,
-                 muted, controls, playsinline, preload="metadata",
-                 an accessible name. The Markdown carries no video
-                 markup. The crawl finds the five videos, each
-                 under its step's heading, and nothing scrolls
-                 sideways at 390px.
-              17. `mise run cost` in the root reads the network,
-                 writes nothing, and isn't part of the check. For
-                 each of the three live sites:
-                 - each page's weight, every response it loads in
-                   the pinned chrome-headless-shell (HTML, CSS,
-                   the three JS files, video metadata where
-                   present), as gzip as Pages served it and as
-                   brotli via node:zlib at quality 11, reported as
-                   median and max per site;
-                 - build time, Vite's "built in" and the check
-                   step's duration, from the Pages runs;
-                 - push-to-live, a run's creation to its
-                   deploy-pages success, confirmed by the live
-                   index's last-modified, over the Pages runs at
-                   the current pins.
-                 It prints one table per site. Its pure parts
-                 (median, log parsing, the table) have unit tests.
-              18. Push-to-live is measured over fresh runs: each
-                 site's merge in this task, plus five
-                 workflow_dispatch runs per site at SDK v0.6.1.
-              19. The root's README records:
-                 - evidence 9, citing the screenshots task's
-                   capture command and no-capture test, the design
-                   task's four checkpoints at 390, 1120 and 1376px,
-                   and this task's checkpoint captures;
-                 - evidence 10, the five recordings and where they
-                   sit;
-                 - evidence 11, the cost table with its date,
-                   noting Pages serves gzip, not brotli, and each
-                   page loads three JS files;
-                 - the pins at SDK v0.6.1.
-              20. At checkpoint 1 the architect views the five
-                 recordings and the revised quick-start's captures
-                 at 390, 1120 and 1376, light and dark, built
-                 against the unreleased SDK, before the standards
-                 and spec reviews and before the SDK release.
-                 Marked changes become behaviors here.
-              21. At checkpoint 2 the architect views the cost
-                 tables and the evidence write-up after the sites
-                 deploy, before the root's README merges.
-              Checkpoint 1 amendments (the architect, 2026-11-10):
-              22. Each recording's terminal is sized to the space
-                 the page gives it: its text reads in the content
-                 column at 1120 and 1376 without fullscreen.
-              23. Each recording shows only what the reader needs
-                 to see, in a format chosen for it: long output is
-                 sequenced into smaller runs that each fit the
-                 terminal, with a short pause after each so the
-                 reader takes in its whole context, and no scroll.
-              24. A recording lasts about as long as its commands
-                 take plus the time to read each output, with no
-                 idle stretches. Best practices for the tapes are
-                 written down beside them, and every tape meets
-                 them.
-              25. Each video's poster is its recording's last
-                 frame, committed as WebP and held to the input
-                 hash, so the page shows the result before play.
-              26. The revision note is a muted aside, in the page's
-                 secondary text colour.
-              27. The revised prose reads plainly to a human
-                 reader. Step 10 says that guard_where gives a
-                 command optimistic concurrency, and what that
-                 means: the write applies only if the row's
-                 version is still the one the caller read, and a
-                 stale write fails rather than overwriting. Step
-                 12 is reordered and reworded so it reads in
-                 sequence.
-Test seams    each repository's `mise run check`: the icons build
-              and browse tests; the SDK's crawl, landing and
-              scaffold tests on its fixture sites; the sqlate
-              site's unit tier (content and its revision marker,
-              the guide's blocks against the program, the
-              recordings' input hashes) and browser tier (shell
-              checks, crawl, the placed videos); the program's go
-              vet, go test and sqlint; the root's unit tier over
-              the cost command's pure parts
-Slices        Upgrades first, in dependency order (icons,
-              components, SDK):
-              1. Icons upgrade: headless-shell .50, rolldown
-                 1.3.1, typescript-eslint 8.72.2 (-icons)
-              2. Components upgrade: headless-shell .50
-                 (-components)
-              3. SDK upgrade: marked 18.2.0, rolldown hold
-                 renewed at 1.2.18 (-sdk)
-              4. Icons fixes: refused-set build, browse label;
-                 merged with no release (-icons)
-              5. SDK fixes: landing listener, crawl front-matter
-                 check, template provenance line (-sdk)
-              6. The program: the finished quick-start program,
-                 go pinned; the check vets, tests and lints it
-                 offline (-sqlate)
-              7. Revised quick-start: the copy edited in place,
-                 the revised entry and its test, the blocks-
-                 match-program check, the revision note;
-                 captures (-sqlate)
-              8. Recordings: tapes A-E, `mise run tapes` with
-                 pinned vhs, ttyd, ffmpeg and the headless shell,
-                 committed WebM and input hashes, the offline
-                 hash check, the build placing each video;
-                 captures (-sqlate)
-                 → checkpoint 1: the architect views the
-                   recordings and the quick-start's captures, SDK
-                   branch linked locally; then the standards and
-                   spec reviews over every branch
-              9. SDK release: 0.6.1, CHANGELOG [0.6.1]; merges,
-                 release workflow cuts v0.6.1 (-sdk)
-              10. Sites pin SDK v0.6.1 in package.json and both
-                 workflows; currency prints nothing; merge and
-                 deploy (-architecture, -sqlate, root)
-              11. Cost command: `mise run cost` with unit tests;
-                 five dispatch runs per site; the tables (root)
-              12. Evidence: README evidence 9, 10, 11 and pins
-                 (root)
-                 → checkpoint 2: the architect views the cost
-                   tables and the evidence before the root's last
-                   merge
-Out of scope  writing to sqlate (the revision and the step 1
-              defect go to the intake); an icons or components
-              release; Source.As in the guide; rendering in CI or
-              any change to the SDK's workflows; a revision
-              feature in the SDK's content check; brotli on Pages
-              itself; rolldown 1.3.x; the answer section; the
-              findings recorded for the intake (shortcut-dialog
-              pattern page, the foundation's lazy chunks,
-              glyph-button, the narrow-width nav menu)
-Door          one-way: the tag spike-html-hosting-sdk v0.6.1,
-              which every site and later scaffold consumes, and
-              the committed WebM, which stays in the sqlate
-              site's history after any revert; two-way: the icons
-              and components commits, the three sites' changes
-              (each redeploys and reverts by reverting its merge),
-              and the root's cost command and README
-Release       spike-html-hosting-sdk v0.6.1
+Problem       The spike has no answer, and this is its last task, so
+              the intake reads only what it leaves. The root README
+              records only evidence 9, 10 and 11. The verdicts for
+              evidence 5 and 8 and the live measures for 5 and 6
+              exist only in PR #7's body and comment, and evidence 1-4,
+              7 and 12 are recorded nowhere a reader looks. The root
+              URL, the site list, the components layer and the
+              HTML/Markdown line were decided in this plan, but no
+              file says so. The goal record's pending edits still
+              carry edits that are done or that sync makes moot,
+              findings for the intake that the intake would never
+              read, and no answer section.
+Behaviors     Held by the check:
+              1. The root's `mise run check` passes after
+                 `mise run install`, and its currency prints nothing.
+              2. The task changes three files: the root README, the
+                 spike README (context/README.md) and the goal
+                 record. No code, test, page, workflow or pin
+                 changes; the deployed site is unchanged.
+              Read at the spec review, each against its sources:
+              3. The root README's Evidence section records all
+                 twelve items, and its introduction says so.
+                 Evidence 1-8 and 12 are added beside 9-11, numbered
+                 as the spike README numbers them. Each says what
+                 was shown and where it is proven: a check tier and
+                 its test, a mise task, a live URL, or a merged PR.
+              4. The added evidence carries these measures and says
+                 where each proof falls short:
+                 - 5: built-list skew (ahead lists 4, behind lists 3)
+                   against the fetched list (both 4), proven only by
+                   the components' fixture tests on one local
+                   origin; the live fetch of 2026-11-06: max-age=600,
+                   first paint 308 ms with the built list, the fetch
+                   from 284 ms for 204 ms; only the root fetches.
+                 - 6: the components' two-base test, and the live
+                   theme on the three deployed sites, set in storage
+                   rather than through the menu.
+                 - 7: proven only by the check.
+                 - 8: briefs/ 3.6x drafting tokens as hand HTML
+                   (1,397 vs 5,095, Gemma 4 tokenizer) for +9%
+                   brotli; sitrep 1.9x (2,764 vs 5,271), ~4 KB
+                   brotli. Verdict: Markdown rendered at build by
+                   default, hand HTML only where a diagram earns it.
+                 - 12: the builds ship 6, 6 and 7 of 986 Octicons.
+                 Every figure matches PR #7, the goal record, or the
+                 live site.
+              5. The spike README's "The answer" replaces "Pending":
+                 the question; a bold one-line answer (the hypothesis
+                 holds with the org site moved to the origin root:
+                 architecture and each code repository's docs/ guide
+                 are project sites under /<repo>/, built by Vite from
+                 Markdown through one site SDK and one documentation
+                 components layer, each released by tag; the org site
+                 is a standards-lab.github.io repository holding the
+                 charter and the index of sites, and serving the site
+                 list every nav fetches); evidence 1-12, one line
+                 each naming its proof and pointing to the root
+                 README, 10 marked built and rejected, test-only
+                 items called out; the topology v1.client and
+                 v1.repository-docs build:
+                 - the org site at the origin root, needing an SDK
+                   root-base option (base() returns /<name>/ today);
+                   a custom domain on it carries to every project
+                   site, per GitHub's docs; the coordinator keeps
+                   no build;
+                 - one site list fetched at runtime from the org
+                   site, built-in list as fallback, needing the
+                   SDK's under-base request check to allow the org
+                   site's sites.json;
+                 - the Pages costs from evidence 11: gzip only, the
+                   deploy queue dominating push-to-live, a stale CDN
+                   window.
+                 The components item:
+                 - spike-html-hosting-components is the documentation
+                   layer the org site and v1.repository-docs' sites
+                   build on, kept apart from
+                   spike-html-apps-components;
+                 - status-reports and training.foundation each build
+                   their own components layer on the foundation for
+                   their content;
+                 - only overlap those layers prove moves into a
+                   shared documentation layer;
+                 - the drawer is foundation chrome.
+                 Then the HTML/Markdown line, and the "For the
+                 intake" list (behavior 7).
+              6. The spike README's Capabilities and Path name the
+                 answer task as done; its question, hypothesis and
+                 evidence list are unchanged.
+              7. The "For the intake" list, one line per finding:
+                 the keyboard-shortcut dialog pattern page; Settings
+                 and Help as foundation changes; the foundation's
+                 eagerly built lazy chunks; glyph-button as a
+                 foundation control; front matter as head meta for
+                 v1.repository-docs; the sqlate quick-start revision
+                 against f2b2117; the narrow-width nav menu and
+                 sub-navs; the VHS verdict, CLI output shown as text;
+                 one sl-drawer in the foundation, its Close glyph
+                 passed through a slot; 14 repositories each keeping
+                 their own scripts/currency.sh; the SDK provenance
+                 convention (one line per tag in the root, one line
+                 naming the latest in the other two sites).
+              8. The goal record's pending edits:
+                 - gain "### Answer · experiment.html.spike-html-
+                   hosting" in marathon's form (Question, one-line
+                   Answer, numbered evidence naming its proof, the
+                   "For the intake" list, the two links), matching
+                   the README answer;
+                 - drop the done edits (evidence-11 Pages findings;
+                   catalog org and .github);
+                 - drop the edits sync moots (this spike's own
+                   roadmap summaries, new tasks, repos list);
+                 - fold the intake-tagged edits into the answer
+                   section;
+                 - retag the mise.<env>.toml edit as architecture;
+                 - mark the five claude-plugins findings as retro
+                   items for the sync PR body;
+                 - keep the Keyboard bullet, the catalog additions
+                   (spike-html-hosting-sdk, -icons, primer/octicons)
+                   and the icons workspace path;
+                 - add the Sync's coordinator edits: the note's
+                   experiment paragraph, the roadmap removal, header
+                   comment and wave A line, staging
+                   spike-html-go-wasm.
+              9. Decisions logs round 1's ten answers and round 2's
+                 drawer answer, one line each.
+Test seams    the root's `mise run check` and `git diff --stat main`
+              (1-2); 3-9 are written records the spec review reads
+              against PR #7's body and comment, the goal record's
+              Decisions, GitHub's Pages docs and the live sites
+Slices        No upgrade slice: the root's currency prints nothing.
+              1. Evidence: the root README records evidence 1-8 and
+                 12 with their proofs; its introduction names all
+                 twelve (root)
+              2. The answer: the spike README's "The answer", its
+                 Capabilities and Path (root)
+              3. The record: the answer section, the pending edits
+                 sorted and added, the decisions logged (root)
+Out of scope  every layer and site repository; any release; the SDK
+              root-base option and the widened request check
+              (v1.client builds them); the nav menu and sub-navs;
+              moving sl-drawer to the foundation; normalizing the
+              root's provenance lines; creating standards-lab.github.io
+              or enabling Pages on any standards-lab repository; the
+              sync itself, which runs once this task merges
+Door          two-way: only the root's two READMEs and its goal
+              record change; the site deploys unchanged; nothing is
+              tagged. The sync's coordinator and architecture PRs
+              revert like any merge; staging spike-html-go-wasm is a
+              roadmap edit.
 ```
 
 ## Decisions
@@ -1257,6 +1131,27 @@ Release       spike-html-hosting-sdk v0.6.1
   28 s after deploy-pages reported success, and one CDN node served the previous deploy's index
   minutes after the latest. Rejected: confirming a run by the Last-Modified falling between its
   deploy step's start and its reported success.
+- answer: the org site the answer recommends is a standards-lab.github.io repository at the
+  origin root, not Pages on the coordinator at /org/; the site SDK needs a root-base option, since
+  base() always returns /<name>/.
+- answer: every site's nav fetches its site list at runtime from the org site's sites.json, with
+  the built-in list as fallback; the SDK's under-base request check must allow it.
+- answer: the documentation components layer stays separate from spike-html-apps-components;
+  status-reports and training.foundation each build their own components layer for their content
+  on the foundation, and only overlap they prove moves into a shared documentation layer.
+- answer: the HTML/Markdown line is Markdown rendered at build by default, with hand HTML only
+  where a diagram earns it, for briefs/ and status-reports' entries.
+- answer: the narrow-width site-nav menu and sub-navs are recorded for the intake, not built.
+- answer: findings for experiment.html's intake go in a "For the intake" list in the answer
+  section. Rejected: edits to the intake task's roadmap summary.
+- answer: both rolling-currency.md edits (minimumReleaseAge 0; every mise.<env>.toml) land at sync
+  on an architecture branch.
+- answer: the five claude-plugins findings are listed in the sync pull request's body for
+  `marathon retro`, not edited at sync.
+- answer: spike-html-go-wasm is staged when the session brief is accepted.
+- answer: the html-artifacts.md Keyboard bullet edit lands at sync as a coordinator edit.
+- answer: the answer recommends one sl-drawer, in the foundation, its Close glyph passed by the
+  consumer through a slot. Rejected: the shared documentation layer; a copy per components layer.
 
 ## Pending edits
 

@@ -1152,6 +1152,17 @@ Door          two-way: only the root's two READMEs and its goal
 - answer: the html-artifacts.md Keyboard bullet edit lands at sync as a coordinator edit.
 - answer: the answer recommends one sl-drawer, in the foundation, its Close glyph passed by the
   consumer through a slot. Rejected: the shared documentation layer; a copy per components layer.
+- answer: evidence 12 is counted on the builds at SDK v0.6.1 (2026-11-10): the architecture, sqlate, and root builds
+  ship 7, 7, and 8 of 986 Octicons. The architecture and sqlate builds ship arrow-left,
+  arrow-right, gear, list-ordered, list-unordered, question, and x, and the root ships those
+  seven and report. The brief's 6, 6, and 7 were the icons task's counts, before the design task
+  added the Settings and Contents glyphs.
+- answer: the intake detail (the shortcut-dialog pattern page, the foundation's Settings and Help
+  changes, and the sqlate quick-start revision's change list) is carried as sub-points under its
+  item in the "For the intake" list, in the README answer and in the answer section, since sync
+  has no target for an intake-tagged edit and deletes the goal record. Rejected: keeping
+  "intake ·" pending edits.
+- answer: evidence 1 and 2 say plainly that no site was served at an origin root.
 
 ## Pending edits
 
@@ -1198,9 +1209,9 @@ Door          two-way: only the root's two READMEs and its goal
       their Pages runs: Pages serves gzip, not brotli; GitHub's deployment queue dominates
       push-to-live; a CDN node can serve the previous deploy minutes after a new one.
   12. One icon toolkit. Proven by the icons layer's unit and browser tiers and each site's
-      `showsGlyphs` shell check. Counted on today's builds, the architecture, sqlate, and root
+      `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1 (2026-11-10), the architecture, sqlate, and root
       builds ship 7, 7, and 8 of 986 Octicons: arrow-left, arrow-right, gear, list-ordered,
-      list-unordered, question, and x, and the root also report.
+      list-unordered, question, and x, and the root also ships report.
 
   For the intake:
 
@@ -1213,7 +1224,8 @@ Door          two-way: only the root's two READMEs and its goal
       it closes the hint alone.
   - Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
     keys help's built-in settings.
-    - Both force a rebuild today.
+    - The components layer builds both again, as sl-settings and sl-shortcuts, because the
+      foundation's theme menu and keys help lack them.
   - The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
     `keys-help.js`, so every site builds both chunks without requesting them.
   - glyph-button as a foundation control.
@@ -1235,9 +1247,9 @@ Door          two-way: only the root's two READMEs and its goal
       guarded command optimistic concurrency: the write applies only if the row's version is still
       the one the caller read, and a stale write fails.
     - Step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print.
-      Each output line names its request and outcome, the refused requests through a `refused`
-      helper naming the error each matches, with prose explaining each line and that `Replace`
-      deletes and creates in one transaction.
+      Each output line names its request and its outcome, and a `refused` helper names the error
+      each refused request matches. Prose explains each line, and that `Replace` deletes and
+      creates in one transaction.
     - A new step 12 scopes projects by organization: `app.tenant` and `app.live` layered with
       `sql.guard_set` and `sql.guard_where` in a guarded returning command, and cursor paging on
       PostgreSQL's keyset overlay. The intro gains a bullet for it.
@@ -1273,8 +1285,8 @@ Door          two-way: only the root's two READMEs and its goal
   without brackets, and the tree marks the current section by an accent rule and bold text, with
   no reading progress, by the architect's direction.
 - coordinator · roadmap: remove experiment.html.spike-html-hosting from `active` and delete its
-  `[goals.experiment.html.spike-html-hosting]` table and its tasks. The header comment (about
-  line 12, "spike-html-hosting is active") and wave A's line (about line 24) say
+  `[goals.experiment.html.spike-html-hosting]` table and its tasks. Change the header comment
+  (about line 12, "spike-html-hosting is active") and wave A's line (about line 24) to say that
   spike-html-hosting has answered (html-artifacts.md, "Answers · experiment.html").
 - coordinator · roadmap: stage experiment.html.spike-html-go-wasm, moving it from `planned` to
   `active`, on the session brief's acceptance.

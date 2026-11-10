@@ -62,8 +62,8 @@ its own docs/ guide.
   only the icons it uses.
 - **Review and demos:** the screenshot review, and VHS-recorded CLI demos, built and then
   rejected (README, "Evidence", 10).
-- **Answer:** all twelve evidence items recorded in the root README's "Evidence", and the answer
-  below, written by the answer task.
+- **Answer:** the root README's "Evidence" records all twelve evidence items, and "The answer",
+  below, gives the spike's answer. The answer task wrote both.
 
 ## Path
 
@@ -86,8 +86,8 @@ The tasks, in the order they run; each cites the evidence it proves.
 9. `design`: the design review of the three sites.
 10. `review`: the review across every site, the sqlint VHS demo, and the cost per site
     (evidence 9, 10, 11).
-11. `answer`: the Pages topology, the root URL option, and the components layer's verdict, done:
-    every evidence item recorded in the root README and the answer written ("The answer").
+11. `answer`, done: every evidence item recorded in the root README, and the answer written ("The
+    answer"): the Pages topology, the root URL option, and the components layer's verdict.
 
 ## Building the sites
 
@@ -179,7 +179,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   `SITES`. These are evidence 5's two sides, build-time-by-tag and fetched-at-runtime, which the
   components' browser tier measures on fixture sites with one deployed ahead. A layer that names
   its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
-  exception until evidence 5's measure settles it.
+  exception. Evidence 5 is measured, and the answer takes the list fetched from the org site,
+  with the built list as fallback; the fallback keeps the exception.
 - Every site's chrome-headless-shell is 157.0.8103.50.
 - `sl-settings` lays out its theme rows with the foundation v0.3.0's `theme-menu.css`, which it
   adopts in its shadow root, so the shell checks look for that sheet's layer in the settings'
@@ -269,8 +270,8 @@ Each item's proof is recorded in the root README's "Evidence".
 1. **Three project sites** ([README](../README.md#1-three-project-sites)): each live site
    answered 200 on 2026-11-10, and each site's `mise run check` runs its Vite build.
 2. **The org stand-in** ([README](../README.md#2-the-org-stand-in)): the root's browser tier,
-   the SDK's shell checks on its five pages, its index held to sites.json, and the SDK's crawl;
-   live from the org task, PR #7.
+   the SDK's shell checks on its five pages, its index held to sites.json, and the SDK's crawl.
+   The root is live from the org task, PR #7.
 3. **The architecture stand-in** ([README](../README.md#3-the-architecture-stand-in)): the
    architecture site's crawl, each page's head held to its front matter's meta and every in-site
    link followed to its page and fragment.
@@ -299,9 +300,10 @@ Each item's proof is recorded in the root README's "Evidence".
 11. **Cost per site** ([README](../README.md#11-cost-per-site)): `mise run cost`, its run of
     2026-11-10 over the live sites and their Pages runs.
 12. **One icon toolkit** ([README](../README.md#12-one-icon-toolkit)): the icons layer's unit and
-    browser tiers, and each site's `showsGlyphs` shell check. Counted on today's builds, the
+    browser tiers, and each site's `showsGlyphs` shell check. Counted on the builds at SDK v0.6.1 (2026-11-10), the
     architecture, sqlate, and root builds ship 7, 7, and 8 of 986 Octicons: arrow-left,
-    arrow-right, gear, list-ordered, list-unordered, question, and x, and the root also report.
+    arrow-right, gear, list-ordered, list-unordered, question, and x, and the root also ships
+    report.
 
 Items 5 and 7 are proven only by tests: 5 by fixture tests on one local origin, 7 by the check
 alone. Item 9 rests on the architect's reviews, item 11 on a measure run on demand, and the rest
@@ -351,7 +353,8 @@ intake, web-client.md's persistent artifacts, "written as HTML and hosted in the
     closes the hint alone.
 - Settings and Help as foundation changes: the theme menu's fixed heading and T save, and the
   keys help's built-in settings.
-  - Both force a rebuild today.
+  - The components layer builds both again, as sl-settings and sl-shortcuts, because the
+    foundation's theme menu and keys help lack them.
 - The foundation's `preferences.js` and `keys.js` dynamically import `theme-menu.js` and
   `keys-help.js`, so every site builds both chunks without requesting them.
 - glyph-button as a foundation control.
@@ -373,9 +376,9 @@ intake, web-client.md's persistent artifacts, "written as HTML and hosted in the
     command optimistic concurrency: the write applies only if the row's version is still the one the
     caller read, and a stale write fails.
   - Step 11's `print` helper becomes `printJSON`, since `print` shadowed Go's predeclared print.
-    Each output line names its request and outcome, the refused requests through a `refused` helper
-    naming the error each matches, with prose explaining each line and that `Replace` deletes and
-    creates in one transaction.
+    Each output line names its request and its outcome, and a `refused` helper names the error each
+    refused request matches. Prose explains each line, and that `Replace` deletes and creates in one
+    transaction.
   - A new step 12 scopes projects by organization: `app.tenant` and `app.live` layered with
     `sql.guard_set` and `sql.guard_where` in a guarded returning command, and cursor paging on
     PostgreSQL's keyset overlay. The intro gains a bullet for it.

@@ -214,9 +214,9 @@ creation to its deploy's reported success:
 - The sqlate quick-start was the outlier, at about 274 kB, 206 kB of it the five recordings' WebP
   posters, measured before evidence 10's recordings were removed; it loaded no video bytes, since
   each video was `preload="none"`.
-- GitHub's Pages deployment queue dominates push-to-live. The merge runs took 1m52s to 6m24s,
-  against dispatch medians of about 56s, 2m, and 85s.
-- The architecture site's check step, about 93s, is the longest build cost.
+- GitHub's Pages deployment queue dominates push-to-live. The merge runs took 1 m 52 s to
+  6 m 24 s, against dispatch medians of about 56 s, 2 m, and 85 s.
+- The architecture site's check step, about 94 s, is the longest build cost.
 - Pages' CDN serves stale copies of a site's index for minutes after a deploy, and the index's
   Last-Modified can trail the deploy's reported success.
 
@@ -224,7 +224,7 @@ creation to its deploy's reported success:
 
 One icon toolkit, spike-html-hosting-icons v0.1.0, releases Octicons as one module per icon. The
 SDK's build fills each page's glyph markers from it, so a build ships only the icons its pages
-name: counted on today's builds, the architecture, sqlate, and root builds ship 7, 7, and 8 of its
+name: counted on the builds at SDK v0.6.1 (2026-11-10), the architecture, sqlate, and root builds ship 7, 7, and 8 of its
 986 Octicons. The architecture and sqlate builds ship arrow-left, arrow-right, gear,
 list-ordered, list-unordered, question, and x, and the root ships those seven and report.
 

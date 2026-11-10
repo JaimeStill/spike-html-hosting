@@ -82,7 +82,7 @@ run = "tsc -p ."
 dir = "{{config_root}}"
 
 [tasks."types:test"]
-description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, and the capture file, scripts/screenshots.config.ts, with tsc against tsconfig.test.json; reads no network, writes nothing"
+description = "Type-check the suite, test/'s TypeScript that node --test runs under type stripping, the capture file, scripts/screenshots.config.ts, and mise run cost's scripts, with tsc against tsconfig.test.json; reads no network, writes nothing"
 depends = ["preflight"]
 run = "tsc -p tsconfig.test.json"
 dir = "{{config_root}}"
@@ -94,7 +94,7 @@ run = "pnpm exec vite build"
 dir = "{{config_root}}"
 
 [tasks."test:unit"]
-description = "Run the unit tier under node --test: each tree in content/ against content.json's blob hashes, with the SDK's content check; reads no network, writes nothing"
+description = "Run the unit tier under node --test: each tree in content/ against content.json's blob hashes, with the SDK's content check, and mise run cost's pure parts on fixtures of gh's output; reads no network, writes nothing"
 depends = ["preflight"]
 run = "node --test 'test/unit/*.test.ts'"
 dir = "{{config_root}}"
@@ -120,6 +120,15 @@ depends = ["preflight browser", "build"]
 # raw: with dependencies, mise prefixes a task's output through a pipe; icat needs the terminal.
 raw = true
 run = "BROWSER_EXECUTABLE=$(mise which chrome-headless-shell) pnpm exec spike-html-apps-screenshots scripts/screenshots.config.ts"
+dir = "{{config_root}}"
+
+# Never a dependency of check, which reads no network: a measurement of the live sites, their page
+# weight in the pinned chrome-headless-shell and their Pages runs' build and push-to-live times,
+# through gh. scripts/cost.ts holds what it reads and how.
+[tasks.cost]
+description = "Print one table per site in public/sites.json: each live page's weight, every response gzip as Pages served it and brotli 11, median and max; the build, check, and push-to-live times of the Pages runs at the site's current pin; reads the network and gh, writes nothing"
+depends = ["preflight browser"]
+run = "BROWSER_EXECUTABLE=$(mise which chrome-headless-shell) node scripts/cost.ts"
 dir = "{{config_root}}"
 
 [tasks.install]

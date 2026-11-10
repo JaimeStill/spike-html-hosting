@@ -60,7 +60,8 @@ its own docs/ guide.
   module per icon, and a dev-only browse page of every released glyph. The SDK's build fills each
   page's glyph markers and draws the alert callouts' glyphs from the package, so a build ships
   only the icons it uses.
-- **Review and demos:** the screenshot review and VHS-recorded CLI demos.
+- **Review and demos:** the screenshot review, and VHS-recorded CLI demos, built and then
+  rejected (README, "Evidence", 10).
 
 ## Path
 
@@ -96,7 +97,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.6.0, spike-html-hosting-components at v0.5.0, and the icons
+- Every site pins the SDK at v0.6.1, spike-html-hosting-components at v0.5.0, and the icons
   layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
@@ -107,10 +108,10 @@ The tasks, in the order they run; each cites the evidence it proves.
   Pages drawer; Contents, on a page with a section tree, which a Contents drawer holds; then Help
   and Settings. From 40rem the header is one row, the group on the nav's first line at its inline
   end; below it, two rows, the nav over the group at its inline start. Each shortcut dialog opens
-  with a header row, its heading and its Close. Those buttons and each shortcut dialog's Close are glyph buttons: each shows a glyph
-  and a key hint, is named by its `aria-label`, and shows that name in an interest hint. A GitHub
-  alert's title shows its kind's Octicon. The SDK's `showsGlyphs` shell check holds each button
-  to its glyph.
+  with a header row, its heading and its Close. Those buttons and each shortcut dialog's Close are
+  glyph buttons: each shows a glyph and a key hint, is named by its `aria-label`, and shows that
+  name in an interest hint. A GitHub alert's title shows its kind's Octicon. The SDK's
+  `showsGlyphs` shell check holds each button to its glyph.
 - Each template file a site changes carries an "Adapted from spike-html-hosting-sdk (<tag>)"
   provenance line, its tag the release whose content the file carries:
   - The architecture and sqlate sites adapt `index.html`, with their own title and text;
@@ -146,6 +147,9 @@ The tasks, in the order they run; each cites the evidence it proves.
   architecture repository's 29 front-matter pages at 8706d04, and sqlate's README and docs/ at
   the commit tag v0.6.1 points to. Its `content.json` records the repository, the commit, and
   each file's git blob hash, and a unit test fails when a copy differs.
+- The sqlate site revises one copy in place, `docs/quick-start.md`, which `content.json`'s
+  `revised` entry holds against its original, blob 0c54507 at f2b2117, and its build opens the
+  page with a note naming that original. The revision goes to sqlate at the intake.
 - Every shell loads the foundation's full entry, `page-full.css` and `register-full.js`, so the
   settings offer every profile. It also loads `keys.js`, which clicks the Pages button on P and
   the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
@@ -173,7 +177,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   components' browser tier measures on fixture sites with one deployed ahead. A layer that names
   its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
   exception until evidence 5's measure settles it.
-- Every site's chrome-headless-shell is 157.0.8103.38.
+- Every site's chrome-headless-shell is 157.0.8103.50.
 - `sl-settings` lays out its theme rows with the foundation v0.3.0's `theme-menu.css`, which it
   adopts in its shadow root, so the shell checks look for that sheet's layer in the settings'
   `adoptedStyleSheets`.
@@ -203,12 +207,27 @@ of the check.
   the SDK's `served()`, which the browser tier also uses. A browser test in each site's check
   runs the command once and asserts it leaves no capture file behind.
 
+## Measuring cost
+
+`mise run cost` prints one table per site in `public/sites.json`, from the live sites and their
+Pages runs: each page's weight, every response it loads in the pinned chrome-headless-shell,
+gzip as Pages served it and brotli 11; and the build, check, and push-to-live times of the runs at
+the site's current pin. It reads the network and gh and isn't part of the check.
+`scripts/cost.ts` holds what it reads and how, and the root README's "Evidence" records its
+numbers.
+
+- Pages serves gzip, not brotli.
+- Pages' CDN answers from several nodes, and one can serve the index of the deploy before the
+  latest for minutes after it. The index's Last-Modified falls a few seconds into its deploy, and
+  can trail deploy-pages' reported success by up to half a minute, so the command marks the live
+  run as the last whose deploy step started at or before it.
+
 ## Releases
 
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.6.0, the
+release workflow tags a version bump that lands on main. Its current release is v0.6.1, the
 components' is v0.5.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
 release nothing; each deploys on its push to main.
 
@@ -219,8 +238,8 @@ The spike reads these repositories and never writes to them. Each is a key in th
 which a pending edit in the goal record adds:
 
 - `architecture`, at 8706d04: the architecture stand-in's pages.
-- `sqlate`, at v0.6.1, with `sqlint/v0.1.1`: the sqlate stand-in's README and docs/, and the
-  recorded CLI.
+- `sqlate`, at v0.6.1, with `sqlint/v0.3.0`: the sqlate stand-in's README and docs/, and the
+  CLI the review task recorded, then removed (README, "Evidence", 10).
 - `standards-lab/.github`, at dd10b25: the charter, its `profile/README.md`.
 - `standards-lab/org`, at c812496: the orientation brief, its `briefs/orientation.md`.
 - `spike-html-apps-foundation`, at v0.3.0: the baseline every site pins.

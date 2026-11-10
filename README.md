@@ -26,13 +26,89 @@ glyphs the build fills into every page's `<svg data-icon="octicon/<name>"></svg>
 - `mise run install`: install the pinned tools and node_modules; reads the network.
 - `mise run check`: ESLint, with the check that no CSS module script is left in the build;
   Prettier, shellcheck, and actionlint; tsc's type check; the build; the unit tier, the copied
-  trees against `content.json`; and the browser tier, the SDK's checks on every page the build
-  writes in the pinned chrome-headless-shell. It reads no network.
+  trees against `content.json` and the cost command's pure parts; and the browser tier, the SDK's
+  checks on every page the build writes in the pinned chrome-headless-shell. It reads no network.
 - `mise run screenshots`: capture every page, light and dark, at 390px, 1120px, and 1376px.
 - `mise run currency`: every pin behind its latest, the SDK's tag among them.
+- `mise run cost`: one table per site, each live page's weight and the build, check, and
+  push-to-live times of its Pages runs; reads the network and gh.
 
 ## Keeping pace with the SDK
 
 The SDK is pinned by its release tag, in `package.json` and in both workflows'
 `uses:` lines. To move to a newer release, bump the tag in all three, run `pnpm install`, and run
 `mise run check`.
+
+## Evidence
+
+This section records evidence 9, 10, and 11, which the review task proves. `context/README.md`,
+"The evidence", numbers all twelve.
+
+### 9. The review across every site
+
+Evidence 9 is recorded from earlier tasks' work, not from a new capture pass.
+
+- The screenshots task's `mise run screenshots` shows each site's captures inline in the terminal
+  and removes its files at the end. A browser test in each site's check runs it once and asserts
+  it leaves no capture file behind.
+- At the design task's four checkpoints the architect reviewed all three sites at 390px, 1120px,
+  and 1376px, light and dark, with the index's Help and Settings open.
+- At the review task's first checkpoint the architect reviewed the revised sqlate quick-start at
+  all three widths, light and dark.
+
+### 10. The CLI demo
+
+Verdict: recorded terminal demos are not worth the overhead for a docs guide whose text shows the
+output. The review task built them and removed them.
+
+- It recorded sqlint v0.3.0 and the revised guide's program through VHS: five recordings under
+  the sqlate quick-start's steps 9 to 12, committed as WebM with WebP posters behind a hash of
+  their inputs, rendered locally with vhs, ttyd, ffmpeg, Docker, and the pinned headless shell,
+  never in CI.
+- The guide already prints every output the recordings showed, as text a reader can search, copy,
+  and read with a screen reader. What the recordings added was motion, for commands that finish
+  in under three seconds.
+- They cost a second mise environment for the render tools, four scripts of hashing, placement,
+  and tape checks, a re-render on every change to the guide's program (three in the one task),
+  and 206 kB of posters on the quick-start. The architect removed them, and the program the check
+  held the guide to, at the task's second checkpoint.
+- What stays is the quick-start, revised in place from sqlate f2b2117 and proposed to sqlate at
+  the intake. The revision fixes step 1, without which step 5 doesn't build as published, prints
+  the SQL PostgreSQL receives, shows what sqlint catches, and adds a step that layers the
+  library's guard patterns with the program's own. The program it was proven against built,
+  passed its tests and sqlint, and ran on PostgreSQL 18 before its removal.
+
+### 11. Cost per site
+
+`mise run cost` prints one table per site from the live sites and their Pages runs. These
+numbers are its run of 2026-11-10, at SDK v0.6.1, over each site's merge and five
+`workflow_dispatch` runs. Page weight is every response a page loads, cache off.
+
+Page weight, per page, as Pages served it with gzip and as brotli 11 would compress it:
+
+| Site         | Pages | Served median | Served max | Brotli median | Brotli max |
+| ------------ | ----: | ------------: | ---------: | ------------: | ---------: |
+| root         |     5 |       34.5 kB |    35.3 kB |       29.8 kB |    30.6 kB |
+| architecture |    29 |       33.9 kB |    36.5 kB |       29.3 kB |    31.7 kB |
+| sqlate       |     5 |       38.6 kB |   273.7 kB |       33.2 kB |   251.7 kB |
+
+Build time, the median of Vite's "built in" and of the check step, and push-to-live, from a run's
+creation to its deploy's reported success:
+
+| Site         | Vite build | Check step | Merge    | Dispatch median | Dispatch max |
+| ------------ | ---------: | ---------: | -------- | --------------: | -----------: |
+| root         |     0.42 s |     32.6 s | 1 m 52 s |          56.4 s |       59.4 s |
+| architecture |     0.49 s |     93.6 s | 6 m 24 s |        2 m 03 s |     2 m 06 s |
+| sqlate       |     2.42 s |     55.0 s | 3 m 20 s |          85.5 s |       89.3 s |
+
+- Pages serves gzip, not brotli. Brotli 11 would save only 11 to 15% on a typical page.
+- Every page loads three JS files, its entry, the shared `index` chunk, and rolldown's runtime,
+  about 21.5 kB served: the bulk of a page's weight.
+- The sqlate quick-start was the outlier, at about 274 kB, 206 kB of it the five recordings' WebP
+  posters, measured before evidence 10's recordings were removed; it loaded no video bytes, since
+  each video was `preload="none"`.
+- GitHub's Pages deployment queue dominates push-to-live. The merge runs took 1m52s to 6m24s,
+  against dispatch medians of about 56s, 2m, and 85s.
+- The architecture site's check step, about 93s, is the longest build cost.
+- Pages' CDN serves stale copies of a site's index for minutes after a deploy, and the index's
+  Last-Modified can trail the deploy's reported success.

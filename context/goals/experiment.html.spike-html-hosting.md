@@ -1268,6 +1268,15 @@ Door          two-way: only the root's two READMEs and its goal
   config, each `mise.<env>.toml` through `mise -E <env>`, not only mise.toml, so a tool pinned
   for one task alone, as the sqlate site's mise.tapes.toml pinned vhs, ttyd and ffmpeg, stays
   current. spike-html-hosting-sdk v0.6.1's currency bin does this.
+- intake · architecture, the detail behind the answer section's shortcut-dialog item: a pattern
+  page for the keyboard-shortcut dialog, with Settings and Help as its worked instances and an
+  upload under U as an extension. The dialog's Close sits in its header row with the h2. The page
+  is inert under a modal and keys fire only inside it, so no second modal opens over Help, and
+  sl-shortcuts reads the bindings against the topmost modal. In a modal, Escape with a glyph hint
+  showing closes the dialog and the hint; on a plain page it closes the hint alone.
+- intake · spike-html-apps-foundation, the detail behind the answer section's Settings and Help
+  item: the theme menu's fixed heading and T save, and the keys help's built-in settings, force a
+  rebuild today.
 - intake · sqlate, docs/quick-start.md, the change list behind the answer section's "sqlate
   quick-start revision" item: apply the revision as the diff of the spike-html-hosting-sqlate
   site's revised copy, `content/docs/quick-start.md`, against blob 0c54507 at f2b2117. Its

@@ -100,9 +100,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- The root pins the SDK at v0.6.2 and the other sites at v0.6.1, spike-html-hosting-components
-  at v0.5.0, and the icons layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's
-  template names. A site keeps
+- Every site pins the SDK at v0.6.2, spike-html-hosting-components at v0.5.0, and the icons
+  layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
   svg string, 1em square in `currentColor`. A page places a glyph as a marker,

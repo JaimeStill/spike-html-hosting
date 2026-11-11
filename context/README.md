@@ -100,7 +100,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.6.1, spike-html-hosting-components at v0.5.0, and the icons
+- Every site pins the SDK at v0.6.2, spike-html-hosting-components at v0.5.0, and the icons
   layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
@@ -158,7 +158,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   the Contents button on C, each while it shows; the Help button, marked `data-keys="?"`, on ?;
   the Settings button, marked `data-keys="s"`, on S; the section tree's J and K; and, on the
   copied pages, the pager's H and L. Help opens a dialog whose `sl-shortcuts` lists the page's
-  keys; Settings opens one whose `sl-settings` sets the theme and the keyboard settings. Each
+  keys, its heading, with `tabindex="-1"` and `autofocus`, focused as it opens; Settings opens one whose `sl-settings` sets the theme and the keyboard settings. Each
   dialog closes on Escape.
 - The renderer highlights each fenced block at build with Shiki, so no script reaches the page.
   A syntax theme is `{ palette, light, dark }`. The SDK's built-ins map primer, catppuccin, and
@@ -231,7 +231,7 @@ numbers.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.6.1, the
+release workflow tags a version bump that lands on main. Its current release is v0.6.2, the
 components' is v0.5.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
 release nothing; each deploys on its push to main.
 

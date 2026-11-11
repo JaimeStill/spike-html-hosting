@@ -27,6 +27,8 @@
      Theme button, the theme menu, and the keys help, and the dialogs' header rows; and
      test/fixtures/trees/briefs/orientation.html, the section tree in its Contents drawer, the
      header's Contents button, and their script.
+     Adapted from spike-html-hosting-sdk (v0.6.2): template/index.html, Help's heading's tabindex
+     and autofocus.
      Adapted from spike-html-hosting-components (v0.5.0): README.md, the header-actions group,
      the Settings and Contents openers, sl-drawer's script, the drawer closed as a link in it is
      followed, each glyph button's class and interest hint, and the shortcut dialogs, Help's and
@@ -360,7 +362,7 @@
     </sl-drawer>
     <dialog id="help" aria-labelledby="help-title">
       <header class="dialog-header">
-        <h2 id="help-title">Keyboard shortcuts</h2>
+        <h2 id="help-title" tabindex="-1" autofocus>Keyboard shortcuts</h2>
         <button
           type="button"
           class="glyph-button"

@@ -5,7 +5,7 @@
 # spike-html-hosting
 
 The GitHub Pages site of spike-html-hosting, the org stand-in, made from the template of
-[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.6.1 and served
+[spike-html-hosting-sdk](https://github.com/JaimeStill/spike-html-hosting-sdk) v0.6.2 and served
 under `/spike-html-hosting/`. It pins
 [spike-html-hosting-components](https://github.com/JaimeStill/spike-html-hosting-components)
 v0.5.0 and the icons layer,

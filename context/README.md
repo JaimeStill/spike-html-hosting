@@ -100,7 +100,7 @@ The tasks, in the order they run; each cites the evidence it proves.
   `pnpm dlx github:JaimeStill/spike-html-hosting-sdk#v0.1.0 <repo>`. The three existing sites
   were scaffolded into a scratch directory and the copy moved over them, keeping each site's
   notes, marathon configuration, history, and copied tree, if it has one.
-- Every site pins the SDK at v0.6.2, spike-html-hosting-components at v0.5.0, and the icons
+- Every site pins the SDK at v0.6.4, spike-html-hosting-components at v0.5.1, and the icons
   layer, spike-html-hosting-icons, at v0.1.0, the tags that SDK's template names. A site keeps
   pace with the SDK by bumping its tag in `package.json` and in both workflows' `uses:` lines.
 - The icons layer releases Octicons as one module per icon, `octicon/<name>`, each a complete
@@ -181,8 +181,8 @@ The tasks, in the order they run; each cites the evidence it proves.
   its consumers breaks the architecture's downward-dependencies principle; the spike accepts that
   exception. Evidence 5 is measured, and the answer takes the list fetched from the org site,
   with the built list as fallback; the fallback keeps the exception.
-- Every site's chrome-headless-shell is 157.0.8103.50.
-- `sl-settings` lays out its theme rows with the foundation v0.3.0's `theme-menu.css`, which it
+- Every site's chrome-headless-shell is 157.0.8103.78.
+- `sl-settings` lays out its theme rows with the foundation v0.3.1's `theme-menu.css`, which it
   adopts in its shadow root, so the shell checks look for that sheet's layer in the settings'
   `adoptedStyleSheets`.
 
@@ -231,8 +231,8 @@ numbers.
 spike-html-hosting-components releases at 0.y.z, `@jaimestill/spike-html-hosting-components`,
 starting at v0.1.0, peering spike-html-apps-foundation at its current minor.
 spike-html-hosting-sdk, `@jaimestill/spike-html-hosting-sdk`, releases at 0.y.z the same way: its
-release workflow tags a version bump that lands on main. Its current release is v0.6.2, the
-components' is v0.5.0, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
+release workflow tags a version bump that lands on main. Its current release is v0.6.4, the
+components' is v0.5.1, and the icons layer's, spike-html-hosting-icons, is v0.1.0. The sites
 release nothing; each deploys on its push to main.
 
 ## References
@@ -246,7 +246,7 @@ which a pending edit in the goal record adds:
   CLI the review task recorded, then removed (README, "Evidence", 10).
 - `standards-lab/.github`, at dd10b25: the charter, its `profile/README.md`.
 - `standards-lab/org`, at c812496: the orientation brief, its `briefs/orientation.md`.
-- `spike-html-apps-foundation`, at v0.3.0: the baseline every site pins.
+- `spike-html-apps-foundation`, at v0.3.1: the baseline every site pins.
 - `spike-html-apps-tooling`, at v0.3.0: the screenshot review.
 - `primer/octicons`, at 9a274e2 (tag `@primer/octicons@19.42.0`): the icons layer's Octicons,
   whose LICENSE the package copies.
